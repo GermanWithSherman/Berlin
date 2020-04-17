@@ -35,6 +35,9 @@ public class LocationConnection
     public int Duration = 0;
     public string Label = "";
 
+    public string Type = "Walk";
+    public bool interruptible = true;
+
     public void execute()
     {
         GameManager.Instance.locationTransfer(this);

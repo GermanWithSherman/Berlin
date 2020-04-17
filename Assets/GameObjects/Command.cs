@@ -12,7 +12,7 @@ public class Command
     public static bool pauseActive = false;
     public static CommandsCollection pausedCommands = new CommandsCollection();
 
-    public enum Type { None, Break, Pause, Continue, Consume, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass }
+    public enum Type { None, Break, Pause, Continue, Flush, Consume, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public Type type = Type.None;
@@ -34,8 +34,8 @@ public class Command
                 return;
             case Type.Consume:
 
-                long hunger = p.ContainsKey("hunger") ? ( p["hunger"] is Int64 ? p["hunger"] : 0L ) : 0L;
-                long calories=p.ContainsKey("calories") ? (p["calories"] is Int64 ? p["calories"] : 0L) : 0L;
+                long hunger = p.ContainsKey("hunger") ? (p["hunger"] is Int64 ? p["hunger"] : 0L) : 0L;
+                long calories = p.ContainsKey("calories") ? (p["calories"] is Int64 ? p["calories"] : 0L) : 0L;
 
                 gameManager.PC.statHunger += hunger;
                 gameManager.PC.statCalories += (int)calories;
@@ -58,7 +58,7 @@ public class Command
 
                 return;
             case Type.Event:
-                
+
                 if (p.ContainsKey("e"))
                 {
                     string key = p["e"];
@@ -72,12 +72,23 @@ public class Command
                     eventStage = p["es"];
                     gameManager.eventExecute(eventGroup, eventStage);
                 }
-                
+
                 return;
             case Type.EventEnd:
                 gameManager.eventEnd();
                 return;
+            case Type.Flush:
+                pauseActive = false;
+                pausedCommands = new CommandsCollection();
+                return;
             case Type.GotoLocation:
+                if (p.ContainsKey("location") && p["location"] is SubLocation)
+                {
+                    gameManager.locationGoto(p["location"]);
+                    return;
+                }
+
+
                 dynamic lid;
 
                 if (!p.TryGetValue("id", out lid))
@@ -86,27 +97,46 @@ public class Command
                     return;
                 }
 
-                if(!(lid is System.String))
+                if (!(lid is System.String))
                 {
                     Debug.LogError("Command malformed: parameter id must be a string");
                     return;
                 }
 
                 gameManager.locationGoto(lid);
-                
+
                 return;
             case Type.Interrupt:
-                JArray interruptKeywords = p.ContainsKey("keywords") ? (p["keywords"] is JArray ? p["keywords"] : null) : null;
-                
-                if(interruptKeywords == null)
+
+                if (!p.ContainsKey("keywords"))
                 {
-                    Debug.LogError($"Interrupt Parameter keywords malformed");
+                    Debug.LogError($"Parameter keywords missing in Command.Type.Interrupt");
                     return;
                 }
 
-                List<string> keywords = interruptKeywords.ToObject<List<string>>();
+                if (p["keywords"] is JArray) {
+                    JArray interruptKeywords = p["keywords"];
+                    List<string> keywords = interruptKeywords.ToObject<List<string>>();
+                    gameManager.InterruptServer.trigger(keywords);
 
-                gameManager.InterruptServer.trigger(keywords);
+                    return;
+                }
+
+                if (p["keywords"] is IEnumerable<string>)
+                {
+                    gameManager.InterruptServer.trigger(p["keywords"]);
+                    return;
+                }
+
+                if(p["keywords"] is string)
+                {
+                    gameManager.InterruptServer.trigger(p["keywords"]);
+                    return;
+                }
+
+
+                Debug.LogError($"Parameter keywords malformed in Command.Type.Interrupt");
+                 
 
                 return;
             case Type.Outfit:

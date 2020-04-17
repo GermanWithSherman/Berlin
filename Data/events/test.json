@@ -1,0 +1,29 @@
+{
+    "id":"shoppingFemale",
+    "EventStages":{
+        "main":{
+            "Commands":{
+                "Pause":{"Type":"Pause"}
+            },
+            "Text":{
+                "V": "Test Event."
+            },
+            "Options":{
+                "ignore":{
+                    "text":"Ignore",
+                    "Commands":{
+                        "Continue":{"Type":"Continue"},
+                        "EventEnd":{"Type":"EventEnd"}
+                    }
+                },
+                "break":{
+                    "text":"Break",
+                    "Commands":{
+                        "Flush":{"Type":"Flush"},
+                        "EventEnd":{"Type":"EventEnd"}
+                    }
+                }
+            }
+        }
+    }
+}

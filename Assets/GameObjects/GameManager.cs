@@ -228,11 +228,9 @@ public class GameManager : MonoBehaviour
 
     public void locationTransfer(LocationConnection locationConnection)
     {
-        int duration = locationConnection.Duration;
 
-        timePass(duration);
-
-        locationGoto(locationConnection.TargetLocation);
+        CommandsCollection transferCommands = new CommandsCollection(locationConnection);
+        transferCommands.execute();
     }
 
     public bool moneyPay(int amount)

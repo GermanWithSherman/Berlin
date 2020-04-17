@@ -4,6 +4,30 @@ using UnityEngine;
 
 public class CommandsCollection : Dictionary<string, Command>
 {
+
+    public CommandsCollection() { }
+
+    public CommandsCollection(LocationConnection locationConnection)
+    {
+        if (locationConnection.interruptible)
+        {
+            Command interruptCommand = new Command();
+            interruptCommand.type = Command.Type.Interrupt;
+            interruptCommand.p["keywords"] = new string[] { locationConnection.Type };
+            Add("interrupt", interruptCommand);
+        }
+
+        Command timePassCommand = new Command();
+        timePassCommand.type = Command.Type.TimePass;
+        timePassCommand.p["v"] = locationConnection.Duration;
+        Add("timePass", timePassCommand);
+
+        Command locationCommand = new Command();
+        locationCommand.type = Command.Type.GotoLocation;
+        locationCommand.p["location"] = locationConnection.TargetLocation;
+        Add("location",locationCommand);
+    }
+
     public void Add(Command command)
     {
         string key;
@@ -24,7 +48,7 @@ public class CommandsCollection : Dictionary<string, Command>
 
         foreach (Command c in Values)
         {
-            if (Command.pauseActive && c.type != Command.Type.Continue)
+            if (Command.pauseActive && c.type != Command.Type.Continue && c.type != Command.Type.Flush)
             {
                 Command.pausedCommands.Add(c);
                 continue;

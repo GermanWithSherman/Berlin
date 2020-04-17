@@ -1,0 +1,14 @@
+{
+    "walk":{
+        "listen": ["Walk"],
+        "priority": 10,
+        "cd": 86400,
+        "chance": 1,
+        "allow":{},
+        "allowResetListen":[""],
+        "conditionCD": -1,
+        "Commands":{
+            "gte":{"Type":"Event","p":{"e":"test."}}
+        }
+    }
+}
