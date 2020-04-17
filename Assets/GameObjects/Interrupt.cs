@@ -10,7 +10,7 @@ public class Interrupt
 
     public float chance = 1f;
 
-    public CommandsCollection commands = new CommandsCollection();
+    public CommandsCollection Commands = new CommandsCollection();
 
     public Condition condition;
     public List<string> listen = new List<string>();

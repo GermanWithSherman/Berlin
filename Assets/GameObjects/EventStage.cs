@@ -10,7 +10,7 @@ public class EventStage
 
     public string text;
 
-    public List<Command> commands = new List<Command>();
+    public CommandsCollection Commands = new CommandsCollection();
 
     public Dictionary<string, Option> options = new Dictionary<string, Option>();
 
@@ -23,10 +23,7 @@ public class EventStage
 
         gameManager.optionsSet(options.Values);
 
-        foreach (Command command in commands)
-        {
-            command.execute();
-        }
+        Commands.execute();
     }
 
 }

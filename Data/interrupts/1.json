@@ -6,6 +6,9 @@
         "chance": 1,
         "allow":{},
         "allowResetListen":[""],
-        "conditionCD": -1
+        "conditionCD": -1,
+        "Commands":{
+            "gte":{"Type":"GotoEvent","p":{"e":"shoppingFemale"}}
+        }
     }
 }

@@ -26,16 +26,6 @@ public class SubLocation
 
     public void execute(GameManager gameManager)
     {
-        /*GameData gameData = gameManager.GameData;
-
-        if(TexturePath != null)
-            gameManager.TextureMain = gameManager.TextureCache[TexturePath.value(gameManager.GameData)];
-
-        gameManager.TextMain = Text.Text(gameData);
-
-        gameManager.LocationConnections = LocationConnections.Values;
-
-        gameManager.optionsSet(Options.Values);*/
 
         foreach (Command command in onShow.Values)
         {

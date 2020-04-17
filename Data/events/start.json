@@ -1,35 +1,36 @@
 {
     "id":"start",
     "EventStages":{
-        "default":{
+        "main":{
             "id":"default",
             "text": "Hallo, mein Lieber",
-            "commands":[
-                {
+            "commands":{
+                "gtl":{
                     "type": "GotoLocation",
                     "p":{"id":"start."}
                 },
-                {
+                "time":{
                     "type": "Set",
                     "p":{"k":"World.DateTime","v":"2020-04-09T06:00:00"}
                 },
-                {
+                "money":{
                     "type": "Set",
                     "p":{"k":"PC.moneyCash","v":10000}
                 },
-                {
+                "hunger":{
                     "type": "Set",
                     "p":{"k":"PC.statHunger","v":1000000}
                 },
-                {
+                "height":{
                     "type": "Set",
                     "p":{"k":"PC.height","v":1910}
                 },
-                {
+                "bmi":{
                     "type": "Set",
                     "p":{"k":"PC.BMI","v":23}
                 }
+            }
         }
-        }
-    ]
+        
+    }
 }
