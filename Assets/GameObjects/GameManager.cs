@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
 
     public void gameNew()
     {
-        eventExecute("start", "default");
+        eventExecute("start", "main");
 
         PC.age = 18;
 

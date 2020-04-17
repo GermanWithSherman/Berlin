@@ -31,7 +31,7 @@ public class Interrupt
 
     public void execute()
     {
-        commands.execute();
+        Commands.execute();
     }
 
     public bool trySelect()
