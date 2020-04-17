@@ -8,8 +8,8 @@
             },
             "TexturePath":{
                 "Values":{
-                    "night":{"V":"cityCenter/cityCenterNight0.jpg", "C": "World.DayPhase=\"night\""},
-                    "day":{"V":"cityCenter/cityCenterDay0.jpg"}
+                    "night":{"V":"locations/cityCenter/cityCenterNight0.jpg", "C": "World.DayPhase=\"night\""},
+                    "day":{"V":"locations/cityCenter/cityCenterDay0.jpg"}
                 }
             },
             "LocationConnections":{
@@ -40,7 +40,7 @@
             },
             "TexturePath":{
                 "Values":{
-                    "0":{"V":"cityCenter/cityCanterMall0.jpg"}
+                    "0":{"V":"locations/cityCenter/cityCanterMall1.jpg"}
                 }
             },
             "LocationConnections":{
@@ -52,7 +52,12 @@
                 "shop_fn":{
                     "targetLocationId": ".mall_shop_fn",
                     "Duration": 120,
-                    "Label":"F+N"
+                    "Label":"F+N",
+                    "TexturePath":{
+                        "Values":{
+                            "0":{"V":"locations/shop/fn.png"}
+                        }
+                    }
                 }
             }
         },
@@ -61,7 +66,7 @@
             "Text":{"V":"City Center Mall"},
             "TexturePath":{
                 "Values":{
-                    "0":{"V":"cityCenter/cityCanterMall0.jpg"}
+                    "0":{"V":"locations/cityCenter/cityCanterMall0.jpg"}
                 }
             },
             "LocationConnections":{
@@ -77,10 +82,10 @@
             }
         },
         "mall_shop_fn":{
-            "Text":{"V":"F+N"},
+            "Text":{"V":"<size=150%>F+N</size>\n<i>Fröken and Nilsson</i> is a Swedish multinational clothing-retail company."},
             "TexturePath":{
                 "Values":{
-                    "0":{"V":"shops/fnInterior.jpg"}
+                    "0":{"V":"locations/shop/fnInterior.jpg"}
                 }
             },
             "LocationConnections":{

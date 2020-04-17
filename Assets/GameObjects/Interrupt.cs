@@ -9,6 +9,7 @@ public class Interrupt
     public string id;
 
     public float chance = 1f;
+    public int cooldown = 3600;
 
     public CommandsCollection Commands = new CommandsCollection();
 
@@ -38,6 +39,7 @@ public class Interrupt
 
     public void execute()
     {
+        GameManager.Instance.GameData.Interrupts.resetCooldown(this, cooldown);
         Commands.execute();
     }
 
@@ -45,6 +47,8 @@ public class Interrupt
     {
         float random = Random.Range(0f,1f);
         if (random > chance)
+            return false;
+        if (GameManager.Instance.GameData.Interrupts.remainingCooldown(this) > 0)
             return false;
         return conditionCheck();
     }

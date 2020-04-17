@@ -20,6 +20,8 @@ public class GameData: Data
     public ShopData ShopData = new ShopData();
     public WorldData WorldData = new WorldData();
 
+    public InterruptPersistentDataCollection Interrupts = new InterruptPersistentDataCollection();
+
     [JsonConverter(typeof(EventStageConverter))]
     public EventStage currentEventStage;
 

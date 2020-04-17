@@ -87,6 +87,8 @@
     <Compile Include="Assets\GameObjects\GameData.cs" />
     <Compile Include="Assets\GameObjects\GameManager.cs" />
     <Compile Include="Assets\GameObjects\Interrupt.cs" />
+    <Compile Include="Assets\GameObjects\InterruptPersistentData.cs" />
+    <Compile Include="Assets\GameObjects\InterruptPersistentDataCollection.cs" />
     <Compile Include="Assets\GameObjects\InterruptServer.cs" />
     <Compile Include="Assets\GameObjects\Item.cs" />
     <Compile Include="Assets\GameObjects\ItemsCollection.cs" />
