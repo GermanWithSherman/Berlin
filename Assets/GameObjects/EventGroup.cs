@@ -34,6 +34,13 @@ public class EventGroup
     [OnDeserialized]
     internal void OnDeserializedMethod(StreamingContext context)
     {
+        foreach (KeyValuePair<string, EventStage> kv in EventStages)
+        {
+            string eventId = kv.Key;
+            EventStage eventStage = kv.Value;
+            eventStage.id = id + "." + eventId;
+        }
+
         if (!EventStages.ContainsKey(Default))
         {
             Debug.LogError($"EventGroup {id} deserialized with invalid default EventStage");

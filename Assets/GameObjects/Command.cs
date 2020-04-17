@@ -47,21 +47,21 @@ public class Command
 
                 return;
             case Type.GotoEvent:
-                string eventGroup;
-                string eventStage;
+                
                 if (p.ContainsKey("e"))
                 {
                     string key = p["e"];
-                    string[] keyparts = key.Split('.');
-                    eventGroup = keyparts[0];
-                    eventStage = keyparts[1];
+                    gameManager.eventExecute(key);
                 }
                 else
                 {
+                    string eventGroup;
+                    string eventStage;
                     eventGroup = p["eg"];
                     eventStage = p["es"];
+                    gameManager.eventExecute(eventGroup, eventStage);
                 }
-                gameManager.eventExecute(eventGroup, eventStage);
+                
                 return;
             case Type.GotoLocation:
                 dynamic lid;

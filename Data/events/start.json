@@ -2,7 +2,6 @@
     "id":"start",
     "EventStages":{
         "main":{
-            "id":"default",
             "text": "Hallo, mein Lieber",
             "commands":{
                 "gtl":{

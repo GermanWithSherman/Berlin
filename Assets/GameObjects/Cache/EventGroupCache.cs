@@ -28,6 +28,13 @@ public class EventGroupCache : Cache<EventGroup>
             EventStage eventStage = eventGroup[keyparts[1]];
             return eventStage;
         }
+        else if(keyparts.Length == 1)
+        {
+            Debug.LogWarning($"Malformed EventStage Key '{key}', assuming '{key}.'");
+            EventGroup eventGroup = this[key];
+            EventStage eventStage = eventGroup[""];
+            return eventStage;
+        }
 
         return null;
     }

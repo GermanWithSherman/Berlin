@@ -1,0 +1,9 @@
+{
+    "id":"shoppingFemale",
+    "EventStages":{
+        "main":{
+            "text": "shoppingFemale"
+        }
+    }
+    
+}

@@ -129,7 +129,8 @@ public class GameManager : MonoBehaviour
 
     public void eventExecute(EventStage eventStage)
     {
-        eventStage.execute();
+        GameData.currentEventStage = eventStage;
+        eventStage?.execute();
     }
 
     public static JObject File2Data(string path)

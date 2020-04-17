@@ -20,6 +20,9 @@ public class GameData: Data
     public ShopData ShopData = new ShopData();
     public WorldData WorldData = new WorldData();
 
+    [JsonConverter(typeof(EventStageConverter))]
+    public EventStage currentEventStage;
+
     [JsonIgnore]
     public SubLocation currentLocation;
     [JsonProperty]
