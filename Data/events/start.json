@@ -1,7 +1,7 @@
 {
     "id":"start",
-    "EventStages":[
-        {
+    "EventStages":{
+        "default":{
             "id":"default",
             "text": "Hallo, mein Lieber",
             "commands":[
@@ -29,7 +29,7 @@
                     "type": "Set",
                     "p":{"k":"PC.BMI","v":23}
                 }
-            ]
+        }
         }
     ]
 }

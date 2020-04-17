@@ -10,29 +10,12 @@ public class EventGroup
 {
     public string id;
 
-    //public List<EventStage> EventStages = new List<EventStage>();
-    private List<EventStage> eventStages;
-    public List<EventStage> EventStages
-    {
-        set => eventStages = value;
-    }
-
-    private Dictionary<string, EventStage> eventStagesDict = new Dictionary<string, EventStage>();
+    [JsonProperty]
+    private Dictionary<string, EventStage> EventStages = new Dictionary<string, EventStage>();
 
     public EventStage this[string key]
     {
-        get => eventStagesDict[key];
+        get => EventStages[key];
     }
 
-    [OnDeserialized]
-    private void onDeserialized(StreamingContext context)
-    {
-        if (eventStages == null)
-            return;
-
-        foreach (EventStage eventStage in eventStages)
-        {
-            eventStagesDict[eventStage.id] = eventStage;
-        }
-    }
 }
