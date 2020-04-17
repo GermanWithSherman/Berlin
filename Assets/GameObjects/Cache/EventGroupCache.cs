@@ -17,4 +17,25 @@ public class EventGroupCache : Cache<EventGroup>
 
         return eventGroupCache;
     }
+
+    public EventStage EventStage(string key)
+    {
+        string[] keyparts = key.Split('.');
+
+        if (keyparts.Length == 2)
+        {
+            EventGroup eventGroup = this[keyparts[0]];
+            EventStage eventStage = eventGroup[keyparts[1]];
+            return eventStage;
+        }
+
+        return null;
+    }
+
+    public EventStage EventStage(string eventGroupId, string eventStageId)
+    {
+        EventGroup eventGroup = this[eventGroupId];
+        EventStage eventStage = eventGroup[eventStageId];
+        return eventStage;
+    }
 }

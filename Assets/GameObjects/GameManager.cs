@@ -82,9 +82,6 @@ public class GameManager : MonoBehaviour
 
     private bool uiUpdatePending;
 
-    private string eventGroupId;
-    private string eventStageId;
-
 
     private void Awake()
     {
@@ -117,13 +114,16 @@ public class GameManager : MonoBehaviour
         Debug.Log(command);
     }
 
-    public void eventExecute(string eGId, string eSId)
+
+    public void eventExecute(string eventId)
     {
-        if(!String.IsNullOrEmpty(eGId))
-            eventGroupId = eGId;
-        if (!String.IsNullOrEmpty(eSId))
-            eventStageId = eSId;
-        EventStage eventStage = EventGroupCache[eventGroupId][eventStageId];
+        EventStage eventStage = EventGroupCache.EventStage(eventId);
+        eventExecute(eventStage);
+    }
+
+    public void eventExecute(string eventGroupId, string eventStageId)
+    {
+        EventStage eventStage = EventGroupCache.EventStage(eventGroupId, eventStageId);
         eventExecute(eventStage);
     }
 
