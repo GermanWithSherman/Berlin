@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 
 public class ItemsCollection : Dictionary<string,string>
@@ -74,6 +75,13 @@ public class ItemsCollection : Dictionary<string,string>
     public void setItem(string key, string itemId)
     {
         this[key] = itemId;
+        cacheDirty = true;
+    }
+
+
+    [OnDeserialized]
+    internal void OnDeserializedMethod(StreamingContext context)
+    {
         cacheDirty = true;
     }
 }
