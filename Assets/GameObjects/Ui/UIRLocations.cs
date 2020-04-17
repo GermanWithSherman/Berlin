@@ -8,7 +8,15 @@ public class UIRLocations : MonoBehaviour
 
     public void setRLs(IEnumerable<LocationConnection> locationConnections)
     {
-        foreach(Transform child in transform)
+        if(locationConnections == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        gameObject.SetActive(true);
+
+        foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
         }

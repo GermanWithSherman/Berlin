@@ -12,7 +12,14 @@ public class Interrupt
 
     public CommandsCollection Commands = new CommandsCollection();
 
-    public Condition condition;
+    [JsonProperty("Condition")]
+    private string _condition;
+    [JsonIgnore]
+    public Condition Condition
+    {
+        get => GameManager.Instance.ConditionCache[_condition];
+    }
+
     public List<string> listen = new List<string>();
 
     public int priority = 0;
@@ -24,9 +31,9 @@ public class Interrupt
 
     public bool conditionCheck()
     {
-        if (condition == null)
+        if (Condition == null)
             return true;
-        return condition.evaluate(GameManager.Instance.GameData);
+        return Condition.evaluate(GameManager.Instance.GameData);
     }
 
     public void execute()

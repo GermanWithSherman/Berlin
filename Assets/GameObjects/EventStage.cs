@@ -10,20 +10,15 @@ public class EventStage
     [JsonIgnore]
     public string id;
 
-    public string text;
+    public CText Text = new CText();
 
     public CommandsCollection Commands = new CommandsCollection();
 
-    public Dictionary<string, Option> options = new Dictionary<string, Option>();
+    public Dictionary<string, Option> Options = new Dictionary<string, Option>();
 
     public void execute()
     {
         GameManager gameManager = GameManager.Instance;
-
-        if (!String.IsNullOrEmpty(text))
-            gameManager.TextMain = text;
-
-        gameManager.optionsSet(options.Values);
 
         Commands.execute();
     }

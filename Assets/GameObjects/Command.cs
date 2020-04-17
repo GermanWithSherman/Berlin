@@ -8,7 +8,11 @@ using UnityEngine;
 
 public class Command
 {
-    public enum Type { None, Consume, Dialog, GotoEvent, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass }
+    public static bool breakActive = false;
+    public static bool pauseActive = false;
+    public static CommandsCollection pausedCommands = new CommandsCollection();
+
+    public enum Type { None, Break, Pause, Continue, Consume, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public Type type = Type.None;
@@ -25,6 +29,9 @@ public class Command
         {
             case Type.None:
                 return;
+            case Type.Break:
+                breakActive = true;
+                return;
             case Type.Consume:
 
                 long hunger = p.ContainsKey("hunger") ? ( p["hunger"] is Int64 ? p["hunger"] : 0L ) : 0L;
@@ -33,6 +40,10 @@ public class Command
                 gameManager.PC.statHunger += hunger;
                 gameManager.PC.statCalories += (int)calories;
 
+                return;
+            case Type.Continue:
+                pauseActive = false;
+                pausedCommands.execute();
                 return;
             case Type.Dialog:
 
@@ -46,7 +57,7 @@ public class Command
                 gameManager.DialogServer.dialogShow(dialogId, dialogResolver);
 
                 return;
-            case Type.GotoEvent:
+            case Type.Event:
                 
                 if (p.ContainsKey("e"))
                 {
@@ -62,6 +73,9 @@ public class Command
                     gameManager.eventExecute(eventGroup, eventStage);
                 }
                 
+                return;
+            case Type.EventEnd:
+                gameManager.eventEnd();
                 return;
             case Type.GotoLocation:
                 dynamic lid;
@@ -97,6 +111,10 @@ public class Command
                 return;
             case Type.Outfit:
                 gameManager.outfitWindowShow();
+                return;
+            case Type.Pause:
+                pauseActive = true;
+                pausedCommands = new CommandsCollection();
                 return;
             case Type.Services:
                 dynamic servicePointId;

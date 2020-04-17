@@ -50,8 +50,9 @@ public class GameData: Data
             switch (keyParts[0])
             {
                 case "NPC":
-                case "PC":
                     return CharacterData[keyParts[1]];
+                case "PC":
+                    return CharacterData.PC[keyParts[1]];
                 case "Shop":
                     return ShopData[keyParts[1]];
                 case "World":

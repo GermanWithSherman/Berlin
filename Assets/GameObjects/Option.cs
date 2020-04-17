@@ -34,8 +34,10 @@ public class Option
     }
 
 
-    public Dictionary<string, Command> commands = new Dictionary<string, Command>();
-    [JsonIgnore]
+    //public Dictionary<string, Command> commands = new Dictionary<string, Command>();
+    public CommandsCollection Commands = new CommandsCollection();
+
+    /*[JsonIgnore]
     public IEnumerable<Command> Commands
     {
         get
@@ -51,7 +53,7 @@ public class Option
 
             return mergedCommands.Values;
         }
-    }
+    }*/
 
     public string inherit;
 
@@ -84,10 +86,11 @@ public class Option
 
     public void execute()
     {
-        foreach (Command command in Commands)
+        /*foreach (Command command in Commands)
         {
             command.execute();
-        }
+        }*/
+        Commands.execute();
     }
 
     [OnDeserialized]

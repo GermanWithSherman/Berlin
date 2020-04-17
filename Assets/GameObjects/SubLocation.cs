@@ -22,15 +22,12 @@ public class SubLocation
 
     public Schedules OpeningTimes = new Schedules();
 
-    public Dictionary<string, Command> onShow = new Dictionary<string, Command>();
+    public CommandsCollection onShow = new CommandsCollection();
 
     public void execute(GameManager gameManager)
     {
 
-        foreach (Command command in onShow.Values)
-        {
-            command.execute();
-        }
+        onShow.execute();
 
     }
 

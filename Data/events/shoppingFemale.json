@@ -2,7 +2,21 @@
     "id":"shoppingFemale",
     "EventStages":{
         "main":{
-            "text": "shoppingFemale"
+            "Commands":{
+                "Pause":{"Type":"Pause"}
+            },
+            "Text":{
+                "V": "There is nothing you want to buy here."
+            },
+            "Options":{
+                "okay":{
+                    "text":"Okay",
+                    "Commands":{
+                        "Continue":{"Type":"Continue"},
+                        "EventEnd":{"type":"EventEnd"}
+                    }
+                }
+            }
         }
     }
     

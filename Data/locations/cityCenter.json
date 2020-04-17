@@ -93,7 +93,7 @@
             "Options":{
                 "dresses":{
                     "text":"Shop (Dresses)",
-                    "commands":{"shop":{"type": "Shop","p":{"id":"test.1"}}},
+                    "Commands":{"shop":{"type": "Shop","p":{"id":"test.1"}}},
                     "state":{"Values":{
                         "0":{"V":{"enabled":false,"text":"wert"}}
                     }}
@@ -103,14 +103,14 @@
                 },
                 "shoes":{
                     "text":"Shop (Shoes)",
-                    "commands":{
+                    "Commands":{
                         "interrupt":{"type": "Interrupt", "p":{"keywords":["shopFemale"]}},
                         "shop":{"type": "Shop","p":{"id":"testShoes.1"}}
                     }
                 },
                 "outfit":{
                     "text":"Change Outfit",
-                    "commands":{"outfit":{"type":"Outfit"}}
+                    "Commands":{"outfit":{"type":"Outfit"}}
                 }
             }
         },

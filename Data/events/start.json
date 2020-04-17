@@ -2,7 +2,9 @@
     "id":"start",
     "EventStages":{
         "main":{
-            "text": "Hallo, mein Lieber",
+            "Text":{
+                "V": "Hallo mein Lieber!"
+            },
             "commands":{
                 "gtl":{
                     "type": "GotoLocation",

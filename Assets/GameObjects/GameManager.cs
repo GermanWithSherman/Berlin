@@ -114,6 +114,11 @@ public class GameManager : MonoBehaviour
         Debug.Log(command);
     }
 
+    public void eventEnd()
+    {
+        GameData.currentEventStage = null;
+        uiUpdate();
+    }
 
     public void eventExecute(string eventId)
     {
@@ -131,6 +136,7 @@ public class GameManager : MonoBehaviour
     {
         GameData.currentEventStage = eventStage;
         eventStage?.execute();
+        uiUpdate();
     }
 
     public static JObject File2Data(string path)
@@ -202,6 +208,7 @@ public class GameManager : MonoBehaviour
     {
         subLocation.execute(this);
 
+        GameData.currentEventStage = null;
         GameData.currentLocation = subLocation;
 
         npcsPresentUpdate();
@@ -383,14 +390,22 @@ public class GameManager : MonoBehaviour
         UIServicesWindow.update();
 
         //SubLocation Stuff
-        //TextureMain = TextureCache[GameData.currentLocation.TexturePath.value(GameData)];
-        TextureMain = GameData.currentLocation.Texture;
+        if (GameData.currentEventStage == null)
+        {
+            TextureMain = GameData.currentLocation.Texture;
 
-        TextMain = GameData.currentLocation.Text.Text(GameData);
+            TextMain = GameData.currentLocation.Text.Text(GameData);
 
-        LocationConnections = GameData.currentLocation.LocationConnections.Values;
+            LocationConnections = GameData.currentLocation.LocationConnections.Values;
 
-        optionsSet(GameData.currentLocation.Options.Values);
+            optionsSet(GameData.currentLocation.Options.Values);
+        }
+        else
+        {
+            TextMain = GameData.currentEventStage.Text.Text(GameData);
+            optionsSet(GameData.currentEventStage.Options.Values);
+            LocationConnections = null;
+        }
     }
 
 }
