@@ -1,0 +1,17 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using UnityEngine;
+
+public class StatusBarMoney : MonoBehaviour
+{
+    public UnityEngine.UI.Text Text;
+
+    public void set(int money) => set((long)money);
+
+    public void set(long money)
+    {
+        double m = money / 100d;
+        Text.text = m.ToString("C",CultureInfo.CreateSpecificCulture("de"));
+    }
+}

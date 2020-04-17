@@ -1,0 +1,11 @@
+{
+    "asd":{
+        "listen": ["shopFemale"],
+        "priority": 10,
+        "cd": 86400,
+        "chance": 1,
+        "allow":{},
+        "allowResetListen":[""],
+        "conditionCD": -1
+    }
+}

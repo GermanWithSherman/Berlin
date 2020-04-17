@@ -1,0 +1,45 @@
+{
+    "id": "start",
+    "subLocations":{
+        "main":{
+            "Text":{
+                "V": "Hello, and welcome to BER."
+            },
+            "TexturePath":{
+                "Value":"cityCenter/cityCenterNight0.jpg"
+            },
+            "Options":{
+                "skipIntro":{
+                    "text":"Skip Intro",
+                    "commands":{"goto":{"type":"GotoLocation","p":{"id":"start.skipIntro"}}}
+                },
+                "debug":{
+                    "text":"Debug",
+                    "commands":{"goto":{"type":"GotoLocation","p":{"id":"cityCenter."}}}
+                }
+            }
+        },
+        "skipIntro":{
+            "Text":{
+                "V": "Skip Intro"
+            },
+            "onShow":{
+                "sexSelectDialog":{
+                    "type":"Dialog",
+                    "p":{
+                        "id":"SexSelect",
+                        "targets":{
+                            "gender": "PC.genderVisible"
+                        },
+                        "onComplete":{"goto":{"type":"GotoLocation","p":{"id":"start.skipIntro_Appearance"}}}
+                    }
+                }
+            }
+        },
+        "skipIntro_Appearance":{
+            "Text":{
+                "V": "Appearance"
+            }
+        }
+    }
+}

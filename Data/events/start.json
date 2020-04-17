@@ -1,0 +1,35 @@
+{
+    "id":"start",
+    "EventStages":[
+        {
+            "id":"default",
+            "text": "Hallo, mein Lieber",
+            "commands":[
+                {
+                    "type": "GotoLocation",
+                    "p":{"id":"start."}
+                },
+                {
+                    "type": "Set",
+                    "p":{"k":"World.DateTime","v":"2020-04-09T06:00:00"}
+                },
+                {
+                    "type": "Set",
+                    "p":{"k":"PC.moneyCash","v":10000}
+                },
+                {
+                    "type": "Set",
+                    "p":{"k":"PC.statHunger","v":1000000}
+                },
+                {
+                    "type": "Set",
+                    "p":{"k":"PC.height","v":1910}
+                },
+                {
+                    "type": "Set",
+                    "p":{"k":"PC.BMI","v":23}
+                }
+            ]
+        }
+    ]
+}

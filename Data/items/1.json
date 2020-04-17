@@ -1,0 +1,40 @@
+{
+    "items":{
+        "dress_1":{
+            "Label":"Dress 1",
+            "TexturePath":"items/dressA(0).jpg",
+            "Price": 3000,
+            "Slot": "Clothes"
+        },
+        "dress_2":{
+            "Label":"Dress 2",
+            "TexturePath":"items/dressA(1).jpg",
+            "Price": 5000,
+            "Slot": "Clothes"
+        },
+        "dress_3":{
+            "Label":"Dress 3",
+            "TexturePath":"items/dressA(2).jpg",
+            "Price": 4444,
+            "Slot": "Clothes"
+        },
+        "dress_4":{
+            "Label":"Dress 4",
+            "TexturePath":"items/dressA(3).jpg",
+            "Price": 1111,
+            "Slot": "Clothes"
+        },
+        "shoes_1":{
+            "Label":"Shoes 1",
+            "TexturePath":"items/s(21).jpg",
+            "Price": 1499,
+            "Slot": "Shoes"
+        },
+        "shoes_2":{
+            "Label":"Shoes 2",
+            "TexturePath":"items/s(22).jpg",
+            "Price": 1999,
+            "Slot": "Shoes"
+        }
+    }
+}

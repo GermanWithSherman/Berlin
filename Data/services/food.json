@@ -1,0 +1,16 @@
+{
+    "kebap":{
+        "label": "Döner",
+        "price": 450,
+        "category": "Food",
+        "onBuy":{
+            "hunger":{
+                "type": "Consume",
+                "p":{
+                    "hunger":200000,
+                    "calories":200000
+                }
+            }
+        }
+    }
+}

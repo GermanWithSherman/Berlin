@@ -1,0 +1,7 @@
+{
+    "water":{
+        "label": "Water",
+        "price": 100,
+        "category": "Drink"
+    }
+}

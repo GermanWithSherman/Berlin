@@ -1,0 +1,140 @@
+{
+    "id": "cityCenter",
+    "subLocations":{
+        "main":{
+            "Label":{"V":"City Center"},
+            "Text":{
+                "V": "City Center"
+            },
+            "TexturePath":{
+                "Values":{
+                    "night":{"V":"cityCenter/cityCenterNight0.jpg", "C": "World.DayPhase=\"night\""},
+                    "day":{"V":"cityCenter/cityCenterDay0.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "mall":{
+                    "targetLocationId": ".mall_outside",
+                    "Duration": 180
+                },
+                "kebap":{
+                    "targetLocationId": ".kebap",
+                    "Duration": 120,
+                    "TexturePath":{
+                        "Value":"services/kebabHouse.jpg"
+                    }
+                }
+            },
+            "Options":{
+                "1":{
+                    "text":"Pass 30 Minutes",
+                    "commands":{"timeP1800":{"type":"TimePass","p":{"v":1800}}}
+                }
+            }
+        },
+        "mall_inside":{
+            "Label":{"V":"Mall"},
+            "Text":{"V":"City Center Mall"},
+            "OpeningTimes":{
+                "0": {"start":"800","end":"2200","d":[1,2,3,4,5]}
+            },
+            "TexturePath":{
+                "Values":{
+                    "0":{"V":"cityCenter/cityCanterMall0.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "outside":{
+                    "targetLocationId": ".mall_outside",
+                    "Duration": 120,
+                    "Label":"Leave"
+                },
+                "shop_fn":{
+                    "targetLocationId": ".mall_shop_fn",
+                    "Duration": 120,
+                    "Label":"F+N"
+                }
+            }
+        },
+        "mall_outside":{
+            "Label":{"V":"Mall"},
+            "Text":{"V":"City Center Mall"},
+            "TexturePath":{
+                "Values":{
+                    "0":{"V":"cityCenter/cityCanterMall0.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "1":{
+                    "targetLocationId": ".main",
+                    "Duration": 180
+                },
+                "2":{
+                    "targetLocationId": ".mall_inside",
+                    "Duration": 120,
+                    "Label":"Enter"
+                }
+            }
+        },
+        "mall_shop_fn":{
+            "Text":{"V":"F+N"},
+            "TexturePath":{
+                "Values":{
+                    "0":{"V":"shops/fnInterior.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "mallInside":{
+                    "targetLocationId": ".mall_inside",
+                    "Duration": 120,
+                    "Label":"Leave"
+                }
+            },
+            "Options":{
+                "dresses":{
+                    "text":"Shop (Dresses)",
+                    "commands":{"shop":{"type": "Shop","p":{"id":"test.1"}}},
+                    "state":{"Values":{
+                        "0":{"V":{"enabled":false,"text":"wert"}}
+                    }}
+                },
+                "dressesCopy":{
+                    "inherit":"cityCenter.mall_shop_fn.dresses"
+                },
+                "shoes":{
+                    "text":"Shop (Shoes)",
+                    "commands":{
+                        "interrupt":{"type": "Interrupt", "p":{"keywords":["shopFemale"]}},
+                        "shop":{"type": "Shop","p":{"id":"testShoes.1"}}
+                    }
+                },
+                "outfit":{
+                    "text":"Change Outfit",
+                    "commands":{"outfit":{"type":"Outfit"}}
+                }
+            }
+        },
+        "kebap":{
+            "Label":{"V":"Kebap House"},
+            "Text":{"V":"Kebap House"},
+            "TexturePath":{
+                "Values":{
+                    "0":{"V":"services/kebabHouseInside.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "mallInside":{
+                    "targetLocationId": ".main",
+                    "Duration": 120,
+                    "Label":"Leave"
+                }
+            },
+            "Options":{
+                "1":{
+                    "text":"Order Drinks & Food",
+                    "commands":{"service":{"type": "Services","p":{"id":"kebapHouse"}}}
+                }
+            }
+        }
+    }
+}

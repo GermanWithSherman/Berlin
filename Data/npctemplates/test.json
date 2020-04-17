@@ -1,0 +1,5 @@
+{
+    "parent":"default",
+    "nameFirst":{"VT":"WeightedStringList","K":"names_first_female_90s"},
+    "age": {"V":18}
+}
