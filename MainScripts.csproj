@@ -11,10 +11,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F4834801-C93A-F22F-E0B0-570B5D1F7D98}</ProjectGuid>
+    <ProjectGuid>{D887CDB4-9DBE-E902-9A5A-B583B8B098A2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>MainScripts</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -98,12 +98,6 @@
     <Compile Include="Assets\GameObjects\JSON\EventStageConverter.cs" />
     <Compile Include="Assets\GameObjects\Location.cs" />
     <Compile Include="Assets\GameObjects\LocationConnection.cs" />
-    <Compile Include="Assets\GameObjects\LocationConnections.cs" />
-    <Compile Include="Assets\GameObjects\Mods\IModable.cs" />
-    <Compile Include="Assets\GameObjects\Mods\Mod.cs" />
-    <Compile Include="Assets\GameObjects\Mods\ModManifest.cs" />
-    <Compile Include="Assets\GameObjects\Mods\ModableDictionary.cs" />
-    <Compile Include="Assets\GameObjects\Mods\ModsServer.cs" />
     <Compile Include="Assets\GameObjects\NPC.cs" />
     <Compile Include="Assets\GameObjects\NPCRaw.cs" />
     <Compile Include="Assets\GameObjects\NPCTemplate.cs" />
@@ -155,59 +149,30 @@
     <Compile Include="Assets\GameObjects\Util\WeightedStringList.cs" />
     <Compile Include="Assets\GameObjects\Value.cs" />
     <Compile Include="Assets\GameObjects\WorldData.cs" />
-    <Compile Include="Assets\Scenes\Main\ServicesWindow\ServiceWindow.cs" />
-    <Compile Include="Assets\Scenes\Main\ServicesWindow\ServiceWindowService.cs" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\JsonDotNet\link.xml" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
-    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
-    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\GameObjects\JsonDotNet\link.xml" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\GameObjects\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+    <Reference Include="UnityEditor.UI">
+      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>I:/Unity/Editor/2019.3.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -386,8 +351,20 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>I:/Unity/Editor/2019.3.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.VR">
+      <HintPath>I:/Unity/Editor/2019.3.8f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>I:/Unity/Editor/2019.3.8f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>I:/Unity/Editor/2019.3.8f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+      <HintPath>I:/ownCloud/Development/Unity/Berlin/Assets/GameObjects/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>I:/Unity/Editor/2019.3.8f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

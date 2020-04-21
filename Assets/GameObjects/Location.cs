@@ -7,14 +7,14 @@ using System.Runtime.Serialization;
 using UnityEngine;
 
 [System.Serializable]
-public class Location
+public class Location : IModable
 {
     public string id;
 
     public string Default = "main";
 
-    [JsonProperty]
-    private Dictionary<string, SubLocation> subLocations = new Dictionary<string, SubLocation>();
+    //private Dictionary<string, SubLocation> subLocations = new Dictionary<string, SubLocation>();
+    public ModableDictionary<SubLocation> subLocations = new ModableDictionary<SubLocation>();
 
     public SubLocation this[string key]
     {
@@ -30,6 +30,17 @@ public class Location
             return subLocations[Default];
         }
 
+    }
+
+    public void mod(IModable modable)
+    {
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        subLocations.mod(((Location)modable).subLocations);
     }
 
     [OnDeserialized]

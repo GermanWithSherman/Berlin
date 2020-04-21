@@ -1,0 +1,4 @@
+{
+    "ID": "testMod",
+    "dependencies": ["testMod2"]
+}

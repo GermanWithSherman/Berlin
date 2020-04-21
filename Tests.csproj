@@ -11,10 +11,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F4834801-C93A-F22F-E0B0-570B5D1F7D98}</ProjectGuid>
+    <ProjectGuid>{B8F218EA-4086-51F6-BB54-F0A77E8E645C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -62,152 +62,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GameObjects\Activity.cs" />
-    <Compile Include="Assets\GameObjects\CText.cs" />
-    <Compile Include="Assets\GameObjects\Cache\Cache.cs" />
-    <Compile Include="Assets\GameObjects\Cache\ConditionCache.cs" />
-    <Compile Include="Assets\GameObjects\Cache\EventGroupCache.cs" />
-    <Compile Include="Assets\GameObjects\Cache\LocationCache.cs" />
-    <Compile Include="Assets\GameObjects\Cache\NPCTemplateCache.cs" />
-    <Compile Include="Assets\GameObjects\Cache\ServicepointCache.cs" />
-    <Compile Include="Assets\GameObjects\Cache\ServicesCache.cs" />
-    <Compile Include="Assets\GameObjects\Cache\ShopTypeCache.cs" />
-    <Compile Include="Assets\GameObjects\Cache\TextureCache.cs" />
-    <Compile Include="Assets\GameObjects\Cache\WeightedStringListCache.cs" />
-    <Compile Include="Assets\GameObjects\CharacterData.cs" />
-    <Compile Include="Assets\GameObjects\Command.cs" />
-    <Compile Include="Assets\GameObjects\CommandsCollection.cs" />
-    <Compile Include="Assets\GameObjects\Condition.cs" />
-    <Compile Include="Assets\GameObjects\Conditional.cs" />
-    <Compile Include="Assets\GameObjects\Data.cs" />
-    <Compile Include="Assets\GameObjects\EventGroup.cs" />
-    <Compile Include="Assets\GameObjects\EventStage.cs" />
-    <Compile Include="Assets\GameObjects\FunctionParameters.cs" />
-    <Compile Include="Assets\GameObjects\FunctionsLibrary.cs" />
-    <Compile Include="Assets\GameObjects\GameData.cs" />
-    <Compile Include="Assets\GameObjects\GameManager.cs" />
-    <Compile Include="Assets\GameObjects\Interrupt.cs" />
-    <Compile Include="Assets\GameObjects\InterruptPersistentData.cs" />
-    <Compile Include="Assets\GameObjects\InterruptPersistentDataCollection.cs" />
-    <Compile Include="Assets\GameObjects\InterruptServer.cs" />
-    <Compile Include="Assets\GameObjects\Item.cs" />
-    <Compile Include="Assets\GameObjects\ItemsCollection.cs" />
-    <Compile Include="Assets\GameObjects\ItemsFile.cs" />
-    <Compile Include="Assets\GameObjects\ItemsFilter.cs" />
-    <Compile Include="Assets\GameObjects\ItemsLibrary.cs" />
-    <Compile Include="Assets\GameObjects\JSON\EventStageConverter.cs" />
-    <Compile Include="Assets\GameObjects\Location.cs" />
-    <Compile Include="Assets\GameObjects\LocationConnection.cs" />
-    <Compile Include="Assets\GameObjects\LocationConnections.cs" />
-    <Compile Include="Assets\GameObjects\Mods\IModable.cs" />
-    <Compile Include="Assets\GameObjects\Mods\Mod.cs" />
-    <Compile Include="Assets\GameObjects\Mods\ModManifest.cs" />
-    <Compile Include="Assets\GameObjects\Mods\ModableDictionary.cs" />
-    <Compile Include="Assets\GameObjects\Mods\ModsServer.cs" />
-    <Compile Include="Assets\GameObjects\NPC.cs" />
-    <Compile Include="Assets\GameObjects\NPCRaw.cs" />
-    <Compile Include="Assets\GameObjects\NPCTemplate.cs" />
-    <Compile Include="Assets\GameObjects\NPCsRawLibrary.cs" />
-    <Compile Include="Assets\GameObjects\Option.cs" />
-    <Compile Include="Assets\GameObjects\Outfit.cs" />
-    <Compile Include="Assets\GameObjects\PC.cs" />
-    <Compile Include="Assets\GameObjects\Schedule.cs" />
-    <Compile Include="Assets\GameObjects\Schedules.cs" />
-    <Compile Include="Assets\GameObjects\Service.cs" />
-    <Compile Include="Assets\GameObjects\ServiceCategory.cs" />
-    <Compile Include="Assets\GameObjects\Servicepoint.cs" />
-    <Compile Include="Assets\GameObjects\ServicesFile.cs" />
-    <Compile Include="Assets\GameObjects\Shop.cs" />
-    <Compile Include="Assets\GameObjects\ShopData.cs" />
-    <Compile Include="Assets\GameObjects\ShopType.cs" />
-    <Compile Include="Assets\GameObjects\SubLocation.cs" />
-    <Compile Include="Assets\GameObjects\Ui\Console.cs" />
-    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialog.cs" />
-    <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogResolver.cs" />
-    <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogResult.cs" />
-    <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogServer.cs" />
-    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SexSelectDialogPrefab.cs" />
-    <Compile Include="Assets\GameObjects\Ui\FlexibleGridLayout.cs" />
-    <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindow.cs" />
-    <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindowItem.cs" />
-    <Compile Include="Assets\GameObjects\Ui\OutfitWindow\CurrentOutfitItem.cs" />
-    <Compile Include="Assets\GameObjects\Ui\OutfitWindow\OutfitWindow.cs" />
-    <Compile Include="Assets\GameObjects\Ui\PanelView\IPanelData.cs" />
-    <Compile Include="Assets\GameObjects\Ui\PanelView\UIPanelView.cs" />
-    <Compile Include="Assets\GameObjects\Ui\PanelView\UIPanelViewTitle.cs" />
-    <Compile Include="Assets\GameObjects\Ui\PanelView\UIPanelViewWindow.cs" />
-    <Compile Include="Assets\GameObjects\Ui\StartMenu\StartMenu.cs" />
-    <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarHunger.cs" />
-    <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarMoney.cs" />
-    <Compile Include="Assets\GameObjects\Ui\Tooltip\Tooltip.cs" />
-    <Compile Include="Assets\GameObjects\Ui\Tooltip\TooltipProvider.cs" />
-    <Compile Include="Assets\GameObjects\Ui\UINPCPresent.cs" />
-    <Compile Include="Assets\GameObjects\Ui\UINPCsPresentContainer.cs" />
-    <Compile Include="Assets\GameObjects\Ui\UIOption.cs" />
-    <Compile Include="Assets\GameObjects\Ui\UIOptionsContainer.cs" />
-    <Compile Include="Assets\GameObjects\Ui\UIRLocation.cs" />
-    <Compile Include="Assets\GameObjects\Ui\UIRLocations.cs" />
-    <Compile Include="Assets\GameObjects\Ui\UiShopItem.cs" />
-    <Compile Include="Assets\GameObjects\Ui\UiShopWindow.cs" />
-    <Compile Include="Assets\GameObjects\Util\DependencySorter.cs" />
-    <Compile Include="Assets\GameObjects\Util\IDependentObject.cs" />
-    <Compile Include="Assets\GameObjects\Util\WeightedList.cs" />
-    <Compile Include="Assets\GameObjects\Util\WeightedStringList.cs" />
-    <Compile Include="Assets\GameObjects\Value.cs" />
-    <Compile Include="Assets\GameObjects\WorldData.cs" />
-    <Compile Include="Assets\Scenes\Main\ServicesWindow\ServiceWindow.cs" />
-    <Compile Include="Assets\Scenes\Main\ServicesWindow\ServiceWindowService.cs" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\JsonDotNet\link.xml" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
-    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
-    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    <Compile Include="Assets\Test\Tests\TestDependencySort.cs" />
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>I:/Unity/Editor/2019.3.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -386,8 +252,8 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>I:/Unity/Editor/2019.3.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>I:/ownCloud/Development/Unity/Berlin/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>I:/ownCloud/Development/Unity/Berlin/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>I:/Unity/Editor/2019.3.8f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
     public NPCsRawLibrary NPCsRawLibrary;
 
     public DialogServer DialogServer;
-
     public InterruptServer InterruptServer;
+    public ModsServer ModsServer;
 
     public string DataPath;
 
@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
         NPCsRawLibrary = new NPCsRawLibrary(path("npcs"));
 
         InterruptServer = new InterruptServer(path("interrupts"));
+        ModsServer = new ModsServer(path("mods"));
 
         StartMenu.show();
 

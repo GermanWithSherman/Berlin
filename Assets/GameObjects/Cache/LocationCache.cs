@@ -11,9 +11,37 @@ public class LocationCache : Cache<Location>
 
     protected override Location create(string key)
     {
-        string locationPath = Path.Combine(GameManager.Instance.DataPath,"locations", key + ".json");
+        //string locationPath = Path.Combine(GameManager.Instance.DataPath,"locations", key + ".json");
 
-        JObject deserializationData = GameManager.File2Data(locationPath);
+        List<string> locationPaths = new List<string>() { GameManager.Instance.DataPath };
+        locationPaths.AddRange(GameManager.Instance.ModsServer.ActivatedModsPaths);
+
+        Location result = null;
+
+        foreach (string rawpath in locationPaths)
+        {
+            string path = Path.Combine(rawpath, "locations", key + ".json");
+            Location location = loadLocation(path);
+            if (location == null)
+                continue;
+            if (result == null)
+            {
+                result = location;
+                continue;
+            }
+            result.mod(location);
+        }
+
+        //return loadLocation(locationPath);
+        return result;
+    }
+
+    private Location loadLocation(string path)
+    {
+        if (!File.Exists(path))
+            return null;
+
+        JObject deserializationData = GameManager.File2Data(path);
 
         Location location = deserializationData.ToObject<Location>();
 

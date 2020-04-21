@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 //using System.Runtime.Serialization;
 using UnityEngine;
 
 [System.Serializable]
-public class LocationConnection
+public class LocationConnection : IModable
 {
     [JsonIgnore]
     public SubLocation TargetLocation
@@ -32,11 +33,14 @@ public class LocationConnection
         }
     }
 
-    public int Duration = 0;
+    public int? Duration;
     public string Label = "";
 
     public string Type = "Walk";
     public bool interruptible = true;
+
+
+    public LocationConnection() { }
 
     public void execute()
     {
@@ -45,10 +49,22 @@ public class LocationConnection
 
     internal void linkIds(string locationId)
     {
-        if (_targetLocationId[0] == '.')
+        if (!String.IsNullOrEmpty(_targetLocationId) && _targetLocationId[0] == '.')
         {
             _targetLocationId = locationId + _targetLocationId;
         }
     }
 
+    public void mod(IModable modable)
+    {
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        LocationConnection modLocationConnection = (LocationConnection)modable;
+
+        Duration = modLocationConnection.Duration == null ? Duration : modLocationConnection.Duration;
+    }
 }

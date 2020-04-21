@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SubLocation
+public class SubLocation : IModable
 {
     [JsonIgnore]
     public string id;
 
-    public Dictionary<string,LocationConnection> LocationConnections = new Dictionary<string, LocationConnection>();
+    public LocationConnections LocationConnections = new LocationConnections();
 
     public CText Label = new CText();
     public CText Text = new CText();
@@ -48,4 +48,19 @@ public class SubLocation
         }
     }
 
+    internal void mod(SubLocation modSublocation)
+    {
+        LocationConnections.mod(modSublocation.LocationConnections);
+    }
+
+    public void mod(IModable modable)
+    {
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((SubLocation)modable);
+    }
 }

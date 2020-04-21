@@ -14,7 +14,7 @@ public class Interrupt
     public CommandsCollection Commands = new CommandsCollection();
 
     [JsonProperty("Condition")]
-    private string _condition;
+    public string _condition;
     [JsonIgnore]
     public Condition Condition
     {
