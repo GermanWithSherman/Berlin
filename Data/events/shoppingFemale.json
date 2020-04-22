@@ -3,7 +3,7 @@
     "EventStages":{
         "main":{
             "Commands":{
-                "Pause":{"Type":"Pause"}
+                "Pause":{"Type":"Break"}
             },
             "Text":{
                 "V": "There is nothing you want to buy here."
@@ -12,7 +12,6 @@
                 "okay":{
                     "text":"Okay",
                     "Commands":{
-                        "Continue":{"Type":"Continue"},
                         "EventEnd":{"type":"EventEnd"}
                     }
                 }

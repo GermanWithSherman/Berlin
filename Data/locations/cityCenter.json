@@ -13,6 +13,17 @@
                 }
             },
             "LocationConnections":{
+                "home_cheap":{
+                    "Label":{"V":"Go Home"},
+                    "targetLocationId": "home_cheap.",
+                    "Duration": 300,
+                    "Visible":{
+                        "Values":{
+                            "owned":{"V":true, "C": "b.owns_home_cheap=true"},
+                            "default":{"V":false}
+                        }
+                    }
+                },
                 "mall":{
                     "targetLocationId": ".mall_outside",
                     "Duration": 180
@@ -96,15 +107,13 @@
                 }
             },
             "Options":{
-                "dresses":{
-                    "text":"Shop (Dresses)",
-                    "Commands":{"shop":{"type": "Shop","p":{"id":"test.1"}}},
-                    "state":{"Values":{
-                        "0":{"V":{"enabled":false,"text":"wert"}}
-                    }}
+                "fn_clothes_f":{
+                    "text":"Shop (Female Outfits)",
+                    "Commands":{"shop":{"type": "Shop","p":{"id":"fn_clothes_f.cityCenterMall"}}}
                 },
-                "dressesCopy":{
-                    "inherit":"cityCenter.mall_shop_fn.dresses"
+                "fn_clothes_m":{
+                    "text":"Shop (Male Outfits)",
+                    "Commands":{"shop":{"type": "Shop","p":{"id":"fn_clothes_m.cityCenterMall"}}}
                 },
                 "shoes":{
                     "text":"Shop (Shoes)",

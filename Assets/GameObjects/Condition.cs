@@ -165,6 +165,27 @@ public class Condition
 
             for (int i = 0; i < stringValues.Length; i += 1)
             {
+                if (stringValues[i] == "true")
+                {
+                    value[i] = true;
+                    valueType[i] = Types.Value;
+                    continue;
+                }
+
+                if (stringValues[i] == "false")
+                {
+                    value[i] = false;
+                    valueType[i] = Types.Value;
+                    continue;
+                }
+
+                if (stringValues[i] == "null")
+                {
+                    value[i] = null;
+                    valueType[i] = Types.Value;
+                    continue;
+                }
+
                 if (stringValues[i].Length >= 3 && stringValues[i][0] == '"')
                 {
                     value[i] = stringValues[i].Substring(1, stringValues[i].Length - 2);
@@ -187,6 +208,8 @@ public class Condition
                     valueType[i] = Types.Value;
                     continue;
                 }
+
+                
 
                 value[i] = stringValues[i];
                 valueType[i] = Types.Field;

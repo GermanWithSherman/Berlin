@@ -3812,7 +3812,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 23555725}
   m_HandleRect: {fileID: 23555724}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4085,7 +4085,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 847052783}
   m_HandleRect: {fileID: 847052782}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4549,9 +4549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2185b6510a2bce4fb2151e43a118d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  optionPrefab: {fileID: 817922208070615766, guid: f8ac0766ba868304694ac79f316c0a98,
+  optionPrefab: {fileID: 817922208070615763, guid: f8ac0766ba868304694ac79f316c0a98,
     type: 3}
-  optionCount: 4
 --- !u!1 &970250025
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,6 +35,8 @@ public class InterruptPersistentDataCollection : Dictionary<string, InterruptPer
 
     public void resetCooldown(Interrupt interrupt, int cooldown)
     {
+        if (cooldown == 0)
+            return;
         string key = interrupt.id;
         if (!ContainsKey(key))
             this[key] = new InterruptPersistentData();

@@ -24,6 +24,7 @@ public class LocationConnection : IModable
     }
 
     public Conditional<string> TexturePath;
+    public Conditional<bool> Visible;
 
     public Texture Texture {
         get{

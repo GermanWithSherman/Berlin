@@ -9,7 +9,7 @@ public class Interrupt
     public string id;
 
     public float chance = 1f;
-    public int cooldown = 3600;
+    public int cooldown=0;
 
     public CommandsCollection Commands = new CommandsCollection();
 

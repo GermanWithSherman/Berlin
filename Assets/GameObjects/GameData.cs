@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,6 +36,9 @@ public class GameData: Data
     [JsonProperty]
     private List<string> _npcsPresentIds;
 
+    [JsonExtensionData]
+    private IDictionary<string, JToken> _additionalData = new Dictionary<string, JToken>();
+
     protected override dynamic get(string key)
     {
         string[] keyParts = key.Split(new char[] { '.' },2);
@@ -62,7 +66,46 @@ public class GameData: Data
             }
         }
 
-         return "";
+        if (_additionalData.ContainsKey(key))
+        {
+            switch (key[0])
+            {
+                case 'b':
+                    return (bool)_additionalData[key];
+                case 'i':
+                    return (int)_additionalData[key];
+                case 'f':
+                    return (float)_additionalData[key];
+                case 'd':
+                    return (double)_additionalData[key];
+                case 'm':
+                    return (decimal)_additionalData[key];
+                case 's':
+                default:
+                    return _additionalData[key].ToString();
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Requesting unknown value {key} from Gamedata. Returning default data.");
+            switch (key[0])
+            {
+                case 'b':
+                    return false;
+                case 'i':
+                    return 0;
+                case 'f':
+                    return 0f;
+                case 'd':
+                    return 0d;
+                case 'm':
+                    return 0m;
+                case 's':
+                default:
+                    return "";
+            }
+        }
+
     }
 
     protected override void set(string key, dynamic value)
@@ -75,18 +118,23 @@ public class GameData: Data
             {
                 case "NPC":
                     CharacterData[keyParts[1]] = value;
-                    break;
+                    return;
                 case "PC":
                     CharacterData[key] = value;
-                    break;
+                    return;
                 case "Shop":
                     ShopData[keyParts[1]] = value;
-                    break;
+                    return;
                 case "World":
                     WorldData[keyParts[1]] = value;
-                    break;
+                    return;
             }
         }
+
+
+        _additionalData[key] = value;
+
+
     }
 
     #region Serialization

@@ -1,9 +1,0 @@
-{
-    "id": "BAASD",
-    "LocationConnections":[
-        {
-            "targetLocationId": "start",
-            "Duration": 123
-        }
-    ]
-}

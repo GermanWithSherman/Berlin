@@ -9,14 +9,29 @@
                 "Value":"cityCenter/cityCenterNight0.jpg"
             },
             "Options":{
+                "intro":{
+                    "text":"Intro",
+                    "commands":{"goto":{"type":"GotoLocation","p":{"id":"start.intro"}}}
+                },
                 "skipIntro":{
                     "text":"Skip Intro",
                     "commands":{"goto":{"type":"GotoLocation","p":{"id":"start.skipIntro"}}}
                 },
                 "debug":{
                     "text":"Debug",
-                    "commands":{"goto":{"type":"GotoLocation","p":{"id":"cityCenter."}}}
+                    "commands":{
+                        "goto":{"type":"GotoLocation","p":{"id":"home_cheap."}},
+                        "setHomeOwner":{
+                            "type": "Set",
+                            "p":{"k":"b.owns_home_cheap","v":true}
+                        }
+                    }
                 }
+            }
+        },
+        "intro":{
+            "Text":{
+                "V": "Intro"
             }
         },
         "skipIntro":{

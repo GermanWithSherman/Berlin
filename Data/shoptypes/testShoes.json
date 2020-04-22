@@ -1,5 +1,5 @@
 {
     "filter":{
-        "allowedSlots":["Shoes"]
+        "Slots":["Shoes"]
     }
 }

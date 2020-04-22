@@ -1,0 +1,28 @@
+{
+    "id": "home_cheap",
+    "subLocations":{
+        "main":{
+            "Label":{"V":"Hallway"},
+            "Text":{
+                "V": "Hallway"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"V":"locations/apartments/testHallway.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "mall":{
+                    "targetLocationId": "cityCenter.",
+                    "Duration": 300
+                }
+            },
+            "Options":{
+                "1":{
+                    "text":"Pass 30 Minutes",
+                    "commands":{"timeP1800":{"type":"TimePass","p":{"v":1800}}}
+                }
+            }
+        }
+    }
+}

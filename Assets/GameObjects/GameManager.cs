@@ -395,7 +395,8 @@ public class GameManager : MonoBehaviour
 
             TextMain = GameData.currentLocation.Text.Text(GameData);
 
-            LocationConnections = GameData.currentLocation.LocationConnections.Values;
+            //LocationConnections = GameData.currentLocation.LocationConnections.Values;
+            LocationConnections = GameData.currentLocation.LocationConnections.VisibleLocationConnections;
 
             optionsSet(GameData.currentLocation.Options.Values);
         }
