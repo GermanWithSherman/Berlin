@@ -14,7 +14,7 @@
             },
             "LocationConnections":{
                 "home_cheap":{
-                    "Label":{"V":"Go Home"},
+                    "Label":"Go Home",
                     "targetLocationId": "home_cheap.",
                     "Duration": 300,
                     "Visible":{

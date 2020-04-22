@@ -33,8 +33,12 @@ public class PC : NPC
     public int statCalories;
     public int statCaloriesBurnt;
 
-    public Int64 statHunger;
-    public Int64 statSleep;
+    public int statHunger;
+    private int _statHunger { get => statHunger; set => statHunger = Mathf.Clamp(value, 0, 1000000); }
+
+
+    public int statSleep;
+    private int _statSleep { get => statSleep; set => statSleep = Mathf.Clamp(value, 0, 1000000); }
 
 
 
@@ -87,14 +91,6 @@ public class PC : NPC
 
     private IEnumerable<string> itemIdsGet()
     {
-        /*List<string> result = new List<string>();
-
-        foreach(Item item in items)
-        {
-            result.Add(item.id);
-        }
-
-        return result;*/
         return items.Values;
     }
 
@@ -138,24 +134,9 @@ public class PC : NPC
 
     public void timePass(int seconds, Activity activity)
     {
-        statHunger += seconds * activity.statHunger;
-        statSleep += seconds * activity.statSleep;
+        _statHunger += seconds * activity.statHunger;
+        _statSleep += seconds * activity.statSleep;
     }
 
-    /*
-    #region Serialization
-    [OnDeserialized]
-    internal void OnDeserializedMethod(StreamingContext context)
-    {
-        GameManager gameManager = GameManager.Instance;
-        ItemsLibrary itemsLibrary = gameManager.ItemsLibrary;
 
-        items = new List<Item>();
-        foreach(string id in _itemIds)
-        {
-            items.Add(itemsLibrary[id]);
-        }
-    }
-    #endregion
-    */
 }

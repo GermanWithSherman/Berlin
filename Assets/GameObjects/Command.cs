@@ -12,7 +12,7 @@ public class Command
     public static bool pauseActive = false;
     public static CommandsCollection pausedCommands = new CommandsCollection();
 
-    public enum Type { None, Break, Pause, Continue, Flush, Consume, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass }
+    public enum Type { None, Break, Pause, Continue, Flush, Consume, Sleep, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public Type type = Type.None;
@@ -34,9 +34,9 @@ public class Command
                 return;
             case Type.Consume:
 
-                long hunger = p.ContainsKey("hunger") ? (p["hunger"] is Int64 ? p["hunger"] : 0L) : 0L;
-                long calories = p.ContainsKey("calories") ? (p["calories"] is Int64 ? p["calories"] : 0L) : 0L;
-
+                int hunger = p.ContainsKey("hunger") ? ((int)p["hunger"]) : 0;
+                int calories = p.ContainsKey("calories") ? ((int)p["calories"]) : 0;
+                
                 gameManager.PC.statHunger += hunger;
                 gameManager.PC.statCalories += (int)calories;
 
@@ -176,12 +176,60 @@ public class Command
                 string shopId = p["id"];
                 gameManager.shopShow(shopId);
                 return;
+            case Type.Sleep:
+                int duration = (int)p["duration"];
+                CommandsCollection sleepCommands = newSleepCommandList(duration);
+                sleepCommands.execute();
+                return;
             case Type.TimePass:
                 Int64 time = p["v"];
-                gameManager.timePass((int)time);
+                string activityId = p.ContainsKey("a") ? (string)p["a"] : "";
+                gameManager.timePass((int)time,activityId);
                 return;
         }
 
         
+    }
+
+    private static Command newInterruptCommand(string keyword)
+    {
+        return newInterruptCommand(new string[] { keyword });
+    }
+
+    private static Command newInterruptCommand(IEnumerable<string> keywords)
+    {
+        Command result = new Command();
+        result.type = Type.Interrupt;
+        result.p["keywords"] = keywords;
+        return result;
+    }
+
+    private static CommandsCollection newSleepCommandList(int duration)
+    {
+        CommandsCollection result = new CommandsCollection();
+
+        int duration25 = duration / 4;
+        int duration75 = duration * 3 / 4;
+
+        int middleDuration = UnityEngine.Random.Range(duration25,duration75);
+
+        result.Add(newInterruptCommand("SleepStart"));
+
+        result.Add(newTimePassCommand(middleDuration,"sleep"));
+        result.Add(newInterruptCommand("SleepMiddle"));
+        result.Add(newTimePassCommand(duration-middleDuration, "sleep"));
+
+        result.Add(newInterruptCommand("SleepEnd"));
+
+        return result;
+    }
+
+    private static Command newTimePassCommand(int duration, string activityId)
+    {
+        Command result = new Command();
+        result.type = Type.TimePass;
+        result.p["a"] = activityId;
+        result.p["v"] = duration;
+        return result;
     }
 }

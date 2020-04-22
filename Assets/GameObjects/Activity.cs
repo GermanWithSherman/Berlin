@@ -5,6 +5,6 @@ using UnityEngine;
 
 public class Activity
 {
-    public Int64 statHunger = -23;
-    public Int64 statSleep = -11;
+    public int statHunger = -23;
+    public int statSleep = -11;
 }

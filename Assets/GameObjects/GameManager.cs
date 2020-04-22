@@ -349,10 +349,19 @@ public class GameManager : MonoBehaviour
         return age;
     }
 
-    public void timePass(int seconds)
+    public void timePass(int seconds, string activityId = "default")
     {
         timeAdd(seconds);
-        PC.timePass(seconds, new Activity());
+
+        Activity activity = new Activity();
+
+        if(activityId == "sleep")
+        {
+            activity.statSleep *= -2;
+            activity.statHunger /= -2;
+        }
+
+        PC.timePass(seconds, activity);
     }
 
     public DateTime timeWithAge(int age)

@@ -12,15 +12,85 @@
                 }
             },
             "LocationConnections":{
-                "mall":{
+                "leave":{
+                    "Label":"Leave",
                     "targetLocationId": "cityCenter.",
                     "Duration": 300
+                },
+                "bedroom":{
+                    "targetLocationId": ".bedroom",
+                    "Duration": 15
+                },
+                "bathroom":{
+                    "targetLocationId": ".bathroom",
+                    "Duration": 15
+                },
+                "kitchen":{
+                    "targetLocationId": ".kitchen",
+                    "Duration": 15
                 }
             },
             "Options":{
                 "1":{
                     "text":"Pass 30 Minutes",
                     "commands":{"timeP1800":{"type":"TimePass","p":{"v":1800}}}
+                }
+            }
+        },
+        "bedroom":{
+            "Label":{"V":"Bedroom"},
+            "Text":{
+                "V": "Bedroom"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"V":"locations/apartments/testBedroom.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "leave":{
+                    "targetLocationId": ".main",
+                    "Duration": 15
+                }
+            },
+            "Options":{
+                "GoToSleep":{
+                    "text":"Go to sleep",
+                    "commands":{"sleep":{"type":"Sleep","p":{"duration":28800}}}
+                }
+            }
+        },
+        "bathroom":{
+            "Label":{"V":"Bathroom"},
+            "Text":{
+                "V": "Bathroom"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"V":"locations/apartments/testBathroom.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "leave":{
+                    "targetLocationId": ".main",
+                    "Duration": 15
+                }
+            }
+        },
+        "kitchen":{
+            "Label":{"V":"Kitchen"},
+            "Text":{
+                "V": "Kitchen"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"V":"locations/apartments/testKitchen.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "leave":{
+                    "targetLocationId": ".main",
+                    "Duration": 15
                 }
             }
         }

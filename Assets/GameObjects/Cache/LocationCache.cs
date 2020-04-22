@@ -56,6 +56,10 @@ public class LocationCache : Cache<Location>
         {
             Location location;
             location = this[keyparts[0]];
+
+            if (location == null)
+                throw new Exception($"Location {keyparts[0]} not found");
+
             SubLocation subLocation = location[keyparts[1]];
             return subLocation;
         }
