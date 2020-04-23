@@ -9,8 +9,9 @@ public class Option
 {
     public struct OptionState
     {
-        public bool enabled;
+        public bool? enabled;
         public string text;
+        public bool? visible;
     }
 
 
@@ -37,23 +38,6 @@ public class Option
     //public Dictionary<string, Command> commands = new Dictionary<string, Command>();
     public CommandsCollection Commands = new CommandsCollection();
 
-    /*[JsonIgnore]
-    public IEnumerable<Command> Commands
-    {
-        get
-        {
-            Option parent = Parent;
-            if (parent == null)
-                return commands.Values;
-
-            Dictionary<string, Command> mergedCommands = new Dictionary<string, Command>(parent.commands);
-
-            foreach (KeyValuePair<string, Command> kv in commands)
-                mergedCommands[kv.Key] = kv.Value;
-
-            return mergedCommands.Values;
-        }
-    }*/
 
     public string inherit;
 
@@ -72,7 +56,7 @@ public class Option
 
             GameManager gameManager = GameManager.Instance;
 
-            SubLocation subLocation = gameManager.LocationCache[keyParts[0]][keyParts[1]];
+            SubLocation subLocation = gameManager.LocationCache.SubLocation(keyParts[0],keyParts[1]);
 
             Option option = subLocation.Options[keyParts[2]];
 
@@ -81,7 +65,7 @@ public class Option
     }
 
 
-    public Conditional<OptionState> state = new Conditional<OptionState>(new OptionState(){enabled=true}, -2000000001);
+    public Conditional<OptionState> state = new Conditional<OptionState>(new OptionState(){enabled=true, visible=true}, -2000000001);
 
 
     public void execute()

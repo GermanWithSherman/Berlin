@@ -6,6 +6,7 @@ public class DialogServer : MonoBehaviour
 {
     public delegate void DialogCallback(DialogResult dialogResult);
 
+    public Dialog AlarmClockDialogPrefab;
     public Dialog SexSelectDialogPrefab;
 
     public Transform canvas;
@@ -60,6 +61,8 @@ public class DialogServer : MonoBehaviour
     {
         switch (dialogId)
         {
+            case "AlarmClock":
+                return AlarmClockDialogPrefab;
             case "SexSelect":
                 return SexSelectDialogPrefab;
         }

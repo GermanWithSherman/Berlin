@@ -56,7 +56,54 @@
             "Options":{
                 "GoToSleep":{
                     "text":"Go to sleep",
-                    "commands":{"sleep":{"type":"Sleep","p":{"duration":28800}}}
+                    "commands":{
+                        "sleep":{
+                            "type":"Sleep",
+                            "p":{
+                                "alarmTime":"i_SleepAlarmTime",
+                                "alarmActivated":"b_SleepAlarmClockActivated"
+                            }
+                        }
+                    }
+                },
+                "AlarmClockActivate":{
+                    "text":"Activate Alarm Clock",
+                    "state":{"Values":{
+                        "0":{"V":{"visible":false},"C":"b_SleepAlarmClockActivated=true"}
+                    }},
+                    "commands":{
+                        "sleep":{
+                            "type": "Set",
+                            "p":{"k":"b_SleepAlarmClockActivated","v":true}
+                        }
+                    }
+                },
+                "AlarmClockDeactivate":{
+                    "text":"Deactivate Alarm Clock",
+                    "state":{"Values":{
+                        "0":{"V":{"visible":false},"C":"b_SleepAlarmClockActivated=false"}
+                    }},
+                    "commands":{
+                        "sleep":{
+                            "type": "Set",
+                            "p":{"k":"b_SleepAlarmClockActivated","v":false}
+                        }
+                    }
+                },
+                "AlarmClockSet":{
+                    "text": "Set Alarm Clock",
+                    "commands":{
+                        "alarmClockDialog":{
+                            "type":"Dialog",
+                            "p":{
+                                "id":"AlarmClock",
+                                "targets":{
+                                    "time": "i_SleepAlarmTime"
+                                },
+                                "onComplete":{}
+                            }
+                        }
+                    }
                 }
             }
         },

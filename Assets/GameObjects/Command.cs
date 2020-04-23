@@ -177,7 +177,26 @@ public class Command
                 gameManager.shopShow(shopId);
                 return;
             case Type.Sleep:
-                int duration = (int)p["duration"];
+                int duration = -1;
+                if (p.ContainsKey("duration"))
+                    duration = (int)p["duration"];
+                else if (p.ContainsKey("alarmTime")) {
+                    int alarmTime = GameManager.Instance.GameData[p["alarmTime"]];
+                    duration = GameManager.Instance.timeSecondsTils(alarmTime);
+
+                    if (p.ContainsKey("alarmActivated"))
+                    {
+                        bool alarmActivated = GameManager.Instance.GameData[p["alarmActivated"]];
+                        if (!alarmActivated)
+                            duration = -1;
+                    }
+
+                    
+                }
+
+                if (duration < 0)
+                    duration = 3600; // TODO: calculate required sleep
+                
                 CommandsCollection sleepCommands = newSleepCommandList(duration);
                 sleepCommands.execute();
                 return;

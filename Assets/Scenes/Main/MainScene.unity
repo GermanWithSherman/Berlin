@@ -8452,6 +8452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77290a05335d7b74b92114fd56337b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlarmClockDialogPrefab: {fileID: 1289147506556008738, guid: a4d663f4ffc24b64a98ff732e6ff264f,
+    type: 3}
   SexSelectDialogPrefab: {fileID: 8370782463832836622, guid: d6c5c04cd2faa07429f52c27f1774ea7,
     type: 3}
   canvas: {fileID: 758532552}

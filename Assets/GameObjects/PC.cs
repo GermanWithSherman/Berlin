@@ -68,10 +68,10 @@ public class PC : NPC
                 moneyCash = value;
                 return;
             case "statHunger":
-                statHunger = value;
+                statHunger = (int)value;
                 return;
             case "statSleep":
-                statSleep = value;
+                statSleep = (int)value;
                 return;
         }
 

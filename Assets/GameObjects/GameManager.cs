@@ -364,6 +364,22 @@ public class GameManager : MonoBehaviour
         PC.timePass(seconds, activity);
     }
 
+    public int timeSecondsTils(int targetTime)
+    {
+        DateTime now = GameData.WorldData.DateTime;
+
+        int targetHour = targetTime / 10000;
+        int targetMinute = (targetTime / 100) % 100;
+        int targetSecond = targetTime % 100;
+
+        int diff = (targetHour - now.Hour) * 3600 + (targetMinute - now.Minute) * 60 + (targetSecond - now.Second);
+
+        if (diff < 0)
+            diff += 86400;
+
+        return diff;
+    }
+
     public DateTime timeWithAge(int age)
     {
         DateTime todayMN = GameData.WorldData.DateTime.Date;

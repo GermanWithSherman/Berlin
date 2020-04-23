@@ -54,18 +54,24 @@ public class LocationCache : Cache<Location>
 
         if(keyparts.Length == 2)
         {
-            Location location;
-            location = this[keyparts[0]];
-
-            if (location == null)
-                throw new Exception($"Location {keyparts[0]} not found");
-
-            SubLocation subLocation = location[keyparts[1]];
-            return subLocation;
+            return SubLocation(keyparts[0],keyparts[1]);
         }
 
         return null;
     }
 
-    
+    public SubLocation SubLocation(string locationId, string subLocationId)
+    {
+        Location location;
+        location = this[locationId];
+
+        if (location == null)
+            throw new Exception($"Location {locationId} not found");
+
+        SubLocation subLocation = location[subLocationId];
+        return subLocation;
+    }
+
+
+
 }

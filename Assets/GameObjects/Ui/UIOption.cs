@@ -13,18 +13,26 @@ public class UIOption : MonoBehaviour
         Text t = GetComponentInChildren<Text>();
         Button button = GetComponentInChildren<Button>();
 
-        if (optionState.enabled)
+        if (optionState.visible == false)
         {
-            t.color = Color.black;
-            t.text = option.Text;
-            button.interactable = true;
+            gameObject.SetActive(false);
+            return;
         }
-        else
+
+        if (optionState.enabled == false)
         {
             t.color = Color.red;
             t.text = $"{option.Text} ({optionState.text})";
             button.interactable = false;
         }
+        else //true or null
+        {
+            t.color = Color.black;
+            t.text = option.Text;
+            button.interactable = true;
+        }
+
+        
 
         
         button.onClick.RemoveAllListeners();

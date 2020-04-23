@@ -126,6 +126,7 @@
     <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogResolver.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogResult.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogServer.cs" />
+    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\AlarmClockDialogPrefab.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SexSelectDialogPrefab.cs" />
     <Compile Include="Assets\GameObjects\Ui\FlexibleGridLayout.cs" />
     <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindow.cs" />
