@@ -1326,6 +1326,7 @@ GameObject:
   - component: {fileID: 214901659}
   - component: {fileID: 214901661}
   - component: {fileID: 214901660}
+  - component: {fileID: 214901662}
   m_Layer: 5
   m_Name: LocationImage
   m_TagString: Untagged
@@ -1385,6 +1386,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214901658}
   m_CullTransparentMesh: 0
+--- !u!114 &214901662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214901658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2686f6ddecdc78b4fbb3cc504bd157f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RawImage: {fileID: 214901660}
 --- !u!1 &239380417
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,6 +3293,7 @@ GameObject:
   - component: {fileID: 697579165}
   - component: {fileID: 697579167}
   - component: {fileID: 697579166}
+  - component: {fileID: 697579168}
   m_Layer: 5
   m_Name: DateTime
   m_TagString: Untagged
@@ -3345,6 +3360,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697579164}
   m_CullTransparentMesh: 0
+--- !u!114 &697579168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697579164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc0ed60335dcf9418405396bca26166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: {fileID: 697579166}
 --- !u!1 &709391901
 GameObject:
   m_ObjectHideFlags: 0
@@ -7063,18 +7091,20 @@ MonoBehaviour:
   DataPath: I:\ownCloud\Development\Unity\Berlin\Data
   QuicksavePath: I:\ownCloud\Development\Unity\Berlin-Savegames\quicksave.json
   TextBoxMain: {fileID: 631625491}
-  OptionsContainer: {fileID: 962716871}
-  StatusBarHunger: {fileID: 1490864347}
-  StatusBarMoney: {fileID: 1986100057}
-  StatusBarDateTime: {fileID: 697579166}
-  ImageMain: {fileID: 214901660}
   UINPCsPresentContainer: {fileID: 1584895295}
-  UIRLocations: {fileID: 1279165172}
   OutfitWindow: {fileID: 918231701}
   UIServicesWindow: {fileID: 95498083}
   UiShopWindow: {fileID: 1813158145}
   Tooltip: {fileID: 1646412688}
   StartMenu: {fileID: 200701796}
+  updateListeners:
+  - {fileID: 1490864347}
+  - {fileID: 1986100057}
+  - {fileID: 697579168}
+  - {fileID: 214901662}
+  - {fileID: 1693913545}
+  - {fileID: 962716871}
+  - {fileID: 1279165172}
 --- !u!1 &1528893066
 GameObject:
   m_ObjectHideFlags: 0
@@ -8181,6 +8211,7 @@ GameObject:
   - component: {fileID: 1693913542}
   - component: {fileID: 1693913544}
   - component: {fileID: 1693913543}
+  - component: {fileID: 1693913545}
   m_Layer: 5
   m_Name: TextMainContainer
   m_TagString: Untagged
@@ -8244,6 +8275,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693913541}
   m_CullTransparentMesh: 0
+--- !u!114 &1693913545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693913541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdbb175cc7aa3841a5c2ca7ee0f7167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: {fileID: 631625491}
 --- !u!1 &1695540419
 GameObject:
   m_ObjectHideFlags: 0

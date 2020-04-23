@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatusBarHunger : MonoBehaviour
+public class StatusBarHunger : UIUpdateListener
 {
     public TMPro.TextMeshProUGUI Text;
 
@@ -10,5 +10,10 @@ public class StatusBarHunger : MonoBehaviour
     {
         decimal h = hunger / 1000000m;
         Text.text = h.ToString("P");
+    }
+
+    public override void uiUpdate(GameManager gameManager)
+    {
+        set(gameManager.PC.statHunger);
     }
 }

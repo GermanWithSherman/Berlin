@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
-public class StatusBarMoney : MonoBehaviour
+public class StatusBarMoney : UIUpdateListener
 {
     public UnityEngine.UI.Text Text;
 
@@ -13,5 +13,10 @@ public class StatusBarMoney : MonoBehaviour
     {
         double m = money / 100d;
         Text.text = m.ToString("C",CultureInfo.CreateSpecificCulture("de"));
+    }
+
+    public override void uiUpdate(GameManager gameManager)
+    {
+        set(gameManager.PC.moneyCash);
     }
 }

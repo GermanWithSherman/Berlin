@@ -48,27 +48,35 @@ public class GameManager : MonoBehaviour
         set => TextBoxMain.text = value;
     }
 
-    public UIOptionsContainer OptionsContainer;
-
-    public StatusBarHunger StatusBarHunger;
-    public StatusBarMoney StatusBarMoney;
-    public Text StatusBarDateTime;
-
-
-    public RawImage ImageMain;
-    public Texture TextureMain
+    public IEnumerable<Option> CurrentOptions
     {
-        get => ImageMain.texture;
-        set => ImageMain.texture = value;
+        get
+        {
+
+            if (GameData.currentEventStage == null)
+                return GameData.currentLocation.Options.Values;
+            else
+                return GameData.currentEventStage.Options.Values;
+        }
     }
+
+    public IEnumerable<LocationConnection> CurrentReachableLocations{get => GameData.currentLocation.LocationConnections.VisibleLocationConnections;}
+
+    public string CurrentText
+    {
+        get
+        {
+            if (GameData.currentEventStage == null)
+                return GameData.currentLocation.Text.Text(GameData);
+            else
+                return GameData.currentEventStage.Text.Text(GameData);
+        }
+    }
+
+    public Texture CurrentTexture{ get => GameData.currentLocation.Texture; }
 
     public UINPCsPresentContainer UINPCsPresentContainer;
 
-    public UIRLocations UIRLocations;
-    public IEnumerable<LocationConnection> LocationConnections
-    {
-        set => UIRLocations.setRLs(value);
-    }
 
     public OutfitWindow OutfitWindow;
 
@@ -81,7 +89,7 @@ public class GameManager : MonoBehaviour
     public StartMenu StartMenu;
 
     private bool uiUpdatePending;
-
+    public List<UIUpdateListener> updateListeners;
 
     private void Awake()
     {
@@ -299,10 +307,10 @@ public class GameManager : MonoBehaviour
         return npcGenerated;
     }
 
-    public void optionsSet(IEnumerable<Option> options)
+    /*public void optionsSet(IEnumerable<Option> options)
     {
         OptionsContainer.optionsSet(options);
-    }
+    }*/
 
     public void outfitWindowShow()
     {
@@ -406,15 +414,19 @@ public class GameManager : MonoBehaviour
     {
         uiUpdatePending = false;
 
-        StatusBarHunger.set(PC.statHunger);
-        StatusBarMoney.set(PC.moneyCash);
-        StatusBarDateTime.text = GameData.WorldData.DateTime.ToString();
+        foreach (UIUpdateListener listener in updateListeners)
+        {
+            listener.uiUpdate(this);
+        }
+
+        /*
         TextureMain = GameData.currentLocation.Texture;
 
         UIServicesWindow.update();
 
         //SubLocation Stuff
         if (GameData.currentEventStage == null)
+
         {
             TextureMain = GameData.currentLocation.Texture;
 
@@ -430,7 +442,7 @@ public class GameManager : MonoBehaviour
             TextMain = GameData.currentEventStage.Text.Text(GameData);
             optionsSet(GameData.currentEventStage.Options.Values);
             LocationConnections = null;
-        }
+        }*/
     }
 
 }
