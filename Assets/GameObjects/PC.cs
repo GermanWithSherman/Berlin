@@ -36,13 +36,15 @@ public class PC : NPC
     public int statHunger;
     private int _statHunger { get => statHunger; set => statHunger = Mathf.Clamp(value, 0, 1000000); }
 
+    public int statHygiene;
+    private int _statHygiene { get => statHygiene; set => statHygiene = Mathf.Clamp(value, 0, 1000000); }
 
     public int statSleep;
     private int _statSleep { get => statSleep; set => statSleep = Mathf.Clamp(value, 0, 1000000); }
 
-
-
     
+
+
 
 
     protected override dynamic get(string key)
@@ -53,6 +55,8 @@ public class PC : NPC
                 return moneyCash;
             case "statHunger":
                 return statHunger;
+            case "statHygiene":
+                return statHygiene;
             case "statSleep":
                 return statSleep;
         }
@@ -68,10 +72,13 @@ public class PC : NPC
                 moneyCash = value;
                 return;
             case "statHunger":
-                statHunger = (int)value;
+                _statHunger = (int)value;
+                return;
+            case "statHygiene":
+                _statHygiene = (int)value;
                 return;
             case "statSleep":
-                statSleep = (int)value;
+                _statSleep = (int)value;
                 return;
         }
 
@@ -135,6 +142,7 @@ public class PC : NPC
     public void timePass(int seconds, Activity activity)
     {
         _statHunger += seconds * activity.statHunger;
+        _statHygiene += seconds * activity.statHygiene;
         _statSleep += seconds * activity.statSleep;
     }
 

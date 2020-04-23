@@ -358,7 +358,7 @@ public class GameManager : MonoBehaviour
         if(activityId == "sleep")
         {
             activity.statSleep *= -2;
-            activity.statHunger /= -2;
+            activity.statHunger /= 2;
         }
 
         PC.timePass(seconds, activity);

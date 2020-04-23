@@ -122,6 +122,14 @@
                     "targetLocationId": ".main",
                     "Duration": 15
                 }
+            },
+            "Options":{
+                "Shower":{
+                    "text":"Shower",
+                    "commands":{
+                        "gte":{"Type":"Event","p":{"e":"bathShower."}}
+                    }
+                }
             }
         },
         "kitchen":{

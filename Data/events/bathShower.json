@@ -1,0 +1,25 @@
+{
+    "id":"bathShower",
+    "EventStages":{
+        "main":{
+            "Commands":{
+                "HygieneReset":{
+                    "type": "Set",
+                    "p":{"k":"PC.statHygiene","v":1000000}
+                }
+            },
+            "Text":{
+                "V": "Shower Shower"
+            },
+            "Options":{
+                "leave":{
+                    "text":"Leave",
+                    "Commands":{
+                        "EventEnd":{"type":"EventEnd"}
+                    }
+                }
+            }
+        }
+    }
+    
+}
