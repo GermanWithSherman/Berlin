@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -38,14 +39,25 @@ public class FunctionsLibrary
 
     }
 
+    public string functionExecute(string id, FunctionParameters parameters)
+    {
+        if (!stringFunctions.ContainsKey(id))
+        {
+            throw new NotImplementedException($"Function {id} can not be found");
+        }
+
+        return stringFunctions[id].value(parameters);
+    }
+
     public string npcName(NPC npc)
     {
-        if (!stringFunctions.ContainsKey("s_npcName"))
-            return "{npcName}";
+        //if (!stringFunctions.ContainsKey("s_npcName"))
+        //    return "{npcName}";
 
         FunctionParameters parameters = new FunctionParameters("_NPC", npc);
 
-        return stringFunctions["s_npcName"].value(parameters);
+        //return stringFunctions["s_npcName"].value(parameters);
+        return functionExecute("s_npcName", parameters);
     }
 
 }

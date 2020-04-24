@@ -38,7 +38,7 @@ public class ItemsCollection : Dictionary<string,string>
     public Item getItem(string slot)
     {
         Dictionary<string, Item> dict = getItemDict();
-        return dict[slot];
+        return dict.ContainsKey(slot) ? dict[slot] : null;
     }
 
     private Dictionary<string,Item> getItemDict()
@@ -66,10 +66,21 @@ public class ItemsCollection : Dictionary<string,string>
 
     public void setItem(string key, Item item)
     {
-        this[key] = item.id;
+        if (item == null)
+        {
+            Remove(key);
 
-        if (!cacheDirty)
-            cache[key] = item;
+            if (!cacheDirty)
+                cache.Remove(key);
+        }
+        else
+        {
+
+            this[key] = item.id;
+
+            if (!cacheDirty)
+                cache[key] = item;
+        }
     }
 
     public void setItem(string key, string itemId)

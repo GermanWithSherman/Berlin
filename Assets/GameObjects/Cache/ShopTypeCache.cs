@@ -10,12 +10,18 @@ public class ShopTypeCache : Cache<ShopType>
     {
         string path = Path.Combine(GameManager.Instance.DataPath, "shoptypes", key + ".json");
 
-        JObject deserializationData = GameManager.File2Data(path);
+        try
+        {
+            JObject deserializationData = GameManager.File2Data(path);
 
-        ShopType shopType = deserializationData.ToObject<ShopType>();
+            ShopType shopType = deserializationData.ToObject<ShopType>();
 
-        shopType.id = key;
+            shopType.id = key;
 
-        return shopType;
+            return shopType;
+        }catch(FileNotFoundException)
+        {
+            throw new GameException($"ShopType {key} does not exist");
+        }
     }
 }

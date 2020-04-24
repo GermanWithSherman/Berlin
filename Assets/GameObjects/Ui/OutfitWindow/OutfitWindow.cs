@@ -12,9 +12,11 @@ public class OutfitWindow : MonoBehaviour
 
     public ItemSelectWindow ItemSelectWindow;
 
+    private string _itemSelectionSlot = "";
+
     void Start()
     {
-        
+        hide();
     }
 
     public void hide()
@@ -24,13 +26,17 @@ public class OutfitWindow : MonoBehaviour
 
     public void itemSelect(Item item)
     {
-        currentCharacter.currentOutfit.addItem(item);
+        if (item == null)
+            currentCharacter.currentOutfit.setItem(_itemSelectionSlot, item);
+        else
+            currentCharacter.currentOutfit.addItem(item);
         updateItems();
     }
 
     public void itemSelectWindowShow(string slot)
     {
         ItemSelectWindow.show(ItemsFilter.filterSlot(currentCharacter.items,slot), this.itemSelect);
+        _itemSelectionSlot = slot;
     }
 
     public void setCharacter(PC character)

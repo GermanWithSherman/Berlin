@@ -131,6 +131,8 @@
     <Compile Include="Assets\GameObjects\Ui\FlexibleGridLayout.cs" />
     <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindow.cs" />
     <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindowItem.cs" />
+    <Compile Include="Assets\GameObjects\Ui\Messages\ErrorMessage.cs" />
+    <Compile Include="Assets\GameObjects\Ui\Messages\GameException.cs" />
     <Compile Include="Assets\GameObjects\Ui\OutfitWindow\CurrentOutfitItem.cs" />
     <Compile Include="Assets\GameObjects\Ui\OutfitWindow\OutfitWindow.cs" />
     <Compile Include="Assets\GameObjects\Ui\PanelView\IPanelData.cs" />

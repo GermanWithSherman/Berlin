@@ -43,7 +43,7 @@ public class PC : NPC
     private int _statSleep { get => statSleep; set => statSleep = Mathf.Clamp(value, 0, 1000000); }
 
     
-
+    private static GameManager gameManager { get => GameManager.Instance; }
 
 
 
@@ -83,6 +83,12 @@ public class PC : NPC
         }
 
         setNPCData(key, value);
+    }
+
+    public Texture GetBodypartTexture(string slot)
+    {
+        string path = gameManager.FunctionsLibrary.functionExecute("s_PcBodypartChest",new FunctionParameters("_PC",this));
+        return gameManager.TextureCache[path];
     }
 
     public void itemAdd(Item item)

@@ -11,10 +11,19 @@ public class CurrentOutfitItem : MonoBehaviour
 
     public string Slot;
 
+    public string Label;
+
+    public TMPro.TextMeshProUGUI LabelText;
+
     public Button Button;
     public RawImage RawImage;
 
     private PC currentCharacter;
+
+    void Start()
+    {
+        LabelText.text = Label;
+    }
 
     public void onClick()
     {
@@ -30,6 +39,11 @@ public class CurrentOutfitItem : MonoBehaviour
     {
         Item item = currentCharacter.currentOutfit[Slot];
 
+        if(item == null)
+        {
+            RawImage.texture = currentCharacter.GetBodypartTexture(Slot);
+            return;
+        }
         RawImage.texture = item.Texture;
     }
 }

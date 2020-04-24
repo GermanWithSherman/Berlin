@@ -12,6 +12,11 @@ public class ItemSelectWindow : MonoBehaviour
 
     private ItemCallback _callback;
 
+    void Start()
+    {
+        hide();
+    }
+
     private void deleteItems()
     {
         foreach (Transform child in ItemsContainer)
@@ -23,6 +28,11 @@ public class ItemSelectWindow : MonoBehaviour
     public void hide()
     {
         gameObject.SetActive(false);
+    }
+
+    public void itemSelectNull()
+    {
+        itemSelect(null);
     }
 
     public void itemSelect(Item item)
