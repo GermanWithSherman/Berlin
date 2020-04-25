@@ -15,6 +15,8 @@ public class Shop
         get => getItems();
     }*/
 
+    public ItemsCollection ItemsAll { get => Items; } //Not limited by number, TODO
+
     public ItemsCollection Items = new ItemsCollection();
 
     [JsonProperty]

@@ -177,8 +177,8 @@ public class GameManager : MonoBehaviour
 
         PC.age = 18;
 
-        PC.outfits.Add("DEFAULT", new Outfit(new Item[] { ItemsLibrary["dress_2"] }));
-        PC.currentOutfitId = "DEFAULT";
+        //PC.outfits.Add("DEFAULT", new Outfit(new Item[] { ItemsLibrary["dress_2"] }));
+        //PC.currentOutfitId = "DEFAULT";
 
         OutfitWindow.setCharacter(PC);
     }

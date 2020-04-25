@@ -12,7 +12,7 @@ public class Command
     public static bool pauseActive = false;
     public static CommandsCollection pausedCommands = new CommandsCollection();
 
-    public enum Type { None, Break, Pause, Continue, Flush, Consume, Sleep, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass }
+    public enum Type { None, Break, Pause, Continue, Flush, Consume, Sleep, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass, ItemAdd }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public Type type = Type.None;
@@ -139,6 +139,40 @@ public class Command
 
 
                     Debug.LogError($"Parameter keywords malformed in Command.Type.Interrupt");
+
+
+                    return;
+                case Type.ItemAdd:
+                    ItemsCollection selectedItems;
+                    bool equip = false;
+
+                    if (p.ContainsKey("shop"))
+                    {
+                        int count = 1;
+
+                        if (p.ContainsKey("count"))
+                            count = p["count"];
+
+                        ItemsCollection items = gameManager.GameData.ShopData[p["shop"]].ItemsAll;
+
+                        selectedItems = items.getRandomItems(count);
+                    }else if (p.ContainsKey("id"))
+                    {
+                        selectedItems = new ItemsCollection(new string[] { p["id"] });
+                    }
+                    else{
+                        throw new GameException("Neither shop nor id declared for Command.Type.ItemAdd");
+                    }
+
+                    if (p.ContainsKey("equip"))
+                        equip = p["equip"];
+
+                    foreach(Item item in ((Dictionary<string,Item>)selectedItems).Values)
+                    {
+                        gameManager.PC.itemAdd(item);
+                        if(equip)
+                            gameManager.PC.currentOutfit.addItem(item);
+                    }
 
 
                     return;

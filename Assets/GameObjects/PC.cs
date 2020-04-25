@@ -20,11 +20,16 @@ public class PC : NPC
     public ItemsCollection items = new ItemsCollection();
 
     public Dictionary<string, Outfit> outfits = new Dictionary<string, Outfit>();
-    public string currentOutfitId;
+    public string currentOutfitId="DEFAULT";
     [JsonIgnore]
     public Outfit currentOutfit
     {
-        get => outfits[currentOutfitId];
+        get
+        {
+            if (!outfits.ContainsKey(currentOutfitId))
+                outfits[currentOutfitId] = new Outfit();
+            return outfits[currentOutfitId];
+        }
     }
 
 

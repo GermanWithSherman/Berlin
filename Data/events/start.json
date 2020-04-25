@@ -10,6 +10,10 @@
                     "type": "GotoLocation",
                     "p":{"id":"start."}
                 },
+                "clothesAdd":{
+                    "type": "ItemAdd",
+                    "p":{"shop":"testShoes","equip":true}
+                },
                 "time":{
                     "type": "Set",
                     "p":{"k":"World.DateTime","v":"2020-04-09T06:00:00"}

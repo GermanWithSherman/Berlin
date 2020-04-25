@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using UnityEngine;
 
@@ -19,10 +20,25 @@ public class ItemsCollection : Dictionary<string,string>
     public ItemsCollection() { }
 
     public ItemsCollection(IEnumerable<Item> items) {
+        cacheDirty = false;
         foreach (Item item in items)
         {
             addItem(item);
         }
+    }
+
+    public ItemsCollection(IEnumerable<string> itemIds)
+    {
+        foreach (string itemId in itemIds)
+        {
+            Add(itemId,itemId);
+        }
+    }
+
+    public new void Add(string key, string itemId)
+    {
+        base.Add(key,itemId);
+        cacheDirty = true;
     }
 
     public bool Contains(Item item)
@@ -87,6 +103,33 @@ public class ItemsCollection : Dictionary<string,string>
     {
         this[key] = itemId;
         cacheDirty = true;
+    }
+
+
+    public ItemsCollection getRandomItems(int count)
+    {
+        var result = new ItemsCollection();
+
+        if(Count <= count)
+        {
+            if(Count < count)
+                ErrorMessage.Show($"Requesting {count} items from {Count} available items");
+            return new ItemsCollection(getItemDict().Values);
+        }
+
+
+        List<Item> possibleItems = getItemDict().Values.ToList();
+
+        for(int i = 0; i < count; i++)
+        {
+            int index = UnityEngine.Random.Range(0,possibleItems.Count);
+            Item item = possibleItems[index];
+
+            result.addItem(item);
+            possibleItems.RemoveAt(index);
+        }
+
+        return result;
     }
 
 

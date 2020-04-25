@@ -14,11 +14,6 @@ public class OutfitWindow : MonoBehaviour
 
     private string _itemSelectionSlot = "";
 
-    void Start()
-    {
-        hide();
-    }
-
     public void hide()
     {
         gameObject.SetActive(false);
@@ -54,8 +49,9 @@ public class OutfitWindow : MonoBehaviour
 
     public void show()
     {
-        updateItems();
         gameObject.SetActive(true);
+        updateItems();
+        
     }
 
     public void update()

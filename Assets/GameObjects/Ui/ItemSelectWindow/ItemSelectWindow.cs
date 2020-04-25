@@ -12,11 +12,6 @@ public class ItemSelectWindow : MonoBehaviour
 
     private ItemCallback _callback;
 
-    void Start()
-    {
-        hide();
-    }
-
     private void deleteItems()
     {
         foreach (Transform child in ItemsContainer)
