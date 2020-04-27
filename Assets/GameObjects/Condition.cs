@@ -311,6 +311,9 @@ public class Condition
                 case Modes.LEquals:
                     result = (lower(left, right) || eq(left, right));
                     break;
+                case Modes.NEquals:
+                    result = !eq(left,right);
+                    break;
             }
         }
         catch (Exception e)

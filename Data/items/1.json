@@ -1,5 +1,11 @@
 {
     "items":{
+        "bra1":{
+            "Label":"Bra 1",
+            "TexturePath":"items/bra1.jpg",
+            "Price": 1000,
+            "Slot": "Bra"
+        },
         "dress_1":{
             "Label":"Dress 1",
             "TexturePath":"items/dressA(0).jpg",
@@ -23,6 +29,12 @@
             "TexturePath":"items/dressA(3).jpg",
             "Price": 1111,
             "Slot": "Clothes"
+        },
+        "panties_1":{
+            "Label":"Panties 1",
+            "TexturePath":"items/panties1.jpg",
+            "Price": 1000,
+            "Slot": "Panties"
         },
         "shoes_1":{
             "Label":"Shoes 1",

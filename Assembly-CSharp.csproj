@@ -120,6 +120,7 @@
     <Compile Include="Assets\GameObjects\Shop.cs" />
     <Compile Include="Assets\GameObjects\ShopData.cs" />
     <Compile Include="Assets\GameObjects\ShopType.cs" />
+    <Compile Include="Assets\GameObjects\StringExtensions.cs" />
     <Compile Include="Assets\GameObjects\SubLocation.cs" />
     <Compile Include="Assets\GameObjects\Ui\Console.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialog.cs" />

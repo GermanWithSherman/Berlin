@@ -11,6 +11,7 @@ public class Value<T>
 {
     public enum ValueType
     {
+        Function,
         Interpolate,
         Plain,
         Reference,
@@ -20,7 +21,9 @@ public class Value<T>
     [JsonConverter(typeof(StringEnumConverter))]
     public ValueType VT = ValueType.Plain;
 
-    public string K; //Key for Reference and WSL
+    public Dictionary<string, string> Parameters = new Dictionary<string, string>(); //for ValueType.Function
+
+    public string K; //Key for Reference and WeightedStringList and Function
 
     public T V; // value
 
@@ -62,6 +65,13 @@ public class Value<T>
     {
         switch (VT)
         {
+            case ValueType.Function:
+                FunctionParameters p = new FunctionParameters();
+                foreach(KeyValuePair<string,string> kv in Parameters)
+                {
+                    p.Add(kv.Key, kv.Value.ToValue(gameData));
+                }
+                return (T)(object)GameManager.Instance.FunctionsLibrary.functionExecute(K,p);
             case ValueType.Interpolate:
                 return (T)(object)gameData.interpolate(K);
             case ValueType.Plain:

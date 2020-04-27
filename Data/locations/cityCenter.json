@@ -115,6 +115,10 @@
                     "text":"Shop (Male Outfits)",
                     "Commands":{"shop":{"type": "Shop","p":{"id":"fn_clothes_m.cityCenterMall"}}}
                 },
+                "fn_underwear_f":{
+                    "text":"Shop (Female Underwear)",
+                    "Commands":{"shop":{"type": "Shop","p":{"id":"fn_underwear_f.cityCenterMall"}}}
+                },
                 "shoes":{
                     "text":"Shop (Shoes)",
                     "Commands":{

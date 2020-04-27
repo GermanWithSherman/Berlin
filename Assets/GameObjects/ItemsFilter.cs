@@ -6,7 +6,7 @@ public class ItemsFilter
 {
     public List<string> Genders = new List<string>();
     public List<string> Slots = new List<string>();
-    public List<string> Types = new List<string>();
+    public List<string> Styles = new List<string>();
 
     public int[] Price;
     public int[] Skimpiness;
@@ -39,7 +39,7 @@ public class ItemsFilter
             if (Slots.Count > 0 && !Slots.Contains(item.Slot))
                 continue;
 
-            if (Types.Count > 0 && !Types.Contains(item.Type))
+            if (Styles.Count > 0 && !Styles.Contains(item.Style))
                 continue;
 
             if (Price != null)

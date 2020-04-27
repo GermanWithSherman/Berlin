@@ -37,13 +37,14 @@ public class CurrentOutfitItem : MonoBehaviour
 
     public void update()
     {
-        Item item = currentCharacter.currentOutfit[Slot];
+        /*Item item = currentCharacter.currentOutfit[Slot];
 
         if(item == null)
         {
             RawImage.texture = currentCharacter.GetBodypartTexture(Slot);
             return;
         }
-        RawImage.texture = item.Texture;
+        RawImage.texture = item.Texture;*/
+        RawImage.texture = currentCharacter.GetClothingslotTexture(Slot);
     }
 }

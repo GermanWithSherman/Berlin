@@ -2,7 +2,7 @@
     "filter":{
         "Genders": ["f"],
         "Slots":["Clothes"],
-        "Types": ["Casual"],
+        "Styles": ["Casual"],
         "Price": [20,100],
         "Skimpiness": [20,80]
     }

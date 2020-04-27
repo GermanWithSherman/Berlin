@@ -16,7 +16,7 @@ public class Item
 
     public string Slot = "Clothes";
 
-    public string Type = "Casual"; //Casual, Glamour, Dance, Sports, Swimming
+    public string Style = "Casual"; //Casual, Glamour, Dance, Sports, Swimming
 
     public int Skimpiness = 0;
 
@@ -25,5 +25,16 @@ public class Item
     public Texture Texture
     {
         get => GameManager.Instance.TextureCache[TexturePath];
+    }
+
+    public dynamic getDynamic(string key)
+    {
+        switch (key)
+        {
+            case "TexturePath":
+                return TexturePath;
+        }
+
+        return "";
     }
 }

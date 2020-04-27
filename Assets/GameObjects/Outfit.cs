@@ -38,13 +38,57 @@ public class Outfit
         setItem(item.Slot,item);
     }
 
+    public dynamic getDynamic(string key)
+    {
+        string[] keyparts = key.Split(new char[] { '.' }, 2);
+
+        if (keyparts.Length == 1)
+            return this[key];
+
+        return this[keyparts[0]]?.getDynamic(keyparts[1]);
+    }
+
     public void setItem(string slot, Item item)
     {
         items.setItem(slot,item);
+        updateStyle();
     }
 
     public void setItem(string slot, string itemId)
     {
         items.setItem(slot, itemId);
+        updateStyle();
+    }
+
+    private void updateStyle()
+    {
+        string braStyle = "None";
+        string clothesStyle = "None";
+        string pantiesStyle = "None";
+        string shoesStyle = "None";
+
+        Item bra = items.getItem("Bra");
+        Item clothes = items.getItem("Clothes");
+        Item panties = items.getItem("Panties");
+        Item shoes = items.getItem("Shoes");
+
+        if (bra != null)
+            braStyle = bra.Style;
+        if (clothes != null)
+            clothesStyle = clothes.Style;
+        if (panties != null)
+            pantiesStyle = panties.Style;
+        if (shoes != null)
+            shoesStyle = shoes.Style;
+
+        FunctionParameters parameters = new FunctionParameters();
+        parameters.Add("_bra", braStyle);
+        parameters.Add("_clothes", clothesStyle);
+        parameters.Add("_panties", pantiesStyle);
+        parameters.Add("_shoes", shoesStyle);
+
+        string style = GameManager.Instance.FunctionsLibrary.functionExecute("s_OutfitStyle", parameters);
+
+        Debug.Log(style);
     }
 }

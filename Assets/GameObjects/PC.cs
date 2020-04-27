@@ -7,15 +7,6 @@ using UnityEngine;
 
 public class PC : NPC
 {
-    /*[JsonIgnore]
-    public List<Item> items = new List<Item>();
-
-    private List<string> _itemIds = new List<string>(); //for deserialization only
-    public List<string> itemIds
-    {
-        get => itemIdsGet();
-        set => _itemIds = value;
-    }*/
 
     public ItemsCollection items = new ItemsCollection();
 
@@ -66,6 +57,18 @@ public class PC : NPC
                 return statSleep;
         }
 
+        string[] keyparts = key.Split(new char[] { '.' }, 2);
+
+        if (keyparts.Length == 2)
+        { 
+            switch (keyparts[0])
+            {
+                case "currentOutfit":
+                    return currentOutfit.getDynamic(keyparts[1]);
+            }
+        }
+
+
         return base.get(key);
     }
 
@@ -90,10 +93,43 @@ public class PC : NPC
         setNPCData(key, value);
     }
 
-    public Texture GetBodypartTexture(string slot)
+    public Texture GetClothingslotTexture(string slot)
     {
-        string path = gameManager.FunctionsLibrary.functionExecute("s_PcBodypartChest",new FunctionParameters("_PC",this));
+        string path = "";
+        switch (slot)
+        {
+            case "Bra":
+                Item bra = currentOutfit["Bra"];
+                if (bra == null)
+                {
+                    path = gameManager.FunctionsLibrary.functionExecute("s_PcBodyBreast", new FunctionParameters("_PC", this, "_slot", slot));
+                    return gameManager.TextureCache[path];
+                }
+                return bra.Texture;
+            case "Clothes":
+                Item clothes = currentOutfit["Clothes"];
+                if (clothes == null)
+                    return GetClothingslotTexture("Bra");
+                return clothes.Texture;
+            case "Panties":
+                Item panties = currentOutfit["Panties"];
+                if (panties == null) {
+                    path = gameManager.FunctionsLibrary.functionExecute("s_PcBodyLap", new FunctionParameters("_PC", this, "_slot", slot));
+                    return gameManager.TextureCache[path];
+                }
+                return panties.Texture;
+            case "Shoes":
+                Item shoes = currentOutfit["Shoes"];
+                if (shoes == null)
+                {
+                    path = gameManager.FunctionsLibrary.functionExecute("s_PcBodyFeet", new FunctionParameters("_PC", this, "_slot", slot));
+                    return gameManager.TextureCache[path];
+                }
+                return shoes.Texture;
+        }
+
         return gameManager.TextureCache[path];
+
     }
 
     public void itemAdd(Item item)
