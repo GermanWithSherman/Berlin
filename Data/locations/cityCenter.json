@@ -128,7 +128,16 @@
                 },
                 "outfit":{
                     "text":"Change Outfit",
-                    "Commands":{"outfit":{"type":"Outfit"}}
+                    "Commands":{
+                        "outfit":{
+                            "type":"Outfit",
+                            "p":{
+                                "requirements":{
+                                    "ForbiddenStyles": ["Naked","Underwear"]
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },

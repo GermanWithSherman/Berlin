@@ -314,11 +314,14 @@ public class Condition
                 case Modes.NEquals:
                     result = !eq(left,right);
                     break;
+                default:
+                    throw new GameException($"Unhandled Condition Type {mode.ToString()}");
             }
         }
         catch (Exception e)
         {
-            Debug.LogError("Failed to evaluate condition: "+ conditionString+"("+e+")");
+            throw new GameException($"Failed to evaluate condition: {conditionString} ( {e} )");
+            //Debug.LogError("Failed to evaluate condition: "+ conditionString+"("+e+")");
         }
 
         return result;

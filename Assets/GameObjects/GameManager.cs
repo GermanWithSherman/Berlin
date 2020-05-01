@@ -312,9 +312,9 @@ public class GameManager : MonoBehaviour
         OptionsContainer.optionsSet(options);
     }*/
 
-    public void outfitWindowShow()
+    public void outfitWindowShow(OutfitRequirement outfitRequirement)
     {
-        OutfitWindow.show();
+        OutfitWindow.show(outfitRequirement);
     }
 
     public string path(string p)

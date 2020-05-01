@@ -110,6 +110,7 @@
     <Compile Include="Assets\GameObjects\NPCsRawLibrary.cs" />
     <Compile Include="Assets\GameObjects\Option.cs" />
     <Compile Include="Assets\GameObjects\Outfit.cs" />
+    <Compile Include="Assets\GameObjects\OutfitRequirement.cs" />
     <Compile Include="Assets\GameObjects\PC.cs" />
     <Compile Include="Assets\GameObjects\Schedule.cs" />
     <Compile Include="Assets\GameObjects\Schedules.cs" />

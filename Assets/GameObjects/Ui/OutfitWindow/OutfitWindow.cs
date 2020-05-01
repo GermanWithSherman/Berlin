@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,24 @@ public class OutfitWindow : MonoBehaviour
     public ItemSelectWindow ItemSelectWindow;
 
     private string _itemSelectionSlot = "";
+
+    private OutfitRequirement _outfitRequirement;
+
+    public void close()
+    {
+        try
+        {
+            if (_outfitRequirement.isValid(currentCharacter.currentOutfit))
+            {
+                hide();
+                return;
+            }
+            throw new GameException(_outfitRequirement.Instruction);
+        }
+        catch (GameException e) { 
+            ErrorMessage.Show(e.Message);
+        }
+    }
 
     public void hide()
     {
@@ -49,9 +68,15 @@ public class OutfitWindow : MonoBehaviour
 
     public void show()
     {
+        OutfitRequirement outfitRequirement = new OutfitRequirement();
+        show(outfitRequirement);
+    }
+
+    public void show(OutfitRequirement outfitRequirement)
+    {
+        _outfitRequirement = outfitRequirement;
         gameObject.SetActive(true);
         updateItems();
-        
     }
 
     public void update()

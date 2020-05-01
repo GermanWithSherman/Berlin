@@ -1,0 +1,36 @@
+{
+    "#DEV":"Deprecated",
+    "Values":{
+        "Bra":{
+            "VT": "Function",
+            "K": "s_PcBodypart",
+            "Parameters":{"_PC":"_PC","_slot":"\"Breast\""},
+            "C":"_slot=\"Bra\""
+        },
+        "Breast":{
+            "V":"PC/breastB_1.jpg",
+            "C":"_slot=\"Breast\""
+        },
+        "Clothes":{
+            "VT": "Function",
+            "K": "s_PcBodypart",
+            "Parameters":{"_PC":"_PC","_slot":"\"Bra\""},
+            "C":"_slot=\"Clothes\""
+        },
+        "Lap":{
+            "V":"PC/lap1.jpg",
+            "C":"_slot=\"Lap\""
+        },
+        "Panties":{
+            "VT": "Function",
+            "K": "s_PcBodypart",
+            "Parameters":{"_PC":"_PC","_slot":"\"Lap\""},
+            "C":"_slot=\"Panties\""
+        },
+        "Shoes":{
+            "VT": "Function",
+            "K": "s_test",
+            "Parameters":{"_PC":"_PC","_slot":"_slot"}
+        }
+    }
+}

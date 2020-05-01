@@ -40,11 +40,18 @@ public class LocationConnection : IModable
     public string Type = "Walk";
     public bool interruptible = true;
 
+    public OutfitRequirement OutfitRequirement = new OutfitRequirement();
+
 
     public LocationConnection() { }
 
     public void execute()
     {
+        if (!OutfitRequirement.isValid(GameManager.Instance.PC.currentOutfit))
+        {
+            ErrorMessage.Show(OutfitRequirement.Instruction);
+            return;
+        }
         GameManager.Instance.locationTransfer(this);
     }
 

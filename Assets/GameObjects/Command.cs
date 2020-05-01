@@ -177,7 +177,13 @@ public class Command
 
                     return;
                 case Type.Outfit:
-                    gameManager.outfitWindowShow();
+                    OutfitRequirement outfitRequirement = new OutfitRequirement();
+                    if (p.ContainsKey("requirements") && p["requirements"] is JObject)
+                    {
+                        outfitRequirement = ((JObject)p["requirements"]).ToObject<OutfitRequirement>();
+                    }
+
+                    gameManager.outfitWindowShow(outfitRequirement);
                     return;
                 case Type.Pause:
                     pauseActive = true;

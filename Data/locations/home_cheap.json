@@ -15,7 +15,11 @@
                 "leave":{
                     "Label":"Leave",
                     "targetLocationId": "cityCenter.",
-                    "Duration": 300
+                    "Duration": 300,
+                    "OutfitRequirement":{
+                        "ForbiddenStyles": ["Naked","Underwear"],
+                        "CustomInstruction": "You should put on some clothes before leaving."
+                    }
                 },
                 "bedroom":{
                     "targetLocationId": ".bedroom",
@@ -102,6 +106,14 @@
                                 },
                                 "onComplete":{}
                             }
+                        }
+                    }
+                },
+                "outfit":{
+                    "text":"Change Outfit",
+                    "Commands":{
+                        "outfit":{
+                            "type":"Outfit"
                         }
                     }
                 }

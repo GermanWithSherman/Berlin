@@ -1,0 +1,8 @@
+{
+    "Values":{
+        "Bra":{
+            "VT": "Reference",
+            "K":"_PC.currentOutfit.Clothes.TexturePath"
+        }
+    }
+}

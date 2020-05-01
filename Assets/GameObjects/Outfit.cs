@@ -8,6 +8,8 @@ public class Outfit
     [JsonProperty]
     private ItemsCollection items = new ItemsCollection();
 
+    public string Style = "Casual";
+
     public Item this[string slot]
     {
         get => items.getItem(slot);
@@ -89,6 +91,7 @@ public class Outfit
 
         string style = GameManager.Instance.FunctionsLibrary.functionExecute("s_OutfitStyle", parameters);
 
+        Style = style;
         Debug.Log(style);
     }
 }
