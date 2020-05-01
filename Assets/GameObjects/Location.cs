@@ -20,16 +20,34 @@ public class Location : IModable
     {
         get
         {
+            SubLocation result;
+
             if (String.IsNullOrEmpty(key))
-                return subLocations[Default];
+                result = subLocations[Default];
 
-            if (subLocations.ContainsKey(key))
-                return subLocations[key];
+            else if (subLocations.ContainsKey(key))
+                result = subLocations[key];
+            else
+            {
+                Debug.LogWarning($"Requested sublocation {key} is not present in location {id}");
+                result = subLocations[Default];
+            }
 
-            Debug.LogWarning($"Requested sublocation {key} is not present in location {id}");
-            return subLocations[Default];
+            if (!result.inheritanceResolved)
+            {
+                if (!String.IsNullOrEmpty(result.Inherit))
+                    result.mod(GameManager.Instance.LocationCache.SubLocation(result.Inherit));
+                result.inheritanceResolved = true;
+            }
+            return result;
+
         }
 
+    }
+
+    public IModable copyDeep()
+    {
+        throw new NotImplementedException();
     }
 
     public void mod(IModable modable)

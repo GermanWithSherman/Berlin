@@ -30,7 +30,7 @@ public class LocationConnection : IModable
         get{
             if (TexturePath != null)
                 return GameManager.Instance.TextureCache[TexturePath];
-            return TargetLocation.Texture;
+            return TargetLocation.TexturePreview;
         }
     }
 
@@ -74,5 +74,10 @@ public class LocationConnection : IModable
         LocationConnection modLocationConnection = (LocationConnection)modable;
 
         Duration = modLocationConnection.Duration == null ? Duration : modLocationConnection.Duration;
+    }
+
+    public IModable copyDeep()
+    {
+        throw new NotImplementedException();
     }
 }

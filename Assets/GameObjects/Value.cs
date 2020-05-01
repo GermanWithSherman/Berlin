@@ -6,8 +6,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public abstract class Value : IModable
+{
+    public abstract IModable copyDeep();
+    public abstract void mod(IModable modable);
+}
 
-public class Value<T>
+public class Value<T>: Value
 {
     public enum ValueType
     {
@@ -21,7 +26,8 @@ public class Value<T>
     [JsonConverter(typeof(StringEnumConverter))]
     public ValueType VT = ValueType.Plain;
 
-    public Dictionary<string, string> Parameters = new Dictionary<string, string>(); //for ValueType.Function
+    //public Dictionary<string, string> Parameters = new Dictionary<string, string>(); //for ValueType.Function
+    public ModableDictionary<string> Parameters = new ModableDictionary<string>();
 
     public string K; //Key for Reference and WeightedStringList and Function
 
@@ -96,4 +102,42 @@ public class Value<T>
         return y.P - x.P;
     }
 
+    public void mod(Value<T> modable)
+    {
+        VT = modable.VT;
+        Parameters.mod(modable.Parameters);
+        V = modable.V;
+        //TODO: Continue
+    }
+
+    public override void mod(IModable modable)
+    {
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((Value<T>)modable);
+    }
+
+    public override IModable copyDeep()
+    {
+        var result = new Value<T>();
+
+        result.C = C;
+        result.CV = Modable.copyDeep(CV);
+        result.K = K;
+        result.P = P;
+
+        if (V is IModable)
+        {
+            IModable VCopy = Modable.copyDeep((IModable)V);
+            result.V = (T)VCopy;
+        }
+        else
+            result.V = V;
+
+        return result;
+    }
 }

@@ -11,7 +11,6 @@ public class LocationCache : Cache<Location>
 
     protected override Location create(string key)
     {
-        //string locationPath = Path.Combine(GameManager.Instance.DataPath,"locations", key + ".json");
 
         List<string> locationPaths = new List<string>() { GameManager.Instance.DataPath };
         locationPaths.AddRange(GameManager.Instance.ModsServer.ActivatedModsPaths);
@@ -32,7 +31,6 @@ public class LocationCache : Cache<Location>
             result.mod(location);
         }
 
-        //return loadLocation(locationPath);
         return result;
     }
 

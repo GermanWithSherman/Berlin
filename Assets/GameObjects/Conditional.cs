@@ -4,14 +4,45 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class Conditional { }
+public abstract class Conditional : IModable
+{
+    public abstract IModable copyDeep();
+
+    public abstract void mod(IModable modable);
+
+    public static Conditional<T> mod<T>(Conditional<T> original, Conditional mod)
+    {
+        if (mod == null)
+            return original;
+
+        if(!(mod is Conditional<T>))
+        {
+            Debug.LogError("Type mismatch");
+            return original;
+        }
+
+        if (original == null)
+            return ((Conditional<T>)mod.copyDeep());
+
+        /*if (original.GetType() != mod.GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return original;
+        }*/
+
+        original.mod(mod);
+
+        return original;
+    }
+
+}
 
 public class Conditional<T> : Conditional
 {
     [JsonProperty]
     private T Value = default(T);
 
-    public Dictionary<string, Value<T>> Values = new Dictionary<string, Value<T>>();
+    public ModableDictionary<Value<T>> Values = new ModableDictionary<Value<T>>();
 
     public static implicit operator T(Conditional<T> conditional)
     {
@@ -53,5 +84,35 @@ public class Conditional<T> : Conditional
         Debug.Log("No valid value, returning default");
 
         return default;
+    }
+
+    
+
+    public void mod(Conditional<T> modable)
+    {
+        if (modable == null) return;
+        Value = (modable.Value != null && !modable.Value.Equals(default(T))) ? modable.Value : Value;
+        Values.mod(modable.Values);
+    }
+
+    public override void mod(IModable modable)
+    {
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((Conditional<T>)modable);
+    }
+
+    public override IModable copyDeep()
+    {
+        var result = new Conditional<T>();
+
+        result.Value = Value;
+        result.Values = Modable.copyDeep(Values);//(ModableDictionary<Value<T>>)Values.copyDeep();
+
+        return result;
     }
 }

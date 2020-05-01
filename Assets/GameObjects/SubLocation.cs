@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class SubLocation : IModable
 {
     [JsonIgnore]
@@ -15,14 +15,29 @@ public class SubLocation : IModable
     public CText Label = new CText();
     public CText Text = new CText();
 
+    [JsonIgnore]
     public Texture Texture { get => GameManager.Instance.TextureCache[TexturePath]; }
-    public Conditional<string> TexturePath;
+    public Conditional<string> TexturePath;// = new Conditional<string>();
+
+    [JsonIgnore]
+    public Texture TexturePreview {
+        get
+        {
+            if(TexturePreviewPath != null)
+                return GameManager.Instance.TextureCache[TexturePreviewPath];
+            return Texture;
+        }
+    }
+    public Conditional<string> TexturePreviewPath;
 
     public Dictionary<string, Option> Options = new Dictionary<string, Option>();
 
     public Schedules OpeningTimes = new Schedules();
 
     public CommandsCollection onShow = new CommandsCollection();
+
+    public string Inherit;
+    public bool inheritanceResolved = false;
 
     public void execute(GameManager gameManager)
     {
@@ -51,6 +66,20 @@ public class SubLocation : IModable
     internal void mod(SubLocation modSublocation)
     {
         LocationConnections.mod(modSublocation.LocationConnections);
+
+
+        //TexturePath.mod(modSublocation.TexturePath);
+        //TexturePath = Conditional<string>.mod<string>(TexturePath, modSublocation.TexturePath);
+        TexturePath = Modable.mod(TexturePath, modSublocation.TexturePath);
+
+        /*if (modSublocation.TexturePreviewPath != null)
+        {
+            if (TexturePreviewPath == null)
+                TexturePreviewPath = new Conditional<string>();
+            TexturePreviewPath.mod(modSublocation.TexturePreviewPath);
+        }*/
+        //TexturePreviewPath = Conditional<string>.mod<string>(TexturePreviewPath, modSublocation.TexturePreviewPath);
+        TexturePreviewPath = Modable.mod(TexturePreviewPath, modSublocation.TexturePreviewPath);
     }
 
     public void mod(IModable modable)
@@ -62,5 +91,10 @@ public class SubLocation : IModable
         }
 
         mod((SubLocation)modable);
+    }
+
+    public IModable copyDeep()
+    {
+        throw new NotImplementedException();
     }
 }

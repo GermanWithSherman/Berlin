@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
         FunctionsLibrary = new FunctionsLibrary(path("functions"));
         ItemsLibrary = new ItemsLibrary(path("items"));
         NPCsRawLibrary = new NPCsRawLibrary(path("npcs"));

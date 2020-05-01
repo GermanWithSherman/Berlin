@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class ModableDictionary<V> : Dictionary<string,V>, IModable
 {
+    public IModable copyDeep()
+    {
+        var result = new ModableDictionary<V>();
+        foreach (KeyValuePair<string,V> kv in this)
+        {
+            string key = kv.Key;
+            V value = kv.Value;
+            if (value is IModable)
+                result.Add(key, (V)((IModable)value).copyDeep());
+            else
+                result.Add(key,value);
+        }
+        return result;
+    }
+
     //public void mod(Dictionary<string,V> modData)
     public void mod(IModable modable)
     {

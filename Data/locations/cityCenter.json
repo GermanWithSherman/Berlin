@@ -34,6 +34,10 @@
                     "TexturePath":{
                         "Value":"services/kebabHouse.jpg"
                     }
+                },
+                "kaeda":{
+                    "targetLocationId": ".kaeda",
+                    "Duration": 180
                 }
             },
             "Options":{
@@ -140,6 +144,9 @@
                     }
                 }
             }
+        },
+        "kaeda":{
+            "Inherit": "shop_kaeda."
         },
         "kebap":{
             "Label":{"V":"Kebap House"},

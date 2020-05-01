@@ -1,0 +1,19 @@
+{
+    "id": "shop_kaeda",
+    "subLocations":{
+        "main":{
+            "Label":{"V":"City Center"},
+            "Text":{
+                "V": "City Center"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"V":"locations/shop/kaedaInterior.jpg"}
+                }
+            },
+            "TexturePreviewPath":{
+                "Value": "locations/shop/kaedaWide.png"
+            }
+        }
+    }
+}
