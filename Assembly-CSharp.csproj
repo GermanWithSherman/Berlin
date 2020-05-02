@@ -99,6 +99,7 @@
     <Compile Include="Assets\GameObjects\Location.cs" />
     <Compile Include="Assets\GameObjects\LocationConnection.cs" />
     <Compile Include="Assets\GameObjects\LocationConnections.cs" />
+    <Compile Include="Assets\GameObjects\Mods\IInheritable.cs" />
     <Compile Include="Assets\GameObjects\Mods\IModable.cs" />
     <Compile Include="Assets\GameObjects\Mods\Mod.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModManifest.cs" />

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
 
-public class Option
+public class Option : IModable, IInheritable
 {
     public struct OptionState
     {
@@ -16,8 +16,8 @@ public class Option
 
 
 
-    public string text;
-    [JsonIgnore]
+    public string Text;
+    /*[JsonIgnore]
     public string Text
     {
         get
@@ -32,24 +32,23 @@ public class Option
             }
             return "Text Missing";
         }
-    }
+    }*/
 
 
-    //public Dictionary<string, Command> commands = new Dictionary<string, Command>();
     public CommandsCollection Commands = new CommandsCollection();
 
 
-    public string inherit;
+    public string Inherit;
 
     [JsonIgnore]
     public Option Parent
     {
         get
         {
-            if (String.IsNullOrEmpty(inherit))
+            if (String.IsNullOrEmpty(Inherit))
                 return null;
 
-            string[] keyParts = inherit.Split('.');
+            string[] keyParts = Inherit.Split('.');
 
             if (keyParts.Length != 3)
                 return null;
@@ -64,22 +63,72 @@ public class Option
         }
     }
 
+    [JsonIgnore]
+    public bool inheritanceResolved = false;
 
-    public Conditional<OptionState> state = new Conditional<OptionState>(new OptionState(){enabled=true, visible=true}, -2000000001);
+
+    public Conditional<OptionState> State = new Conditional<OptionState>(new OptionState(){enabled=true, visible=true}, -2000000001);
 
 
     public void execute()
     {
-        /*foreach (Command command in Commands)
-        {
-            command.execute();
-        }*/
         Commands.execute();
     }
 
-    [OnDeserialized]
-    internal void OnDeserializedMethod(StreamingContext context)
+    public static Option Inherited(Option option)
     {
+        if (!option.inheritanceResolved)
+            option.inherit();
+        return option;
+    }
+
+    public void inherit(Option parent)
+    {
+        Option parentCopy = Modable.copyDeep(parent);
+
+        mod(parentCopy, this);
+
         
     }
+
+    public void inherit()
+    {
+        Option parent = Parent;
+
+        if(parent != null)
+            inherit(parent);
+
+        inheritanceResolved = true;
+    }
+
+    private void mod(Option original, Option mod)
+    {
+        Commands = Modable.mod(original.Commands, mod.Commands);
+        State = Modable.mod(original.State, mod.State);
+        Text = Modable.mod(original.Text, mod.Text);
+    }
+
+    public void mod(Option modable)
+    {
+        if (modable == null) return;
+        mod(this, modable);
+    }
+
+    public void mod(IModable modable)
+    {
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((Option)modable);
+    }
+
+    public IModable copyDeep()
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool isInheritanceResolved() => inheritanceResolved;
 }

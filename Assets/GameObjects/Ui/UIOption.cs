@@ -7,7 +7,7 @@ public class UIOption : MonoBehaviour
 {
     public void optionSet(Option option)
     {
-        Option.OptionState optionState = option.state;
+        Option.OptionState optionState = option.State;
 
 
         Text t = GetComponentInChildren<Text>();

@@ -13,33 +13,34 @@ public class Location : IModable
 
     public string Default = "main";
 
-    //private Dictionary<string, SubLocation> subLocations = new Dictionary<string, SubLocation>();
     public ModableDictionary<SubLocation> subLocations = new ModableDictionary<SubLocation>();
 
     public SubLocation this[string key]
     {
         get
         {
-            SubLocation result;
+            //SubLocation result;
 
             if (String.IsNullOrEmpty(key))
-                result = subLocations[Default];
-
+                //result = subLocations[Default];
+                return Inheritable.Inherited(subLocations[Default]);
             else if (subLocations.ContainsKey(key))
-                result = subLocations[key];
+                //result = subLocations[key];
+                return Inheritable.Inherited(subLocations[key]);
             else
             {
                 Debug.LogWarning($"Requested sublocation {key} is not present in location {id}");
-                result = subLocations[Default];
+                //result = subLocations[Default];
+                return Inheritable.Inherited(subLocations[Default]);
             }
 
-            if (!result.inheritanceResolved)
+            /*if (!result.inheritanceResolved)
             {
                 if (!String.IsNullOrEmpty(result.Inherit))
                     result.mod(GameManager.Instance.LocationCache.SubLocation(result.Inherit));
                 result.inheritanceResolved = true;
             }
-            return result;
+            return result;*/
 
         }
 

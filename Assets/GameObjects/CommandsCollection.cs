@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandsCollection : Dictionary<string, Command>
+public class CommandsCollection : ModableDictionary<Command>
 {
 
     public CommandsCollection() { }

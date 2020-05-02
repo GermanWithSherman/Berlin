@@ -95,6 +95,10 @@ public class CText : IModable
 
     public IModable copyDeep()
     {
-        throw new NotImplementedException();
+        var result = new CText();
+        result.V = Modable.copyDeep(V);
+        result.D = Modable.copyDeep(D);
+        result.C = Modable.copyDeep(C);
+        return result;
     }
 }

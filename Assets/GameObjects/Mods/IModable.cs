@@ -13,9 +13,22 @@ public static class Modable
 {
     public static T copyDeep<T>(T original) where T: IModable
     {
-        if (original == null)
-            return default(T);
-        return (T)original.copyDeep();
+        try
+        {
+            if (original == null)
+                return default(T);
+            return (T)original.copyDeep();
+        }
+        catch(InvalidCastException)
+        {
+            Debug.LogError($"{typeof(T)} vs {original.copyDeep().GetType()}");
+            return default;
+        }
+    }
+
+    public static string copyDeep(string original)
+    {
+        return original;
     }
 
     public static T mod<T>(T original, T mod) where T : IModable

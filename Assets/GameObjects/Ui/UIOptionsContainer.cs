@@ -32,7 +32,7 @@ public class UIOptionsContainer : UIUpdateListener
         foreach (Option option in options)
         {
             UIOption uiOption = Instantiate<UIOption>(optionPrefab, transform);
-            uiOption.optionSet(option);
+            uiOption.optionSet(Option.Inherited(option));
         }
     }
 

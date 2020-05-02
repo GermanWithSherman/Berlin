@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class SubLocation : IModable
+public class SubLocation : IModable, IInheritable
 {
     [JsonIgnore]
     public string id;
@@ -30,13 +30,25 @@ public class SubLocation : IModable
     }
     public Conditional<string> TexturePreviewPath;
 
-    public Dictionary<string, Option> Options = new Dictionary<string, Option>();
+    public ModableDictionary<Option> Options = new ModableDictionary<Option> ();
 
     public Schedules OpeningTimes = new Schedules();
 
     public CommandsCollection onShow = new CommandsCollection();
 
     public string Inherit;
+
+    [JsonIgnore]
+    public SubLocation Parent
+    {
+        get
+        {
+            if (String.IsNullOrEmpty(Inherit))
+                return null;
+            return GameManager.Instance.LocationCache.SubLocation(Inherit);
+        }
+    }
+    [JsonIgnore]
     public bool inheritanceResolved = false;
 
     public void execute(GameManager gameManager)
@@ -63,14 +75,42 @@ public class SubLocation : IModable
         }
     }
 
-    internal void mod(SubLocation modSublocation)
+    public void inherit(SubLocation parent)
     {
-        LocationConnections = Modable.mod(LocationConnections,modSublocation.LocationConnections);
+        SubLocation parentCopy = Modable.copyDeep(parent);
 
-        Text = Modable.mod(Text, modSublocation.Text);
+        mod(parentCopy, this);
+        
+    }
 
-        TexturePath = Modable.mod(TexturePath, modSublocation.TexturePath);
-        TexturePreviewPath = Modable.mod(TexturePreviewPath, modSublocation.TexturePreviewPath);
+    public void inherit()
+    {
+        SubLocation parent = Parent;
+        if(parent != null)
+            inherit(parent);
+
+        inheritanceResolved = true;
+    }
+
+    public bool isInheritanceResolved() => inheritanceResolved;
+
+    private void mod(SubLocation original, SubLocation mod)
+    {
+
+        LocationConnections = Modable.mod(original.LocationConnections, mod.LocationConnections);
+
+        Options = Modable.mod(original.Options, mod.Options);
+
+        Text = Modable.mod(original.Text, mod.Text);
+
+        TexturePath = Modable.mod(original.TexturePath, mod.TexturePath);
+        TexturePreviewPath = Modable.mod(original.TexturePreviewPath, mod.TexturePreviewPath);
+    }
+
+    public void mod(SubLocation modSublocation)
+    {
+        if (modSublocation == null) return;
+        mod(this, modSublocation);
     }
 
     public void mod(IModable modable)
@@ -86,6 +126,15 @@ public class SubLocation : IModable
 
     public IModable copyDeep()
     {
-        throw new NotImplementedException();
+        var result = new SubLocation();
+        result.Label = Modable.copyDeep(Label);
+        result.LocationConnections = Modable.copyDeep(LocationConnections);
+        result.Options = Modable.copyDeep(Options);
+        result.Text = Modable.copyDeep(Text);
+        result.TexturePath = Modable.copyDeep(TexturePath);
+        result.TexturePreviewPath = Modable.copyDeep(TexturePreviewPath);
+        return result;
     }
+
+    
 }
