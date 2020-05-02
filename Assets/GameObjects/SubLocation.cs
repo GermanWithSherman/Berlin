@@ -65,20 +65,11 @@ public class SubLocation : IModable
 
     internal void mod(SubLocation modSublocation)
     {
-        LocationConnections.mod(modSublocation.LocationConnections);
+        LocationConnections = Modable.mod(LocationConnections,modSublocation.LocationConnections);
 
+        Text = Modable.mod(Text, modSublocation.Text);
 
-        //TexturePath.mod(modSublocation.TexturePath);
-        //TexturePath = Conditional<string>.mod<string>(TexturePath, modSublocation.TexturePath);
         TexturePath = Modable.mod(TexturePath, modSublocation.TexturePath);
-
-        /*if (modSublocation.TexturePreviewPath != null)
-        {
-            if (TexturePreviewPath == null)
-                TexturePreviewPath = new Conditional<string>();
-            TexturePreviewPath.mod(modSublocation.TexturePreviewPath);
-        }*/
-        //TexturePreviewPath = Conditional<string>.mod<string>(TexturePreviewPath, modSublocation.TexturePreviewPath);
         TexturePreviewPath = Modable.mod(TexturePreviewPath, modSublocation.TexturePreviewPath);
     }
 

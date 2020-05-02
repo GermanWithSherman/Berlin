@@ -2,10 +2,8 @@
     "id": "shop_kaeda",
     "subLocations":{
         "main":{
-            "Label":{"V":"City Center"},
-            "Text":{
-                "V": "City Center"
-            },
+            "Label":{"V":"Kaeda"},
+            "Text":{"V":"Kaeda City Center"},
             "TexturePath":{
                 "Values":{
                     "default":{"V":"locations/shop/kaedaInterior.jpg"}

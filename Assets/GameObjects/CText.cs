@@ -6,11 +6,12 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 
 [System.Serializable]
-public class CText
+public class CText : IModable
 {
     public string V; //Plain Text
 
-    public Dictionary<string, CText> D = new Dictionary<string, CText>();
+    //public Dictionary<string, CText> D = new Dictionary<string, CText>();
+    public ModableDictionary<CText> D = new ModableDictionary<CText>();
 
     [JsonIgnore]
     public Condition Condition
@@ -70,5 +71,30 @@ public class CText
 
 
         return result;
+    }
+ 
+
+    public void mod(CText modable)
+    {
+        V = Modable.mod(V, modable.V);
+        D = Modable.mod(D, modable.D);
+        C = Modable.mod(C, modable.C);
+    }
+
+    public void mod(IModable modable)
+    {
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((CText)modable);
+        
+    }
+
+    public IModable copyDeep()
+    {
+        throw new NotImplementedException();
     }
 }

@@ -146,7 +146,15 @@
             }
         },
         "kaeda":{
-            "Inherit": "shop_kaeda."
+            "Inherit": "shop_kaeda.",
+            "Text":{"V":"Kaeda City Center"},
+            "LocationConnections":{
+                "mallInside":{
+                    "targetLocationId": ".main",
+                    "Duration": 180,
+                    "Label":"Leave"
+                }
+            }
         },
         "kebap":{
             "Label":{"V":"Kebap House"},
