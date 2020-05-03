@@ -80,6 +80,10 @@
     <Compile Include="Assets\GameObjects\Condition.cs" />
     <Compile Include="Assets\GameObjects\Conditional.cs" />
     <Compile Include="Assets\GameObjects\Data.cs" />
+    <Compile Include="Assets\GameObjects\Dialogue.cs" />
+    <Compile Include="Assets\GameObjects\Dialogue\UIDialogue.cs" />
+    <Compile Include="Assets\GameObjects\Dialogue\UIDialogueTopic.cs" />
+    <Compile Include="Assets\GameObjects\DialogueTopicLibrary.cs" />
     <Compile Include="Assets\GameObjects\EventGroup.cs" />
     <Compile Include="Assets\GameObjects\EventStage.cs" />
     <Compile Include="Assets\GameObjects\FunctionParameters.cs" />
@@ -107,6 +111,7 @@
     <Compile Include="Assets\GameObjects\Mods\ModableDictionary.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModsServer.cs" />
     <Compile Include="Assets\GameObjects\NPC.cs" />
+    <Compile Include="Assets\GameObjects\NPCFilter.cs" />
     <Compile Include="Assets\GameObjects\NPCRaw.cs" />
     <Compile Include="Assets\GameObjects\NPCTemplate.cs" />
     <Compile Include="Assets\GameObjects\NPCsRawLibrary.cs" />

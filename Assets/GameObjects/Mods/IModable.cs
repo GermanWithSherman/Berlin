@@ -26,6 +26,11 @@ public static class Modable
         }
     }
 
+    public static int copyDeep(int original)
+    {
+        return original;
+    }
+
     public static string copyDeep(string original)
     {
         return original;

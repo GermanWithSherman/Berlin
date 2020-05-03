@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public TextureCache TextureCache;
     public WeightedStringListCache WeightedStringListCache;
 
+    public DialogueTopicLibrary DialogueTopicLibrary;
     public FunctionsLibrary FunctionsLibrary;
     public ItemsLibrary ItemsLibrary;
     public NPCsRawLibrary NPCsRawLibrary;
@@ -80,6 +81,8 @@ public class GameManager : MonoBehaviour
 
     public OutfitWindow OutfitWindow;
 
+    public UIDialogue UIDialogue;
+
     public UIPanelView UIServicesWindow;
 
     public UiShopWindow UiShopWindow;
@@ -98,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
+        DialogueTopicLibrary = new DialogueTopicLibrary(path("dialogue/topics"));
         FunctionsLibrary = new FunctionsLibrary(path("functions"));
         ItemsLibrary = new ItemsLibrary(path("items"));
         NPCsRawLibrary = new NPCsRawLibrary(path("npcs"));
@@ -122,6 +125,11 @@ public class GameManager : MonoBehaviour
     public void console(string command)
     {
         Debug.Log(command);
+    }
+
+    public void dialogueShow(NPC npc)
+    {
+        UIDialogue.show(npc);
     }
 
     public void eventEnd()
