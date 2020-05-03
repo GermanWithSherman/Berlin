@@ -63,15 +63,6 @@ public class CommandsCollection : ModableDictionary<Command>, IModable
 
     public new IModable copyDeep()
     {
-        var result = new CommandsCollection();
-
-        ModableDictionary<Command> original = (ModableDictionary<Command>)base.copyDeep();
-
-        foreach (KeyValuePair<string,Command> kv in original)
-        {
-            result.Add(kv.Key,kv.Value);
-        }
-
-        return result;
+        return base.copyDeep<CommandsCollection>();
     }
 }
