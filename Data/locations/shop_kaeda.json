@@ -11,6 +11,12 @@
             },
             "TexturePreviewPath":{
                 "Value": "locations/shop/kaedaWide.png"
+            },
+            "Options":{
+                "1":{
+                    "text":"Shop Groceries",
+                    "commands":{"service":{"type": "Services","p":{"id":"kaeda"}}}
+                }
             }
         }
     }

@@ -8,28 +8,6 @@ public class LocationConnections : ModableDictionary<LocationConnection>, IModab
 {
     public LocationConnections() { }
 
-    private LocationConnections(IModable modable)
-    {
-        if (modable is IDictionary<string, LocationConnection>)
-            build((IDictionary<string, LocationConnection>)modable);
-        else
-            throw new NotImplementedException();
-    }
-
-    private LocationConnections(IDictionary<string, LocationConnection> dict)
-    {
-        build(dict);
-    }
-
-    private void build(IDictionary<string, LocationConnection> dict)
-    {
-        foreach (KeyValuePair<string, LocationConnection> kv in dict)
-        {
-            Add(kv.Key,kv.Value);
-        }
-    }
-
-
     [JsonIgnore]
     public List<LocationConnection> VisibleLocationConnections
     {
@@ -49,6 +27,6 @@ public class LocationConnections : ModableDictionary<LocationConnection>, IModab
 
     public new IModable copyDeep()
     {
-        return new LocationConnections(base.copyDeep());
+        return base.copyDeep<LocationConnections>();
     }
 }

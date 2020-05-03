@@ -5,6 +5,9 @@ using UnityEngine;
 public class Service
 {
     public string label;
+
+    public CText Description = new CText();
+
     public int price;
     public string category;
 

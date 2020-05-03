@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandsCollection : ModableDictionary<Command>
+public class CommandsCollection : ModableDictionary<Command>, IModable
 {
 
     public CommandsCollection() { }
@@ -59,5 +59,19 @@ public class CommandsCollection : ModableDictionary<Command>
                 break;
             
         }
+    }
+
+    public new IModable copyDeep()
+    {
+        var result = new CommandsCollection();
+
+        ModableDictionary<Command> original = (ModableDictionary<Command>)base.copyDeep();
+
+        foreach (KeyValuePair<string,Command> kv in original)
+        {
+            result.Add(kv.Key,kv.Value);
+        }
+
+        return result;
     }
 }

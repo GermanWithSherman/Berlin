@@ -127,7 +127,11 @@ public class Option : IModable, IInheritable
 
     public IModable copyDeep()
     {
-        throw new NotImplementedException();
+        var result = new Option();
+        result.Commands = Modable.copyDeep(Commands);
+        result.State = Modable.copyDeep(State);
+        result.Text = Modable.copyDeep(Text);
+        return result;
     }
 
     public bool isInheritanceResolved() => inheritanceResolved;

@@ -96,6 +96,7 @@ public class SubLocation : IModable, IInheritable
 
     private void mod(SubLocation original, SubLocation mod)
     {
+        Label = Modable.mod(original.Label, mod.Label);
 
         LocationConnections = Modable.mod(original.LocationConnections, mod.LocationConnections);
 

@@ -6,15 +6,21 @@ public class ModableDictionary<V> : Dictionary<string,V>, IModable
 {
     public IModable copyDeep()
     {
-        var result = new ModableDictionary<V>();
-        foreach (KeyValuePair<string,V> kv in this)
+        return copyDeep<ModableDictionary<V>>();
+    }
+
+    public T copyDeep<T>() where T : ModableDictionary<V>, new()
+    {
+        //var result = new ModableDictionary<V>();
+        var result = new T();
+        foreach (KeyValuePair<string, V> kv in this)
         {
             string key = kv.Key;
             V value = kv.Value;
             if (value is IModable)
                 result.Add(key, (V)((IModable)value).copyDeep());
             else
-                result.Add(key,value);
+                result.Add(key, value);
         }
         return result;
     }

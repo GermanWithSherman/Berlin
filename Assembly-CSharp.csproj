@@ -95,6 +95,7 @@
     <Compile Include="Assets\GameObjects\ItemsFile.cs" />
     <Compile Include="Assets\GameObjects\ItemsFilter.cs" />
     <Compile Include="Assets\GameObjects\ItemsLibrary.cs" />
+    <Compile Include="Assets\GameObjects\JSON\CTextConverter.cs" />
     <Compile Include="Assets\GameObjects\JSON\EventStageConverter.cs" />
     <Compile Include="Assets\GameObjects\Location.cs" />
     <Compile Include="Assets\GameObjects\LocationConnection.cs" />

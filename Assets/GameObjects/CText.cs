@@ -5,12 +5,11 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-[System.Serializable]
+[JsonConverter(typeof(CTextConverter))]
 public class CText : IModable
 {
     public string V; //Plain Text
 
-    //public Dictionary<string, CText> D = new Dictionary<string, CText>();
     public ModableDictionary<CText> D = new ModableDictionary<CText>();
 
     [JsonIgnore]
@@ -19,6 +18,15 @@ public class CText : IModable
         get => GameManager.Instance.ConditionCache[C];
     }
     public string C = ""; //condition String
+
+
+    public CText() { }
+
+    public CText(string s)
+    {
+        V = s;
+    }
+
 
     public string Text(GameData gameData)
     {
