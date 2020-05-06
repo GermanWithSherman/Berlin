@@ -127,7 +127,17 @@ public class Option : IModable, IInheritable
 
     public IModable copyDeep()
     {
-        var result = new Option();
+        /*var result = new Option();
+        result.Commands = Modable.copyDeep(Commands);
+        result.State = Modable.copyDeep(State);
+        result.Text = Modable.copyDeep(Text);
+        return result;*/
+        return copyDeep<Option>();
+    }
+
+    public IModable copyDeep<T>() where T:Option, new()
+    {
+        var result = new T();
         result.Commands = Modable.copyDeep(Commands);
         result.State = Modable.copyDeep(State);
         result.Text = Modable.copyDeep(Text);

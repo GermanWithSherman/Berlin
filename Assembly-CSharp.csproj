@@ -66,6 +66,7 @@
     <Compile Include="Assets\GameObjects\CText.cs" />
     <Compile Include="Assets\GameObjects\Cache\Cache.cs" />
     <Compile Include="Assets\GameObjects\Cache\ConditionCache.cs" />
+    <Compile Include="Assets\GameObjects\Cache\DialogueLineCache.cs" />
     <Compile Include="Assets\GameObjects\Cache\EventGroupCache.cs" />
     <Compile Include="Assets\GameObjects\Cache\LocationCache.cs" />
     <Compile Include="Assets\GameObjects\Cache\NPCTemplateCache.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets\GameObjects\Data.cs" />
     <Compile Include="Assets\GameObjects\Dialogue.cs" />
     <Compile Include="Assets\GameObjects\Dialogue\UIDialogue.cs" />
+    <Compile Include="Assets\GameObjects\Dialogue\UIDialogueOption.cs" />
     <Compile Include="Assets\GameObjects\Dialogue\UIDialogueTopic.cs" />
     <Compile Include="Assets\GameObjects\DialogueTopicLibrary.cs" />
     <Compile Include="Assets\GameObjects\EventGroup.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Assets\GameObjects\Ui\FlexibleGridLayout.cs" />
     <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindow.cs" />
     <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindowItem.cs" />
+    <Compile Include="Assets\GameObjects\Ui\Messages\ErrorDialog.cs" />
     <Compile Include="Assets\GameObjects\Ui\Messages\ErrorMessage.cs" />
     <Compile Include="Assets\GameObjects\Ui\Messages\GameException.cs" />
     <Compile Include="Assets\GameObjects\Ui\OutfitWindow\CurrentOutfitItem.cs" />
@@ -167,6 +170,7 @@
     <Compile Include="Assets\GameObjects\Ui\UiTextMain.cs" />
     <Compile Include="Assets\GameObjects\Util\DependencySorter.cs" />
     <Compile Include="Assets\GameObjects\Util\IDependentObject.cs" />
+    <Compile Include="Assets\GameObjects\Util\Prioritizable.cs" />
     <Compile Include="Assets\GameObjects\Util\WeightedList.cs" />
     <Compile Include="Assets\GameObjects\Util\WeightedStringList.cs" />
     <Compile Include="Assets\GameObjects\Value.cs" />

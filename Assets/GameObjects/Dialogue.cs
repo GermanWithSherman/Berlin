@@ -3,15 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueLine : IModable
+public class DialogueLine : IModable, IPrioritizable
 {
     public string TopicID;
 
     public int Priority = 0;
 
-    public string Condition;
+    [JsonProperty("Condition")]
+    public string ConditionString;
 
-    public ModableDictionary<Option> Options = new ModableDictionary<Option>();
+    [JsonIgnore]
+    public Condition Condition
+    {
+        get => GameManager.Instance.ConditionCache[ConditionString];
+    }
+
+    public ModableDictionary<DialogueOption> Options = new ModableDictionary<DialogueOption>();
 
     public CText Text;
 
@@ -27,13 +34,93 @@ public class DialogueLine : IModable
         return result;
     }
 
+    public int getPriority()
+    {
+        return Priority;
+    }
+
     public void mod(IModable modable)
     {
         throw new System.NotImplementedException();
     }
 }
 
-public class DialogueTopic : IModable
+public class DialogueOption : Option, IModable
+{
+    public string TargetStage;
+
+    public new IModable copyDeep()
+    {
+        return base.copyDeep<DialogueOption>();
+    }
+
+    public void mod(DialogueOption modable)
+    {
+        base.mod(modable);
+        TargetStage = Modable.mod(TargetStage, modable.TargetStage);
+    }
+
+    public new void mod(IModable modable)
+    {
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((DialogueOption)modable);
+    }
+}
+
+public class DialogueStage : ModableDictionary<DialogueLine>, IModable
+{
+
+    public DialogueLine Line()
+    {
+        return Line(GameManager.Instance.GameData);
+    }
+
+    public DialogueLine Line(GameData gameData)
+    {
+        IEnumerable<DialogueLine> allLines = this.Values;
+
+        List<DialogueLine> possibleLines = new List<DialogueLine>();
+
+        foreach (DialogueLine line in allLines)
+        {
+            if (line.Condition.evaluate(gameData))
+                possibleLines.Add(line);
+        }
+
+        Prioritizable.Sort(possibleLines);
+
+        if (possibleLines.Count == 0)
+            throw new GameException("No valid line");
+
+        return possibleLines[0];
+    }
+
+    public new IModable copyDeep()
+    {
+        return base.copyDeep<DialogueStage>();
+    }
+
+}
+
+public class DialogueStages : ModableDictionary<DialogueStage>, IModable
+{
+    public DialogueStage StartStage()
+    {
+        return this["start"];
+    }
+
+    public new IModable copyDeep()
+    {
+        return base.copyDeep<DialogueStages>();
+    }
+}
+
+public class DialogueTopic : IModable, IPrioritizable
 {
     [JsonIgnore]
     public string ID;
@@ -52,6 +139,11 @@ public class DialogueTopic : IModable
         result.Title = Modable.copyDeep(Title);
 
         return result;
+    }
+
+    public int getPriority()
+    {
+        return Priority;
     }
 
     public void mod(IModable modable)

@@ -27,6 +27,10 @@ public class CText : IModable
         V = s;
     }
 
+    public string Text()
+    {
+        return Text(GameManager.Instance.GameData);
+    }
 
     public string Text(GameData gameData)
     {

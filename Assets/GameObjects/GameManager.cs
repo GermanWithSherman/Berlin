@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     }
 
     public ConditionCache ConditionCache;
+    public DialogueLineCache DialogueLineCache;
     public EventGroupCache EventGroupCache;
     public LocationCache LocationCache;
     public NPCTemplateCache NPCTemplateCache;

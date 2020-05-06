@@ -1,18 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIDialogueTopic : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private DialogueTopic _topic;
+    private UIDialogue _dialogueWindow;
+
+    public TextMeshProUGUI Text;
+
+    public void onClick()
     {
-        
+        _dialogueWindow.topicShow(_topic);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void setDialogueWindow(UIDialogue dialogueWindow)
     {
-        
+        _dialogueWindow = dialogueWindow;
     }
+
+    public void setTopic(DialogueTopic topic)
+    {
+        _topic = topic;
+
+        Text.text = _topic.Title.Text();
+    }
+
 }
