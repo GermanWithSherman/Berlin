@@ -88,6 +88,7 @@
     <Compile Include="Assets\GameObjects\DialogueTopicLibrary.cs" />
     <Compile Include="Assets\GameObjects\EventGroup.cs" />
     <Compile Include="Assets\GameObjects\EventStage.cs" />
+    <Compile Include="Assets\GameObjects\Extensions\TransformExtensions.cs" />
     <Compile Include="Assets\GameObjects\FunctionParameters.cs" />
     <Compile Include="Assets\GameObjects\FunctionsLibrary.cs" />
     <Compile Include="Assets\GameObjects\GameData.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogResult.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogServer.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\AlarmClockDialogPrefab.cs" />
+    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectHorizontal.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SexSelectDialogPrefab.cs" />
     <Compile Include="Assets\GameObjects\Ui\FlexibleGridLayout.cs" />
     <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindow.cs" />
@@ -155,6 +157,8 @@
     <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarDateTime.cs" />
     <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarHunger.cs" />
     <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarMoney.cs" />
+    <Compile Include="Assets\GameObjects\Ui\TextExtended\ButtonTextExtended.cs" />
+    <Compile Include="Assets\GameObjects\Ui\TextExtended\TextExtended.cs" />
     <Compile Include="Assets\GameObjects\Ui\Tooltip\Tooltip.cs" />
     <Compile Include="Assets\GameObjects\Ui\Tooltip\TooltipProvider.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIImageMain.cs" />

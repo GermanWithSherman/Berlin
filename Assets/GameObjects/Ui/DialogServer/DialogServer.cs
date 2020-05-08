@@ -7,6 +7,7 @@ public class DialogServer : MonoBehaviour
     public delegate void DialogCallback(DialogResult dialogResult);
 
     public Dialog AlarmClockDialogPrefab;
+    public Dialog SelectHorizontalPrefab;
     public Dialog SexSelectDialogPrefab;
 
     public Transform canvas;
@@ -17,27 +18,28 @@ public class DialogServer : MonoBehaviour
 
 
 
-    private Dialog dialogInstantiate(Dialog dialog)
+    private Dialog dialogInstantiate(Dialog dialog, IDictionary<string, string> settings)
     {
         Dialog result = Instantiate(dialog, canvas);
         result.setServer(this);
+        result.setSettings(settings);
         return result;
     }
 
-    private Dialog dialogInstantiate(string dialogId)
+    private Dialog dialogInstantiate(string dialogId, IDictionary<string, string> settings)
     {
-        return dialogInstantiate(dialogGet(dialogId));
+        return dialogInstantiate(dialogGet(dialogId), settings);
     }
 
-    public void dialogShow(string dialogId, DialogCallback callback)
+    public void dialogShow(string dialogId, DialogCallback callback, IDictionary<string,string> settings)
     {
-        Dialog dialog = dialogInstantiate(dialogId);
+        Dialog dialog = dialogInstantiate(dialogId, settings);
         callbacks[dialog] = callback;
     }
 
-    public void dialogShow(string dialogId, DialogResolver resolver)
+    public void dialogShow(string dialogId, DialogResolver resolver, IDictionary<string, string> settings)
     {
-        Dialog dialog = dialogInstantiate(dialogId);
+        Dialog dialog = dialogInstantiate(dialogId, settings);
         resolvers[dialog] = resolver;
     }
 
@@ -63,6 +65,8 @@ public class DialogServer : MonoBehaviour
         {
             case "AlarmClock":
                 return AlarmClockDialogPrefab;
+            case "SelectHorizontal":
+                return SelectHorizontalPrefab;
             case "SexSelect":
                 return SexSelectDialogPrefab;
         }

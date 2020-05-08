@@ -54,6 +54,27 @@
         "skipIntro_Appearance":{
             "Text":{
                 "V": "Appearance"
+            },
+            "onShow":{
+                "sexSelectDialog":{
+                    "type":"Dialog",
+                    "p":{
+                        "id":"SelectHorizontal",
+                        "targets":{
+                            "RESULT": "sTemp_PCAppearance"
+                        },
+                        "settings":{
+                            "optionCount":"3",
+                            "text_1":"Opt<b>io</b>n 1",
+                            "text_2":"Option 2",
+                            "text_3":"Option 3",
+                            "result_1":"1",
+                            "result_2":"2",
+                            "result_3":"3"
+                        },
+                        "onComplete":{"goto":{"type":"GotoLocation","p":{"id":"cityCenter."}}}
+                    }
+                }
             }
         }
     }

@@ -15,20 +15,6 @@ public class ErrorMessage : MonoBehaviour
         if (Instance == null) { Instance = this; } else { Debug.LogError("Error: multiple " + this + " in scene!"); }
     }
 
-    /*void Start()
-    {
-        close();
-    }
-
-    public void close()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void show()
-    {
-        show("");
-    }*/
 
     public void show(string msg)
     {

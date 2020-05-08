@@ -815,7 +815,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 141388634}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1064,7 +1064,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153324437}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1528,8 +1528,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 198.849, y: -50}
-  m_SizeDelta: {x: 1127.698, y: 100}
+  m_AnchoredPosition: {x: 195.64258, y: -50}
+  m_SizeDelta: {x: 1121.2852, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &199362665
 MonoBehaviour:
@@ -2102,7 +2102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239914353}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -2858,8 +2858,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 876.0461, y: -160}
-  m_SizeDelta: {x: 1752.0922, y: 100}
+  m_AnchoredPosition: {x: 868.31024, y: -160}
+  m_SizeDelta: {x: 1736.6205, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &385742855
 MonoBehaviour:
@@ -3988,8 +3988,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 876.0461, y: -50}
-  m_SizeDelta: {x: 1752.0922, y: 100}
+  m_AnchoredPosition: {x: 868.31024, y: -50}
+  m_SizeDelta: {x: 1736.6205, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &507088432
 MonoBehaviour:
@@ -6642,7 +6642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 998.31024, y: -215.37476}
+  m_AnchoredPosition: {x: 998.31024, y: -195.40779}
   m_SizeDelta: {x: 1996.6205, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &962716868
@@ -8627,8 +8627,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 198.849, y: -50}
-  m_SizeDelta: {x: 1127.698, y: 100}
+  m_AnchoredPosition: {x: 195.64258, y: -50}
+  m_SizeDelta: {x: 1121.2852, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1380361775
 MonoBehaviour:
@@ -8937,8 +8937,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1752.0923, y: -50}
-  m_SizeDelta: {x: 926.1442, y: 100}
+  m_AnchoredPosition: {x: 1736.6205, y: -50}
+  m_SizeDelta: {x: 917.0853, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1431857209
 MonoBehaviour:
@@ -9121,8 +9121,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1752.0923, y: -50}
-  m_SizeDelta: {x: 926.1442, y: 100}
+  m_AnchoredPosition: {x: 1736.6205, y: -50}
+  m_SizeDelta: {x: 917.0853, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1453085466
 MonoBehaviour:
@@ -11126,7 +11126,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693913541}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -11403,7 +11403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149265ba4e16d23449db2f74c5b4ff85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ErrorDialogPrefab: {fileID: 0}
+  ErrorDialogPrefab: {fileID: 6195683238625596487, guid: 0f852b2f4dd2be343af55f779dc51a98,
+    type: 3}
 --- !u!222 &1723397702
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11456,6 +11457,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AlarmClockDialogPrefab: {fileID: 1289147506556008738, guid: a4d663f4ffc24b64a98ff732e6ff264f,
+    type: 3}
+  SelectHorizontalPrefab: {fileID: 4110033717784494788, guid: 99d7310e092ea4d438578a2e1342c874,
     type: 3}
   SexSelectDialogPrefab: {fileID: 8370782463832836622, guid: d6c5c04cd2faa07429f52c27f1774ea7,
     type: 3}
@@ -14145,7 +14148,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057329260}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

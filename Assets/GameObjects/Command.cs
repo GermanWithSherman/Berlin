@@ -56,7 +56,12 @@ public class Command
                     DialogResolver dialogResolver = new DialogResolver(targets);
                     dialogResolver.setOnComplete(onComplete);
 
-                    gameManager.DialogServer.dialogShow(dialogId, dialogResolver);
+                    JObject settings = p.ContainsKey("settings") ? (p["settings"] is JObject ? p["settings"] : null) : null;
+                    Dictionary<string, string> settingDict = new Dictionary<string, string>();
+                    if (settings != null)
+                        settingDict = settings.ToObject<Dictionary<string, string>>();
+
+                    gameManager.DialogServer.dialogShow(dialogId, dialogResolver, settingDict);
 
                     return;
                 case Type.Event:
