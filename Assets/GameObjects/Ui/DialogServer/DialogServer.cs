@@ -16,19 +16,29 @@ public class DialogServer : MonoBehaviour
 
     private Dictionary<Dialog, DialogResolver> resolvers = new Dictionary<Dialog, DialogResolver>();
 
-
+    private Dialog dialogInstantiate(Dialog dialog, DialogSetting setting)
+    {
+        Dialog result = Instantiate(dialog, canvas);
+        result.setSettings(setting);
+        return result;
+    }
 
     private Dialog dialogInstantiate(Dialog dialog, IDictionary<string, string> settings)
     {
         Dialog result = Instantiate(dialog, canvas);
         result.setServer(this);
-        result.setSettings(settings);
+        //result.setSettings(settings);
         return result;
     }
 
     private Dialog dialogInstantiate(string dialogId, IDictionary<string, string> settings)
     {
         return dialogInstantiate(dialogGet(dialogId), settings);
+    }
+
+    public void dialogShow(Dialog dialog, DialogSetting setting)
+    {
+        dialogInstantiate(dialog, setting);
     }
 
     public void dialogShow(string dialogId, DialogCallback callback, IDictionary<string,string> settings)
@@ -59,7 +69,7 @@ public class DialogServer : MonoBehaviour
         }
     }
 
-    private Dialog dialogGet(string dialogId)
+    public Dialog dialogGet(string dialogId)
     {
         switch (dialogId)
         {

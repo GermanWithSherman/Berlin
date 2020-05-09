@@ -7,32 +7,24 @@
             },
             "commands":{
                 "gtl":{
-                    "type": "GotoLocation",
-                    "p":{"id":"start."}
+                    "Type": "GotoLocation",
+                    "LocationID":"start."
                 },
                 "clothesAdd":{
-                    "type": "ItemAdd",
-                    "p":{"shop":"testShoes","equip":true}
+                    "Type": "ItemAdd",
+                    "ShopID":"testShoes",
+                    "Equip":true
                 },
-                "time":{
-                    "type": "Set",
-                    "p":{"k":"World.DateTime","v":"2020-04-09T06:00:00"}
-                },
-                "money":{
-                    "type": "Set",
-                    "p":{"k":"PC.moneyCash","v":10000}
-                },
-                "hunger":{
-                    "type": "Set",
-                    "p":{"k":"PC.statHunger","v":1000000}
-                },
-                "height":{
-                    "type": "Set",
-                    "p":{"k":"PC.height","v":1910}
-                },
-                "bmi":{
-                    "type": "Set",
-                    "p":{"k":"PC.BMI","v":23}
+                "SET":{
+                    "Type": "Set",
+                    "Values":{
+                        "PC.height":1910,
+                        "PC.BMI":23,
+                        "PC.moneyCash":10000,
+                        "PC.statHunger":1000000,
+                        "World.DateTime":"2020-04-09T06:00:00"
+                    }
+                    
                 }
             }
         }

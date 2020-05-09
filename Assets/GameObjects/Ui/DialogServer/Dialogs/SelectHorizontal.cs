@@ -1,18 +1,34 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectHorizontal : Dialog
+public class SelectHorizontal : Dialog<SelectHorizontalSettings>
 {
     public ButtonTextExtended ButtonPrefab;
 
-    public override void setSettings(IDictionary<string, string> settings)
+    private SelectHorizontalSettings _selectHorizontalSettings;
+
+    public override void setSettings(DialogSetting settings)
     {
         transform.childrenDestroyAll();
 
-        base.setSettings(settings);
+        SelectHorizontalSettings _settings = (SelectHorizontalSettings)settings;
+
+        foreach (Option option in _settings.Options.Values)
+        {
+            ButtonTextExtended button = Instantiate(ButtonPrefab, transform);
+            button.Text = option.Text;
+        }
+    }
+
+    /*public override void setSettings(IDictionary<string, string> settings)
+    {
+        transform.childrenDestroyAll();
+
+        /*base.setSettings(settings);
 
         int optionCount = Int32.Parse(settings["optionCount"]);
 
@@ -23,14 +39,21 @@ public class SelectHorizontal : Dialog
 
             string result = settings["result_" + i.ToString()];
             button.Button.onClick.AddListener(delegate { optionSelect(result); });
-        }
+        }*//*
 
-    }
+    }*/
 
-    public void optionSelect(string result)
+
+    /*public void optionSelect(string result)
     {
         data["RESULT"] = result;
         submit();
-    }
+    }*/
 
 }
+
+public class SelectHorizontalSettings : DialogSetting
+{
+    public ModableDictionary<Option> Options = new ModableDictionary<Option>();
+}
+

@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerable<LocationConnection> CurrentReachableLocations{get => GameData.currentLocation.LocationConnections.VisibleLocationConnections;}
+    public IEnumerable<LocationConnection> CurrentReachableLocations{get => GameData.currentLocation?.LocationConnections.VisibleLocationConnections;}
 
     public string CurrentText
     {
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Texture CurrentTexture{ get => GameData.currentLocation.Texture; }
+    public Texture CurrentTexture{ get => GameData.currentLocation?.Texture; }
 
     public UINPCsPresentContainer UINPCsPresentContainer;
 
@@ -248,7 +248,7 @@ public class GameManager : MonoBehaviour
     public void locationTransfer(LocationConnection locationConnection)
     {
 
-        CommandsCollection transferCommands = new CommandsCollection(locationConnection);
+        CommandsCollection transferCommands = CommandGotoLocation.GotoCommandsList(locationConnection);
         transferCommands.execute();
     }
 

@@ -11,19 +11,19 @@
             "Options":{
                 "intro":{
                     "text":"Intro",
-                    "commands":{"goto":{"type":"GotoLocation","p":{"id":"start.intro"}}}
+                    "commands":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance"}}
                 },
                 "skipIntro":{
                     "text":"Skip Intro",
-                    "commands":{"goto":{"type":"GotoLocation","p":{"id":"start.skipIntro"}}}
+                    "commands":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro"}}
                 },
                 "debug":{
                     "text":"Debug",
                     "commands":{
-                        "goto":{"type":"GotoLocation","p":{"id":"home_cheap."}},
+                        "goto":{"Type":"GotoLocation","LocationID":"home_cheap."},
                         "setHomeOwner":{
-                            "type": "Set",
-                            "p":{"k":"b.owns_home_cheap","v":true}
+                            "Type": "Set",
+                            "Values":{"b.owns_home_cheap":true}
                         }
                     }
                 }
@@ -40,14 +40,13 @@
             },
             "onShow":{
                 "sexSelectDialog":{
-                    "type":"Dialog",
-                    "p":{
-                        "id":"SexSelect",
-                        "targets":{
-                            "gender": "PC.genderVisible"
-                        },
-                        "onComplete":{"goto":{"type":"GotoLocation","p":{"id":"start.skipIntro_Appearance"}}}
-                    }
+                    "Type":"Dialog",
+                    "DialogID":"SexSelect",
+                    "targets":{
+                        "gender": "PC.genderVisible"
+                    },
+                    "onComplete":{"goto":{"type":"GotoLocation","LocationID":"start.skipIntro_Appearance"}}
+                    
                 }
             }
         },
@@ -57,20 +56,17 @@
             },
             "onShow":{
                 "sexSelectDialog":{
-                    "type":"Dialog",
-                    "p":{
-                        "id":"SelectHorizontal",
+                    "Type":"Dialog",
+                    "DialogID":"SelectHorizontal",
+                    "Settings":{
+                        
                         "targets":{
                             "RESULT": "sTemp_PCAppearance"
                         },
-                        "settings":{
-                            "optionCount":"3",
-                            "text_1":"Opt<b>io</b>n 1",
-                            "text_2":"Option 2",
-                            "text_3":"Option 3",
-                            "result_1":"1",
-                            "result_2":"2",
-                            "result_3":"3"
+                        "Options":{
+                            "1":{"Text": "Option 1"},
+                            "2":{"Text": "Option 2"},
+                            "3":{"Text": "Option 3"}
                         },
                         "onComplete":{"goto":{"type":"GotoLocation","p":{"id":"cityCenter."}}}
                     }
