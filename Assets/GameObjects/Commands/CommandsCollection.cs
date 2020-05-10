@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,20 +24,37 @@ public class CommandsCollection : ModableDictionary<Command>, IModable
 
     public void execute()
     {
-        Command.breakActive = false;
-
-        foreach (Command c in Values)
+        execute(GameManager.Instance.GameData);
+    }
+    public void execute(Data data)
+    {
+        try
         {
-            if(Command.pauseActive && !(c is CommandContinue) && !(c is CommandFlush))
-            {
-                Command.pausedCommands.Add(c);
-                continue;
-            }
+            Command.breakActive = false;
 
-            c.execute();
-            if (Command.breakActive)
-                break;
-            
+            foreach (Command c in Values)
+            {
+                if (Command.pauseActive && !(c is CommandContinue) && !(c is CommandFlush))
+                {
+                    Command.pausedCommands.Add(c);
+                    continue;
+                }
+
+                c.execute(data);
+                if (Command.breakActive)
+                    break;
+
+            }
+        }
+        catch (GameException e)
+        {
+            ErrorMessage.Show(e.Message);
+            Debug.LogError(e);
+        }
+        catch (Exception e)
+        {
+            ErrorMessage.Show(e.Message);
+            Debug.LogError(e);
         }
     }
 

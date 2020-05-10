@@ -8,7 +8,7 @@
         "conditionCD": -1,
         "Condition": "PC.genderVisible = \"m\"",
         "Commands":{
-            "gte":{"Type":"Event","p":{"e":"shoppingFemale."}}
+            "gte":{"Type":"Event","EventID":"shoppingFemale."}
         }
     }
 }

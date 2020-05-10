@@ -42,33 +42,89 @@
                 "sexSelectDialog":{
                     "Type":"Dialog",
                     "DialogID":"SexSelect",
-                    "targets":{
-                        "gender": "PC.genderVisible"
-                    },
-                    "onComplete":{"goto":{"type":"GotoLocation","LocationID":"start.skipIntro_Appearance"}}
-                    
+                    "Settings":{
+                        "Targets":{
+                            "Gender": "PC.genderVisible"
+                        },
+                        "onComplete":{
+                            "goto_appearance_female":{
+                                "Type":"Conditional",
+                                "Condition": "PC.genderVisible=\"f\"",
+                                "Commands":{
+                                    "goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Female"}
+                                }
+                            },
+                            "goto_appearance_male":{
+                                "Type":"Conditional",
+                                "Condition": "PC.genderVisible=\"m\"",
+                                "Commands":{
+                                    "goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Male"}
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },
-        "skipIntro_Appearance":{
-            "Text":{
-                "V": "Appearance"
-            },
+        "skipIntro_Appearance_Female":{
             "onShow":{
                 "sexSelectDialog":{
                     "Type":"Dialog",
                     "DialogID":"SelectHorizontal",
                     "Settings":{
                         
-                        "targets":{
+                        "Targets":{
                             "RESULT": "sTemp_PCAppearance"
                         },
+                        "Headline":"Please choose your appearance.\n<size=50%><i><color=\"red\">Choose carefully. Some of the resulting traits can be changed by performing plastic surgery, some are hard or impossible to change.</color></i></size>",
                         "Options":{
-                            "1":{"Text": "Option 1"},
-                            "2":{"Text": "Option 2"},
-                            "3":{"Text": "Option 3"}
+                            "Ugly":{"Text": "<align=\"center\"><b><size=200%>Ugly</size></b></align>\n<align=\"left\">Your looks are rather unfortunate. Your skin is impure, your breasts are rather small and your figure is not very feminine.\n<color=\"red\">Most men find you less attractive</color>\n<color=\"red\">Establishing friendships will be harder with most women</color>\n<color=\"orange\">People with \"special\" interests will shun you</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>","State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":1}}}},
+                            "Average":{"Text": "<align=\"center\"><b><size=200%>Average</size></b></align>\n<align=\"left\">You look like a typical girl. You have an average height and your face is distinctively female.\n<color=\"blue\">No special modifiers</color></align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":3}}}},
+                            "Attractive":{"Text": "<align=\"center\"><b><size=200%>Attractive</size></b></align>\n<align=\"left\">You have goods looks. Your skin is soft like silk, your breasts are a little bigger than average and your figure is destinctively feminine.\n<color=\"green\">Most men find you more attractive</color>\n<color=\"green\">Establishing friendships will be easier with most women</color>\n<color=\"orange\">You will attract people with \"special\" interests</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>", "State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":5}}}}
                         },
-                        "onComplete":{"goto":{"type":"GotoLocation","p":{"id":"cityCenter."}}}
+                        "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Living"}}
+                    }
+                }
+            }
+        },
+        "skipIntro_Appearance_Male":{
+            "onShow":{
+                "sexSelectDialog":{
+                    "Type":"Dialog",
+                    "DialogID":"SelectHorizontal",
+                    "Settings":{
+                        
+                        "Targets":{
+                            "RESULT": "sTemp_PCAppearance"
+                        },
+                        "Headline":"Please choose your appearance.\n<size=50%><i><color=\"red\">Choose carefully. Some of the resulting traits can be changed by performing plastic surgery, some are hard or impossible to change.</color></i></size>",
+                        "Options":{
+                            "Girlish":{"Text": "<align=\"center\"><b><size=200%>Girlish</size></b></align>\n<align=\"left\">You look pretty girlish for a boy. You are smaller than most boys and your facial features are softer. The pitch of your voice is also a little higher than usual.\n<color=\"red\">Most women find you less attractive</color>\n<color=\"red\">Establishing friendships will be harder with most men</color>\n<color=\"orange\">You will attract people with \"special\" interests</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>","State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":1}}}},
+                            "Average":{"Text": "<align=\"center\"><b><size=200%>Average</size></b></align>\n<align=\"left\">You look like a typical boy. You have an average height and your face is distinctively male. Your voice has a normal male pitch.\n<color=\"blue\">No special modifiers</color></align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":3}}}},
+                            "Manly":{"Text": "<align=\"center\"><b><size=200%>Manly</size></b></align>\n<align=\"left\">You are taller than most boys and you have some muscles. You face is distinctively male. Your voice is a little deeper than most boys voices.\n<color=\"green\">Most women find you more attractive</color>\n<color=\"green\">Establishing friendships will be easier with most men</color>\n<color=\"orange\">People with \"special\" interests will shun you</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>", "State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":5}}}}
+                        },
+                        "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Living"}}
+                    }
+                }
+            }
+        },
+        "skipIntro_Living":{
+            "onShow":{
+                "sexSelectDialog":{
+                    "Type":"Dialog",
+                    "DialogID":"SelectHorizontal",
+                    "Settings":{
+                        
+                        "Targets":{
+                            "RESULT": "sTemp_PCAppearance"
+                        },
+                        "Headline":"Where are you currently living?\n<size=50%><i><color=\"red\">Choose carefully. This coice has major implications.</color></i></size>",
+                        "Options":{
+                            "Dorm":{"Text": "<align=\"center\"><b><size=200%>Dorm</size></b></align>\n<align=\"left\">You are living at the dorm of boarding school.</align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>","State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":1}}}},
+                            "Home":{"Text": "<align=\"center\"><b><size=200%>Home</size></b></align>\n<align=\"left\">You are living at home with your family.</align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":3}}}},
+                            "Hobo":{"Text": "<align=\"center\"><b><size=200%>Homeless</size></b></align>\n<align=\"left\">You are currently homeless.\n<color=\"orange\">Challenging start</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>", "State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":5}}}}
+                        },
+                        "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"cityCenter."}}
                     }
                 }
             }

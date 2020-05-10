@@ -22,12 +22,18 @@ public class CommandConverter : JsonConverter
         JObject jo = JObject.Load(reader);
 
         if (!Enum.TryParse((string)jo["Type"], out Command.Type commandType))
+        {
+            Debug.LogError($"CommandType {jo["Type"]} not recognized");
             return new CommandNone();
+        }
 
         switch (commandType)
         {
             case (Command.Type.Break):
                 result = new CommandBreak();
+                break;
+            case (Command.Type.Conditional):
+                result = new CommandConditional();
                 break;
             case (Command.Type.Consume):
                 result = new CommandConsume();

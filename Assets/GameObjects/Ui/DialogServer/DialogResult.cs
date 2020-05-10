@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogResult : Data//Dictionary<string, dynamic>
+public class DialogResult : Data
 {
     private Dictionary<string, dynamic> _dict = new Dictionary<string, dynamic>();
 
@@ -15,4 +15,6 @@ public class DialogResult : Data//Dictionary<string, dynamic>
     {
         _dict[key] = value;
     }
+
+    
 }

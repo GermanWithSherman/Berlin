@@ -354,6 +354,7 @@ public class GameManager : MonoBehaviour
     public void timeAdd(int duration)
     {
         GameData.WorldData.DateTime += new TimeSpan(0,0,duration);
+        uiUpdate();
     }
 
     public int timeAgeYears(DateTime dateTime)

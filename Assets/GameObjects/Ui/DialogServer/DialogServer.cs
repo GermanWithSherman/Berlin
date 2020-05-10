@@ -12,9 +12,9 @@ public class DialogServer : MonoBehaviour
 
     public Transform canvas;
 
-    private Dictionary<Dialog, DialogCallback> callbacks = new Dictionary<Dialog, DialogCallback>();
+    //private Dictionary<Dialog, DialogCallback> callbacks = new Dictionary<Dialog, DialogCallback>();
 
-    private Dictionary<Dialog, DialogResolver> resolvers = new Dictionary<Dialog, DialogResolver>();
+    //private Dictionary<Dialog, DialogResolver> resolvers = new Dictionary<Dialog, DialogResolver>();
 
     private Dialog dialogInstantiate(Dialog dialog, DialogSetting setting)
     {
@@ -23,7 +23,7 @@ public class DialogServer : MonoBehaviour
         return result;
     }
 
-    private Dialog dialogInstantiate(Dialog dialog, IDictionary<string, string> settings)
+    /*private Dialog dialogInstantiate(Dialog dialog, IDictionary<string, string> settings)
     {
         Dialog result = Instantiate(dialog, canvas);
         result.setServer(this);
@@ -31,17 +31,17 @@ public class DialogServer : MonoBehaviour
         return result;
     }
 
-    private Dialog dialogInstantiate(string dialogId, IDictionary<string, string> settings)
+    /*private Dialog dialogInstantiate(string dialogId, IDictionary<string, string> settings)
     {
         return dialogInstantiate(dialogGet(dialogId), settings);
-    }
+    }*/
 
     public void dialogShow(Dialog dialog, DialogSetting setting)
     {
         dialogInstantiate(dialog, setting);
     }
 
-    public void dialogShow(string dialogId, DialogCallback callback, IDictionary<string,string> settings)
+    /*public void dialogShow(string dialogId, DialogCallback callback, IDictionary<string,string> settings)
     {
         Dialog dialog = dialogInstantiate(dialogId, settings);
         callbacks[dialog] = callback;
@@ -51,9 +51,9 @@ public class DialogServer : MonoBehaviour
     {
         Dialog dialog = dialogInstantiate(dialogId, settings);
         resolvers[dialog] = resolver;
-    }
+    }*/
 
-    public void dialogSubmit(Dialog dialog, DialogResult dialogResult)
+    /*public void dialogSubmit(Dialog dialog, DialogResult dialogResult)
     {
         if (resolvers.ContainsKey(dialog))
         {
@@ -67,7 +67,7 @@ public class DialogServer : MonoBehaviour
             callbacks.Remove(dialog);
             callback(dialogResult);
         }
-    }
+    }*/
 
     public Dialog dialogGet(string dialogId)
     {

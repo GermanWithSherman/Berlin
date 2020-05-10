@@ -78,6 +78,7 @@
     <Compile Include="Assets\GameObjects\CharacterData.cs" />
     <Compile Include="Assets\GameObjects\Commands\Command.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandBreak.cs" />
+    <Compile Include="Assets\GameObjects\Commands\CommandConditional.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandConsume.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandContinue.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandConverter.cs" />

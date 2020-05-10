@@ -6,24 +6,24 @@ public class CommandTimePass : Command
 {
 
     public string ActivityId = "";
-    public int Time = 0;
+    public int Duration = 0;
 
     public CommandTimePass() { }
 
     public CommandTimePass(int time)
     {
-        Time = time;
+        Duration = time;
     }
 
     public CommandTimePass(int time, string activityId)
     {
         ActivityId = activityId;
-        Time = time;
+        Duration = time;
     }
 
     public override void execute(Data data)
     {
-        GameManager.Instance.timePass(Time, ActivityId);
+        GameManager.Instance.timePass(Duration, ActivityId);
         return;
     }
 }

@@ -13,6 +13,12 @@ public class ButtonTextExtended : MonoBehaviour
         get => GetComponent<Button>();
     }
 
+    public bool Enabled
+    {
+        get => Button.interactable;
+        set => Button.interactable = value;
+    }
+
     public string Text
     {
         get => TextExtended.Text;

@@ -19,29 +19,30 @@ public abstract class Dialog<T> : Dialog where T : DialogSetting
     
     //protected IDictionary<string, string> _settings;
 
-    protected DialogResult data = new DialogResult();
+    protected DialogResult _data = new DialogResult();
 
     protected T _settings;
 
 
-
-
-    /*public virtual void setSettings(IDictionary<string, string> settings)
+    private void resolve()
     {
-        _settings = settings;
-    }*/
+        resolve(GameManager.Instance.GameData);
+    }
 
-    /*public void setSetting(JObject jObject)
+    private void resolve(Data data)
     {
-        _settings = jObject.ToObject<T>();
-    }*/
+        foreach (KeyValuePair<string,string> target in _settings.Targets)
+        {
+            data[target.Value] = _data[target.Key];
+        }
+    }
 
-    
 
     protected void submit()
     {
         gameObject.SetActive(false);
         //_dialogServer.dialogSubmit(this, data);
+        resolve();
         _settings.onComplete.execute();
         Destroy(gameObject);
     }
@@ -51,4 +52,5 @@ public abstract class Dialog<T> : Dialog where T : DialogSetting
 public abstract class DialogSetting
 {
     public CommandsCollection onComplete = new CommandsCollection();
+    public ModableDictionary<string> Targets = new ModableDictionary<string>();
 }

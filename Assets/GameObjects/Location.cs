@@ -22,25 +22,16 @@ public class Location : IModable
             //SubLocation result;
 
             if (String.IsNullOrEmpty(key))
-                //result = subLocations[Default];
                 return Inheritable.Inherited(subLocations[Default]);
             else if (subLocations.ContainsKey(key))
-                //result = subLocations[key];
                 return Inheritable.Inherited(subLocations[key]);
             else
             {
-                Debug.LogWarning($"Requested sublocation {key} is not present in location {id}");
-                //result = subLocations[Default];
+                ErrorMessage.Show($"Requested sublocation {key} is not present in location {id}");
                 return Inheritable.Inherited(subLocations[Default]);
             }
 
-            /*if (!result.inheritanceResolved)
-            {
-                if (!String.IsNullOrEmpty(result.Inherit))
-                    result.mod(GameManager.Instance.LocationCache.SubLocation(result.Inherit));
-                result.inheritanceResolved = true;
-            }
-            return result;*/
+
 
         }
 

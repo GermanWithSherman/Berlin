@@ -70,6 +70,16 @@ public class Option : IModable, IInheritable
     public Conditional<OptionState> State = new Conditional<OptionState>(new OptionState(){enabled=true, visible=true}, -2000000001);
 
 
+    public bool Enabled
+    {
+        get => State.value().enabled.GetValueOrDefault(true);
+    }
+
+    public bool Visible
+    {
+        get => State.value().visible.GetValueOrDefault(true);
+    }
+
     public void execute()
     {
         Commands.execute();

@@ -8,7 +8,7 @@
         "allowResetListen":[""],
         "conditionCD": -1,
         "Commands":{
-            "gte":{"Type":"Event","p":{"e":"test."}}
+            "gte":{"Type":"Event","EventID":"test."}
         }
     }
 }

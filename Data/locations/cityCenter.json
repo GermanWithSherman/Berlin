@@ -42,8 +42,8 @@
             },
             "Options":{
                 "1":{
-                    "text":"Pass 30 Minutes",
-                    "commands":{"timeP1800":{"type":"TimePass","p":{"v":1800}}}
+                    "Text":"Pass 30 Minutes",
+                    "Commands":{"timeP1800":{"Type":"TimePass","Duration":1800}}
                 }
             }
         },
@@ -112,33 +112,33 @@
             },
             "Options":{
                 "fn_clothes_f":{
-                    "text":"Shop (Female Outfits)",
-                    "Commands":{"shop":{"type": "Shop","p":{"id":"fn_clothes_f.cityCenterMall"}}}
+                    "Text":"Shop (Female Outfits)",
+                    "Commands":{"shop":{"Type": "Shop","ShopID":"fn_clothes_f.cityCenterMall"}}
                 },
                 "fn_clothes_m":{
-                    "text":"Shop (Male Outfits)",
-                    "Commands":{"shop":{"type": "Shop","p":{"id":"fn_clothes_m.cityCenterMall"}}}
+                    "Text":"Shop (Male Outfits)",
+                    "Commands":{"shop":{"Type": "Shop","ShopID":"fn_clothes_m.cityCenterMall"}}
                 },
                 "fn_underwear_f":{
-                    "text":"Shop (Female Underwear)",
-                    "Commands":{"shop":{"type": "Shop","p":{"id":"fn_underwear_f.cityCenterMall"}}}
+                    "Text":"Shop (Female Underwear)",
+                    "Commands":{"shop":{"Type": "Shop","ShopID":"fn_underwear_f.cityCenterMall"}}
                 },
                 "shoes":{
-                    "text":"Shop (Shoes)",
+                    "Text":"Shop (Shoes)",
                     "Commands":{
-                        "interrupt":{"type": "Interrupt", "p":{"keywords":["shopFemale"]}},
-                        "shop":{"type": "Shop","p":{"id":"testShoes.1"}}
+                        "interrupt":{"Type": "Interrupt", "Keyword":"shopFemale"},
+                        "shop":{"Type": "Shop","ShopID":"testShoes.1"}
                     }
                 },
                 "outfit":{
-                    "text":"Change Outfit",
+                    "Text":"Change Outfit",
                     "Commands":{
                         "outfit":{
-                            "type":"Outfit",
-                            "p":{
-                                "requirements":{
-                                    "ForbiddenStyles": ["Naked","Underwear"]
-                                }
+                            "Type":"Outfit",
+                            "OutfitRequirement":{
+
+                                "ForbiddenStyles": ["Naked","Underwear"]
+
                             }
                         }
                     }
@@ -167,14 +167,14 @@
             "LocationConnections":{
                 "mallInside":{
                     "targetLocationId": ".main",
-                    "Duration": 120,
+                    "Time": 120,
                     "Label":"Leave"
                 }
             },
             "Options":{
                 "1":{
-                    "text":"Order Drinks & Food",
-                    "commands":{"service":{"type": "Services","p":{"id":"kebapHouse"}}}
+                    "Text":"Order Drinks & Food",
+                    "commands":{"service":{"Type": "Services","ServicePointId":"kebapHouse"}}
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
+using TMPro;
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,51 +10,46 @@ public class SelectHorizontal : Dialog<SelectHorizontalSettings>
 {
     public ButtonTextExtended ButtonPrefab;
 
+    public Transform ButtonTransform;
+
+    public TextMeshProUGUI HeadlineText;
+
     private SelectHorizontalSettings _selectHorizontalSettings;
 
     public override void setSettings(DialogSetting settings)
     {
-        transform.childrenDestroyAll();
+        _settings = (SelectHorizontalSettings)settings;
 
-        SelectHorizontalSettings _settings = (SelectHorizontalSettings)settings;
+        ButtonTransform.childrenDestroyAll();
+
+        if (String.IsNullOrEmpty(_settings.Headline))
+            HeadlineText.gameObject.SetActive(false);
+        else
+        {
+            HeadlineText.text = _settings.Headline;
+            HeadlineText.gameObject.SetActive(true);
+        }
+
+        
 
         foreach (Option option in _settings.Options.Values)
         {
-            ButtonTextExtended button = Instantiate(ButtonPrefab, transform);
-            button.Text = option.Text;
+            if (option.Visible)
+            {
+                ButtonTextExtended button = Instantiate(ButtonPrefab, ButtonTransform);
+                button.Enabled = option.Enabled;
+                button.Text = option.Text;
+                button.Button.onClick.AddListener(delegate { option.Commands.execute(_data); submit(); });
+            }
         }
     }
 
-    /*public override void setSettings(IDictionary<string, string> settings)
-    {
-        transform.childrenDestroyAll();
-
-        /*base.setSettings(settings);
-
-        int optionCount = Int32.Parse(settings["optionCount"]);
-
-        for(int i = 1; i <= optionCount; i++)
-        {
-            ButtonTextExtended button = Instantiate(ButtonPrefab, transform);
-            button.Text = settings["text_"+i.ToString()];
-
-            string result = settings["result_" + i.ToString()];
-            button.Button.onClick.AddListener(delegate { optionSelect(result); });
-        }*//*
-
-    }*/
-
-
-    /*public void optionSelect(string result)
-    {
-        data["RESULT"] = result;
-        submit();
-    }*/
 
 }
 
 public class SelectHorizontalSettings : DialogSetting
 {
+    public string Headline;
     public ModableDictionary<Option> Options = new ModableDictionary<Option>();
 }
 
