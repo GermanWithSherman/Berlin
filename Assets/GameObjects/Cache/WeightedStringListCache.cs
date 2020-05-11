@@ -10,4 +10,9 @@ public class WeightedStringListCache : Cache<WeightedStringList>
         WeightedStringList weightedStringList = new WeightedStringList(locationPath);
         return weightedStringList;
     }
+
+    protected override WeightedStringList getInvalidKeyEntry(string key)
+    {
+        throw new GameException($"WeightedStringList {key} does not exist");
+    }
 }

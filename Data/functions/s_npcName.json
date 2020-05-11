@@ -1,9 +1,21 @@
 {
     "Values":{
         "known":{
-            "C" :"_NPC.known = 0",
-            "VT": "Interpolate",
-            "K":"{_NPC.nameFirst} {_NPC.nameLast}"
+            "C" :"_NPC.known = 1",
+            "VT": "Plain",
+            "CV":{
+                "Values":{
+                    "hasNickName":{
+                        "C" :"_NPC.nameNick != \"\"",
+                        "VT": "Interpolate",
+                        "K":"{_NPC.nameFirst} {_NPC.nameLast}\n<i>{_NPC.nameNick}</i>"
+                    },
+                    "noNick":{
+                        "VT": "Interpolate",
+                        "K":"{_NPC.nameFirst} {_NPC.nameLast}"
+                    }
+                }
+            }
         },
         "unknown":{
             "CV":{

@@ -1,5 +1,5 @@
 {
     "parent":"default",
     "nameFirst":{"VT":"WeightedStringList","K":"names_first_female_90s"},
-    "genderVisible":"f"
+    "genderVisible":{"VT":"Plain","V":"f"}
 }

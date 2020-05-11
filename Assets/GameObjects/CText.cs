@@ -32,6 +32,13 @@ public class CText : IModable
         return Text(GameManager.Instance.GameData);
     }
 
+    public static string Text(CText cText)
+    {
+        if (cText == null)
+            return "";
+        return cText.Text();
+    }
+
     public string Text(GameData gameData)
     {
         if (!Condition.evaluate(gameData))

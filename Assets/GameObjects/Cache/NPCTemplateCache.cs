@@ -16,4 +16,9 @@ public class NPCTemplateCache : Cache<NPCTemplate>
 
         return template;
     }
+
+    protected override NPCTemplate getInvalidKeyEntry(string key)
+    {
+        return null;
+    }
 }

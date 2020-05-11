@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC : Data
+public class NPC : Data, IInheritable, IModable
 {
     [JsonIgnore]
     public string id;
@@ -12,16 +12,26 @@ public class NPC : Data
     public string nameFirst;
     public string nameLast;
 
-    public DateTime birthDate;
+
+    public CText NameNick;
+    public bool ShouldSerializeNameNick() => false;
+
+    public DateTime? birthDate;
+
+    [JsonIgnore]
+    public DateTime BirthDate
+    {
+        get => birthDate.GetValueOrDefault();
+    }
 
     [JsonIgnore]
     public int age
     {
-        get => GameManager.Instance.timeAgeYears(birthDate);
+        get => GameManager.Instance.timeAgeYears(BirthDate);
         set => birthDate = GameManager.Instance.timeWithAge(value);
     }
 
-    public string genderVisible = "m";
+    public string genderVisible;
 
     public int height = 1700; //in mm
     public int weight = 6000; //in g
@@ -33,20 +43,27 @@ public class NPC : Data
         set => weight = Mathf.RoundToInt(value * Mathf.Pow(height / 1000f, 2)*1000);
     }
 
-    public Dictionary<string, Schedule> schedules = new Dictionary<string, Schedule>();
+    [JsonProperty("Schedules")]
+    public ModableDictionary<Schedule> SchedulesDict = new ModableDictionary<Schedule>();
+    public bool ShouldSerializeSchedulesDict() => false;
     [JsonIgnore]
-    public IEnumerable<Schedule> Schedules { get => schedules.Values; }
+    public IEnumerable<Schedule> Schedules { get => SchedulesDict.Values; }
 
-    public string templateId;
+    public string TemplateId;
     [JsonIgnore]
     public NPCTemplate Template
     {
-        get => GameManager.Instance.NPCTemplateCache[templateId];
+        get => GameManager.Instance.NPCTemplateCache[TemplateId];
     }
 
     [JsonIgnore]
     public Texture Texture { get => GameManager.Instance.TextureCache[TexturePath]; }
+
     public Conditional<string> TexturePath;
+    public bool ShouldSerializeTexturePath() => false;
+
+    [JsonIgnore]
+    public bool inheritanceResolved = false;
 
     protected override dynamic get(string key)
     {
@@ -60,6 +77,8 @@ public class NPC : Data
                 return nameFirst;
             case "nameLast":
                 return nameLast;
+            case "nameNick":
+                return CText.Text(NameNick);
             case "birthDate":
                 return birthDate;
             case "height":
@@ -111,7 +130,129 @@ public class NPC : Data
         }
     }
 
+    public void inherit() => templateApply();
 
+    public void templateApply()
+    {
+        if(!inheritanceResolved)
+            inherit(Template.generate());
+        inheritanceResolved = true;
+    }
+
+
+    public void mod(NPC modNPC)
+    {
+        if (modNPC == null) return;
+        mod(this, modNPC);
+    }
+
+    public void mod(IModable modable)
+    {
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((NPC)modable);
+    }
+
+    private void mod(NPC original, NPC mod)
+    {
+        birthDate = Modable.mod(original.birthDate, mod.birthDate);
+
+        nameFirst = Modable.mod(original.nameFirst, mod.nameFirst);
+
+        nameLast = Modable.mod(original.nameLast, mod.nameLast);
+
+        genderVisible = Modable.mod(original.genderVisible, mod.genderVisible);
+
+        SchedulesDict = Modable.mod(original.SchedulesDict, mod.SchedulesDict);
+
+        TexturePath = Modable.mod(original.TexturePath, mod.TexturePath);
+
+        NameNick = Modable.mod(original.NameNick, mod.NameNick);
+        //TODO: etc.
+    }
+
+    public IModable copyDeep()
+    {
+        var result = new NPC();
+        result.TemplateId = Modable.copyDeep(TemplateId);
+        result.birthDate = Modable.copyDeep(birthDate);
+        result.nameFirst = Modable.copyDeep(nameFirst);
+        result.nameLast = Modable.copyDeep(nameLast);
+        result.NameNick = Modable.copyDeep(NameNick);
+        result.genderVisible = Modable.copyDeep(genderVisible);
+        result.SchedulesDict = Modable.copyDeep(SchedulesDict);
+        result.TexturePath = Modable.copyDeep(TexturePath);
+        //TODO: etc.
+        return result;
+    }
+
+    public void inherit(NPC parent)
+    {
+        //if (parent != null)
+        //    inherit(parent);
+        if (parent == null)
+            return;
+
+
+        NPC parentCopy = Modable.copyDeep(parent);
+
+        mod(parentCopy, this);
+
+        
+
+    }
+
+    public bool isInheritanceResolved() => inheritanceResolved;
+
+    /*
+
+    private void mod(NPC original, NPC mod)
+    {
+        birthDate = Modable.mod(original.birthDate, mod.birthDate);
+
+        nameFirst = Modable.mod(original.nameFirst, mod.nameFirst);
+
+        nameLast = Modable.mod(original.nameLast, mod.nameLast);
+
+        genderVisible = Modable.mod(original.genderVisible, mod.genderVisible);
+
+        schedules = Modable.mod(original.schedules, mod.schedules);
+        //TODO: etc.
+    }
+
+    public void mod(NPC modNPC)
+    {
+        if (modNPC == null) return;
+        mod(this, modNPC);
+    }
+
+    public void mod(IModable modable)
+    {
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((NPC)modable);
+    }
+
+    public IModable copyDeep()
+    {
+        var result = new NPC();
+
+        result.birthDate = Modable.copyDeep(birthDate);
+        result.nameFirst = Modable.copyDeep(nameFirst);
+        result.nameLast = Modable.copyDeep(nameLast);
+        result.genderVisible = Modable.copyDeep(genderVisible);
+        result.schedules = Modable.copyDeep(schedules);
+        //TODO: etc.
+        return result;
+    }*/
 }
 
 public class NPCComparer : IEqualityComparer<NPC>

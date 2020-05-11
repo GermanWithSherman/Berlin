@@ -1,7 +1,8 @@
 {
-    "templateId": "default_female",
-    "schedules":{
-        "1":{"l":"cityCenter.main","d":[0,1,2,3,4,5,6],"start":0,"end":2359}
+    "TemplateId": "default_female",
+    "NameNick": "Mum",
+    "Schedules":{
+        "1":{"l":"home_parents.kitchen","d":[0,1,2,3,4,5,6],"start":0,"end":2359}
     },
     "TexturePath":{"Value": "npc/p(0).jpg"}
 }

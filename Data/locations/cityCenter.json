@@ -167,7 +167,7 @@
             "LocationConnections":{
                 "mallInside":{
                     "targetLocationId": ".main",
-                    "Time": 120,
+                    "Duration": 120,
                     "Label":"Leave"
                 }
             },

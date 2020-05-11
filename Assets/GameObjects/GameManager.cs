@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public DialogueTopicLibrary DialogueTopicLibrary;
     public FunctionsLibrary FunctionsLibrary;
     public ItemsLibrary ItemsLibrary;
-    public NPCsRawLibrary NPCsRawLibrary;
+    public NPCsLibrary NPCsLibrary;
 
     public DialogServer DialogServer;
     public InterruptServer InterruptServer;
@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
         DialogueTopicLibrary = new DialogueTopicLibrary(path("dialogue/topics"));
         FunctionsLibrary = new FunctionsLibrary(path("functions"));
         ItemsLibrary = new ItemsLibrary(path("items"));
-        NPCsRawLibrary = new NPCsRawLibrary(path("npcs"));
+        //NPCsLibrary = new NPCsLibrary(path("npcs"));
 
         InterruptServer = new InterruptServer(path("interrupts"));
         ModsServer = new ModsServer(path("mods"));
@@ -237,7 +237,8 @@ public class GameManager : MonoBehaviour
 
     private void npcsPresentUpdate()
     {
-        IEnumerable<NPC> npcs = npcsPresent(GameData.currentLocation, GameData.WorldData.DateTime);
+        //IEnumerable<NPC> npcs = npcsPresent(GameData.currentLocation, GameData.WorldData.DateTime);
+        IEnumerable<NPC> npcs = NPCsLibrary.npcsPresent(GameData.currentLocation, GameData.WorldData.DateTime);
         foreach (NPC npc in npcs)
             Debug.Log(FunctionsLibrary.npcName(npc));
 
@@ -259,7 +260,7 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    public IEnumerable<NPC> npcsPresent(SubLocation subLocation, DateTime dateTime)
+    /*public IEnumerable<NPC> npcsPresent(SubLocation subLocation, DateTime dateTime)
     {
         List<NPC> result = new List<NPC>();
 
@@ -302,20 +303,21 @@ public class GameManager : MonoBehaviour
         }
 
         return result;
-    }
+    }*/
 
-    private NPC npcGenerate(string id)
+    /*private NPC npcGenerate(string id)
     {
-        NPCRaw npcRaw = NPCsRawLibrary[id];
-        NPC npcGenerated = null;
+        //NPCRaw npcRaw = NPCsRawLibrary[id];
+        //NPC npcGenerated = null;
 
-        npcGenerated = npcRaw.generate();
-        npcGenerated.id = id;
+        //npcGenerated = npcRaw.generate();
+        //npcGenerated.id = id;
 
+        NPC npcGenerated = NPCTemplateCache[]
         GameData.CharacterData.NPCs.Add(id, npcGenerated);
 
         return npcGenerated;
-    }
+    }*/
 
     /*public void optionsSet(IEnumerable<Option> options)
     {

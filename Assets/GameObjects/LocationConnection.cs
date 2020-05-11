@@ -78,6 +78,17 @@ public class LocationConnection : IModable
 
     public IModable copyDeep()
     {
-        throw new NotImplementedException();
+        var result = new LocationConnection();
+
+        result.Duration = Modable.copyDeep(Duration);
+        result.interruptible = Modable.copyDeep(interruptible);
+        result.Label = Modable.copyDeep(Label);
+        result.TexturePath = Modable.copyDeep(TexturePath);
+        result.Visible = Modable.copyDeep(Visible);
+        result.targetLocationId = Modable.copyDeep(targetLocationId);
+        result.OutfitRequirement = Modable.copyDeep(OutfitRequirement);
+        result.Type = Modable.copyDeep(Type);
+
+        return result;
     }
 }

@@ -138,7 +138,7 @@
     <Compile Include="Assets\GameObjects\NPCFilter.cs" />
     <Compile Include="Assets\GameObjects\NPCRaw.cs" />
     <Compile Include="Assets\GameObjects\NPCTemplate.cs" />
-    <Compile Include="Assets\GameObjects\NPCsRawLibrary.cs" />
+    <Compile Include="Assets\GameObjects\NPCsLibrary.cs" />
     <Compile Include="Assets\GameObjects\Option.cs" />
     <Compile Include="Assets\GameObjects\Outfit.cs" />
     <Compile Include="Assets\GameObjects\OutfitRequirement.cs" />

@@ -16,6 +16,7 @@ public class Value<T>: Value
 {
     public enum ValueType
     {
+        None,
         Function,
         Interpolate,
         Plain,
@@ -24,7 +25,7 @@ public class Value<T>: Value
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
-    public ValueType VT = ValueType.Plain;
+    public ValueType VT = ValueType.None;
 
     //public Dictionary<string, string> Parameters = new Dictionary<string, string>(); //for ValueType.Function
     public ModableDictionary<string> Parameters = new ModableDictionary<string>();
@@ -33,7 +34,13 @@ public class Value<T>: Value
 
     public T V; // value
 
-    public int P = 0;
+    public int? P;
+
+    [JsonIgnore]
+    public int Priority
+    {
+        get => P.GetValueOrDefault(0);
+    }
 
     [JsonIgnore]
     public Condition Condition
@@ -56,6 +63,8 @@ public class Value<T>: Value
 
     public static implicit operator T(Value<T> value)
     {
+        if (value == null)
+            return default;
         return value.value();
     }
 
@@ -80,6 +89,7 @@ public class Value<T>: Value
                 return (T)(object)GameManager.Instance.FunctionsLibrary.functionExecute(K,p);
             case ValueType.Interpolate:
                 return (T)(object)gameData.interpolate(K);
+            case ValueType.None:
             case ValueType.Plain:
                 if (CV != null)
                     return CV.value(gameData);
@@ -99,15 +109,32 @@ public class Value<T>: Value
 
     public static int ComparePriorities(Value<T> x, Value<T> y)
     {
-        return y.P - x.P;
+        return y.Priority - x.Priority;
     }
 
     public void mod(Value<T> modable)
     {
-        VT = modable.VT;
-        Parameters.mod(modable.Parameters);
-        V = modable.V;
-        //TODO: Continue
+        if (modable == null) return;
+        mod(this, modable);
+    }
+
+    private void mod(Value<T> original, Value<T> mod) {
+        VT = mod.VT == ValueType.None ? original.VT : mod.VT;//mod.VT; //Modable.mod(original.VT, mod.VT);
+        Parameters = Modable.mod(original.Parameters, mod.Parameters);
+
+        if (original.V is IModable && original.V.GetType() == mod.V.GetType())
+            V = (T)Modable.mod((IModable)original.V, (IModable)mod.V);
+        else
+        {
+            if(original.V is int)
+                original.V = mod.V;
+            else if(original.V is int?)
+                original.V = mod.V == null ? original.V : mod.V;
+        }
+        K = Modable.mod(original.K, mod.K);
+        P = Modable.mod(original.P, mod.P);
+        C = Modable.mod(original.C, mod.C);
+        CV = Modable.mod(original.CV, mod.CV);
     }
 
     public override void mod(IModable modable)
@@ -137,6 +164,8 @@ public class Value<T>: Value
         }
         else
             result.V = V;
+
+        result.VT = VT;
 
         return result;
     }

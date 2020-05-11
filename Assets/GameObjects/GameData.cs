@@ -33,8 +33,8 @@ public class GameData: Data
 
     [JsonIgnore]
     public IEnumerable<NPC> NpcsPresent = new List<NPC>();
-    [JsonProperty]
-    private List<string> _npcsPresentIds;
+    //[JsonProperty]
+    //private List<string> _npcsPresentIds;
 
     [JsonExtensionData]
     private IDictionary<string, JToken> _additionalData = new Dictionary<string, JToken>();
@@ -56,8 +56,11 @@ public class GameData: Data
             switch (keyParts[0])
             {
                 case "NPC":
-                    return CharacterData[keyParts[1]];
+                    //return CharacterData[keyParts[1]];
+                    //We need to acquire NPC-Data from the NPCsLibrary because the Data in Savegames is incomplete (it lacks Schedules etc.)
+                    return GameManager.Instance.NPCsLibrary[keyParts[1]];
                 case "PC":
+                    //Other than NPCs PC-Data is not split
                     return CharacterData.PC[keyParts[1]];
                 case "Shop":
                     return ShopData[keyParts[1]];
@@ -117,6 +120,7 @@ public class GameData: Data
             switch (keyParts[0])
             {
                 case "NPC":
+                    //Persistant Data has to be written to GameData, not to libraries!
                     CharacterData[keyParts[1]] = value;
                     return;
                 case "PC":
@@ -145,11 +149,18 @@ public class GameData: Data
 
         currentLocation = gameManager.LocationCache.SubLocation(_currentLocationId);
 
+        
+    }
+
+    /*internal void AfterLinkedMethod()
+    {
+        //We have to wait until GameManager set GameData to this
         List<NPC> npcsPresent = new List<NPC>();
         foreach (string id in _npcsPresentIds)
-            npcsPresent.Add(CharacterData[id]);
+            //npcsPresent.Add(CharacterData[id]);
+            npcsPresent.Add(GameManager.Instance.NPCsLibrary[id]);
         NpcsPresent = npcsPresent;
-    }
+    }*/
     
 
     [OnSerializing]
@@ -157,9 +168,9 @@ public class GameData: Data
     {
         _currentLocationId = currentLocation.id;
 
-        _npcsPresentIds = new List<string>();
+        /*_npcsPresentIds = new List<string>();
         foreach (NPC npc in NpcsPresent)
-            _npcsPresentIds.Add(npc.id);
+            _npcsPresentIds.Add(npc.id);*/
 
         savegameTime = DateTime.UtcNow;
     }

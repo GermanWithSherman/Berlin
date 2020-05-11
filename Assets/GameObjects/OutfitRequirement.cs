@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OutfitRequirement
+public class OutfitRequirement : IModable
 {
     public List<string> AllowedStyles = new List<string>();
     public List<string> ForbiddenStyles = new List<string>();
@@ -33,6 +33,13 @@ public class OutfitRequirement
         }
     }
 
+    public IModable copyDeep()
+    {
+        var result = new OutfitRequirement();
+
+        return result;
+    }
+
     public bool isValid(Outfit outfit)
     {
         return isValid(outfit.Style);
@@ -55,5 +62,10 @@ public class OutfitRequirement
         }
 
         return true;
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new NotImplementedException();
     }
 }

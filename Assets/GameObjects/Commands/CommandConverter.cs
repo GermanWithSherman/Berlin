@@ -23,7 +23,7 @@ public class CommandConverter : JsonConverter
 
         if (!Enum.TryParse((string)jo["Type"], out Command.Type commandType))
         {
-            Debug.LogError($"CommandType {jo["Type"]} not recognized");
+            Debug.LogError($"CommandType {jo["Type"]} not recognized in {jo}");
             return new CommandNone();
         }
 
