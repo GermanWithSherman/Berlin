@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemsFilter
+public class ItemsFilter : IModable
 {
-    public List<string> Genders = new List<string>();
-    public List<string> Slots = new List<string>();
-    public List<string> Styles = new List<string>();
+    public ModableStringList Genders = new ModableStringList();
+    public ModableStringList Slots = new ModableStringList();
+    public ModableStringList Styles = new ModableStringList();
 
     public int[] Price;
     public int[] Skimpiness;
@@ -16,6 +16,11 @@ public class ItemsFilter
         ItemsFilter filter = new ItemsFilter();
         filter.Slots.Add(slot);
         return filter.filter(itemsCollection);
+    }
+
+    public IModable copyDeep()
+    {
+        throw new System.NotImplementedException();
     }
 
     public IEnumerable<Item> filter(ItemsCollection itemsCollection)
@@ -75,5 +80,10 @@ public class ItemsFilter
 
 
         return result;
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new System.NotImplementedException();
     }
 }

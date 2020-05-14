@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 using UnityEngine;
 
 [System.Serializable]
-public class EventGroup
+public class EventGroup : IModable
 {
     public string id;
 
@@ -29,6 +29,16 @@ public class EventGroup
             Debug.LogWarning($"Requested sublocation {key} is not present in location {id}");
             return EventStages[Default];
         }
+    }
+
+    public IModable copyDeep()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new NotImplementedException();
     }
 
     [OnDeserialized]

@@ -16,7 +16,7 @@ public class ShopTypeCache : Cache<ShopType>
 
             ShopType shopType = deserializationData.ToObject<ShopType>();
 
-            shopType.id = key;
+            shopType.ID = key;
 
             return shopType;
         }catch(FileNotFoundException)

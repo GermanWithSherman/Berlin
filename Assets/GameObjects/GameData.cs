@@ -33,8 +33,6 @@ public class GameData: Data
 
     [JsonIgnore]
     public IEnumerable<NPC> NpcsPresent = new List<NPC>();
-    //[JsonProperty]
-    //private List<string> _npcsPresentIds;
 
     [JsonExtensionData]
     private IDictionary<string, JToken> _additionalData = new Dictionary<string, JToken>();

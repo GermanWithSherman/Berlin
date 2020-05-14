@@ -3,10 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopType
+public class ShopType : IModable
 {
     [JsonIgnore]
-    public string id;
+    public string ID;
 
-    public ItemsFilter filter;
+    public ItemsFilter Filter;
+
+    public IModable copyDeep()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new System.NotImplementedException();
+    }
 }

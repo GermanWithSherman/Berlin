@@ -1,4 +1,4 @@
 {
     "title": "Kebap House",
-    "services":["food.kebap","drink.water"]
+    "ServiceIDs":["food.kebap","drink.water"]
 }

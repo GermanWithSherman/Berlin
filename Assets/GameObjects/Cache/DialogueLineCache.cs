@@ -7,14 +7,14 @@ using UnityEngine;
 
 public class DialogueLineCache : Cache<DialogueStages>
 {
-    public string DialogueLinePath;
+    //public string DialogueLinePath;
 
     public DialogueStages this[DialogueTopic key]
     {
         get => this[key.ID];
     }
 
-    protected override DialogueStages create(string key)
+    /*protected override DialogueStages create(string key)
     {
         string path = Path.Combine(GameManager.Instance.DataPath, DialogueLinePath, key + ".json");
 
@@ -30,7 +30,7 @@ public class DialogueLineCache : Cache<DialogueStages>
         {
             throw new GameException($"DialogueLine {key} does not exist");
         }
-    }
+    }*/
 
     public DialogueStage Stage(string stageId, DialogueTopic defaultTopic)
     {

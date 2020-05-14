@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -126,13 +127,19 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        ModsServer = new ModsServer(path("mods"), Preferences);
 
-        DialogueTopicLibrary = new DialogueTopicLibrary(path("dialogue/topics"));
-        FunctionsLibrary = new FunctionsLibrary(path("functions"));
+        List<string> modsPaths = ModsServer.ActivatedModsPaths;
+        DialogueTopicLibrary = new DialogueTopicLibrary(path("dialogue/topics"), pathsMods(modsPaths, "dialogue/topics") );
+        Thread dialogueTopicLibraryLoadThread = DialogueTopicLibrary.loadThreaded();
+
+        FunctionsLibrary = new FunctionsLibrary(path("functions"), pathsMods(modsPaths, "functions"));
         ItemsLibrary = new ItemsLibrary(path("items"));
 
         InterruptServer = new InterruptServer(path("interrupts"));
-        ModsServer = new ModsServer(path("mods"), Preferences);
+
+
+        dialogueTopicLibraryLoadThread.Join();
 
         StartMenu.show();
 
@@ -188,12 +195,12 @@ public class GameManager : MonoBehaviour
         {
             NullValueHandling = NullValueHandling.Ignore
         });
-        System.IO.File.WriteAllText(path, json);
+        File.WriteAllText(path, json);
     }
 
     public static JObject File2Data(string path)
     {
-        string jsonString = System.IO.File.ReadAllText(path);
+        string jsonString = File.ReadAllText(path);
         var data = JObject.Parse(jsonString);
         return data;
     }
@@ -205,7 +212,7 @@ public class GameManager : MonoBehaviour
 
     public void gameLoad(string path)
     {
-        JObject deserializationData = GameManager.File2Data(path);
+        JObject deserializationData = File2Data(path);
         GameData = deserializationData.ToObject<GameData>();
         npcsPresentUpdate();
         uiUpdate();
@@ -218,10 +225,7 @@ public class GameManager : MonoBehaviour
     {
         eventExecute("start", "main");
 
-        PC.age = 18;
-
-        //PC.outfits.Add("DEFAULT", new Outfit(new Item[] { ItemsLibrary["dress_2"] }));
-        //PC.currentOutfitId = "DEFAULT";
+        //PC.age = 18;
 
         OutfitWindow.setCharacter(PC);
     }
@@ -233,11 +237,6 @@ public class GameManager : MonoBehaviour
 
     public void gameSave(string path)
     {
-        /*string json = JsonConvert.SerializeObject(GameData, Formatting.Indented, new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Ignore
-        });
-        System.IO.File.WriteAllText(path, json);*/
         Data2File(GameData,path);
         Debug.Log($"Game save at {path}");
 
@@ -252,7 +251,6 @@ public class GameManager : MonoBehaviour
 
     public void locationGoto(string subLocationId)
     {
-        //Location location = LocationCache[locationId];
         SubLocation subLocation = LocationCache.SubLocation(subLocationId);
         locationGoto(subLocation);
     }
@@ -271,10 +269,9 @@ public class GameManager : MonoBehaviour
 
     private void npcsPresentUpdate()
     {
-        //IEnumerable<NPC> npcs = npcsPresent(GameData.currentLocation, GameData.WorldData.DateTime);
         IEnumerable<NPC> npcs = NPCsLibrary.npcsPresent(GameData.currentLocation, GameData.WorldData.DateTime);
-        foreach (NPC npc in npcs)
-            Debug.Log(FunctionsLibrary.npcName(npc));
+        /*foreach (NPC npc in npcs)
+            Debug.Log(FunctionsLibrary.npcName(npc));*/
 
         GameData.NpcsPresent = npcs;
         UINPCsPresentContainer.setNPCs(GameData.NpcsPresent);
@@ -305,6 +302,17 @@ public class GameManager : MonoBehaviour
         return Path.Combine(DataPath,p);
     }
 
+    public IEnumerable<string> pathsMods(IEnumerable<string> modBasePaths, string target)
+    {
+        var result = new List<string>();
+
+        foreach (string modBasePath in modBasePaths)
+        {
+            result.Add(Path.Combine(modBasePath, target));
+        }
+
+        return result;
+    }
      
 
     public void shopShow(string shopId)
@@ -402,31 +410,6 @@ public class GameManager : MonoBehaviour
         {
             listener.uiUpdate(this);
         }
-
-        /*
-        TextureMain = GameData.currentLocation.Texture;
-
-        UIServicesWindow.update();
-
-        //SubLocation Stuff
-        if (GameData.currentEventStage == null)
-
-        {
-            TextureMain = GameData.currentLocation.Texture;
-
-            TextMain = GameData.currentLocation.Text.Text(GameData);
-
-            //LocationConnections = GameData.currentLocation.LocationConnections.Values;
-            LocationConnections = GameData.currentLocation.LocationConnections.VisibleLocationConnections;
-
-            optionsSet(GameData.currentLocation.Options.Values);
-        }
-        else
-        {
-            TextMain = GameData.currentEventStage.Text.Text(GameData);
-            optionsSet(GameData.currentEventStage.Options.Values);
-            LocationConnections = null;
-        }*/
     }
 
 }

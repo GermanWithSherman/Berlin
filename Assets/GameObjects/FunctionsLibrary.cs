@@ -5,16 +5,18 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class FunctionsLibrary
+public class FunctionsLibrary : Library<Conditional<string>>
 {
-    private Dictionary<string, Conditional<string>> stringFunctions = new Dictionary<string, Conditional<string>>();
+    //private Dictionary<string, Conditional<string>> stringFunctions = new Dictionary<string, Conditional<string>>();
 
-    public FunctionsLibrary(string path)
+    public FunctionsLibrary(string path, IEnumerable<string> modsPaths)
     {
-        loadFromFolder(path);
+        //loadFromFolder(path);
+        load(path, modsPaths);
     }
 
-    private void loadFromFolder(string path)
+
+    /*private void loadFromFolder(string path)
     {
         if (!Directory.Exists(path))
         {
@@ -37,16 +39,16 @@ public class FunctionsLibrary
             }
         }
 
-    }
+    }*/
 
     public string functionExecute(string id, FunctionParameters parameters)
     {
-        if (!stringFunctions.ContainsKey(id))
+        if (!_dict.ContainsKey(id))
         {
             throw new NotImplementedException($"Function {id} can not be found");
         }
 
-        return stringFunctions[id].value(parameters);
+        return _dict[id].value(parameters);
     }
 
     public string npcName(NPC npc)

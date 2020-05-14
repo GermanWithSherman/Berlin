@@ -58,7 +58,9 @@ public class DialogueOption : Option, IModable
 
     public new IModable copyDeep()
     {
-        return base.copyDeep<DialogueOption>();
+        DialogueOption result = (DialogueOption)base.copyDeep<DialogueOption>();
+        result.TargetStage = Modable.copyDeep(TargetStage);
+        return result;
     }
 
     public void mod(DialogueOption modable)
@@ -111,6 +113,7 @@ public class DialogueStage : ModableDictionary<DialogueLine>, IModable
     {
         return base.copyDeep<DialogueStage>();
     }
+
 
 }
 

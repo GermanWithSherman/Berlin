@@ -1,4 +1,4 @@
 {
     "title": "Kaeda",
-    "services":["sm_groceries.low_quality_1"]
+    "ServiceIDs":["sm_groceries.low_quality_1"]
 }

@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Servicepoint
+public class Servicepoint : IModable
 {
-    public List<string> services;
+    public ModableStringList ServiceIDs;
     [JsonIgnore]
     public List<Service> Services
     {
@@ -13,7 +13,7 @@ public class Servicepoint
         {
             List<Service> result = new List<Service>();
 
-            foreach(string serviceId in services)
+            foreach(string serviceId in ServiceIDs)
             {
                 result.Add(GameManager.Instance.ServicesCache.service(serviceId));
             }
@@ -45,5 +45,13 @@ public class Servicepoint
 
     public string title;
 
-    
+    public void mod(IModable modable)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public IModable copyDeep()
+    {
+        throw new System.NotImplementedException();
+    }
 }

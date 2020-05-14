@@ -126,6 +126,7 @@
     <Compile Include="Assets\GameObjects\ItemsLibrary.cs" />
     <Compile Include="Assets\GameObjects\JSON\CTextConverter.cs" />
     <Compile Include="Assets\GameObjects\JSON\EventStageConverter.cs" />
+    <Compile Include="Assets\GameObjects\Library.cs" />
     <Compile Include="Assets\GameObjects\Location.cs" />
     <Compile Include="Assets\GameObjects\LocationConnection.cs" />
     <Compile Include="Assets\GameObjects\LocationConnections.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Assets\GameObjects\Mods\ModManifest.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModableDictionary.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModableList.cs" />
+    <Compile Include="Assets\GameObjects\Mods\ModableTexture.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModsServer.cs" />
     <Compile Include="Assets\GameObjects\NPC.cs" />
     <Compile Include="Assets\GameObjects\NPCFilter.cs" />

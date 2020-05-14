@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class TextureCache : Cache<Texture2D>
+public class TextureCache : Cache<ModableTexture>
 {
     public string missingTexturePath = "missingTexture.jpg";
-
-    protected override Texture2D create(string path)
+    public ModableTexture MissingTexture { get => this[missingTexturePath]; }
+    /*protected override Texture2D create(string path)
     {
         if(String.IsNullOrEmpty(path))
             return this[missingTexturePath];
@@ -30,10 +30,22 @@ public class TextureCache : Cache<Texture2D>
             return this[missingTexturePath];
         }
         return tex;
+    }*/
+
+    protected override ModableTexture create(string path)
+    {
+        if (String.IsNullOrEmpty(path))
+            return this[missingTexturePath];
+
+        string filePath = Path.Combine(GameManager.Instance.DataPath, "media", path);
+
+        return new ModableTexture(filePath);
     }
 
-    protected override Texture2D getInvalidKeyEntry(string key)
+    protected override ModableTexture getInvalidKeyEntry(string key)
     {
-        return this[missingTexturePath];
+        return MissingTexture;
     }
+
+    
 }

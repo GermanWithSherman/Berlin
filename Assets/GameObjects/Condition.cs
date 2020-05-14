@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class Condition
+public class Condition : IModable
 {
     private const string regex_identifier = "[a-zA-Z0-9'\\._\\-\\+\\(\\)\\[\\],\"]+";
     private const string regex_operator = "[><=]{1,2}|!=|⊆";
@@ -352,5 +352,15 @@ public class Condition
                 || v is uint
                 || v is long
                 || v is ulong;
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IModable copyDeep()
+    {
+        throw new NotImplementedException();
     }
 }

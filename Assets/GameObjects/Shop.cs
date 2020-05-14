@@ -26,7 +26,7 @@ public class Shop
     public ShopType ShopType
     {
         get => GameManager.Instance.ShopTypeCache[type];
-        set => type = value.id;
+        set => type = value.ID;
     }
 
     public Shop() { }
@@ -44,7 +44,7 @@ public class Shop
         ItemsLibrary itemsLibrary = gameManager.ItemsLibrary;
 
         IEnumerable<Item> items = itemsLibrary.items();
-        IEnumerable<Item> filteredItems = ShopType.filter.filter(items);
+        IEnumerable<Item> filteredItems = ShopType.Filter.filter(items);
 
         Items = new ItemsCollection(filteredItems);
 

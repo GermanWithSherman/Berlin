@@ -611,6 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1c879d1be010f4ba0c9cf6a0732b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Folder: 
   size: 50
   hashKey: 0
 --- !u!1 &106922385
@@ -656,6 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6682e28f1afda1a40bd0700a6d86cb2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Folder: 
   size: 50
   hashKey: 0
   missingTexturePath: missingTexture.jpg
@@ -1175,7 +1177,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1680595064}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9925093
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2437,6 +2439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a6d684a5823564a983455a6416dc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Folder: 
   size: 20
   hashKey: 0
 --- !u!1 &278264695
@@ -3301,6 +3304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2aa12b2b8b904649a4932d4dbedb135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Folder: 
   size: 50
   hashKey: 0
 --- !u!1 &446203386
@@ -4277,6 +4281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f23506a54c19094a933c71038fd5d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Folder: 
   size: 50
   hashKey: 0
 --- !u!1 &631625489
@@ -5232,6 +5237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d937723961971c4bbae81688adc892f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Folder: 
   size: 50
   hashKey: 0
 --- !u!1 &798461909
@@ -6642,7 +6648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 998.31024, y: -217.71686}
+  m_AnchoredPosition: {x: 998.3103, y: -217.71683}
   m_SizeDelta: {x: 1996.6205, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &962716868
@@ -9082,6 +9088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79656e0dd5367a44ab75adf2c9b57a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Folder: 
   size: 200
   hashKey: 1
 --- !u!1 &1453085464
@@ -11545,8 +11552,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 36342835}
   m_HandleRect: {fileID: 36342834}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.9601087
+  m_Value: -0.0000015326234
+  m_Size: 0.96010864
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13136,6 +13143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5ac0bbfec8ab74f8d7d7e5226a9312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Folder: 
   size: 10
   hashKey: 0
 --- !u!1 &1926845051
@@ -13266,6 +13274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b9ffe9411b26649b920fa13bbef4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Folder: 
   size: 50
   hashKey: 0
   NPCsRawPath: npcs
@@ -13615,6 +13624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da2c0f8bf0e9494f90b8c06caf806b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Folder: 
   size: 10
   hashKey: 0
 --- !u!1 &1982510633
@@ -14471,9 +14481,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8098c7b31d671ee4b9f11de8067571a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Folder: dialogue/lines
   size: 50
   hashKey: 0
-  DialogueLinePath: dialogue/lines
 --- !u!1001 &2111121305580276139
 PrefabInstance:
   m_ObjectHideFlags: 0

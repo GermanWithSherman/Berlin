@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeightedList<T>
+public class WeightedList<T> : IModable
 {
     private struct WeightedListItem<S>
     {
@@ -52,4 +52,13 @@ public class WeightedList<T>
 
     }
 
+    public void mod(IModable modable)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IModable copyDeep()
+    {
+        throw new NotImplementedException();
+    }
 }

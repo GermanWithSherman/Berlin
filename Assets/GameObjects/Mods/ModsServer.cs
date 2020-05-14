@@ -19,12 +19,6 @@ public class ModsServer
         get
         {
             return _modLoadOrder;
-            /*var result = new List<Mod>();
-            foreach (string id in _activatedModIds)
-            {
-                result.Add(_mods[id]);
-            }
-            return result;*/
         }
     }
 
@@ -54,37 +48,10 @@ public class ModsServer
         }
     }
 
-    public ModsServer(string modsDictPath)
-    {
-        if (!Directory.Exists(modsDictPath))
-            return;
-
-        _modsDictPath = modsDictPath;
-
-        /*string[] modFolders  = Directory.GetDirectories(modsDictPath);
-
-        foreach (string modFolder in modFolders)
-        {
-            modLoad(modFolder);
-        }
-
-        foreach(Mod mod in _mods.Values)
-        {
-            modLinkDependencies(mod);
-        }
-
-        _modLoadOrder = DependencySorter.Sort(ActivatedMods);
-
-        foreach (Mod mod in _modLoadOrder)
-        {
-            Debug.Log($"Mod activated: {mod.ID}");
-        }*/
-    }
 
     public ModsServer(string modsDictPath, Preferences preferences)
     {
         _modsDictPath = modsDictPath;
-        //_activatedModIds = preferences.ActivatedModIDs;
 
         string[] modFolders = Directory.GetDirectories(_modsDictPath);
 
@@ -93,21 +60,15 @@ public class ModsServer
             modLoad(modFolder);
         }
 
-        //List<string> _activatedModIds = new List<string>();
         var activatedMods = new List<Mod>();
 
         foreach (Mod mod in _mods.Values)
         {
             if (modLinkDependencies(mod) && preferences.ActivatedModIDs.Contains(mod.ID) && !activatedMods.Contains(mod))
-                //_activatedModIds.Add(mod.ID);
                 activatedMods.Add(mod);
         }
 
 
-        /*foreach (string id in _activatedModIds)
-        {
-            activatedMods.Add(_mods[id]);
-        }*/
 
         try
         {
@@ -138,19 +99,9 @@ public class ModsServer
         _installedModIds.Add(mod.ID);
     }
     
-    /*private void modActivate(Mod mod)
-    {
-        if (_activatedModIds.Contains(mod.ID))
-            return;
-        _activatedModIds.Add(mod.ID);
-    }*/
 
     private bool modLinkDependencies(Mod mod)
     {
-        /*if (mod.linkDependencies(_mods))
-        {
-            modActivate(mod);
-        }*/
         return mod.linkDependencies(_mods);
     }
 

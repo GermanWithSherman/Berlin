@@ -4,24 +4,26 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class DialogueTopicLibrary
+public class DialogueTopicLibrary : Library<DialogueTopic>
 {
-    private readonly Dictionary<string, DialogueTopic> dict = new Dictionary<string, DialogueTopic>();
-
+    
     public DialogueTopic this[string key]
     {
-        get => dict[key];
+        get => _dict[key];
     }
 
-    public DialogueTopicLibrary(string path)
+    public DialogueTopicLibrary(string path, IEnumerable<string> modsPaths, bool loadInstantly = false)
     {
-        loadFromFolder(path);
+        this.path = path;
+        this.modsPaths = modsPaths;
+        if(loadInstantly)
+            load(path, modsPaths);
     }
 
     public List<DialogueTopic> getTopicsByNPC(NPC npc)
     {
         var result = new List<DialogueTopic>();
-        foreach (DialogueTopic topic in dict.Values)
+        foreach (DialogueTopic topic in _dict.Values)
         {
             if (topic.NPCFilter.isValid(npc))
                 result.Add(topic);
@@ -29,29 +31,26 @@ public class DialogueTopicLibrary
         return result;
     }
 
-    private void loadFromFolder(string path)
+    protected override ModableDictionary<DialogueTopic> loadFromFolder(string path)
     {
-        if (!Directory.Exists(path))
+        //_dict = new Dictionary<string, DialogueTopic>();
+        var result = new ModableDictionary<DialogueTopic>();
+
+        ModableDictionary<ModableDictionary<DialogueTopic>> dict = loadFromFolder<ModableDictionary<DialogueTopic>>(path);
+
+       
+
+        foreach(KeyValuePair<string, ModableDictionary<DialogueTopic>> kv in dict)
         {
-            Debug.LogError($"Path {path} does not exist");
-            return;
-        }
-
-        string[] filePaths = Directory.GetFiles(path);
-
-        foreach (string filePath in filePaths)
-        {
-
-            JObject deserializationData = GameManager.File2Data(filePath);
-            IDictionary<string,DialogueTopic> topics = deserializationData.ToObject<Dictionary<string, DialogueTopic>>();
-
-            foreach (KeyValuePair<string, DialogueTopic> kv in topics)
+            foreach (KeyValuePair<string, DialogueTopic> kv2 in kv.Value)
             {
-                var topic = kv.Value;
-                topic.ID = kv.Key;
-                dict.Add(kv.Key,topic);
+                var topic = kv2.Value;
+                topic.ID = kv2.Key;
+                result.Add(kv2.Key, topic);
             }
         }
 
+        return result;
     }
+
 }
