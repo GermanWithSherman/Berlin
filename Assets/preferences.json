@@ -1,0 +1,8 @@
+{
+  "DataPath": "I:/ownCloud/Development/Unity/Berlin/Data",
+  "SavePath": "I:/ownCloud/Development/Unity/Berlin-Savegames",
+  "ActivatedModIDs": [
+    "testMod2",
+    "testMod"
+  ]
+}

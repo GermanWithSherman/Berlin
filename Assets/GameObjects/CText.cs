@@ -39,7 +39,7 @@ public class CText : IModable
         return cText.Text();
     }
 
-    public string Text(GameData gameData)
+    public string Text(Data gameData)
     {
         if (!Condition.evaluate(gameData))
             return "";
@@ -65,7 +65,7 @@ public class CText : IModable
         return "FORMAT INVALID";
     }
 
-    private static string parse(string s, GameData gameData)
+    private static string parse(string s, Data gameData)
     {
         string result = String.Empty;
         string pattern = @"{([\w\.]*)(?>\|(\w+))?}";

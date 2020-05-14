@@ -28,7 +28,7 @@ public class DialogueLineCache : Cache<DialogueStages>
         }
         catch (FileNotFoundException)
         {
-            throw new GameException($"ShopType {key} does not exist");
+            throw new GameException($"DialogueLine {key} does not exist");
         }
     }
 

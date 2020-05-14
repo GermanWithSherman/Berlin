@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,21 @@ public abstract class Data
     protected abstract dynamic get(string key);
 
     protected abstract void set(string key, dynamic value);
+
+    public virtual bool tryGetValue(string key, out dynamic result)
+    {
+        result = get(key);
+        
+
+        if (result is null)
+            return false;
+
+        if (result is string && String.IsNullOrEmpty(result))
+            return false;
+
+
+        return true;
+    }
 
     public string interpolate(string template)
     {

@@ -20,7 +20,9 @@ public class DialogueLine : IModable, IPrioritizable
 
     public ModableDictionary<DialogueOption> Options = new ModableDictionary<DialogueOption>();
 
-    public CText Text;
+    [JsonProperty("Text")]
+    private CText _text;
+    
 
     public IModable copyDeep()
     {
@@ -29,7 +31,7 @@ public class DialogueLine : IModable, IPrioritizable
         result.TopicID = Modable.copyDeep(TopicID);
         result.Priority = Modable.copyDeep(Priority);
         result.Options = Modable.copyDeep(Options);
-        result.Text = Modable.copyDeep(Text);
+        result._text = Modable.copyDeep(_text);
 
         return result;
     }
@@ -42,6 +44,11 @@ public class DialogueLine : IModable, IPrioritizable
     public void mod(IModable modable)
     {
         throw new System.NotImplementedException();
+    }
+
+    public string Text(Data data)
+    {
+        return _text.Text(data);
     }
 }
 

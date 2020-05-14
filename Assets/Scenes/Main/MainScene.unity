@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1680595064}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0
+  m_Size: 0.9925093
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6642,7 +6642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 998.31024, y: -124.0232}
+  m_AnchoredPosition: {x: 998.31024, y: -217.71686}
   m_SizeDelta: {x: 1996.6205, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &962716868
@@ -9865,7 +9865,6 @@ MonoBehaviour:
   WeightedStringListCache: {fileID: 99735054}
   NPCsLibrary: {fileID: 1932308589}
   DialogServer: {fileID: 1728593861}
-  DataPath: I:\ownCloud\Development\Unity\Berlin\Data
   QuicksavePath: I:\ownCloud\Development\Unity\Berlin-Savegames\quicksave.json
   TextBoxMain: {fileID: 631625491}
   UINPCsPresentContainer: {fileID: 1584895295}

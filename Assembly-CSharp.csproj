@@ -102,6 +102,7 @@
     <Compile Include="Assets\GameObjects\Condition.cs" />
     <Compile Include="Assets\GameObjects\Conditional.cs" />
     <Compile Include="Assets\GameObjects\Data.cs" />
+    <Compile Include="Assets\GameObjects\DataComposed.cs" />
     <Compile Include="Assets\GameObjects\Dialogue.cs" />
     <Compile Include="Assets\GameObjects\Dialogue\UIDialogue.cs" />
     <Compile Include="Assets\GameObjects\Dialogue\UIDialogueOption.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Assets\GameObjects\Mods\Mod.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModManifest.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModableDictionary.cs" />
+    <Compile Include="Assets\GameObjects\Mods\ModableList.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModsServer.cs" />
     <Compile Include="Assets\GameObjects\NPC.cs" />
     <Compile Include="Assets\GameObjects\NPCFilter.cs" />
@@ -143,6 +145,7 @@
     <Compile Include="Assets\GameObjects\Outfit.cs" />
     <Compile Include="Assets\GameObjects\OutfitRequirement.cs" />
     <Compile Include="Assets\GameObjects\PC.cs" />
+    <Compile Include="Assets\GameObjects\Preferences.cs" />
     <Compile Include="Assets\GameObjects\Schedule.cs" />
     <Compile Include="Assets\GameObjects\Schedules.cs" />
     <Compile Include="Assets\GameObjects\Service.cs" />

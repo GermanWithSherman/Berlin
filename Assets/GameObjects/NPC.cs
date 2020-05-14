@@ -208,6 +208,8 @@ public class NPC : Data, IInheritable, IModable
 
     public bool isInheritanceResolved() => inheritanceResolved;
 
+    
+
     /*
 
     private void mod(NPC original, NPC mod)

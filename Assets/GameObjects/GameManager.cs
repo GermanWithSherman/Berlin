@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public Preferences Preferences;
+
     public GameData GameData = new GameData();
 
     public PC PC
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour
     public InterruptServer InterruptServer;
     public ModsServer ModsServer;
 
-    public string DataPath;
+    public string DataPath { get => Preferences.DataPath; }
 
     public string QuicksavePath;
 
@@ -98,17 +100,39 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null) { Instance = this; } else { Debug.LogError("Error: multiple " + this + " in scene!"); }
+
+        _preferencesPath = Path.Combine(Application.dataPath, "preferences.json");
+        preferencesLoad();
+    }
+
+    private string _preferencesPath;
+
+    private void preferencesLoad() => preferencesLoad(_preferencesPath);
+
+    private void preferencesLoad(string path)
+    {
+        JObject jObject = File2Data(path);
+        Preferences = jObject.ToObject<Preferences>();
+
+        Preferences.OnUpdate = delegate { preferencesSave(path);  };
+    }
+
+    public void preferencesSave() => preferencesSave(_preferencesPath);
+
+    private void preferencesSave(string path)
+    {
+        Data2File(Preferences, path);
     }
 
     void Start()
     {
+
         DialogueTopicLibrary = new DialogueTopicLibrary(path("dialogue/topics"));
         FunctionsLibrary = new FunctionsLibrary(path("functions"));
         ItemsLibrary = new ItemsLibrary(path("items"));
-        //NPCsLibrary = new NPCsLibrary(path("npcs"));
 
         InterruptServer = new InterruptServer(path("interrupts"));
-        ModsServer = new ModsServer(path("mods"));
+        ModsServer = new ModsServer(path("mods"), Preferences);
 
         StartMenu.show();
 
@@ -158,6 +182,15 @@ public class GameManager : MonoBehaviour
         uiUpdate();
     }
 
+    public static void Data2File(object value, string path)
+    {
+        string json = JsonConvert.SerializeObject(value, Formatting.Indented, new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        });
+        System.IO.File.WriteAllText(path, json);
+    }
+
     public static JObject File2Data(string path)
     {
         string jsonString = System.IO.File.ReadAllText(path);
@@ -200,11 +233,12 @@ public class GameManager : MonoBehaviour
 
     public void gameSave(string path)
     {
-        string json = JsonConvert.SerializeObject(GameData, Formatting.Indented, new JsonSerializerSettings
+        /*string json = JsonConvert.SerializeObject(GameData, Formatting.Indented, new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore
         });
-        System.IO.File.WriteAllText(path, json);
+        System.IO.File.WriteAllText(path, json);*/
+        Data2File(GameData,path);
         Debug.Log($"Game save at {path}");
 
     }
@@ -260,69 +294,6 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    /*public IEnumerable<NPC> npcsPresent(SubLocation subLocation, DateTime dateTime)
-    {
-        List<NPC> result = new List<NPC>();
-
-        IEnumerable<string> npcIds = NPCsRawLibrary.Ids;
-
-        foreach(string npcId in npcIds)
-        {
-            NPC npc;
-            IEnumerable<Schedule> schedules;
-            bool isRaw = false;
-            if (GameData.CharacterData.has(npcId))
-                npc = GameData.CharacterData[npcId];
-            else
-            {
-                npc = NPCsRawLibrary[npcId];
-                isRaw = true;
-            }
-            schedules = npc.Schedules;
-
-            int time = dateTime.Minute + dateTime.Hour * 100;
-            int day = (int)dateTime.DayOfWeek;
-
-            foreach(Schedule schedule in schedules)
-            {
-                if(schedule.d.Contains(day) && time >= schedule.start && time <= schedule.end)
-                {
-                    if (schedule.l == subLocation.id)
-                    {
-                        if (isRaw)
-                        {
-                            npc = npcGenerate(npcId);
-                        }
-                        result.Add(npc);
-                    }
-                    //else: the character is scheduled to be somewhere else
-                    break;
-                    
-                }
-            }
-        }
-
-        return result;
-    }*/
-
-    /*private NPC npcGenerate(string id)
-    {
-        //NPCRaw npcRaw = NPCsRawLibrary[id];
-        //NPC npcGenerated = null;
-
-        //npcGenerated = npcRaw.generate();
-        //npcGenerated.id = id;
-
-        NPC npcGenerated = NPCTemplateCache[]
-        GameData.CharacterData.NPCs.Add(id, npcGenerated);
-
-        return npcGenerated;
-    }*/
-
-    /*public void optionsSet(IEnumerable<Option> options)
-    {
-        OptionsContainer.optionsSet(options);
-    }*/
 
     public void outfitWindowShow(OutfitRequirement outfitRequirement)
     {

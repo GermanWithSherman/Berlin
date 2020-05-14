@@ -18,7 +18,7 @@ public class UIDialogue : MonoBehaviour
     public Transform TopicListTransform;
 
 
-
+    public Data Data; //Data used to display text
     
     void Start()
     {
@@ -42,7 +42,7 @@ public class UIDialogue : MonoBehaviour
 
     public void lineShow(DialogueLine line)
     {
-        string t = line.Text.Text();
+        string t = line.Text(Data);
         Text.text += t + "\n\n";
 
         optionListShow(line.Options.Values);
@@ -75,11 +75,20 @@ public class UIDialogue : MonoBehaviour
         }
     }
 
-    
+    private void setData(NPC npc)
+    {
+        Dictionary<string, Data> dict = new Dictionary<string, Data>();
+        dict["_NPC1"] = npc;
+        dict["_PC"] = GameManager.Instance.PC;
+
+        Data = new DataComposed(dict);
+    }
 
     public void show(NPC npc)
     {
         _npc = npc;
+
+        setData(_npc);
 
         List<DialogueTopic> dialogueTopics = GameManager.Instance.DialogueTopicLibrary.getTopicsByNPC(_npc);
 

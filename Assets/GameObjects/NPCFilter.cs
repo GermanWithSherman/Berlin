@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCFilter : IModable
 {
-    public ModableDictionary<string> IDs = new ModableDictionary<string>();
+    public ModableStringList IDs = new ModableStringList();
 
     public IModable copyDeep()
     {
@@ -22,7 +22,7 @@ public class NPCFilter : IModable
 
     public bool isValid(NPC npc)
     {
-        if (IDs.Count > 0 && !IDs.ContainsValue(npc.id))
+        if (IDs.Count > 0 && !IDs.Contains(npc.id))
             return false;
         return true;
 
