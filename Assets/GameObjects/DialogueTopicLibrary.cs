@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class DialogueTopicLibrary : Library<DialogueTopic>
 {
-    
+
+    private List<DialogueTopic> _greetings;
+
     public DialogueTopic this[string key]
     {
         get => _dict[key];
@@ -20,20 +22,41 @@ public class DialogueTopicLibrary : Library<DialogueTopic>
             load(path, modsPaths);
     }
 
+    public DialogueTopic getGreetingTopicByNPC(NPC npc)
+    {
+        foreach (DialogueTopic topic in _greetings)
+        {
+            if (topic.NPCFilter.isValid(npc))
+                return topic;
+        }
+        return null;
+    }
+
     public List<DialogueTopic> getTopicsByNPC(NPC npc)
     {
         var result = new List<DialogueTopic>();
         foreach (DialogueTopic topic in _dict.Values)
         {
-            if (topic.NPCFilter.isValid(npc))
+            if (!topic.IsGreeting && topic.NPCFilter.isValid(npc))
                 result.Add(topic);
         }
         return result;
     }
 
+    protected override void load(string path, IEnumerable<string> modPaths)
+    {
+        base.load(path,modPaths);
+        _greetings = new List<DialogueTopic>();
+        foreach (DialogueTopic topic in _dict.Values)
+        {
+            if (topic.IsGreeting)
+                _greetings.Add(topic);
+        }
+        Prioritizable.Sort(_greetings);
+    }
+
     protected override ModableDictionary<DialogueTopic> loadFromFolder(string path)
     {
-        //_dict = new Dictionary<string, DialogueTopic>();
         var result = new ModableDictionary<DialogueTopic>();
 
         ModableDictionary<ModableDictionary<DialogueTopic>> dict = loadFromFolder<ModableDictionary<DialogueTopic>>(path);

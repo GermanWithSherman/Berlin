@@ -95,11 +95,15 @@ public class GameManager : MonoBehaviour
 
     public StartMenu StartMenu;
 
+    public GameObject LoadingScreen;
+
     private bool uiUpdatePending;
     public List<UIUpdateListener> updateListeners;
 
     private void Awake()
     {
+        LoadingScreen.SetActive(true);
+
         if (Instance == null) { Instance = this; } else { Debug.LogError("Error: multiple " + this + " in scene!"); }
 
         _preferencesPath = Path.Combine(Application.dataPath, "preferences.json");
@@ -149,6 +153,7 @@ public class GameManager : MonoBehaviour
 
         StartMenu.show();
 
+        LoadingScreen.SetActive(false);
     }
 
     void Update()

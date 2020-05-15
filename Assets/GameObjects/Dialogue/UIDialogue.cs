@@ -20,10 +20,6 @@ public class UIDialogue : MonoBehaviour
 
     public Data Data; //Data used to display text
     
-    void Start()
-    {
-        Text.text = "";
-    }
 
     public void close()
     {
@@ -90,10 +86,14 @@ public class UIDialogue : MonoBehaviour
 
         setData(_npc);
 
+        Text.text = "";
         List<DialogueTopic> dialogueTopics = GameManager.Instance.DialogueTopicLibrary.getTopicsByNPC(_npc);
-
         topicListShow(dialogueTopics);
         optionListClear();
+
+        DialogueTopic greetingTopic = GameManager.Instance.DialogueTopicLibrary.getGreetingTopicByNPC(_npc);
+        if (greetingTopic != null)
+            topicShow(greetingTopic);
 
         gameObject.SetActive(true);
 

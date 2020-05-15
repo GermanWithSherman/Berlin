@@ -135,6 +135,8 @@ public class DialogueTopic : IModable, IPrioritizable
     [JsonIgnore]
     public string ID;
 
+    public bool IsGreeting = false;
+
     public NPCFilter NPCFilter = new NPCFilter();
 
     public int Priority = 0;
