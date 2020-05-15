@@ -4,17 +4,57 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class InterruptServer
+public class InterruptServer : Library<Interrupt>
 {
 
-    private Dictionary<string, List<Interrupt>> interrupts = new Dictionary<string, List<Interrupt>>();
+    private Dictionary<string, List<Interrupt>> interruptsByType = new Dictionary<string, List<Interrupt>>();
 
-    public InterruptServer(string path)
+    public InterruptServer(string path, IEnumerable<string> modsPaths, bool loadInstantly = false)
     {
-        loadFromFolder(path);
+        this.path = path;
+        this.modsPaths = modsPaths;
+        if (loadInstantly)
+            load(path, modsPaths);
     }
 
-    private void loadFromFolder(string path)
+    protected override void load(string path, IEnumerable<string> modPaths)
+    {
+        base.load(path, modPaths);
+
+        foreach (Interrupt interrupt in _dict.Values)
+        {
+            foreach (string listenId in interrupt.listen)
+            {
+                if (!interruptsByType.ContainsKey(listenId))
+                    interruptsByType[listenId] = new List<Interrupt>();
+                interruptsByType[listenId].Add(interrupt);
+            }
+        }
+    }
+
+    protected override ModableDictionary<Interrupt> loadFromFolder(string path)
+    {
+        var result = new ModableDictionary<Interrupt>();
+
+        ModableDictionary<ModableDictionary<Interrupt>> dict = loadFromFolder<ModableDictionary<Interrupt>>(path);
+
+
+
+        foreach (KeyValuePair<string, ModableDictionary<Interrupt>> kv in dict)
+        {
+            foreach (KeyValuePair<string, Interrupt> kv2 in kv.Value)
+            {
+                var interrupt = kv2.Value;
+                interrupt.id = kv2.Key;
+                result.Add(kv2.Key, interrupt);
+
+            }
+        }
+
+        return result;
+    }
+
+    /*private void loadFromFolder(string path)
     {
         if (!Directory.Exists(path))
         {
@@ -50,13 +90,13 @@ public class InterruptServer
             list.Sort(Interrupt.ComparePriorities);
         }
 
-    }
+    }*/
 
     private Interrupt selectedInterrupt(string keyword)
     {
-        if (!interrupts.ContainsKey(keyword))
+        if (!interruptsByType.ContainsKey(keyword))
             return null;
-        List<Interrupt> list = interrupts[keyword];
+        List<Interrupt> list = interruptsByType[keyword];
 
         foreach (Interrupt interrupt in list)
         {

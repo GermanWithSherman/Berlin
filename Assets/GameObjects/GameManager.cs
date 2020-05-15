@@ -134,16 +134,20 @@ public class GameManager : MonoBehaviour
         Thread dialogueTopicLibraryLoadThread = DialogueTopicLibrary.loadThreaded();
 
         FunctionsLibrary = new FunctionsLibrary(path("functions"), pathsMods(modsPaths, "functions"));
-        ItemsLibrary = new ItemsLibrary(path("items"));
+        Thread functionsLibraryLoadThread = FunctionsLibrary.loadThreaded();
 
-        InterruptServer = new InterruptServer(path("interrupts"));
+        ItemsLibrary = new ItemsLibrary(path("items"), pathsMods(modsPaths, "items"));
+        Thread itemsLibraryLoadThread = ItemsLibrary.loadThreaded();
 
+        InterruptServer = new InterruptServer(path("interrupts"), pathsMods(modsPaths, "interrupts"));
+        Thread interruptServerLoadThread = InterruptServer.loadThreaded();
 
         dialogueTopicLibraryLoadThread.Join();
+        functionsLibraryLoadThread.Join();
+        itemsLibraryLoadThread.Join();
+        interruptServerLoadThread.Join();
 
         StartMenu.show();
-
-
 
     }
 

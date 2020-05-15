@@ -25,7 +25,7 @@ public abstract class Cache<T> : MonoBehaviour where T : IModable
         return loadFromFileWithMods(key);
     }
 
-    private void add(string key)
+    protected void add(string key)
     {
         string data = key;
 
@@ -103,7 +103,7 @@ public abstract class Cache<T> : MonoBehaviour where T : IModable
 
             return obj;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             //Debug.LogError(e);
             return default;

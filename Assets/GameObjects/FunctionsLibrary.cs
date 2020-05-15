@@ -9,10 +9,12 @@ public class FunctionsLibrary : Library<Conditional<string>>
 {
     //private Dictionary<string, Conditional<string>> stringFunctions = new Dictionary<string, Conditional<string>>();
 
-    public FunctionsLibrary(string path, IEnumerable<string> modsPaths)
+    public FunctionsLibrary(string path, IEnumerable<string> modsPaths, bool loadInstantly = false)
     {
-        //loadFromFolder(path);
-        load(path, modsPaths);
+        this.path = path;
+        this.modsPaths = modsPaths;
+        if (loadInstantly)
+            load(path, modsPaths);
     }
 
 

@@ -3,7 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ItemsFile
+public class ItemsFile : IModable
 {
-    public Dictionary<string, Item> items = new Dictionary<string, Item>();
+    public ModableDictionary<Item> Items = new ModableDictionary<Item>();
+
+    public IModable copyDeep()
+    {
+        var result = new ItemsFile();
+        result.Items = Modable.copyDeep(Items);
+        return result;
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new System.NotImplementedException();
+    }
 }

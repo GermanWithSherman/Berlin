@@ -5,38 +5,52 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class ItemsLibrary
+public class ItemsLibrary : Library<Item>
 {
-    private Dictionary<string, Item> dict = new Dictionary<string, Item>();
+    //private Dictionary<string, Item> dict = new Dictionary<string, Item>();
 
     public Item this[string key]
     {
-        get => dict[key];
+        get => _dict[key];
     }
 
-    public ItemsLibrary(string path)
+    public ItemsLibrary(string path, IEnumerable<string> modsPaths, bool loadInstantly = false)
     {
-        loadFromFolder(path);
+        this.path = path;
+        this.modsPaths = modsPaths;
+        if (loadInstantly)
+            load(path, modsPaths);
     }
 
-    private void add(ItemsFile itemsFile)
-    {
-        foreach(KeyValuePair<string,Item> keyValuePair in itemsFile.items)
-        {
-            Item item = keyValuePair.Value;
-            string id = keyValuePair.Key;
-            item.id = id;
-            dict[id] = item;
-        }
-    }
 
     public IList<Item> items()
     {
-        return dict.Values.ToList();
+        return _dict.Values.ToList();
 
     }
 
-    private void loadFromFolder(string path)
+    protected override ModableDictionary<Item> loadFromFolder(string path)
+    {
+        var result = new ModableDictionary<Item>();
+
+        ModableDictionary<ItemsFile> dict = loadFromFolder<ItemsFile>(path);
+
+
+
+        foreach (KeyValuePair<string, ItemsFile> kv in dict)
+        {
+            foreach (KeyValuePair<string, Item> kv2 in kv.Value.Items)
+            {
+                var item = kv2.Value;
+                item.id = kv2.Key;
+                result.Add(kv2.Key, item);
+            }
+        }
+
+        return result;
+    }
+
+    /*private void loadFromFolder(string path)
     {
         if (!Directory.Exists(path))
         {
@@ -55,5 +69,5 @@ public class ItemsLibrary
             add(itemsFile);
         }
 
-    }
+    }*/
 }

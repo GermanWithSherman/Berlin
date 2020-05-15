@@ -16,16 +16,7 @@ public class ModableTexture : IModable
         {
             if(_texture == null)
             {
-                if (File.Exists(Path))
-                {
-                    byte[] fileData = File.ReadAllBytes(Path);
-                    _texture = new Texture2D(2, 2);
-                    _texture.LoadImage(fileData);
-                }
-                else
-                {
-                    return GameManager.Instance.TextureCache.MissingTexture;
-                }
+                initialize();
             }
             return _texture;
         }
@@ -47,6 +38,20 @@ public class ModableTexture : IModable
         var result = new ModableTexture();
         result.Path = Modable.copyDeep(Path);
         return result;
+    }
+
+    internal void initialize()
+    {
+        if (File.Exists(Path))
+        {
+            byte[] fileData = File.ReadAllBytes(Path);
+            _texture = new Texture2D(2, 2);
+            _texture.LoadImage(fileData);
+        }
+        else
+        {
+            _texture = GameManager.Instance.TextureCache.MissingTexture;
+        }
     }
 
     public void mod(IModable modable)

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interrupt
+public class Interrupt : IModable
 {
     [JsonIgnore]
     public string id;
@@ -51,5 +51,15 @@ public class Interrupt
         if (GameManager.Instance.GameData.Interrupts.remainingCooldown(this) > 0)
             return false;
         return conditionCheck();
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public IModable copyDeep()
+    {
+        throw new System.NotImplementedException();
     }
 }

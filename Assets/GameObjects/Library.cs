@@ -21,7 +21,7 @@ public abstract class Library<T> where T : IModable
 
     public void load() => load(path, modsPaths);
 
-    protected void load(string path, IEnumerable<string> modPaths)
+    protected virtual void load(string path, IEnumerable<string> modPaths)
     {
         ModableDictionary<T> original = loadFromFolder(path);
 
