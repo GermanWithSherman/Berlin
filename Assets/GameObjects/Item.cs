@@ -20,7 +20,7 @@ public class Item : IModable
 
     public int Skimpiness = 0;
 
-    public string Gender = "f"; //f, fm, m
+    public string Gender = "fm"; //f, fm, m
 
     public Texture Texture
     {

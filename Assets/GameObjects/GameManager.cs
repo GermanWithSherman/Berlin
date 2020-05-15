@@ -261,12 +261,14 @@ public class GameManager : MonoBehaviour
 
     public void locationGoto(SubLocation subLocation)
     {
-        subLocation.execute(this);
+        
 
         GameData.currentEventStage = null;
         GameData.currentLocation = subLocation;
 
         npcsPresentUpdate();
+
+        subLocation.execute(this);
 
         uiUpdate();
     }

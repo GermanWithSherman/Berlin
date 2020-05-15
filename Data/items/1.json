@@ -2,51 +2,80 @@
     "items":{
         "bra1":{
             "Label":"Bra 1",
-            "TexturePath":"items/bra1.jpg",
+            "TexturePath":"items/bras/bra1.jpg",
             "Price": 1000,
-            "Slot": "Bra"
+            "Slot": "Bra",
+            "Gender": "f"
         },
         "dress_1":{
             "Label":"Dress 1",
-            "TexturePath":"items/dressA(0).jpg",
+            "TexturePath":"items/clothes/f_dress/dressA(0).jpg",
             "Price": 3000,
-            "Slot": "Clothes"
+            "Slot": "Clothes",
+            "Gender": "f"
         },
         "dress_2":{
             "Label":"Dress 2",
-            "TexturePath":"items/dressA(1).jpg",
+            "TexturePath":"items/clothes/f_dress/dressA(1).jpg",
             "Price": 5000,
-            "Slot": "Clothes"
+            "Slot": "Clothes",
+            "Gender": "f"
         },
         "dress_3":{
             "Label":"Dress 3",
-            "TexturePath":"items/dressA(2).jpg",
+            "TexturePath":"items/clothes/f_dress/dressA(2).jpg",
             "Price": 4444,
-            "Slot": "Clothes"
+            "Slot": "Clothes",
+            "Gender": "f"
         },
         "dress_4":{
             "Label":"Dress 4",
-            "TexturePath":"items/dressA(3).jpg",
+            "TexturePath":"items/clothes/f_dress/dressA(3).jpg",
             "Price": 1111,
-            "Slot": "Clothes"
+            "Slot": "Clothes",
+            "Gender": "f"
         },
         "panties_1":{
             "Label":"Panties 1",
-            "TexturePath":"items/panties1.jpg",
+            "TexturePath":"items/panties/panties1.jpg",
             "Price": 1000,
-            "Slot": "Panties"
+            "Slot": "Panties",
+            "Gender": "f"
         },
         "shoes_1":{
             "Label":"Shoes 1",
-            "TexturePath":"items/s(21).jpg",
+            "TexturePath":"items/shoes/f_sandals/s(21).jpg",
             "Price": 1499,
-            "Slot": "Shoes"
+            "Slot": "Shoes",
+            "Gender": "f"
         },
         "shoes_2":{
             "Label":"Shoes 2",
-            "TexturePath":"items/s(22).jpg",
+            "TexturePath":"items/shoes/f_sandals/s(22).jpg",
             "Price": 1999,
-            "Slot": "Shoes"
+            "Slot": "Shoes",
+            "Gender": "f"
+        },
+        "underpants_1":{
+            "Label":"Blue Underpants",
+            "TexturePath":"items/underpants/1.jpg",
+            "Price": 3000,
+            "Slot": "Panties",
+            "Gender": "m"
+        },
+        "shoes_business_1":{
+            "Label":"Black Businessshoes",
+            "TexturePath":"items/shoes/m_business/1.jpg",
+            "Price": 2500,
+            "Slot": "Shoes",
+            "Gender": "m"
+        },
+        "clothes_m_casual_1":{
+            "Label":"Crew-neck Sweater and Brown Pants",
+            "TexturePath":"items/clothes/m_casual/1.jpg",
+            "Price": 6000,
+            "Slot": "Clothes",
+            "Gender": "m"
         }
     }
 }

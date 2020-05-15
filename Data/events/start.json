@@ -10,11 +10,7 @@
                     "Type": "GotoLocation",
                     "LocationID":"start."
                 },
-                "clothesAdd":{
-                    "Type": "ItemAdd",
-                    "ShopID":"testShoes",
-                    "Equip":true
-                },
+                
                 "SET":{
                     "Type": "Set",
                     "Values":{

@@ -124,7 +124,31 @@
                             "Home":{"Text": "<align=\"center\"><b><size=200%>Home</size></b></align>\n<align=\"left\">You are living at home with your family.</align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":3}}}},
                             "Hobo":{"Text": "<align=\"center\"><b><size=200%>Homeless</size></b></align>\n<align=\"left\">You are currently homeless.\n<color=\"orange\">Challenging start</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>", "State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":5}}}}
                         },
-                        "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"home_parents."}}
+                        "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Finish"}}
+                    }
+                }
+            }
+        },
+        "skipIntro_Finish":{
+            "onShow":{
+                "goto":{"Type":"GotoLocation","LocationID":"home_parents."},
+                "clothesFemale":{
+                    "Type":"Conditional",
+                    "Condition": "PC.genderVisible=\"f\"",
+                    "Commands":{
+                        "Bra":{"Type":"ItemAdd","ShopID":"all_bras_f","Equip":true},
+                        "Clothes":{"Type":"ItemAdd","ShopID":"all_clothes_f","Equip":true},
+                        "Panties":{"Type":"ItemAdd","ShopID":"all_panties_f","Equip":true},
+                        "Shoes":{"Type":"ItemAdd","ShopID":"all_shoes_f","Equip":true}
+                    }
+                },
+                "clothesMale":{
+                    "Type":"Conditional",
+                    "Condition": "PC.genderVisible=\"m\"",
+                    "Commands":{
+                        "Clothes":{"Type":"ItemAdd","ShopID":"all_clothes_m","Equip":true},
+                        "Underwear":{"Type":"ItemAdd","ShopID":"all_panties_m","Equip":true},
+                        "Shoes":{"Type":"ItemAdd","ShopID":"all_shoes_m","Equip":true}
                     }
                 }
             }
