@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "SubLocation",
+    "description": "SubLocation schema.",
+    "default": {},
+    "examples": [
+        
+    ],
+    "required": [
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "Label": { "$ref": "./CText.json" },
+        "Inherit": {"type":"string", "pattern": "^[^\\.]+\\.[^\\.]*$"},
+        "Text": { "$ref": "./CText.json" },
+        "TexturePath" : { "$ref": "./ConditionalString.json" },
+        "LocationConnections":{
+            "additionalProperties": false,
+            "patternProperties": {
+                "^.*$": {
+                    "$ref": "./LocationConnection.json"
+                }
+            }   
+        },
+        "Options":{
+            "additionalProperties": false,
+            "patternProperties": {
+                "^.*$": {
+                    "$ref": "./Option.json"
+                }
+            }   
+        }
+    }
+}

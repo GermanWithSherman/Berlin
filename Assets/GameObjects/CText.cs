@@ -8,7 +8,7 @@ using UnityEngine;
 [JsonConverter(typeof(CTextConverter))]
 public class CText : IModable
 {
-    public string V; //Plain Text
+    public string Value; //Plain Text
 
     public ModableDictionary<CText> D = new ModableDictionary<CText>();
 
@@ -24,7 +24,7 @@ public class CText : IModable
 
     public CText(string s)
     {
-        V = s;
+        Value = s;
     }
 
     public string Text()
@@ -46,8 +46,8 @@ public class CText : IModable
 
         List<string> result = new List<string>();
 
-        if (!String.IsNullOrEmpty(V))
-            result.Add(parse(V,gameData));
+        if (!String.IsNullOrEmpty(Value))
+            result.Add(parse(Value, gameData));
 
         foreach (CText cText in D.Values)
             result.Add(cText.Text(gameData));
@@ -95,7 +95,7 @@ public class CText : IModable
 
     public void mod(CText modable)
     {
-        V = Modable.mod(V, modable.V);
+        Value = Modable.mod(Value, modable.Value);
         D = Modable.mod(D, modable.D);
         C = Modable.mod(C, modable.C);
     }
@@ -115,7 +115,7 @@ public class CText : IModable
     public IModable copyDeep()
     {
         var result = new CText();
-        result.V = Modable.copyDeep(V);
+        result.Value = Modable.copyDeep(Value);
         result.D = Modable.copyDeep(D);
         result.C = Modable.copyDeep(C);
         return result;

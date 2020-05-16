@@ -1,13 +1,14 @@
 {
+    "$schema": "../../../_schema/Location.json",
     "subLocations":{
         "main":{
             "Label":"Hallway",
             "Text":{
-                "V": "Hallway"
+                "Value": "Hallway"
             },
             "TexturePath":{
                 "Values":{
-                    "default":{"V":"locations/apartments/testHallway.jpg"}
+                    "default":{"Value":"locations/apartments/testHallway.jpg"}
                 }
             }
         }

@@ -1,30 +1,27 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "type": [
-        "object",
-        "string"
+        "object"
     ],
-    "title": "CText",
-    "description": "CText schema.",
+    "title": "Value<bool>",
+    "description": "Value<bool> schema.",
     "default": {},
     "examples": [
-        {
-            "Value": "Subway Station"
-        }
+
     ],
     "required": [
     ],
     "additionalProperties": false,
     
     "properties": {
+        "Condition":{"type":"string"},
         "Value": {
-            "$id": "#/properties/Text/properties/Value",
-            "type": "string",
+            "type": "boolean",
             "title": "The Value schema",
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "Subway Station"
+                true
             ]
         }
     }

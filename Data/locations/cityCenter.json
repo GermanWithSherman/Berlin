@@ -1,42 +1,42 @@
 {
-    "id": "cityCenter",
+    "$schema": "../_schema/Location.json",
     "subLocations":{
         "main":{
-            "Label":{"V":"City Center"},
+            "Label":{"Value":"City Center"},
             "Text":{
-                "V": "City Center"
+                "Value": "City Center"
             },
             "TexturePath":{
                 "Values":{
-                    "night":{"V":"locations/cityCenter/cityCenterNight0.jpg", "C": "World.DayPhase=\"night\""},
-                    "day":{"V":"locations/cityCenter/cityCenterDay0.jpg"}
+                    "night":{"Value":"locations/cityCenter/cityCenterNight0.jpg", "Condition": "World.DayPhase=\"night\""},
+                    "day":{"Value":"locations/cityCenter/cityCenterDay0.jpg"}
                 }
             },
             "LocationConnections":{
                 "home_cheap":{
                     "Label":"Go Home",
-                    "targetLocationId": "home_cheap.",
+                    "TargetLocationId": "home_cheap.",
                     "Duration": 300,
                     "Visible":{
                         "Values":{
-                            "owned":{"V":true, "C": "b.owns_home_cheap=true"},
-                            "default":{"V":false}
+                            "owned":{"Value":true, "Condition": "b.owns_home_cheap=true"},
+                            "default":{"Value":false}
                         }
                     }
                 },
                 "mall":{
-                    "targetLocationId": ".mall_outside",
+                    "TargetLocationId": ".mall_outside",
                     "Duration": 180
                 },
                 "kebap":{
-                    "targetLocationId": ".kebap",
+                    "TargetLocationId": ".kebap",
                     "Duration": 120,
                     "TexturePath":{
                         "Value":"services/kebabHouse.jpg"
                     }
                 },
                 "kaeda":{
-                    "targetLocationId": ".kaeda",
+                    "TargetLocationId": ".kaeda",
                     "Duration": 180
                 }
             },
@@ -48,64 +48,64 @@
             }
         },
         "mall_inside":{
-            "Label":{"V":"Mall"},
-            "Text":{"V":"City Center Mall"},
+            "Label":{"Value":"Mall"},
+            "Text":{"Value":"City Center Mall"},
             "OpeningTimes":{
                 "0": {"start":"800","end":"2200","d":[1,2,3,4,5]}
             },
             "TexturePath":{
                 "Values":{
-                    "0":{"V":"locations/cityCenter/cityCanterMall1.jpg"}
+                    "0":{"Value":"locations/cityCenter/cityCanterMall1.jpg"}
                 }
             },
             "LocationConnections":{
                 "outside":{
-                    "targetLocationId": ".mall_outside",
+                    "TargetLocationId": ".mall_outside",
                     "Duration": 120,
                     "Label":"Leave"
                 },
                 "shop_fn":{
-                    "targetLocationId": ".mall_shop_fn",
+                    "TargetLocationId": ".mall_shop_fn",
                     "Duration": 120,
                     "Label":"F+N",
                     "TexturePath":{
                         "Values":{
-                            "0":{"V":"locations/shop/fn.png"}
+                            "0":{"Value":"locations/shop/fn.png"}
                         }
                     }
                 }
             }
         },
         "mall_outside":{
-            "Label":{"V":"Mall"},
-            "Text":{"V":"City Center Mall"},
+            "Label":{"Value":"Mall"},
+            "Text":{"Value":"City Center Mall"},
             "TexturePath":{
                 "Values":{
-                    "0":{"V":"locations/cityCenter/cityCanterMall0.jpg"}
+                    "0":{"Value":"locations/cityCenter/cityCanterMall0.jpg"}
                 }
             },
             "LocationConnections":{
                 "1":{
-                    "targetLocationId": ".main",
+                    "TargetLocationId": ".main",
                     "Duration": 180
                 },
                 "2":{
-                    "targetLocationId": ".mall_inside",
+                    "TargetLocationId": ".mall_inside",
                     "Duration": 120,
                     "Label":"Enter"
                 }
             }
         },
         "mall_shop_fn":{
-            "Text":{"V":"<size=150%>F+N</size>\n<i>Fröken and Nilsson</i> is a Swedish multinational clothing-retail company."},
+            "Text":{"Value":"<size=150%>F+N</size>\n<i>Fröken and Nilsson</i> is a Swedish multinational clothing-retail company."},
             "TexturePath":{
                 "Values":{
-                    "0":{"V":"locations/shop/fnInterior.jpg"}
+                    "0":{"Value":"locations/shop/fnInterior.jpg"}
                 }
             },
             "LocationConnections":{
                 "mallInside":{
-                    "targetLocationId": ".mall_inside",
+                    "TargetLocationId": ".mall_inside",
                     "Duration": 120,
                     "Label":"Leave"
                 }
@@ -147,26 +147,26 @@
         },
         "kaeda":{
             "Inherit": "shop_kaeda.",
-            "Text":{"V":"Kaeda City Center"},
+            "Text":{"Value":"Kaeda City Center"},
             "LocationConnections":{
                 "mallInside":{
-                    "targetLocationId": ".main",
+                    "TargetLocationId": ".main",
                     "Duration": 180,
                     "Label":"Leave"
                 }
             }
         },
         "kebap":{
-            "Label":{"V":"Kebap House"},
-            "Text":{"V":"Kebap House"},
+            "Label":{"Value":"Kebap House"},
+            "Text":{"Value":"Kebap House"},
             "TexturePath":{
                 "Values":{
-                    "0":{"V":"services/kebabHouseInside.jpg"}
+                    "0":{"Value":"services/kebabHouseInside.jpg"}
                 }
             },
             "LocationConnections":{
                 "mallInside":{
-                    "targetLocationId": ".main",
+                    "TargetLocationId": ".main",
                     "Duration": 120,
                     "Label":"Leave"
                 }
