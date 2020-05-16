@@ -12,16 +12,18 @@ public class LocationConnection : IModable
     [JsonIgnore]
     public SubLocation TargetLocation
     {
-        get => GameManager.Instance.LocationCache.SubLocation(_targetLocationId);
+        get => GameManager.Instance.LocationCache.SubLocation(TargetLocationId);
     }
 
 
-    private string _targetLocationId = "";
+    /*private string _targetLocationId = "";
     public string targetLocationId
     {
         get => _targetLocationId;
         set => _targetLocationId = value;
-    }
+    }*/
+
+    public string TargetLocationId;
 
     public Conditional<string> TexturePath;
     public Conditional<bool> Visible;
@@ -57,9 +59,9 @@ public class LocationConnection : IModable
 
     internal void linkIds(string locationId)
     {
-        if (!String.IsNullOrEmpty(_targetLocationId) && _targetLocationId[0] == '.')
+        if (!String.IsNullOrEmpty(TargetLocationId) && TargetLocationId[0] == '.')
         {
-            _targetLocationId = locationId + _targetLocationId;
+            TargetLocationId = locationId + TargetLocationId;
         }
     }
 
@@ -85,7 +87,7 @@ public class LocationConnection : IModable
         result.Label = Modable.copyDeep(Label);
         result.TexturePath = Modable.copyDeep(TexturePath);
         result.Visible = Modable.copyDeep(Visible);
-        result.targetLocationId = Modable.copyDeep(targetLocationId);
+        result.TargetLocationId = Modable.copyDeep(TargetLocationId);
         result.OutfitRequirement = Modable.copyDeep(OutfitRequirement);
         result.Type = Modable.copyDeep(Type);
 

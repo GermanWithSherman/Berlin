@@ -9,5 +9,6 @@ public class UIImageMain : UIUpdateListener
     public override void uiUpdate(GameManager gameManager)
     {
         RawImage.texture = gameManager.CurrentTexture;
+        RawImage.SizeToParent();
     }
 }

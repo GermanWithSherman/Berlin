@@ -1,0 +1,38 @@
+{
+    "subLocations":{
+        "main":{
+            "Label":"Dahlem",
+            "Text":{
+                "Value": "Dahlem"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"Value":"locations/dahlem/public/dahlem.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "leave":{
+                    "TargetLocationId": ".subway",
+                    "Duration": 180
+                }
+            }
+        },
+        "subway":{
+            "Label":"Subway Station",
+            "Text":{
+                "Value": "Subway Station"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"Value":"locations/dahlem/public/subway.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "leave":{
+                    "TargetLocationId": ".main",
+                    "Duration": 180
+                }
+            }
+        }
+    }
+}

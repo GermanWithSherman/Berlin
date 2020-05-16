@@ -8,7 +8,7 @@ using UnityEngine;
 public class SubLocation : IModable, IInheritable
 {
     [JsonIgnore]
-    public string id;
+    public string ID;
 
     public LocationConnections LocationConnections = new LocationConnections();
 
@@ -67,7 +67,7 @@ public class SubLocation : IModable, IInheritable
 
     internal void linkIds(string locationId, string subLocationId)
     {
-        id = locationId + "." + subLocationId;
+        ID = locationId + "." + subLocationId;
 
         foreach (LocationConnection locationConnection in LocationConnections.Values)
         {

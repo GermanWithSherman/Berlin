@@ -31,6 +31,8 @@ public class LocationCache : Cache<Location>
             result.mod(location);
         }
 
+        result.linkIds(key);
+
         return result;
     }
 

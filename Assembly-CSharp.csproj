@@ -110,6 +110,7 @@
     <Compile Include="Assets\GameObjects\DialogueTopicLibrary.cs" />
     <Compile Include="Assets\GameObjects\EventGroup.cs" />
     <Compile Include="Assets\GameObjects\EventStage.cs" />
+    <Compile Include="Assets\GameObjects\Extensions\RawImageExtensions.cs" />
     <Compile Include="Assets\GameObjects\Extensions\TransformExtensions.cs" />
     <Compile Include="Assets\GameObjects\FunctionParameters.cs" />
     <Compile Include="Assets\GameObjects\FunctionsLibrary.cs" />

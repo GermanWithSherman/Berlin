@@ -4,11 +4,11 @@
         "main":{
             "Label":"Hallway",
             "Text":{
-                "V": "Hallway"
+                "Value": "Hallway"
             },
             "TexturePath":{
                 "Values":{
-                    "default":{"V":"locations/apartments/testHallway.jpg"}
+                    "default":{"Value":"locations/apartments/testHallway.jpg"}
                 }
             },
             "LocationConnections":{
@@ -42,13 +42,13 @@
             }
         },
         "bedroom":{
-            "Label":{"V":"Bedroom"},
+            "Label":{"Value":"Bedroom"},
             "Text":{
-                "V": "Bedroom"
+                "Value": "Bedroom"
             },
             "TexturePath":{
                 "Values":{
-                    "default":{"V":"locations/apartments/testBedroom.jpg"}
+                    "default":{"Value":"locations/apartments/testBedroom.jpg"}
                 }
             },
             "LocationConnections":{
@@ -72,7 +72,7 @@
                 "AlarmClockActivate":{
                     "text":"Activate Alarm Clock",
                     "state":{"Values":{
-                        "0":{"V":{"visible":false},"C":"b_SleepAlarmClockActivated=true"}
+                        "0":{"Value":{"visible":false},"Condition":"b_SleepAlarmClockActivated=true"}
                     }},
                     "commands":{
                         "sleep":{
@@ -84,7 +84,7 @@
                 "AlarmClockDeactivate":{
                     "text":"Deactivate Alarm Clock",
                     "state":{"Values":{
-                        "0":{"V":{"visible":false},"C":"b_SleepAlarmClockActivated=false"}
+                        "0":{"Value":{"visible":false},"Condition":"b_SleepAlarmClockActivated=false"}
                     }},
                     "commands":{
                         "sleep":{
@@ -118,13 +118,13 @@
             }
         },
         "bathroom":{
-            "Label":{"V":"Bathroom"},
+            "Label":{"Value":"Bathroom"},
             "Text":{
-                "V": "Bathroom"
+                "Value": "Bathroom"
             },
             "TexturePath":{
                 "Values":{
-                    "default":{"V":"locations/apartments/testBathroom.jpg"}
+                    "default":{"Value":"locations/apartments/testBathroom.jpg"}
                 }
             },
             "LocationConnections":{
@@ -143,13 +143,13 @@
             }
         },
         "kitchen":{
-            "Label":{"V":"Kitchen"},
+            "Label":{"Value":"Kitchen"},
             "Text":{
-                "V": "Kitchen"
+                "Value": "Kitchen"
             },
             "TexturePath":{
                 "Values":{
-                    "default":{"V":"locations/apartments/testKitchen.jpg"}
+                    "default":{"Value":"locations/apartments/testKitchen.jpg"}
                 }
             },
             "LocationConnections":{

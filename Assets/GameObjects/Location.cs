@@ -9,7 +9,8 @@ using UnityEngine;
 [System.Serializable]
 public class Location : IModable
 {
-    public string id;
+    [JsonIgnore]
+    public string ID;
 
     public string Default = "main";
 
@@ -27,7 +28,7 @@ public class Location : IModable
                 return Inheritable.Inherited(subLocations[key]);
             else
             {
-                ErrorMessage.Show($"Requested sublocation {key} is not present in location {id}");
+                ErrorMessage.Show($"Requested sublocation {key} is not present in location {ID}");
                 return Inheritable.Inherited(subLocations[Default]);
             }
 
@@ -53,13 +54,19 @@ public class Location : IModable
         subLocations.mod(((Location)modable).subLocations);
     }
 
-    [OnDeserialized]
+    /*[OnDeserialized]
     internal void OnDeserializedMethod(StreamingContext context)
     {
-        foreach(KeyValuePair<string,SubLocation> keyValuePair in subLocations)
+        
+    }*/
+
+    public void linkIds(string id)
+    {
+        this.ID = id;
+        foreach (KeyValuePair<string, SubLocation> keyValuePair in subLocations)
         {
             SubLocation subLocation = keyValuePair.Value;
-            subLocation.linkIds(id,keyValuePair.Key);
+            subLocation.linkIds(ID, keyValuePair.Key);
         }
 
         if (!subLocations.ContainsKey(Default))

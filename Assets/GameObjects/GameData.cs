@@ -165,7 +165,7 @@ public class GameData: Data
     [OnSerializing]
     internal void OnSerializingMethod(StreamingContext context)
     {
-        _currentLocationId = currentLocation.id;
+        _currentLocationId = currentLocation.ID;
 
         /*_npcsPresentIds = new List<string>();
         foreach (NPC npc in NpcsPresent)

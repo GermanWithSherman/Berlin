@@ -131,7 +131,7 @@
         },
         "skipIntro_Finish":{
             "onShow":{
-                "goto":{"Type":"GotoLocation","LocationID":"home_parents."},
+                "goto":{"Type":"GotoLocation","LocationID":"dahlem/school/public."},
                 "clothesFemale":{
                     "Type":"Conditional",
                     "Condition": "PC.genderVisible=\"f\"",

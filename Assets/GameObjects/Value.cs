@@ -14,7 +14,7 @@ public abstract class Value : IModable
 
 public class Value<T>: Value
 {
-    public enum ValueType
+    public enum ValueTypes
     {
         None,
         Function,
@@ -25,39 +25,41 @@ public class Value<T>: Value
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
-    public ValueType VT = ValueType.None;
+    public ValueTypes ValueType = ValueTypes.None;
 
-    //public Dictionary<string, string> Parameters = new Dictionary<string, string>(); //for ValueType.Function
     public ModableDictionary<string> Parameters = new ModableDictionary<string>();
 
-    public string K; //Key for Reference and WeightedStringList and Function
+    public string Key; //Key for Reference and WeightedStringList and Function
 
-    public T V; // value
+    [JsonProperty("Value")]
+    private T _value; // value
 
-    public int? P;
+    [JsonProperty("Priority")]
+    private int? _priority;
 
     [JsonIgnore]
     public int Priority
     {
-        get => P.GetValueOrDefault(0);
+        get => _priority.GetValueOrDefault(0);
     }
 
     [JsonIgnore]
     public Condition Condition
     {
-        get => GameManager.Instance.ConditionCache[C];
+        get => GameManager.Instance.ConditionCache[_condition];
     }
 
-    public string C = ""; //condition String
+    [JsonProperty("Condition")]
+    public string _condition = ""; //condition String
 
-    public Conditional<T> CV; //conditional value
+    public Conditional<T> ConditionalValue; //conditional value
 
     public Value() { }
 
     public Value(T v, int p = 0)
     {
-        V = v;
-        P = p;
+        _value = v;
+        _priority = p;
     }
 
 
@@ -78,30 +80,30 @@ public class Value<T>: Value
 
     public T value(Data gameData)
     {
-        switch (VT)
+        switch (ValueType)
         {
-            case ValueType.Function:
+            case ValueTypes.Function:
                 FunctionParameters p = new FunctionParameters();
                 foreach(KeyValuePair<string,string> kv in Parameters)
                 {
                     p.Add(kv.Key, kv.Value.ToValue(gameData));
                 }
-                return (T)(object)GameManager.Instance.FunctionsLibrary.functionExecute(K,p);
-            case ValueType.Interpolate:
-                return (T)(object)gameData.interpolate(K);
-            case ValueType.None:
-            case ValueType.Plain:
-                if (CV != null)
-                    return CV.value(gameData);
-                return V;
-            case ValueType.Reference:
-                if (String.IsNullOrEmpty(K))
+                return (T)(object)GameManager.Instance.FunctionsLibrary.functionExecute(Key,p);
+            case ValueTypes.Interpolate:
+                return (T)(object)gameData.interpolate(Key);
+            case ValueTypes.None:
+            case ValueTypes.Plain:
+                if (ConditionalValue != null)
+                    return ConditionalValue.value(gameData);
+                return _value;
+            case ValueTypes.Reference:
+                if (String.IsNullOrEmpty(Key))
                     throw new KeyNotFoundException("Parameter K missing");
-                return gameData[K];
-            case ValueType.WeightedStringList:
+                return gameData[Key];
+            case ValueTypes.WeightedStringList:
                 if(typeof(T) == typeof(System.String))
                     //return (T)(object)gameManager.WeightedStringListCache[K].value();
-                    return (T)(object)GameManager.Instance.WeightedStringListCache[K].value();
+                    return (T)(object)GameManager.Instance.WeightedStringListCache[Key].value();
                 break;
         }
         return default;
@@ -119,22 +121,22 @@ public class Value<T>: Value
     }
 
     private void mod(Value<T> original, Value<T> mod) {
-        VT = mod.VT == ValueType.None ? original.VT : mod.VT;//mod.VT; //Modable.mod(original.VT, mod.VT);
+        ValueType = mod.ValueType == ValueTypes.None ? original.ValueType : mod.ValueType;//mod.VT; //Modable.mod(original.VT, mod.VT);
         Parameters = Modable.mod(original.Parameters, mod.Parameters);
 
-        if (original.V is IModable && original.V.GetType() == mod.V.GetType())
-            V = (T)Modable.mod((IModable)original.V, (IModable)mod.V);
+        if (original._value is IModable && original._value.GetType() == mod._value.GetType())
+            _value = (T)Modable.mod((IModable)original._value, (IModable)mod._value);
         else
         {
-            if(original.V is int)
-                original.V = mod.V;
-            else if(original.V is int?)
-                original.V = mod.V == null ? original.V : mod.V;
+            if(original._value is int)
+                original._value = mod._value;
+            else if(original._value is int?)
+                original._value = mod._value == null ? original._value : mod._value;
         }
-        K = Modable.mod(original.K, mod.K);
-        P = Modable.mod(original.P, mod.P);
-        C = Modable.mod(original.C, mod.C);
-        CV = Modable.mod(original.CV, mod.CV);
+        Key = Modable.mod(original.Key, mod.Key);
+        _priority = Modable.mod(original._priority, mod._priority);
+        _condition = Modable.mod(original._condition, mod._condition);
+        ConditionalValue = Modable.mod(original.ConditionalValue, mod.ConditionalValue);
     }
 
     public override void mod(IModable modable)
@@ -152,20 +154,20 @@ public class Value<T>: Value
     {
         var result = new Value<T>();
 
-        result.C = C;
-        result.CV = Modable.copyDeep(CV);
-        result.K = K;
-        result.P = P;
+        result._condition = _condition;
+        result.ConditionalValue = Modable.copyDeep(ConditionalValue);
+        result.Key = Modable.copyDeep(Key);
+        result._priority = Modable.copyDeep(_priority);
 
-        if (V is IModable)
+        if (_value is IModable)
         {
-            IModable VCopy = Modable.copyDeep((IModable)V);
-            result.V = (T)VCopy;
+            IModable VCopy = Modable.copyDeep((IModable)_value);
+            result._value = (T)VCopy;
         }
         else
-            result.V = V;
+            result._value = _value;
 
-        result.VT = VT;
+        result.ValueType = ValueType;
 
         return result;
     }

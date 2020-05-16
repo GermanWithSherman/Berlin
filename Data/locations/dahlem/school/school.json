@@ -1,0 +1,15 @@
+{
+    "subLocations":{
+        "main":{
+            "Label":"Hallway",
+            "Text":{
+                "V": "Hallway"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"V":"locations/apartments/testHallway.jpg"}
+                }
+            }
+        }
+    }
+}

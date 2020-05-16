@@ -103,7 +103,7 @@ public class NPCsLibrary : Cache<NPC>
             {
                 if (schedule.d.Contains(day) && time >= schedule.start && time <= schedule.end)
                 {
-                    if (schedule.l == subLocation.id)
+                    if (schedule.l == subLocation.ID)
                     {
                         
                         result.Add(this[npcId]);
