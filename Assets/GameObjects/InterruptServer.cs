@@ -23,7 +23,7 @@ public class InterruptServer : Library<Interrupt>
 
         foreach (Interrupt interrupt in _dict.Values)
         {
-            foreach (string listenId in interrupt.listen)
+            foreach (string listenId in interrupt.Listen)
             {
                 if (!interruptsByType.ContainsKey(listenId))
                     interruptsByType[listenId] = new List<Interrupt>();
@@ -36,13 +36,13 @@ public class InterruptServer : Library<Interrupt>
     {
         var result = new ModableDictionary<Interrupt>();
 
-        ModableDictionary<ModableDictionary<Interrupt>> dict = loadFromFolder<ModableDictionary<Interrupt>>(path);
+        ModableDictionary<InterruptsFile> dict = loadFromFolder<InterruptsFile>(path);
 
 
 
-        foreach (KeyValuePair<string, ModableDictionary<Interrupt>> kv in dict)
+        foreach (InterruptsFile interruptsFile in dict.Values)
         {
-            foreach (KeyValuePair<string, Interrupt> kv2 in kv.Value)
+            foreach (KeyValuePair<string, Interrupt> kv2 in interruptsFile.interrupts)
             {
                 var interrupt = kv2.Value;
                 interrupt.id = kv2.Key;

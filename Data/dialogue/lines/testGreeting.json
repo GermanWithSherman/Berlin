@@ -1,4 +1,5 @@
 {
+    "$schema": "../../_schema/DialogueLineFile.json",
     "start":{
         "1":{
             "Text": "Hello"

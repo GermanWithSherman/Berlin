@@ -1,5 +1,8 @@
 {
-    "TestTopic":{
-        "Title": "Test-ABC"
+    "$schema": "../../_schema/DialogueTopicFile.json",
+    "topics":{
+        "TestTopic":{
+            "Title": "Test-ABC"
+        }
     }
 }

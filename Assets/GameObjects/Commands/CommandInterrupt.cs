@@ -16,7 +16,7 @@ public class CommandInterrupt : Command
         Keyword = keyword;
     }
 
-    public CommandInterrupt(List<string> keywords)
+    public CommandInterrupt(ModableStringList keywords)
     {
         Keywords = keywords;
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DialogueLine : IModable, IPrioritizable
 {
-    public string TopicID;
+    //public string TopicID;
 
     public int Priority = 0;
 
@@ -28,7 +28,7 @@ public class DialogueLine : IModable, IPrioritizable
     {
         var result = new DialogueLine();
 
-        result.TopicID = Modable.copyDeep(TopicID);
+        //result.TopicID = Modable.copyDeep(TopicID);
         result.Priority = Modable.copyDeep(Priority);
         result.Options = Modable.copyDeep(Options);
         result._text = Modable.copyDeep(_text);
@@ -163,3 +163,19 @@ public class DialogueTopic : IModable, IPrioritizable
         throw new System.NotImplementedException();
     }
 }
+
+public class DialogueTopicsFile : IModable
+{
+    public ModableDictionary<DialogueTopic> topics;
+
+    public IModable copyDeep()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new System.NotImplementedException();
+    }
+}
+

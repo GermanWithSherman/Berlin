@@ -59,13 +59,11 @@ public class DialogueTopicLibrary : Library<DialogueTopic>
     {
         var result = new ModableDictionary<DialogueTopic>();
 
-        ModableDictionary<ModableDictionary<DialogueTopic>> dict = loadFromFolder<ModableDictionary<DialogueTopic>>(path);
+        ModableDictionary<DialogueTopicsFile> dict = loadFromFolder<DialogueTopicsFile>(path);
 
-       
-
-        foreach(KeyValuePair<string, ModableDictionary<DialogueTopic>> kv in dict)
+        foreach (DialogueTopicsFile dialogueTopicsFile in dict.Values)
         {
-            foreach (KeyValuePair<string, DialogueTopic> kv2 in kv.Value)
+            foreach (KeyValuePair<string, DialogueTopic> kv2 in dialogueTopicsFile.topics)
             {
                 var topic = kv2.Value;
                 topic.ID = kv2.Key;

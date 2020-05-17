@@ -63,3 +63,18 @@ public class Interrupt : IModable
         throw new System.NotImplementedException();
     }
 }
+
+public class InterruptsFile : IModable
+{
+    public ModableDictionary<Interrupt> interrupts;
+
+    public IModable copyDeep()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new System.NotImplementedException();
+    }
+}

@@ -1,5 +1,8 @@
 {
-    "testGreeting":{
-        "IsGreeting": true
+    "$schema": "../../_schema/DialogueTopicFile.json",
+    "topics":{
+        "testGreeting":{
+            "IsGreeting": true
+        }
     }
 }

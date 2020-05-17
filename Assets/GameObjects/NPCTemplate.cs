@@ -20,7 +20,7 @@ public class NPCTemplate : IModable, IInheritable
 
     public Value<int?> age;
 
-    public ModableDictionary<Schedule> schedules = new ModableDictionary<Schedule>();
+    public ModableDictionary<Schedule> Schedules = new ModableDictionary<Schedule>();
 
     [JsonIgnore]
     public bool inheritanceResolved = false;
@@ -32,7 +32,7 @@ public class NPCTemplate : IModable, IInheritable
         result.nameFirst = Modable.copyDeep(nameFirst);
         result.nameLast = Modable.copyDeep(nameLast);
         result.age = Modable.copyDeep(age);
-        result.schedules = Modable.copyDeep(schedules);
+        result.Schedules = Modable.copyDeep(Schedules);
         result.genderVisible = Modable.copyDeep(genderVisible);
 
         return result;
@@ -108,7 +108,7 @@ public class NPCTemplate : IModable, IInheritable
         nameFirst = Modable.mod(original.nameFirst, mod.nameFirst);
         nameLast = Modable.mod(original.nameLast, mod.nameLast);
         age = Modable.mod(original.age, mod.age);
-        schedules = Modable.mod(original.schedules, mod.schedules);
+        Schedules = Modable.mod(original.Schedules, mod.Schedules);
         genderVisible = Modable.mod(original.genderVisible, mod.genderVisible);
     }
 

@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type":"object",
+    "oneOf": [
+        {"required": ["Title"]},
+        {"required": ["IsGreeting"],"properties": {"IsGreeting":{"enum": [true]}}}
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "IsGreeting":{"type":"boolean"},
+        "NPCFilter":{ "$ref": "./NPCFilter.json" },
+        "Priority":{"type":"integer"},
+        "Title":{ "$ref": "./CText.json" }
+    }
+}
