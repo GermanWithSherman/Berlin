@@ -5,7 +5,7 @@ using UnityEngine;
 public class CommandTimePass : Command
 {
 
-    public string ActivityId = "";
+    public string ActivityID = "";
     public int Duration = 0;
 
     public CommandTimePass() { }
@@ -17,13 +17,13 @@ public class CommandTimePass : Command
 
     public CommandTimePass(int time, string activityId)
     {
-        ActivityId = activityId;
+        ActivityID = activityId;
         Duration = time;
     }
 
     public override void execute(Data data)
     {
-        GameManager.Instance.timePass(Duration, ActivityId);
+        GameManager.Instance.timePass(Duration, ActivityID);
         return;
     }
 }

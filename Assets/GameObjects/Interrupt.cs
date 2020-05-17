@@ -8,8 +8,8 @@ public class Interrupt : IModable
     [JsonIgnore]
     public string id;
 
-    public float chance = 1f;
-    public int cooldown=0;
+    public float Chance = 1f;
+    public int Cooldown=0;
 
     public CommandsCollection Commands = new CommandsCollection();
 
@@ -21,13 +21,13 @@ public class Interrupt : IModable
         get => GameManager.Instance.ConditionCache[_condition];
     }
 
-    public List<string> listen = new List<string>();
+    public ModableStringList Listen = new ModableStringList();
 
-    public int priority = 0;
+    public int Priority = 0;
 
     public static int ComparePriorities(Interrupt x, Interrupt y)
     {
-        return y.priority - x.priority;
+        return y.Priority - x.Priority;
     }
 
     public bool conditionCheck()
@@ -39,14 +39,14 @@ public class Interrupt : IModable
 
     public void execute()
     {
-        GameManager.Instance.GameData.Interrupts.resetCooldown(this, cooldown);
+        GameManager.Instance.GameData.Interrupts.resetCooldown(this, Cooldown);
         Commands.execute();
     }
 
     public bool trySelect()
     {
         float random = Random.Range(0f,1f);
-        if (random > chance)
+        if (random > Chance)
             return false;
         if (GameManager.Instance.GameData.Interrupts.remainingCooldown(this) > 0)
             return false;

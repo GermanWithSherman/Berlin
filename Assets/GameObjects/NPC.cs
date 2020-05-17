@@ -44,10 +44,12 @@ public class NPC : Data, IInheritable, IModable
     }
 
     [JsonProperty("Schedules")]
-    public ModableDictionary<Schedule> SchedulesDict = new ModableDictionary<Schedule>();
+    public ModableDictionary<TimeFilters> SchedulesDict = new ModableDictionary<TimeFilters>();
+    //public ModableDictionary<Schedule> SchedulesDict = new ModableDictionary<Schedule>();
     public bool ShouldSerializeSchedulesDict() => false;
     [JsonIgnore]
-    public IEnumerable<Schedule> Schedules { get => SchedulesDict.Values; }
+    public IEnumerable<TimeFilters> Schedules { get => SchedulesDict.Values; }
+    //public IEnumerable<Schedule> Schedules { get => SchedulesDict.Values; }
 
     public string TemplateId;
     [JsonIgnore]

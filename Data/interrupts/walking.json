@@ -1,14 +1,14 @@
 {
-    "walk":{
-        "listen": ["Walk"],
-        "priority": 10,
-        "cooldown": 86400,
-        "chance": 1,
-        "allow":{},
-        "allowResetListen":[""],
-        "conditionCD": -1,
-        "Commands":{
-            "gte":{"Type":"Event","EventID":"test."}
+    "$schema": "../_schema/InterruptFile.json",
+    "interrupts":{
+        "walk":{
+            "Listen": ["Walk"],
+            "Priority": 10,
+            "Cooldown": 86400,
+            "Chance": 1,
+            "Commands":{
+                "gte":{"Type":"Event","EventID":"test."}
+            }
         }
     }
 }

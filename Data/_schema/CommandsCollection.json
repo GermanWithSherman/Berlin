@@ -10,5 +10,13 @@
 
     ],
     "required": [
-    ]
+    ],
+    "additionalProperties": false,
+    
+
+    "patternProperties": {
+        "^.*$": {
+            "$ref": "./Command.json"
+        }
+    }           
 }

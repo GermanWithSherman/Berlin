@@ -15,6 +15,34 @@
     
     "properties": {
         "Commands": {"$ref": "./CommandsCollection.json"},
+        "Inherit": {"type":"string"},
+        "State":{
+            "type":"object",
+            "required": ["Values"],
+            "properties": {
+                "Values":{
+                    "type":"object",
+                    "patternProperties": {
+                        "^.*$": {
+                            "type":"object",
+                            "required": ["Value","Condition"],
+                            "properties": {
+                                "Condition":{"type":"string"},
+                                "Value":{
+                                    "type":"object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "Enabled":{"type":"boolean"},
+                                        "Text":{"type":"string"},
+                                        "Visible":{"type":"boolean"}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "Text": {
             "type": "string",
             "title": "The Text schema",

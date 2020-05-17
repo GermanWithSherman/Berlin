@@ -1,0 +1,24 @@
+
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "CommandInterrupt",
+    "description": "CommandInterrupt schema.",
+    "default": {},
+    "examples": [
+    ],
+    "required": [
+        "Type"
+    ],
+    "anyOf": [
+        {"required": ["Keyword"]},
+        {"required": ["Keywords"]}
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "Keyword": {"type": "string" },
+        "Keywords": {"type":"array", "items": {"type":"string"}},
+        "Type": {"type": "string", "pattern": "^Interrupt$" }
+    }
+}

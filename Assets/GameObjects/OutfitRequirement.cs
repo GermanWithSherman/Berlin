@@ -6,18 +6,19 @@ using UnityEngine;
 
 public class OutfitRequirement : IModable
 {
-    public List<string> AllowedStyles = new List<string>();
-    public List<string> ForbiddenStyles = new List<string>();
+    public ModableStringList AllowedStyles = new ModableStringList();
+    public ModableStringList ForbiddenStyles = new ModableStringList();
 
-    public string CustomInstruction;
+    [JsonProperty("Instruction")]
+    private string _instruction;
 
     [JsonIgnore]
     public string Instruction
     {
         get
         {
-            if (!String.IsNullOrEmpty(CustomInstruction))
-                return CustomInstruction;
+            if (!String.IsNullOrEmpty(_instruction))
+                return _instruction;
 
             string result = "";
             if (AllowedStyles.Count == 0 && ForbiddenStyles.Count == 0)
@@ -36,6 +37,9 @@ public class OutfitRequirement : IModable
     public IModable copyDeep()
     {
         var result = new OutfitRequirement();
+
+        result.AllowedStyles = Modable.copyDeep(AllowedStyles);
+        result.ForbiddenStyles = Modable.copyDeep(ForbiddenStyles);
 
         return result;
     }
@@ -66,6 +70,9 @@ public class OutfitRequirement : IModable
 
     public void mod(IModable modable)
     {
-        throw new NotImplementedException();
+        var modOR = (OutfitRequirement)modable;
+
+        AllowedStyles = Modable.mod(AllowedStyles, modOR.AllowedStyles);
+        ForbiddenStyles = Modable.mod(ForbiddenStyles, modOR.ForbiddenStyles);
     }
 }

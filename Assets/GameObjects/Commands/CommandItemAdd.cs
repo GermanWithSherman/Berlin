@@ -8,23 +8,23 @@ public class CommandItemAdd : Command
     public int Count = 1;
 
     public bool Equip;
-    public string ItemId;
+    public string ItemID;
 
-    public string ShopId = "";
+    public string ShopID = "";
 
     public override void execute(Data data)
     {
         ItemsCollection selectedItems;
-        if (!String.IsNullOrEmpty(ShopId))
+        if (!String.IsNullOrEmpty(ShopID))
         {
             GameData gameData = (GameData)data;
-            ItemsCollection items = gameData.ShopData[ShopId].ItemsAll;
+            ItemsCollection items = gameData.ShopData[ShopID].ItemsAll;
 
             selectedItems = items.getRandomItems(Count);
         }
         else
         {
-            selectedItems = new ItemsCollection(new string[] { ItemId });
+            selectedItems = new ItemsCollection(new string[] { ItemID });
         }
 
 

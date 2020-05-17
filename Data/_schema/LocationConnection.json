@@ -17,6 +17,7 @@
     "properties": {
         "Duration":{"type":"integer", "minimum": 0},
         "Label":{"type":"string"},
+        "OutfitRequirement": {"$ref": "./OutfitRequirement.json"},
         "TargetLocationId": {
             "type": "string",
             "title": "The TargetLocationId schema",

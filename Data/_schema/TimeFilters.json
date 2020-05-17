@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "TimeFilters",
+    "description": "TimeFilters schema.",
+    "default": {},
+    "additionalProperties": false,
+    
+
+    "patternProperties": {
+        "^.*$": {
+            "$ref": "./TimeFilter.json"
+        }
+    }            
+         
+}

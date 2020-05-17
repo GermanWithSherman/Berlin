@@ -1,0 +1,20 @@
+
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "CommandServices",
+    "description": "CommandServices schema.",
+    "default": {},
+    "examples": [
+    ],
+    "required": [
+        "ServicePointID",
+        "Type"
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "ServicePointID": {"type": "string" },
+        "Type": {"type": "string", "pattern": "^Services$" }
+    }
+}

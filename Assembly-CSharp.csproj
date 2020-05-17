@@ -160,6 +160,7 @@
     <Compile Include="Assets\GameObjects\ShopType.cs" />
     <Compile Include="Assets\GameObjects\StringExtensions.cs" />
     <Compile Include="Assets\GameObjects\SubLocation.cs" />
+    <Compile Include="Assets\GameObjects\TimeFilter.cs" />
     <Compile Include="Assets\GameObjects\Ui\Console.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialog.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogResolver.cs" />

@@ -1,14 +1,14 @@
 {
-    "shopFemale":{
-        "listen": ["shopFemale"],
-        "priority": 10,
-        "chance": 1,
-        "allow":{},
-        "allowResetListen":[""],
-        "conditionCD": -1,
-        "Condition": "PC.genderVisible = \"m\"",
-        "Commands":{
-            "gte":{"Type":"Event","EventID":"shoppingFemale."}
+    "$schema": "../_schema/InterruptFile.json",
+    "interrupts":{
+        "shopFemale":{
+            "Listen": ["shopFemale"],
+            "Priority": 10,
+            "Chance": 1,
+            "Condition": "PC.genderVisible = \"m\"",
+            "Commands":{
+                "gte":{"Type":"Event","EventID":"shoppingFemale."}
+            }
         }
     }
 }

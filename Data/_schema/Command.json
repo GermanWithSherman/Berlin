@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "anyOf": [
+        {"$ref": "./CommandConditional.json"},
+        {"$ref": "./CommandDialog.json"},
+        {"$ref": "./CommandEvent.json"},
+        
+        {"$ref": "./CommandGotoLocation.json"},
+        
+        {"$ref": "./CommandInterrupt.json"},
+        
+        {"$ref": "./CommandItemAdd.json"},
+        {"$ref": "./CommandOutfit.json"},
+        
+        {"$ref": "./CommandServices.json"},
+        {"$ref": "./CommandSet.json"},
+        {"$ref": "./CommandShop.json"},
+        {"$ref": "./CommandSleep.json"},
+        
+        {"$ref": "./CommandTimePass.json"}
+    ]
+
+}

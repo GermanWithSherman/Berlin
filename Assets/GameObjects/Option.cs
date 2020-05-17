@@ -9,31 +9,14 @@ public class Option : IModable, IInheritable
 {
     public struct OptionState
     {
-        public bool? enabled;
-        public string text;
-        public bool? visible;
+        public bool? Enabled;
+        public string Text;
+        public bool? Visible;
     }
 
 
 
     public string Text;
-    /*[JsonIgnore]
-    public string Text
-    {
-        get
-        {
-            if (!String.IsNullOrEmpty(text))
-                return text;
-            Option parent = Parent;
-            if (parent != null) {
-                string parentText = parent.Text;
-                if (!String.IsNullOrEmpty(parent.Text))
-                    return parentText;
-            }
-            return "Text Missing";
-        }
-    }*/
-
 
     public CommandsCollection Commands = new CommandsCollection();
 
@@ -67,17 +50,17 @@ public class Option : IModable, IInheritable
     public bool inheritanceResolved = false;
 
 
-    public Conditional<OptionState> State = new Conditional<OptionState>(new OptionState(){enabled=true, visible=true}, -2000000001);
+    public Conditional<OptionState> State = new Conditional<OptionState>(new OptionState(){Enabled=true, Visible=true}, -2000000001);
 
 
     public bool Enabled
     {
-        get => State.value().enabled.GetValueOrDefault(true);
+        get => State.value().Enabled.GetValueOrDefault(true);
     }
 
     public bool Visible
     {
-        get => State.value().visible.GetValueOrDefault(true);
+        get => State.value().Visible.GetValueOrDefault(true);
     }
 
     public void execute()

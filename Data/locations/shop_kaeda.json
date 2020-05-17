@@ -1,12 +1,12 @@
 {
-    "id": "shop_kaeda",
+    "$schema": "../_schema/Location.json",
     "subLocations":{
         "main":{
-            "Label":{"V":"Kaeda"},
-            "Text":{"V":"Kaeda"},
+            "Label":{"Value":"Kaeda"},
+            "Text":{"Value":"Kaeda"},
             "TexturePath":{
                 "Values":{
-                    "default":{"V":"locations/shop/kaedaInterior.jpg"}
+                    "default":{"Value":"locations/shop/kaedaInterior.jpg"}
                 }
             },
             "TexturePreviewPath":{
@@ -15,7 +15,7 @@
             "Options":{
                 "1":{
                     "Text":"Shop Groceries",
-                    "commands":{"service":{"Type": "Services","ServicePointId":"kaeda"}}
+                    "Commands":{"service":{"Type": "Services","ServicePointId":"kaeda"}}
                 }
             }
         }

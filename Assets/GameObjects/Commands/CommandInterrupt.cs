@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CommandInterrupt : Command
 {
-    public List<string> Keywords = new List<string>();
+    public ModableStringList Keywords = new ModableStringList();
     public string Keyword;
 
     public CommandInterrupt()

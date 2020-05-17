@@ -76,6 +76,7 @@ public class NPCsLibrary : Cache<NPC>
 
     public IEnumerable<NPC> npcsPresent(SubLocation subLocation, DateTime dateTime)
     {
+        string subLocationID = subLocation.ID;
         List<NPC> result = new List<NPC>();
 
         IEnumerable<string> npcIds = Ids;
@@ -94,12 +95,18 @@ public class NPCsLibrary : Cache<NPC>
             }*/
             NPC npcRaw = rawNPCDict[npcId];
 
-            IEnumerable<Schedule> schedules = npcRaw.Schedules;
+            if(npcRaw.SchedulesDict.TryGetValue(subLocationID, out TimeFilters filters))
+            {
+                if(filters.isValid(dateTime))
+                    result.Add(this[npcId]);
+            }
 
-            int time = dateTime.Minute + dateTime.Hour * 100;
+            //IEnumerable<TimeFilters> schedules = npcRaw.Schedules;
+
+            /*int time = dateTime.Minute + dateTime.Hour * 100;
             int day = (int)dateTime.DayOfWeek;
 
-            foreach (Schedule schedule in schedules)
+            foreach (TimeFilters schedule in schedules)
             {
                 if (schedule.d.Contains(day) && time >= schedule.start && time <= schedule.end)
                 {
@@ -112,7 +119,7 @@ public class NPCsLibrary : Cache<NPC>
                     break;
 
                 }
-            }
+            }*/
         }
 
         return result;

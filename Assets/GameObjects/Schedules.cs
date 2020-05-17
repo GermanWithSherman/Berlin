@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Schedules : Dictionary<string,Schedule>
+[Obsolete]
+public class Schedules : ModableDictionary<Schedule>
 {
-    public bool isScheduled(DateTime dateTime)
+    /*public bool isScheduled(DateTime dateTime)
     {
         if (Count == 0)
             return true;
@@ -21,5 +22,5 @@ public class Schedules : Dictionary<string,Schedule>
             }
         }
         return false;
-    }
+    }*/
 }

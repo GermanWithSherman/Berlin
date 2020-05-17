@@ -32,7 +32,7 @@ public class SubLocation : IModable, IInheritable
 
     public ModableDictionary<Option> Options = new ModableDictionary<Option> ();
 
-    public Schedules OpeningTimes = new Schedules();
+    public TimeFilters OpeningTimes = new TimeFilters();
 
     public CommandsCollection onShow = new CommandsCollection();
 
@@ -62,7 +62,7 @@ public class SubLocation : IModable, IInheritable
     {
         GameManager gameManager = GameManager.Instance;
         DateTime now = gameManager.GameData.WorldData.DateTime;
-        return OpeningTimes.isScheduled(now);
+        return OpeningTimes.isValid(now);
     }
 
     internal void linkIds(string locationId, string subLocationId)

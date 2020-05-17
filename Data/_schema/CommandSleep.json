@@ -1,0 +1,21 @@
+
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "CommandSleep",
+    "description": "CommandSleep schema.",
+    "default": {},
+    "examples": [
+    ],
+    "required": [
+        "Type"
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "AlarmActivatedRef": {"type": "string" },
+        "AlarmTimeRef": {"type": "string" },
+        "Duration":{"type":"integer","minimum": -1},
+        "Type": {"type": "string", "pattern": "^Sleep$" }
+    }
+}

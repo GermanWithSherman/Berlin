@@ -1,0 +1,23 @@
+
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "Interrupt",
+    "description": "Interrupt schema.",
+    "default": {},
+    "examples": [
+    ],
+    "required": [
+        "Commands"
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "Chance": {"type": "number", "minimum": 0,"maximum": 1 },
+        "Commands": {"$ref": "./CommandsCollection.json"},
+        "Condition": {"type":"string"},
+        "Cooldown": {"type": "integer", "description": "Cooldown in seconds"},
+        "Listen":{"type":"array","items": {"type":"string"}},
+        "Priority": {"type":"integer","description": "High value = high priority"}
+    }
+}

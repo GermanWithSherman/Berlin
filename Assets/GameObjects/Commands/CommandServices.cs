@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CommandServices : Command
 {
-    public string ServicePointId;
+    public string ServicePointID;
     public override void execute(Data data)
     {
-        GameManager.Instance.servicepointShow(ServicePointId);
+        GameManager.Instance.servicepointShow(ServicePointID);
     }
 }

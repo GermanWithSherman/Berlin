@@ -1,0 +1,21 @@
+
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "CommandConditional",
+    "description": "CommandConditional schema.",
+    "default": {},
+    "examples": [
+    ],
+    "required": [
+        "Commands",
+        "Type"
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "Commands": {"$ref": "./CommandsCollection.json"},
+        "Condition": {"type":"string"},
+        "Type": {"type": "string", "pattern": "^Conditional$" }
+    }
+}

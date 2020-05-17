@@ -1,25 +1,25 @@
 {
-    "id": "start",
+    "$schema": "../_schema/Location.json",
     "subLocations":{
         "main":{
             "Text":{
-                "V": "Hello, and welcome to BER."
+                "Value": "Hello, and welcome to BER."
             },
             "TexturePath":{
                 "Value":"cityCenter/cityCenterNight0.jpg"
             },
             "Options":{
                 "intro":{
-                    "text":"Intro",
-                    "commands":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance"}}
+                    "Text":"Intro",
+                    "Commands":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance"}}
                 },
                 "skipIntro":{
-                    "text":"Skip Intro",
-                    "commands":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro"}}
+                    "Text":"Skip Intro",
+                    "Commands":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro"}}
                 },
                 "debug":{
-                    "text":"Debug",
-                    "commands":{
+                    "Text":"Debug",
+                    "Commands":{
                         "goto":{"Type":"GotoLocation","LocationID":"home_cheap."},
                         "setHomeOwner":{
                             "Type": "Set",
@@ -31,12 +31,12 @@
         },
         "intro":{
             "Text":{
-                "V": "Intro"
+                "Value": "Intro"
             }
         },
         "skipIntro":{
             "Text":{
-                "V": "Skip Intro"
+                "Value": "Skip Intro"
             },
             "onShow":{
                 "sexSelectDialog":{
@@ -116,7 +116,7 @@
                     "Settings":{
                         
                         "Targets":{
-                            "RESULT": "sTemp_PCAppearance"
+                            "RESULT": "sTemp_PCLiving"
                         },
                         "Headline":"Where are you currently living?\n<size=50%><i><color=\"red\">Choose carefully. This coice has major implications.</color></i></size>",
                         "Options":{

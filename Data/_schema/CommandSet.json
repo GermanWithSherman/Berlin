@@ -1,0 +1,26 @@
+
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "CommandSet",
+    "description": "CommandSet schema.",
+    "default": {},
+    "examples": [
+    ],
+    "required": [
+        "Values",
+        "Type"
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "Values": {
+            "type":"object", "patternProperties": {
+                "^.*$": {
+                    "type":["boolean","null","number","string"]
+                }
+            }  
+        },
+        "Type": {"type": "string", "pattern": "^Set$" }
+    }
+}

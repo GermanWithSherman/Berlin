@@ -16,6 +16,7 @@
         "Inherit": {"type":"string", "pattern": "^[^\\.]+\\.[^\\.]*$"},
         "Text": { "$ref": "./CText.json" },
         "TexturePath" : { "$ref": "./ConditionalString.json" },
+        "TexturePreviewPath" : { "$ref": "./ConditionalString.json" },
         "LocationConnections":{
             "additionalProperties": false,
             "patternProperties": {
@@ -24,6 +25,7 @@
                 }
             }   
         },
+        "OpeningTimes":{ "$ref": "./TimeFilters.json" },
         "Options":{
             "additionalProperties": false,
             "patternProperties": {
@@ -31,6 +33,7 @@
                     "$ref": "./Option.json"
                 }
             }   
-        }
+        },
+        "onShow": {"$ref": "./CommandsCollection.json"}
     }
 }

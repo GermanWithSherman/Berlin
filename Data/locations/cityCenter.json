@@ -51,7 +51,7 @@
             "Label":{"Value":"Mall"},
             "Text":{"Value":"City Center Mall"},
             "OpeningTimes":{
-                "0": {"start":"800","end":"2200","d":[1,2,3,4,5]}
+                "0": {"TimeStart":800,"TimeEnd":2200,"Days":["Mo","Tu","We","Th","Fr"]}
             },
             "TexturePath":{
                 "Values":{
@@ -136,9 +136,7 @@
                         "outfit":{
                             "Type":"Outfit",
                             "OutfitRequirement":{
-
                                 "ForbiddenStyles": ["Naked","Underwear"]
-
                             }
                         }
                     }
@@ -174,7 +172,7 @@
             "Options":{
                 "1":{
                     "Text":"Order Drinks & Food",
-                    "commands":{"service":{"Type": "Services","ServicePointId":"kebapHouse"}}
+                    "Commands":{"service":{"Type": "Services","ServicePointID":"kebapHouse"}}
                 }
             }
         }

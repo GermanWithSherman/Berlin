@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "ItemsFile",
+    "description": "ItemsFile schema.",
+    "default": {},
+    "examples": [
+        
+    ],
+    "required": [
+        "items"
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "items": { 
+            "patternProperties": {
+                "^.*$": {
+                    "$ref": "./Item.json"
+                }
+            }            
+         },
+         "$schema" :{"type":"string"}
+    }
+}

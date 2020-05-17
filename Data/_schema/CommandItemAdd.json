@@ -1,0 +1,26 @@
+
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "CommandItemAdd",
+    "description": "CommandItemAdd schema.",
+    "default": {},
+    "examples": [
+    ],
+    "required": [
+        "Type"
+    ],
+    "anyOf": [
+        {"required": ["ItemID"]},
+        {"required": ["ShopID"]}
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "Count": {"type": "integer" },
+        "Equip": {"type":"boolean"},
+        "ItemID": {"type":"string"},
+        "ShopID": {"type":"string"},
+        "Type": {"type": "string", "pattern": "^ItemAdd$" }
+    }
+}

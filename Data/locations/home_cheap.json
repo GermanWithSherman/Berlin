@@ -1,5 +1,5 @@
 {
-    "id": "home_cheap",
+    "$schema": "../_schema/Location.json",
     "subLocations":{
         "main":{
             "Label":"Hallway",
@@ -14,30 +14,30 @@
             "LocationConnections":{
                 "leave":{
                     "Label":"Leave",
-                    "targetLocationId": "cityCenter.",
+                    "TargetLocationId": "cityCenter.",
                     "Duration": 300,
                     "OutfitRequirement":{
                         "ForbiddenStyles": ["Naked","Underwear"],
-                        "CustomInstruction": "You should put on some clothes before leaving."
+                        "Instruction": "You should put on some clothes before leaving."
                     }
                 },
                 "bedroom":{
-                    "targetLocationId": ".bedroom",
+                    "TargetLocationId": ".bedroom",
                     "Duration": 15
                 },
                 "bathroom":{
-                    "targetLocationId": ".bathroom",
+                    "TargetLocationId": ".bathroom",
                     "Duration": 15
                 },
                 "kitchen":{
-                    "targetLocationId": ".kitchen",
+                    "TargetLocationId": ".kitchen",
                     "Duration": 15
                 }
             },
             "Options":{
                 "1":{
-                    "text":"Pass 30 Minutes",
-                    "commands":{"timeP1800":{"Type":"TimePass","Time":1800}}
+                    "Text":"Pass 30 Minutes",
+                    "Commands":{"timeP1800":{"Type":"TimePass","Duration":1800}}
                 }
             }
         },
@@ -53,14 +53,14 @@
             },
             "LocationConnections":{
                 "leave":{
-                    "targetLocationId": ".main",
+                    "TargetLocationId": ".main",
                     "Duration": 15
                 }
             },
             "Options":{
                 "GoToSleep":{
-                    "text":"Go to sleep",
-                    "commands":{
+                    "Text":"Go to sleep",
+                    "Commands":{
                         "sleep":{
                             "Type":"Sleep",
                             "AlarmTimeRef":"i_SleepAlarmTime",
@@ -70,11 +70,13 @@
                     }
                 },
                 "AlarmClockActivate":{
-                    "text":"Activate Alarm Clock",
-                    "state":{"Values":{
-                        "0":{"Value":{"visible":false},"Condition":"b_SleepAlarmClockActivated=true"}
-                    }},
-                    "commands":{
+                    "Text":"Activate Alarm Clock",
+                    "State":{
+                        "Values":{
+                            "0":{"Value":{"Visible":false},"Condition":"b_SleepAlarmClockActivated=true"}
+                        }
+                    },
+                    "Commands":{
                         "sleep":{
                             "Type": "Set",
                             "Values":{"b_SleepAlarmClockActivated":true}
@@ -82,11 +84,11 @@
                     }
                 },
                 "AlarmClockDeactivate":{
-                    "text":"Deactivate Alarm Clock",
-                    "state":{"Values":{
-                        "0":{"Value":{"visible":false},"Condition":"b_SleepAlarmClockActivated=false"}
+                    "Text":"Deactivate Alarm Clock",
+                    "State":{"Values":{
+                        "0":{"Value":{"Visible":false},"Condition":"b_SleepAlarmClockActivated=false"}
                     }},
-                    "commands":{
+                    "Commands":{
                         "sleep":{
                             "Type": "Set",
                             "Values":{"b_SleepAlarmClockActivated":false}
@@ -94,8 +96,8 @@
                     }
                 },
                 "AlarmClockSet":{
-                    "text": "Set Alarm Clock",
-                    "commands":{
+                    "Text": "Set Alarm Clock",
+                    "Commands":{
                         "alarmClockDialog":{
                             "Type":"Dialog",
                             "DialogID":"AlarmClock",
@@ -108,7 +110,7 @@
                     }
                 },
                 "outfit":{
-                    "text":"Change Outfit",
+                    "Text":"Change Outfit",
                     "Commands":{
                         "outfit":{
                             "Type":"Outfit"
@@ -129,14 +131,14 @@
             },
             "LocationConnections":{
                 "leave":{
-                    "targetLocationId": ".main",
+                    "TargetLocationId": ".main",
                     "Duration": 15
                 }
             },
             "Options":{
                 "Shower":{
-                    "text":"Shower",
-                    "commands":{
+                    "Text":"Shower",
+                    "Commands":{
                         "gte":{"Type":"Event","EventID":"bathShower."}
                     }
                 }
@@ -154,7 +156,7 @@
             },
             "LocationConnections":{
                 "leave":{
-                    "targetLocationId": ".main",
+                    "TargetLocationId": ".main",
                     "Duration": 15
                 }
             }

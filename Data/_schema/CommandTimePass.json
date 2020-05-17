@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "CommandTimePass",
+    "description": "CommandTimePass schema.",
+    "default": {},
+    "examples": [
+    ],
+    "required": [
+        "Duration",
+        "Type"
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "ActivityID": {"type": "string" },
+        "Duration": {"type":"integer","minimum": 0, "maximum": 315360000},
+        "Type": {"type": "string", "pattern": "^TimePass$" }
+    }
+}
