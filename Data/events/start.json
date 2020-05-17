@@ -1,11 +1,11 @@
 {
-    "id":"start",
+    "$schema": "../_schema/EventGroup.json",
     "EventStages":{
         "main":{
             "Text":{
-                "V": "Hallo mein Lieber!"
+                "Value": "Hallo mein Lieber!"
             },
-            "commands":{
+            "Commands":{
                 "gtl":{
                     "Type": "GotoLocation",
                     "LocationID":"start."

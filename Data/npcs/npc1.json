@@ -1,9 +1,10 @@
 {
-    "nameFirst": "Ulf",
-    "templateId": "test",
-    "genderVisible":"m",
-    "schedules":{
-        "1":{"l":"cityCenter.main","d":[0,1,2,3,4,5,6],"start":0,"end":2359}
+    "$schema": "../_schema/NPC.json",
+    "NameFirst": "Ulf",
+    "TemplateID": "test",
+    "GenderVisible":"m",
+    "Schedules":{
+        "cityCenter.main":{"0":{"TimeStart":0,"TimeEnd":2359}}
     },
     "TexturePath":{"Value": "npc/p(0).jpg"}
 }

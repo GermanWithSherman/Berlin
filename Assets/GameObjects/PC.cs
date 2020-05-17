@@ -178,7 +178,7 @@ public class PC : NPC
         else if (statCalories < caloriesToLoseWeight)
             weightChange = -70;
 
-        weight += weightChange;
+        Weight += weightChange;
 
         statCalories = 0;
         statCaloriesBurnt = 0;

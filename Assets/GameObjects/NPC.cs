@@ -16,6 +16,7 @@ public class NPC : Data, IInheritable, IModable
     public CText NameNick;
     public bool ShouldSerializeNameNick() => false;
 
+    [JsonProperty("BirthDate")]
     public DateTime? birthDate;
 
     [JsonIgnore]
@@ -33,29 +34,29 @@ public class NPC : Data, IInheritable, IModable
 
     public string GenderVisible;
 
-    public int height = 1700; //in mm
-    public int weight = 6000; //in g
+    public int Height = 1700; //in mm
+    public int Weight = 6000; //in g
 
     [JsonIgnore]
     public float BMI
     {
-        get => (weight/1000f)/(Mathf.Pow(height/1000f,2));
-        set => weight = Mathf.RoundToInt(value * Mathf.Pow(height / 1000f, 2)*1000);
+        get => (Weight/1000f)/(Mathf.Pow(Height/1000f,2));
+        set => Weight = Mathf.RoundToInt(value * Mathf.Pow(Height / 1000f, 2)*1000);
     }
 
     [JsonProperty("Schedules")]
     public ModableDictionary<TimeFilters> SchedulesDict = new ModableDictionary<TimeFilters>();
     //public ModableDictionary<Schedule> SchedulesDict = new ModableDictionary<Schedule>();
     public bool ShouldSerializeSchedulesDict() => false;
-    [JsonIgnore]
-    public IEnumerable<TimeFilters> Schedules { get => SchedulesDict.Values; }
+    //[JsonIgnore]
+    //public IEnumerable<TimeFilters> Schedules { get => SchedulesDict.Values; }
     //public IEnumerable<Schedule> Schedules { get => SchedulesDict.Values; }
 
-    public string TemplateId;
+    public string TemplateID;
     [JsonIgnore]
     public NPCTemplate Template
     {
-        get => GameManager.Instance.NPCTemplateCache[TemplateId];
+        get => GameManager.Instance.NPCTemplateCache[TemplateID];
     }
 
     [JsonIgnore]
@@ -84,11 +85,11 @@ public class NPC : Data, IInheritable, IModable
             case "birthDate":
                 return birthDate;
             case "height":
-                return height;
+                return Height;
             case "known":
                 return 1;
             case "weight":
-                return weight;
+                return Weight;
             case "BMI":
                 return BMI;
 
@@ -121,10 +122,10 @@ public class NPC : Data, IInheritable, IModable
                 birthDate = value;
                 break;
             case "height":
-                height = (int)value;
+                Height = (int)value;
                 break;
             case "weight":
-                weight = (int)value;
+                Weight = (int)value;
                 break;
             case "BMI":
                 BMI = value;
@@ -180,7 +181,7 @@ public class NPC : Data, IInheritable, IModable
     public IModable copyDeep()
     {
         var result = new NPC();
-        result.TemplateId = Modable.copyDeep(TemplateId);
+        result.TemplateID = Modable.copyDeep(TemplateID);
         result.birthDate = Modable.copyDeep(birthDate);
         result.NameFirst = Modable.copyDeep(NameFirst);
         result.NameLast = Modable.copyDeep(NameLast);

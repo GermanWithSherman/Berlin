@@ -7,7 +7,7 @@ using UnityEngine;
 public class NPCRaw : NPC
 {
     
-    public NPC generate()
+    /*public NPC generate()
     {
         GameManager gameManager = GameManager.Instance;
         NPC npc = gameManager.NPCTemplateCache[TemplateId].generate();
@@ -22,5 +22,5 @@ public class NPCRaw : NPC
         npc.TexturePath = TexturePath ?? npc.TexturePath;
 
         return npc;
-    }
+    }*/
 }

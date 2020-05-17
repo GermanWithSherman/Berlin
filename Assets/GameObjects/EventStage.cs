@@ -14,7 +14,7 @@ public class EventStage
 
     public CommandsCollection Commands = new CommandsCollection();
 
-    public Dictionary<string, Option> Options = new Dictionary<string, Option>();
+    public ModableDictionary<Option> Options = new ModableDictionary<Option> ();
 
     public void execute()
     {

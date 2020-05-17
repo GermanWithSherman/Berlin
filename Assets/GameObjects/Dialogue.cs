@@ -117,16 +117,27 @@ public class DialogueStage : ModableDictionary<DialogueLine>, IModable
 
 }
 
-public class DialogueStages : ModableDictionary<DialogueStage>, IModable
+public class DialogueStages :  IModable
 {
+    public ModableDictionary<DialogueStage> stages;
+
     public DialogueStage StartStage()
     {
-        return this["start"];
+        return stages["start"];
     }
 
-    public new IModable copyDeep()
+    public IModable copyDeep()
     {
-        return base.copyDeep<DialogueStages>();
+        var result = new DialogueStages();
+
+        result.stages = Modable.copyDeep(stages);
+
+        return result;
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new System.NotImplementedException();
     }
 }
 
@@ -166,7 +177,7 @@ public class DialogueTopic : IModable, IPrioritizable
 
 public class DialogueTopicsFile : IModable
 {
-    public ModableDictionary<DialogueTopic> topics;
+    public ModableDictionary<DialogueTopic> topics = new ModableDictionary<DialogueTopic>();
 
     public IModable copyDeep()
     {

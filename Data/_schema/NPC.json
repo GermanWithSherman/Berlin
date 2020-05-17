@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type":"object",
+    "required": [
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "$schema" :{"type":"string"},
+        "TemplateID": {"type":"string" },
+        "GenderVisible": {"type":"string" },
+        "NameNick": {"type":"string" },
+        "NameFirst": {"type":"string" },
+        "NameLast": {"type":"string" },
+        "Schedules": {
+            "patternProperties": {
+                "^.*$": {
+                    "$ref": "./TimeFilters.json"
+                }
+            }  
+        },
+        "TexturePath" : { "$ref": "./ConditionalString.json" }
+    }
+    
+}

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class TextExtended : MonoBehaviour
 {
-    private string _text;
+    private string _text = "";
 
     public RawImage ImagePrefab;
     public TextMeshProUGUI TextPrefab;

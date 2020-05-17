@@ -1,17 +1,20 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "anyOf": [
+        {"$ref": "./CommandBreak.json"},
         {"$ref": "./CommandConditional.json"},
+        {"$ref": "./CommandContinue.json"},
         {"$ref": "./CommandDialog.json"},
         {"$ref": "./CommandEvent.json"},
-        
+        {"$ref": "./CommandEventEnd.json"},
+        {"$ref": "./CommandFlush.json"},
         {"$ref": "./CommandGotoLocation.json"},
         
         {"$ref": "./CommandInterrupt.json"},
         
         {"$ref": "./CommandItemAdd.json"},
         {"$ref": "./CommandOutfit.json"},
-        
+        {"$ref": "./CommandPause.json"},
         {"$ref": "./CommandServices.json"},
         {"$ref": "./CommandSet.json"},
         {"$ref": "./CommandShop.json"},
@@ -19,5 +22,4 @@
         
         {"$ref": "./CommandTimePass.json"}
     ]
-
 }

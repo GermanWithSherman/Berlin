@@ -1,18 +1,18 @@
 {
-    "id":"shoppingFemale",
+    "$schema": "../_schema/EventGroup.json",
     "EventStages":{
         "main":{
             "Commands":{
                 "Pause":{"Type":"Break"}
             },
             "Text":{
-                "V": "There is nothing you want to buy here."
+                "Value": "There is nothing you want to buy here."
             },
             "Options":{
                 "okay":{
                     "text":"Okay",
                     "Commands":{
-                        "EventEnd":{"type":"EventEnd"}
+                        "EventEnd":{"Type":"EventEnd"}
                     }
                 }
             }

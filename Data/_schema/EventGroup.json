@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type":"object",
+    "required": ["EventStages"],
+    "additionalProperties": false,
+    "properties": {
+        "Default": { "type":"string"},
+        "EventStages":{
+            "additionalProperties": false,
+            "patternProperties": {
+                "^.*$": {
+                    "$ref": "./EventStage.json"
+                }
+            },
+            "minProperties":1
+        },
+        "$schema" :{"type":"string"}
+    }
+}

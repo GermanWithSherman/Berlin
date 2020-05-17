@@ -6,6 +6,7 @@
     "description": "CommandSet schema.",
     "default": {},
     "examples": [
+        {"Type":"Set","Values":{"DICT_ID":"NEW_VALUE"}}
     ],
     "required": [
         "Values",
@@ -19,8 +20,11 @@
                 "^.*$": {
                     "type":["boolean","null","number","string"]
                 }
-            }  
+            },
+            "examples": [
+                {"DICT_ID":"NEW_VALUE"}
+            ]
         },
-        "Type": {"type": "string", "pattern": "^Set$" }
+        "Type": {"type": "string", "enum": ["Set"] }
     }
 }

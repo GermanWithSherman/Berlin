@@ -9,12 +9,13 @@ using UnityEngine;
 [System.Serializable]
 public class EventGroup : IModable
 {
+    [JsonIgnore]
     public string id;
 
     public string Default = "main";
 
     [JsonProperty]
-    private Dictionary<string, EventStage> EventStages = new Dictionary<string, EventStage>();
+    private ModableDictionary<EventStage> EventStages = new ModableDictionary<EventStage>();
 
     public EventStage this[string key]
     {

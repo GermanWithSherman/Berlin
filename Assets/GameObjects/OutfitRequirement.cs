@@ -10,7 +10,7 @@ public class OutfitRequirement : IModable
     public ModableStringList ForbiddenStyles = new ModableStringList();
 
     [JsonProperty("Instruction")]
-    private string _instruction;
+    private string _instruction = "";
 
     [JsonIgnore]
     public string Instruction

@@ -10,11 +10,15 @@
     "additionalProperties": false,
     
     "properties": {
-        "$schema" :{"type":"string"}
-    },
-    "patternProperties": {
-        "^.*$": {
-            "$ref": "./DialogueStage.json"
+        "$schema" :{"type":"string"},
+        "stages":{
+            "type":"object",
+            "patternProperties": {
+                "^.*$": {
+                    "$ref": "./DialogueStage.json"
+                }
+            } 
         }
-    } 
+    }
+    
 }

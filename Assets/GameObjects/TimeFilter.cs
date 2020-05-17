@@ -58,6 +58,9 @@ public class TimeFilters : ModableDictionary<TimeFilter>, IModable
 {
     public bool isValid(DateTime dateTime)
     {
+        if (Count == 0)
+            return true;
+
         foreach(TimeFilter filter in Values)
         {
             if (filter.isValid(dateTime))

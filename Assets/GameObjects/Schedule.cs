@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[Obsolete]
 public class Schedule
 {
     /*public string l; // (Sub)LocationId

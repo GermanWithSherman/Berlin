@@ -21,7 +21,7 @@
         "Schedules": {
             "patternProperties": {
                 "^.*$": {
-                    "$ref": "./Schedule.json"
+                    "$ref": "./TimeFilters.json"
                 }
             }  
         }

@@ -1,19 +1,21 @@
 {
     "$schema": "../../_schema/DialogueLineFile.json",
-    "start":{
-        "1":{
-            "Text": "This is a text...",
-            "Options":{
-                "1":{
-                    "Text":"Example Text",
-                    "TargetStage":".test"
+    "stages": {
+        "start":{
+            "1":{
+                "Text": "This is a text...",
+                "Options":{
+                    "1":{
+                        "Text":"Example Text",
+                        "TargetStage":".test"
+                    }
                 }
             }
-        }
-    },
-    "test":{
-        "1":{
-            "Text": "End line..."
+        },
+        "test":{
+            "1":{
+                "Text": "End line..."
+            }
         }
     }
 }
