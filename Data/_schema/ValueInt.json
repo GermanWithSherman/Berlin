@@ -3,8 +3,8 @@
     "type": [
         "object"
     ],
-    "title": "Value<string>",
-    "description": "Value<string> schema.",
+    "title": "Value<int>",
+    "description": "Value<int> schema.",
     "default": {},
     "examples": [
 
@@ -17,12 +17,12 @@
         "Condition":{"type":"string"},
         "Key": {"type":"string"},
         "Value": {
-            "type": "string",
+            "type": "integer",
             "title": "The Value schema",
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "Subway Station"
+                0
             ]
         },
         "ValueType": {"$ref": "./ValueType.json"}

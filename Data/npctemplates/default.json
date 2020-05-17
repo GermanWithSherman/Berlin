@@ -1,4 +1,5 @@
 {
-    "nameFirst":{"V":"ASD"},
-    "nameLast":{"VT":"WeightedStringList","K":"names_last"}
+    "$schema": "../_schema/NPCTemplate.json",
+    "NameFirst":{"Value":"ASD"},
+    "NameLast":{"ValueType":"WeightedStringList","Key":"names_last"}
 }

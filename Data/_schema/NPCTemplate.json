@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "NPCTemplate",
+    "description": "NPCTemplate schema.",
+    "default": {},
+    "examples": [
+        
+    ],
+    "required": [
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "$schema" :{"type":"string"},
+        "Parent": {"type":"string" },
+        "Age": { "$ref": "./ValueInt.json" },
+        "GenderVisible": { "$ref": "./ValueString.json" },
+        "NameFirst": { "$ref": "./ValueString.json" },
+        "NameLast": { "$ref": "./ValueString.json" },
+        "Schedules": {
+            "patternProperties": {
+                "^.*$": {
+                    "$ref": "./Schedule.json"
+                }
+            }  
+        }
+    }
+}

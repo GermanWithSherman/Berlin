@@ -1,5 +1,6 @@
 {
-    "parent":"default",
-    "nameFirst":{"VT":"WeightedStringList","K":"names_first_female_90s"},
-    "age": {"V":18}
+    "$schema": "../_schema/NPCTemplate.json",
+    "Parent":"default",
+    "NameFirst":{"ValueType":"WeightedStringList","Key":"names_first_female_90s"},
+    "Age": {"Value":18}
 }

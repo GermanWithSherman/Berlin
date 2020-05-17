@@ -13,12 +13,12 @@ public class NPCTemplate : IModable, IInheritable
     [JsonIgnore]
     public NPCTemplate Parent{ get => GameManager.Instance.NPCTemplateCache[ParentID]; }
 
-    public Value<System.String> genderVisible;
+    public Value<string> GenderVisible;
 
-    public Value<System.String> nameFirst;
-    public Value<System.String> nameLast;
+    public Value<string> NameFirst;
+    public Value<string> NameLast;
 
-    public Value<int?> age;
+    public Value<int?> Age;
 
     public ModableDictionary<Schedule> Schedules = new ModableDictionary<Schedule>();
 
@@ -29,11 +29,11 @@ public class NPCTemplate : IModable, IInheritable
     {
         var result = new NPCTemplate();
 
-        result.nameFirst = Modable.copyDeep(nameFirst);
-        result.nameLast = Modable.copyDeep(nameLast);
-        result.age = Modable.copyDeep(age);
+        result.NameFirst = Modable.copyDeep(NameFirst);
+        result.NameLast = Modable.copyDeep(NameLast);
+        result.Age = Modable.copyDeep(Age);
         result.Schedules = Modable.copyDeep(Schedules);
-        result.genderVisible = Modable.copyDeep(genderVisible);
+        result.GenderVisible = Modable.copyDeep(GenderVisible);
 
         return result;
     }
@@ -57,10 +57,10 @@ public class NPCTemplate : IModable, IInheritable
 
         NPC npc = new NPC();
 
-        npc.nameFirst = nameFirst;
-        npc.nameLast = nameLast;
-        npc.age = ((int?)age).GetValueOrDefault(30);
-        npc.genderVisible = genderVisible;
+        npc.NameFirst = NameFirst;
+        npc.NameLast = NameLast;
+        npc.age = ((int?)Age).GetValueOrDefault(30);
+        npc.GenderVisible = GenderVisible;
 
 
         return npc;
@@ -105,11 +105,11 @@ public class NPCTemplate : IModable, IInheritable
 
     private void mod(NPCTemplate original, NPCTemplate mod)
     {
-        nameFirst = Modable.mod(original.nameFirst, mod.nameFirst);
-        nameLast = Modable.mod(original.nameLast, mod.nameLast);
-        age = Modable.mod(original.age, mod.age);
+        NameFirst = Modable.mod(original.NameFirst, mod.NameFirst);
+        NameLast = Modable.mod(original.NameLast, mod.NameLast);
+        Age = Modable.mod(original.Age, mod.Age);
         Schedules = Modable.mod(original.Schedules, mod.Schedules);
-        genderVisible = Modable.mod(original.genderVisible, mod.genderVisible);
+        GenderVisible = Modable.mod(original.GenderVisible, mod.GenderVisible);
     }
 
     [OnDeserialized]

@@ -15,6 +15,7 @@
     
     "properties": {
         "Condition":{"type":"string"},
+        "Key": {"type":"string"},
         "Value": {
             "type": "boolean",
             "title": "The Value schema",
@@ -23,6 +24,7 @@
             "examples": [
                 true
             ]
-        }
+        },
+        "ValueType": {"$ref": "./ValueType.json"}
     }
 }

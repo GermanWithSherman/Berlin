@@ -9,8 +9,8 @@ public class NPC : Data, IInheritable, IModable
     [JsonIgnore]
     public string id;
 
-    public string nameFirst;
-    public string nameLast;
+    public string NameFirst;
+    public string NameLast;
 
 
     public CText NameNick;
@@ -31,7 +31,7 @@ public class NPC : Data, IInheritable, IModable
         set => birthDate = GameManager.Instance.timeWithAge(value);
     }
 
-    public string genderVisible;
+    public string GenderVisible;
 
     public int height = 1700; //in mm
     public int weight = 6000; //in g
@@ -74,11 +74,11 @@ public class NPC : Data, IInheritable, IModable
             case "age":
                 return age;
             case "genderVisible":
-                return genderVisible;
+                return GenderVisible;
             case "nameFirst":
-                return nameFirst;
+                return NameFirst;
             case "nameLast":
-                return nameLast;
+                return NameLast;
             case "nameNick":
                 return CText.Text(NameNick);
             case "birthDate":
@@ -109,13 +109,13 @@ public class NPC : Data, IInheritable, IModable
                 age = value;
                 break;
             case "genderVisible":
-                genderVisible = value;
+                GenderVisible = value;
                 break;
             case "nameFirst":
-                nameFirst = value;
+                NameFirst = value;
                 break;
             case "nameLast":
-                nameLast = value;
+                NameLast = value;
                 break;
             case "birthDate":
                 birthDate = value;
@@ -163,11 +163,11 @@ public class NPC : Data, IInheritable, IModable
     {
         birthDate = Modable.mod(original.birthDate, mod.birthDate);
 
-        nameFirst = Modable.mod(original.nameFirst, mod.nameFirst);
+        NameFirst = Modable.mod(original.NameFirst, mod.NameFirst);
 
-        nameLast = Modable.mod(original.nameLast, mod.nameLast);
+        NameLast = Modable.mod(original.NameLast, mod.NameLast);
 
-        genderVisible = Modable.mod(original.genderVisible, mod.genderVisible);
+        GenderVisible = Modable.mod(original.GenderVisible, mod.GenderVisible);
 
         SchedulesDict = Modable.mod(original.SchedulesDict, mod.SchedulesDict);
 
@@ -182,10 +182,10 @@ public class NPC : Data, IInheritable, IModable
         var result = new NPC();
         result.TemplateId = Modable.copyDeep(TemplateId);
         result.birthDate = Modable.copyDeep(birthDate);
-        result.nameFirst = Modable.copyDeep(nameFirst);
-        result.nameLast = Modable.copyDeep(nameLast);
+        result.NameFirst = Modable.copyDeep(NameFirst);
+        result.NameLast = Modable.copyDeep(NameLast);
         result.NameNick = Modable.copyDeep(NameNick);
-        result.genderVisible = Modable.copyDeep(genderVisible);
+        result.GenderVisible = Modable.copyDeep(GenderVisible);
         result.SchedulesDict = Modable.copyDeep(SchedulesDict);
         result.TexturePath = Modable.copyDeep(TexturePath);
         //TODO: etc.
