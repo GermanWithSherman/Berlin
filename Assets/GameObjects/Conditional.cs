@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,10 +40,15 @@ public abstract class Conditional : IModable
 
 public class Conditional<T> : Conditional
 {
+    public enum ConditionalMode { Default, Enum }
+
     [JsonProperty]
     private T Value = default(T);
 
     public ModableDictionary<Value<T>> Values = new ModableDictionary<Value<T>>();
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public ConditionalMode Mode = ConditionalMode.Default;
 
     public static implicit operator T(Conditional<T> conditional)
     {
@@ -71,17 +77,27 @@ public class Conditional<T> : Conditional
         if (Value != null && !Value.Equals(default(T)))
             return Value;
 
-        List<Value<T>> values = Values.Values.ToList();
-        values.Sort(Value<T>.ComparePriorities);
-
-
-        foreach (Value<T> value in values)
+        switch (Mode)
         {
-            if (value.Condition.evaluate(data))
-                return value.value(data);
-        }
+            case (ConditionalMode.Default):
+                List<Value<T>> values = Values.Values.ToList();
+                values.Sort(Value<T>.ComparePriorities);
 
-        Debug.Log("No valid value, returning default");
+
+                foreach (Value<T> value in values)
+                {
+                    if (value.Condition.evaluate(data))
+                        return value.value(data);
+                }
+
+                Debug.Log("No valid value, returning default");
+
+                return default;
+            case (ConditionalMode.Enum):
+                string index = (string)data["KEY"];
+                return Values[index].value(data);
+
+        }
 
         return default;
     }

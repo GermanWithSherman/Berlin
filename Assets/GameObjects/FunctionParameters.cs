@@ -19,6 +19,18 @@ public class FunctionParameters : Data
         data.Add(key2, value2);
     }
 
+    public FunctionParameters(Data data,IEnumerable<string> keys)
+    {
+        foreach (string key in keys)
+        {
+            string[] keyparts = key.Split(':');
+            if(keyparts.Length == 1)
+                this.data.Add(key, data[key]);
+            else
+                this.data.Add(keyparts[0], data[keyparts[1]]);
+        }
+    }
+
     public void Add(string key, dynamic value)
     {
         data.Add(key,value);

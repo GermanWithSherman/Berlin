@@ -68,22 +68,60 @@ public class CText : IModable
     private static string parse(string s, Data gameData)
     {
         string result = String.Empty;
-        string pattern = @"{([\w\.]*)(?>\|(\w+))?}";
+        //string pattern = @"{([\w\.]*)(?>\|(\w+))?}";
+        string pattern = @"{(\>?[\w\.\(\),\\:,""]*)(?>\| (\w +))?}";
+        //string functionPattern = @"^>([\w]+)\(([\w\.\(\),\\""]+(?>,[\w\.\(\),\\""]+)*)\)$";
+        string functionPattern = @"^\>(\w+)\(((?>\w+:)?(?>\\"")?\w+(?>\\"")?(?>,(?>\w+:)?(?>\\"")?\w+(?>\\"")?)*)\)$";
+
         string input = s;
 
         int pos = 0;
 
         foreach (Match match in Regex.Matches(input, pattern, RegexOptions.IgnoreCase))
         {
-            int length = match.Index - pos;
-            result += input.Substring(pos, length);
+            try
+            {
+                int length = match.Index - pos;
+                result += input.Substring(pos, length);
 
-            if (match.Groups.Count > 2 && !String.IsNullOrEmpty(match.Groups[2].Value))
-                result += format(gameData[match.Groups[1].Value], match.Groups[2].Value);
-            else
-                result += gameData[match.Groups[1].Value];
+                string dataString = match.Groups[1].Value;
+
+                dynamic d;
+
+                if (dataString[0] == '>')
+                {
+                    /*Match functionMatch = Regex.Match(dataString, functionPattern, RegexOptions.IgnoreCase);
+                    string functionID = functionMatch.Groups[1].Value;
+                    string functionParametersString = functionMatch.Groups[2].Value;*/
+
+                    int indexOfOpen = dataString.IndexOf('(');
+                    int indexOfClose= dataString.LastIndexOf(')');
+
+                    string functionID = dataString.Substring(1,indexOfOpen-1);
+                    string functionParametersString = dataString.Substring(indexOfOpen+1, indexOfClose-indexOfOpen-1);
+
+                    FunctionParameters functionParameters = new FunctionParameters(gameData, functionParametersString.Split(','));
+
+                    dataString = GameManager.Instance.FunctionsLibrary.functionExecute(functionID, functionParameters);
+
+                    d = dataString;
+                }
+                else
+                {
+                    d = gameData[match.Groups[1].Value];
+                }
+
+                if (match.Groups.Count > 2 && !String.IsNullOrEmpty(match.Groups[2].Value))
+                    result += format(d, match.Groups[2].Value);
+                else
+                    result += d;
+                
+            }
+            catch(Exception e)
+            {
+                result += "{ERROR: "+e.GetType()+" }";
+            }
             pos = match.Index + match.Length;
-            //match.Groups[1].Value, match.Index
         }
 
         result += input.Substring(pos);

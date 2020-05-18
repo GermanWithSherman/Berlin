@@ -9,8 +9,11 @@
         {"Type":"Set","Values":{"DICT_ID":"NEW_VALUE"}}
     ],
     "required": [
-        "Values",
         "Type"
+    ],
+    "anyOf": [
+        {"required": ["Values"]},
+        {"required": ["ValuesFromLists"]}
     ],
     "additionalProperties": false,
     
@@ -23,6 +26,16 @@
             },
             "examples": [
                 {"DICT_ID":"NEW_VALUE"}
+            ]
+        },
+        "ValuesFromLists":{
+            "type":"object", "patternProperties": {
+                "^.*$": {
+                    "type":"string"
+                }
+            },
+            "examples": [
+                {"DICT_ID":"LIST_ID"}
             ]
         },
         "Type": {"type": "string", "enum": ["Set"] }
