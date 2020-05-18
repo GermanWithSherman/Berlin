@@ -1,6 +1,8 @@
 {
-    "mother_ask4money":{
-        "Title": "Ask for Money",
-        "NPCFilter": { "IDs" : ["mother"] }
+    "topics":{
+        "mother_ask4money":{
+            "Title": "Ask for Money",
+            "NPCFilter": { "IDs" : ["mother"] }
+        }
     }
 }
