@@ -47,6 +47,9 @@ public class CommandConverter : JsonConverter
             case (Command.Type.Dialog):
                 result = new CommandDialog();
                 break;
+            case (Command.Type.Dialogue):
+                result = new CommandDialogue();
+                break;
             case (Command.Type.Event):
                 result = new CommandEvent();
                 break;

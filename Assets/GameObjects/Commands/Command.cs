@@ -13,7 +13,7 @@ public abstract class Command
     public static bool pauseActive = false;
     public static CommandsCollection pausedCommands = new CommandsCollection();
 
-    public enum Type { None, Debug, Break, Pause, Continue, Flush, Consume, Sleep, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass, ItemAdd, Conditional }
+    public enum Type { None, Debug, Break, Pause, Continue, Flush, Consume, Sleep, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass, ItemAdd, Conditional, Dialogue }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public Type type = Type.None;

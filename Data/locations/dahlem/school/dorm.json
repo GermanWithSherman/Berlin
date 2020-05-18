@@ -1,0 +1,180 @@
+{
+    "subLocations":{
+        "main":{
+            "Label":"Dorm",
+            "Text":{
+                "Value": "Dorm"
+            },
+            "TexturePath":{"Value":"locations/dahlem/school/dorm.jpg"},
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": "dahlem/school/school.",
+                    "Duration": 120
+                },
+                "enter": {
+                    "TargetLocationId": ".0_hallway",
+                    "Duration": 60
+                }
+            }
+        },
+        "0_hallway":{
+            "Label":"Dorm",
+            "Text":{"Value": "Dorm"},
+            "TexturePath":{"Value":"locations/dahlem/school/dormEntry.jpg"},
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".",
+                    "Duration": 60
+                },
+                "1_hallway": {
+                    "TargetLocationId": ".1_hallway",
+                    "Duration": 30,
+                    "Label": "Upstairs"
+                },
+                "0_kitchen": {
+                    "TargetLocationId": ".0_kitchen",
+                    "Duration": 30
+                },
+                "0_living": {
+                    "TargetLocationId": ".0_living",
+                    "Duration": 30
+                },
+                "0_office": {
+                    "TargetLocationId": ".0_office",
+                    "Duration": 30
+                }
+            }
+        },
+        "0_kitchen":{
+            "Label":"Kitchen",
+            "Text":{"Value": "Kitchen"},
+            "TexturePath":{"Value":"locations/dahlem/school/dormKitchen.jpg"},
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".0_hallway",
+                    "Duration": 30
+                }
+            }
+        },
+        "0_living":{
+            "Label":"Living Room",
+            "Text":{"Value": "Living Room"},
+            "TexturePath":{"Value":"locations/dahlem/school/dormLiving.jpg"},
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".0_hallway",
+                    "Duration": 30
+                }
+            }
+        },
+        "0_office":{
+            "Label":"Office",
+            "Text":{"Value": "Office"},
+            "OpeningTimes": {
+                "0": {
+                    "TimeStart": 600,
+                    "TimeEnd": 2000
+                }
+            },
+            "TexturePath":{"Value":"locations/dahlem/school/dormBureau.jpg"},
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".0_hallway",
+                    "Duration": 30
+                }
+            },
+            "onShow": {
+                "secretary_intro":{
+                    "Type": "Conditional",
+                    "Condition": "b_school_secretary_introduced = false",
+                    "Commands": {
+                        "forcegreet":{
+                            "Type":"Dialogue",
+                            "NPCID": "dorm_secretary",
+                            "TopicID": "dorm_secretary_introduction"
+                        }
+                    }
+                }
+            }
+        },
+        "1_hallway":{
+            "Label":"Hallway 1. Floor",
+            "Text":{"Value": "Hallway 1. Floor"},
+            "TexturePath":{"Value":"locations/dahlem/school/dormHallway.jpg"},
+            "LocationConnections": {
+                "0_hallway": {
+                    "TargetLocationId": ".0_hallway",
+                    "Duration": 30,
+                    "Label": "Downstairs"
+                },
+                "2_hallway": {
+                    "TargetLocationId": ".2_hallway",
+                    "Duration": 30,
+                    "Label": "Upstairs"
+                }
+            }
+        },
+        "2_hallway":{
+            "Label":"Hallway 2. Floor",
+            "Text":{"Value": "Hallway 2. Floor"},
+            "TexturePath":{"Value":"locations/dahlem/school/dormHallway.jpg"},
+            "LocationConnections": {
+                "1_hallway": {
+                    "TargetLocationId": ".1_hallway",
+                    "Duration": 30,
+                    "Label": "Downstairs"
+                },
+                "3_hallway": {
+                    "TargetLocationId": ".3_hallway",
+                    "Duration": 30,
+                    "Label": "Upstairs"
+                }
+            }
+        },
+        "3_hallway":{
+            "Label":"Hallway 3. Floor",
+            "Text":{"Value": "Hallway 3. Floor"},
+            "TexturePath":{"Value":"locations/dahlem/school/dormHallway.jpg"},
+            "LocationConnections": {
+                "2_hallway": {
+                    "TargetLocationId": ".2_hallway",
+                    "Duration": 30,
+                    "Label": "Downstairs"
+                },
+                "4_hallway": {
+                    "TargetLocationId": ".4_hallway",
+                    "Duration": 30,
+                    "Label": "Upstairs"
+                }
+            }
+        },
+        "4_hallway":{
+            "Label":"Hallway 4. Floor",
+            "Text":{"Value": "Hallway 4. Floor"},
+            "TexturePath":{"Value":"locations/dahlem/school/dormHallway.jpg"},
+            "LocationConnections": {
+                "3_hallway": {
+                    "TargetLocationId": ".3_hallway",
+                    "Duration": 30,
+                    "Label": "Downstairs"
+                },
+                "uniformStorage": {
+                    "TargetLocationId": ".4_uniformStorage",
+                    "Duration": 30
+                }
+            }
+        },
+        "4_uniformStorage":{
+            "Label":"Uniform Storage",
+            "Text":{"Value": "Uniform Storage"},
+            "TexturePath":{"Value":"locations/dahlem/school/uniformStorage.jpg"},
+            "LocationConnections": {
+                "Leave": {
+                    "TargetLocationId": ".4_hallway",
+                    "Duration": 30,
+                    "Label": "Leave"
+                }
+            }
+        }
+    }
+}

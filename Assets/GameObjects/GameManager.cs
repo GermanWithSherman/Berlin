@@ -173,6 +173,11 @@ public class GameManager : MonoBehaviour
         UIDialogue.show(npc);
     }
 
+    public void dialogueShow(NPC npc, DialogueTopic topic)
+    {
+        UIDialogue.show(npc, topic);
+    }
+
     public void eventEnd()
     {
         GameData.currentEventStage = null;

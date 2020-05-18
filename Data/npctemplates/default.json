@@ -1,5 +1,3 @@
 {
-    "$schema": "../_schema/NPCTemplate.json",
-    "NameFirst":{"Value":"ASD"},
     "NameLast":{"ValueType":"WeightedStringList","Key":"names_last"}
 }

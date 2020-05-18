@@ -80,7 +80,7 @@ public class UIDialogue : MonoBehaviour
         Data = new DataComposed(dict);
     }
 
-    public void show(NPC npc)
+    public void show(NPC npc, DialogueTopic topic = null)
     {
         _npc = npc;
 
@@ -91,9 +91,16 @@ public class UIDialogue : MonoBehaviour
         topicListShow(dialogueTopics);
         optionListClear();
 
-        DialogueTopic greetingTopic = GameManager.Instance.DialogueTopicLibrary.getGreetingTopicByNPC(_npc);
-        if (greetingTopic != null)
-            topicShow(greetingTopic);
+        if (topic == null)
+        {
+            DialogueTopic greetingTopic = GameManager.Instance.DialogueTopicLibrary.getGreetingTopicByNPC(_npc);
+            if (greetingTopic != null)
+                topicShow(greetingTopic);
+        }
+        else
+        {
+            topicShow(topic);
+        }
 
         gameObject.SetActive(true);
 

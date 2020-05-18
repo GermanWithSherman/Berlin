@@ -5,6 +5,7 @@
         {"$ref": "./CommandConditional.json"},
         {"$ref": "./CommandContinue.json"},
         {"$ref": "./CommandDialog.json"},
+        {"$ref": "./CommandDialogue.json"},
         {"$ref": "./CommandEvent.json"},
         {"$ref": "./CommandEventEnd.json"},
         {"$ref": "./CommandFlush.json"},

@@ -1,13 +1,44 @@
 {
     "subLocations":{
         "main":{
-            "Label":"Hallway",
+            "Label":"School",
             "Text":{
-                "Value": "Hallway"
+                "Value": "School"
             },
             "TexturePath":{
                 "Values":{
-                    "default":{"Value":"locations/apartments/testHallway.jpg"}
+                    "default":{"Value":"locations/dahlem/school/schoolExterior.jpg"}
+                }
+            },
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": "dahlem/public.",
+                    "Duration": 300
+                },
+                "dorm":{
+                    "TargetLocationId": "dahlem/school/dorm.",
+                    "Duration": 120
+                },
+                "sportsfield":{
+                    "TargetLocationId": ".sportsfield",
+                    "Duration": 300
+                }
+            }
+        },
+        "sportsfield":{
+            "Label":"Sportsfield",
+            "Text":{
+                "Value": "Sportsfield"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"Value":"locations/dahlem/school/sportsfield.png"}
+                }
+            },
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".",
+                    "Duration": 240
                 }
             }
         }

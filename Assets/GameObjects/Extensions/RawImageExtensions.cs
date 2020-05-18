@@ -39,8 +39,6 @@ public static class RawImageExtensions
                 h = w / ratio;
             }
 
-            Debug.Log($"{parent.rect.width} {bounds.width} {w}");
-            Debug.Log($"{parent.rect.height} {bounds.height} {h}");
         }
         imageTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, w);
         imageTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, h);

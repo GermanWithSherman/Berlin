@@ -146,6 +146,7 @@ public class DialogueTopic : IModable, IPrioritizable
     [JsonIgnore]
     public string ID;
 
+    public bool IsEventExclusive = false;
     public bool IsGreeting = false;
 
     public NPCFilter NPCFilter = new NPCFilter();

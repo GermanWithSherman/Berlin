@@ -1,0 +1,112 @@
+{
+    
+    "subLocations":{
+        "main":{
+            "Label":"Dahlem",
+            "Text":{
+                "Value": "Dahlem"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"Value":"locations/dahlem/public/dahlem.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "subway":{
+                    "TargetLocationId": ".subway",
+                    "Duration": 180
+                },
+                "school":{
+                    "TargetLocationId": "dahlem/school/school.",
+                    "Duration": 300
+                },
+                "church":{
+                    "TargetLocationId": ".church",
+                    "Duration": 180
+                },
+                "park":{
+                    "TargetLocationId": ".park",
+                    "Duration": 180
+                }
+            }
+        },
+        "church":{
+            "Label":"Church",
+            "Text":{
+                "Value": "Church"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"Value":"locations/dahlem/public/church.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "leave":{
+                    "TargetLocationId": ".main",
+                    "Duration": 180
+                },
+                "inside":{
+                    "TargetLocationId": ".church_inside",
+                    "Duration": 120
+                }
+            }
+        },
+        "church_inside":{
+            "Label":"Church",
+            "Text":{
+                "Value": "Church Inside"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"Value":"locations/dahlem/public/churchInterior.jpg"}
+                }
+            },
+            "OpeningTimes": {
+                "0": {
+                    "TimeStart": 600,
+                    "TimeEnd": 2000
+                }
+            },
+            "LocationConnections":{
+                "leave":{
+                    "TargetLocationId": ".church",
+                    "Duration": 120
+                }
+            }
+        },
+        "park":{
+            "Label":"Park",
+            "Text":{
+                "Value": "Park"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"Value":"locations/dahlem/public/park.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "leave":{
+                    "TargetLocationId": ".main",
+                    "Duration": 180
+                }
+            }
+        },
+        "subway":{
+            "Label":"Subway Station",
+            "Text":{
+                "Value": "Subway Station"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"Value":"locations/dahlem/public/subway.jpg"}
+                }
+            },
+            "LocationConnections":{
+                "leave":{
+                    "TargetLocationId": ".main",
+                    "Duration": 180
+                }
+            }
+        }
+    }
+}

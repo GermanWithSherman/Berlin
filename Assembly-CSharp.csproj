@@ -84,6 +84,7 @@
     <Compile Include="Assets\GameObjects\Commands\CommandConverter.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandDebug.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandDialog.cs" />
+    <Compile Include="Assets\GameObjects\Commands\CommandDialogue.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandEvent.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandEventEnd.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandFlush.cs" />

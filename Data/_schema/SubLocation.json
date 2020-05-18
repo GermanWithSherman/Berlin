@@ -23,7 +23,15 @@
                 "^.*$": {
                     "$ref": "./LocationConnection.json"
                 }
-            }   
+            },
+            "examples": [
+                {
+                    "LocationConnectionID":{
+                        "TargetLocationId": "LocationID.SublocationID",
+                        "Duration": 300
+                    }
+                }
+            ]
         },
         "OpeningTimes":{ "$ref": "./TimeFilters.json" },
         "Options":{
