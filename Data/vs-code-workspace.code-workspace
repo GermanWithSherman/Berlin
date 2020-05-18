@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"json.schemas": [
+			{"fileMatch": ["dialogue/lines/*.json"],"url": "./_schema/DialogueLineFile.json"},
+			{"fileMatch": ["dialogue/topics/*.json"],"url": "./_schema/DialogueTopicFile.json"},
+			{"fileMatch": ["events/*.json"],"url": "./_schema/EventGroup.json"},
+			{"fileMatch": ["functions/*.json"],"url": "./_schema/Function.json"},
+			{"fileMatch": ["interrupts/*.json"],"url": "./_schema/InterruptFile.json"},
+			{"fileMatch": ["items/*.json"],"url": "./_schema/ItemsFile.json"},
+			{"fileMatch": ["locations/*.json"],"url": "./_schema/Location.json"},
+			{"fileMatch": ["npcs/*.json"],"url": "./_schema/NPC.json"},
+			{"fileMatch": ["npctemplates/*.json"],"url": "./_schema/NPCTemplate.json"},
+			{"fileMatch": ["servicepoints/*.json"],"url": "./_schema/ServicePoint.json"},
+			{"fileMatch": ["shoptypes/*.json"],"url": "./_schema/ShopType.json"}
+		]
+
+	},
+	
+}

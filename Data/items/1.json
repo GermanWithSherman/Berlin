@@ -1,5 +1,4 @@
 {
-    "$schema": "../_schema/ItemsFile.json",
     "items":{
         "bra1":{
             "Label":"Bra 1",

@@ -43,7 +43,7 @@ public class Servicepoint : IModable
         }
     }
 
-    public string title;
+    public string Title;
 
     public void mod(IModable modable)
     {

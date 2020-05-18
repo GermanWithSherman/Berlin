@@ -1,15 +1,15 @@
 {
     "Values":{
         "Naked":{
-            "V": "Naked",
-            "C":"(_clothes=\"None\") AND (_panties=\"None\")"
+            "Value": "Naked",
+            "Condition":"(_clothes=\"None\") AND (_panties=\"None\")"
         },
         "Underwear":{
-            "V": "Underwear",
-            "C":"(_clothes=\"None\") AND (_panties!=\"None\")"
+            "Value": "Underwear",
+            "Condition":"(_clothes=\"None\") AND (_panties!=\"None\")"
         },
         "Default":{
-            "V": "Casual"
+            "Value": "Casual"
         }
     }
 }

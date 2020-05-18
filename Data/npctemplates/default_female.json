@@ -1,5 +1,4 @@
 {
-    "$schema": "../_schema/NPCTemplate.json",
     "Parent":"default",
     "NameFirst":{"ValueType":"WeightedStringList","Key":"names_first_female_90s"},
     "GenderVisible":{"ValueType":"Plain","Value":"f"}

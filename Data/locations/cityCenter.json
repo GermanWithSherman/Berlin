@@ -1,5 +1,4 @@
 {
-    "$schema": "../_schema/Location.json",
     "subLocations":{
         "main":{
             "Label":{"Value":"City Center"},

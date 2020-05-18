@@ -1,5 +1,4 @@
 {
-    "$schema": "../_schema/NPC.json",
     "TemplateID": "default_female",
     "NameNick": "Mum",
     "Schedules":{

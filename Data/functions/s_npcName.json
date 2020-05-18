@@ -1,28 +1,28 @@
 {
     "Values":{
         "known":{
-            "C" :"_NPC.known = 1",
-            "VT": "Plain",
-            "CV":{
+            "Condition" :"_NPC.known = 1",
+            "ValueType": "Plain",
+            "ConditionalValue":{
                 "Values":{
                     "hasNickName":{
-                        "C" :"_NPC.nameNick != \"\"",
-                        "VT": "Interpolate",
-                        "K":"{_NPC.nameFirst} {_NPC.nameLast}\n<i>{_NPC.nameNick}</i>"
+                        "Condition" :"_NPC.nameNick != \"\"",
+                        "ValueType": "Interpolate",
+                        "Key":"{_NPC.nameFirst} {_NPC.nameLast}\n<i>{_NPC.nameNick}</i>"
                     },
                     "noNick":{
-                        "VT": "Interpolate",
-                        "K":"{_NPC.nameFirst} {_NPC.nameLast}"
+                        "ValueType": "Interpolate",
+                        "Key":"{_NPC.nameFirst} {_NPC.nameLast}"
                     }
                 }
             }
         },
         "unknown":{
-            "CV":{
+            "ConditionalValue":{
                 "Values":{
-                    "0": {"C":"_NPC.age < 18", "V": "A kid"},
-                    "18f": {"C":"(_NPC.age >= 18) AND (_NPC.genderVisible = \"f\")", "V": "A woman"},
-                    "18m": {"C":"(_NPC.age >= 18) AND (_NPC.genderVisible = \"m\")", "V": "A man"}
+                    "0": {"Condition":"_NPC.age < 18", "Value": "A kid"},
+                    "18f": {"Condition":"(_NPC.age >= 18) AND (_NPC.genderVisible = \"f\")", "Value": "A woman"},
+                    "18m": {"Condition":"(_NPC.age >= 18) AND (_NPC.genderVisible = \"m\")", "Value": "A man"}
                 }
             }
         }

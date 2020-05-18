@@ -15,6 +15,7 @@
     
     "properties": {
         "Condition":{"type":"string"},
+        "ConditionalValue": {"$ref": "./ConditionalString.json"},
         "Key": {"type":"string"},
         "Value": {
             "type": "string",
