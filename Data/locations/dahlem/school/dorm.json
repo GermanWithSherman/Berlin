@@ -90,8 +90,8 @@
                     "Commands": {
                         "forcegreet":{
                             "Type":"Dialogue",
-                            "NPCID": "dorm_secretary",
-                            "TopicID": "dorm_secretary_introduction"
+                            "NPCID": "school_dorm_secretary",
+                            "TopicID": "school_dorm_secretary_introduction"
                         }
                     }
                 }

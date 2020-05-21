@@ -17,6 +17,7 @@
     "additionalProperties": false,
     
     "properties": {
+        "JoinWith": {"type":"string"},
         "Value": {
             "$id": "#/properties/Text/properties/Value",
             "type": "string",
@@ -26,6 +27,13 @@
             "examples": [
                 "Subway Station"
             ]
+        },
+        "Values":{
+            "patternProperties": {
+                "^.*$": {
+                    "$ref": "./CText.json"
+                }
+            }  
         }
     }
 }

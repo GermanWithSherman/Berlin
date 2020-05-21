@@ -1,0 +1,14 @@
+{
+    "TemplateID": "default_female",
+    "TexturePath": {
+        "Value": "npc/school/staff/psychologist_portrait.jpg"
+    },
+    "Schedules":{
+        "dahlem/school/school.psychologistOffice": {
+            "0": {
+                "TimeStart": 0,
+                "TimeEnd": 2359
+            }
+        }
+    }
+}

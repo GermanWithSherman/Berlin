@@ -13,7 +13,8 @@
     ],
     "anyOf": [
         {"required": ["Values"]},
-        {"required": ["ValuesFromLists"]}
+        {"required": ["ValuesFromLists"]},
+        {"required": ["ValuesFromSetters"]}
     ],
     "additionalProperties": false,
     
@@ -38,6 +39,13 @@
                 {"DICT_ID":"LIST_ID"}
             ]
         },
+        "ValuesFromSetters":{
+            "type":"object", "patternProperties": {
+                "^.*$": {
+                    "$ref": "./ValueSetter.json"
+                }
+            }
+        },        
         "Type": {"type": "string", "enum": ["Set"] }
     }
 }

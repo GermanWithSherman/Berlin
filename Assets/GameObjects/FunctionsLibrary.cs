@@ -18,31 +18,6 @@ public class FunctionsLibrary : Library<Conditional<string>>
     }
 
 
-    /*private void loadFromFolder(string path)
-    {
-        if (!Directory.Exists(path))
-        {
-            Debug.LogError($"Path {path} does not exist");
-            return;
-        }
-
-        string[] filePaths = Directory.GetFiles(path);
-
-        foreach (string filePath in filePaths)
-        {
-
-            JObject deserializationData = GameManager.File2Data(filePath);
-            
-
-            if (Path.GetFileName(filePath).StartsWith("s_"))
-            {
-                Conditional<string> conditional = deserializationData.ToObject<Conditional<string>>();
-                stringFunctions.Add(Path.GetFileNameWithoutExtension(filePath), conditional);
-            }
-        }
-
-    }*/
-
     public string functionExecute(string id, FunctionParameters parameters)
     {
         if (!_dict.ContainsKey(id))

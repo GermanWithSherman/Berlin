@@ -1,0 +1,8 @@
+{
+    "topics":{
+        "school_psychologist_introduction":{
+            "IsGreeting": true,
+            "IsEventExclusive":true
+        }
+    }
+}

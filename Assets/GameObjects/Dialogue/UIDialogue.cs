@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIDialogue : MonoBehaviour
 {
@@ -9,13 +12,17 @@ public class UIDialogue : MonoBehaviour
 
     private DialogueTopic _currentTopic;
 
-    public TextMeshProUGUI Text;
+    //public TextMeshProUGUI Text;
+    public TextExtended Text;
+    public ScrollRect TextScrollRect;
 
     public UIDialogueOption OptionPrefab;
     public UIDialogueTopic TopicPrefab;
 
     public Transform OptionListTransform;
     public Transform TopicListTransform;
+
+    public GameObject FinishButton;
 
 
     public Data Data; //Data used to display text
@@ -24,6 +31,7 @@ public class UIDialogue : MonoBehaviour
     public void close()
     {
         hide();
+        GameManager.Instance.uiUpdate();
     }
 
     public void finish()
@@ -36,17 +44,85 @@ public class UIDialogue : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public string lineParse(string input)
+    {
+        string pattern = @"<(\w+)(?>=(\w+))?>(.*?)</\1>";
+        string result = String.Empty;
+        int pos = 0;
+
+        foreach (Match match in Regex.Matches(input, pattern, RegexOptions.IgnoreCase))
+        {
+            try
+            {
+                int length = match.Index - pos;
+                result += input.Substring(pos, length);
+
+                string tagType = match.Groups[1].Value;
+                string parameter = match.Groups[2].Value;
+                string content = match.Groups[3].Value;
+                switch (tagType)
+                {
+                    case ("speaker"):
+                        result += "<i><b>" + content + "</b></i>";
+                        //NPC speaker = Data[parameter];
+                        //result += speaker.GenderVisible;
+                        break;
+                    default:
+                        result += $"<{tagType}>{lineParse(content)}</{tagType}>";
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                result += "{ERROR: " + e.GetType() + " }";
+            }
+            pos = match.Index + match.Length;
+        }
+
+        result += input.Substring(pos);
+
+        return result;
+    }
+
     public void lineShow(DialogueLine line)
     {
+        line.onShow.execute();
+
         string t = line.Text(Data);
-        Text.text += t + "\n\n";
+
+        textShow(t);
+
+        if (line.TopicsVisible)
+            TopicListTransform.gameObject.SetActive(true);
+        else
+            TopicListTransform.gameObject.SetActive(false);
+
+        if (line.LeaveEnabled)
+            FinishButton.SetActive(true);
+        else
+            FinishButton.SetActive(false);
 
         optionListShow(line.Options.Values);
+    }
+
+    private void textShow(string t)
+    {
+        if (String.IsNullOrEmpty(t))
+            return;
+
+        t = lineParse(t) + "\n\n";
+
+        //Text.Text += t;
+        Text.addText(t);
+        Canvas.ForceUpdateCanvases(); 
+        TextScrollRect.verticalNormalizedPosition = 0f; //do ForceUpdateCanvases first to take the new text into account
     }
 
     public void optionExecute(DialogueOption option)
     {
         option.execute();
+
+        textShow(option.Say);
 
         stageShow(option.TargetStage);
     }
@@ -86,9 +162,10 @@ public class UIDialogue : MonoBehaviour
 
         setData(_npc);
 
-        Text.text = "";
-        List<DialogueTopic> dialogueTopics = GameManager.Instance.DialogueTopicLibrary.getTopicsByNPC(_npc);
-        topicListShow(dialogueTopics);
+        Text.Text = "";
+        //List<DialogueTopic> dialogueTopics = GameManager.Instance.DialogueTopicLibrary.getTopicsByNPC(_npc);
+        //topicListShow(dialogueTopics);
+        topicListShow(_npc);
         optionListClear();
 
         if (topic == null)
@@ -137,6 +214,13 @@ public class UIDialogue : MonoBehaviour
             uiTopic.setTopic(topic);
         }
     }
+
+    private void topicListShow(NPC _npc)
+    {
+        List<DialogueTopic> dialogueTopics = GameManager.Instance.DialogueTopicLibrary.getTopicsByNPC(_npc);
+        topicListShow(dialogueTopics);
+    }
+        
 
     public void topicShow(DialogueTopic topic)
     {

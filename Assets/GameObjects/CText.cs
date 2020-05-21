@@ -9,8 +9,8 @@ using UnityEngine;
 public class CText : IModable
 {
     public string Value; //Plain Text
-
-    public ModableDictionary<CText> D = new ModableDictionary<CText>();
+    public ModableDictionary<CText> Values = new ModableDictionary<CText>();
+    public string JoinWith = " ";
 
     [JsonIgnore]
     public Condition Condition
@@ -49,10 +49,10 @@ public class CText : IModable
         if (!String.IsNullOrEmpty(Value))
             result.Add(parse(Value, gameData));
 
-        foreach (CText cText in D.Values)
+        foreach (CText cText in Values.Values)
             result.Add(cText.Text(gameData));
 
-        return String.Join(" ", result);
+        return String.Join(JoinWith, result);
     }
 
     private static string format(dynamic data, string format)
@@ -71,7 +71,7 @@ public class CText : IModable
         //string pattern = @"{([\w\.]*)(?>\|(\w+))?}";
         string pattern = @"{(\>?[\w\.\(\),\\:,""]*)(?>\| (\w +))?}";
         //string functionPattern = @"^>([\w]+)\(([\w\.\(\),\\""]+(?>,[\w\.\(\),\\""]+)*)\)$";
-        string functionPattern = @"^\>(\w+)\(((?>\w+:)?(?>\\"")?\w+(?>\\"")?(?>,(?>\w+:)?(?>\\"")?\w+(?>\\"")?)*)\)$";
+        //string functionPattern = @"^\>(\w+)\(((?>\w+:)?(?>\\"")?\w+(?>\\"")?(?>,(?>\w+:)?(?>\\"")?\w+(?>\\"")?)*)\)$";
 
         string input = s;
 
@@ -133,8 +133,9 @@ public class CText : IModable
 
     public void mod(CText modable)
     {
+        JoinWith = Modable.mod(JoinWith, modable.JoinWith);
         Value = Modable.mod(Value, modable.Value);
-        D = Modable.mod(D, modable.D);
+        Values = Modable.mod(Values, modable.Values);
         C = Modable.mod(C, modable.C);
     }
 
@@ -153,8 +154,9 @@ public class CText : IModable
     public IModable copyDeep()
     {
         var result = new CText();
+        result.JoinWith = Modable.copyDeep(JoinWith);
         result.Value = Modable.copyDeep(Value);
-        result.D = Modable.copyDeep(D);
+        result.Values = Modable.copyDeep(Values);
         result.C = Modable.copyDeep(C);
         return result;
     }

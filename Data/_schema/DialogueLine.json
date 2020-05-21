@@ -7,7 +7,7 @@
     "examples": [
     ],
     "required": [
-        
+        "Text"
     ],
     "additionalProperties": false,
     
@@ -22,7 +22,9 @@
             }
         },
         "Priority":{"type":"integer"},
-        "Text": { "$ref": "./CText.json" }
-        
+        "Text": { "$ref": "./CText.json" },
+        "TopicsVisible": {"type":"boolean"},
+        "LeaveEnabled": {"type":"boolean"},
+        "onShow": {"$ref": "./CommandsCollection.json"}
     }
 }

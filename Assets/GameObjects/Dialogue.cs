@@ -7,6 +7,11 @@ public class DialogueLine : IModable, IPrioritizable
 {
     //public string TopicID;
 
+    public bool TopicsVisible = true;
+    public bool LeaveEnabled = true;
+
+    public CommandsCollection onShow = new CommandsCollection();
+
     public int Priority = 0;
 
     [JsonProperty("Condition")]
@@ -32,6 +37,10 @@ public class DialogueLine : IModable, IPrioritizable
         result.Priority = Modable.copyDeep(Priority);
         result.Options = Modable.copyDeep(Options);
         result._text = Modable.copyDeep(_text);
+        result.ConditionString = Modable.copyDeep(ConditionString);
+        result.LeaveEnabled = Modable.copyDeep(LeaveEnabled);
+        result.TopicsVisible = Modable.copyDeep(TopicsVisible);
+        result.onShow = Modable.copyDeep(onShow);
 
         return result;
     }
@@ -55,10 +64,12 @@ public class DialogueLine : IModable, IPrioritizable
 public class DialogueOption : Option, IModable
 {
     public string TargetStage;
+    public string Say;
 
     public new IModable copyDeep()
     {
         DialogueOption result = (DialogueOption)base.copyDeep<DialogueOption>();
+        result.Say = Modable.copyDeep(Say);
         result.TargetStage = Modable.copyDeep(TargetStage);
         return result;
     }
@@ -66,6 +77,7 @@ public class DialogueOption : Option, IModable
     public void mod(DialogueOption modable)
     {
         base.mod(modable);
+        Say = Modable.mod(Say, modable.Say);
         TargetStage = Modable.mod(TargetStage, modable.TargetStage);
     }
 

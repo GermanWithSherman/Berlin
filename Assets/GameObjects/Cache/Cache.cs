@@ -38,6 +38,10 @@ public abstract class Cache<T> : MonoBehaviour where T : IModable
             entries.Remove(keyToRemove);
             keys.RemoveAt(0);
         }
+
+        if (entries.ContainsKey(key))
+            throw new ArgumentException($"Trying to add already existing key {key} in {GetType()}");
+
         entries.Add(key, create(data));
         keys.Add(key);
     }
