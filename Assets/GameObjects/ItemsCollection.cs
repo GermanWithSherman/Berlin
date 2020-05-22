@@ -80,6 +80,11 @@ public class ItemsCollection : Dictionary<string,string>
         return getItemDict().Values;
     }
 
+    public void removeItem(Item item)
+    {
+        setItem(item.id, (Item)null);
+    }
+
     public void setItem(string key, Item item)
     {
         if (item == null)

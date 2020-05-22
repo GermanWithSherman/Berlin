@@ -18,6 +18,7 @@
     "additionalProperties": false,
     
     "properties": {
+        "Condition":{"type":"string"},
         "Duration":{"type":"integer", "minimum": 0},
         "Label":{"type":"string"},
         "OutfitRequirement": {"$ref": "./OutfitRequirement.json"},

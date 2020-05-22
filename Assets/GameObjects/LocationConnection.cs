@@ -44,6 +44,12 @@ public class LocationConnection : IModable
 
     public OutfitRequirement OutfitRequirement = new OutfitRequirement();
 
+    [JsonProperty("Condition")]
+    public string ConditionString;
+
+    [JsonIgnore]
+    public Condition Condition { get => GameManager.Instance.ConditionCache[ConditionString]; }
+
 
     public LocationConnection() { }
 

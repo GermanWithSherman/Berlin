@@ -5,6 +5,7 @@
                 "Text": {
                     "JoinWith": "\n\n",
                     "Values":{
+                        "image":"<img>npc/school/staff/psychologist_horizontal.jpg</img>",
                         "0":"<speaker=_NPC1>Hello. You must be {>s_LANG(KEY:\"Miss\",NPC:_PC)} {PC.nameLast}. Welcome to the Hermann-Acedemy.</speaker>",
                         "1":"She points at a chair in front of her desk. <speaker=_NPC1>Please, take a seat.</speaker>"
                     }
@@ -211,6 +212,7 @@
                         "ValuesFromSetters": { "PC.moneyCash":{"Mode": "Inc", "Value": 50000} }
                     },
                     "setIntroduced":{"Type": "Set","Values": {"b_school_psychologist_introduced": true}},
+                    "setDormAccess":{"Type": "Set","Values": {"b_school_dorm_211_access": true}},
                     "setExperiment":{"Type": "Set","Values": {"b_school_psychologist_participant": true},"ValuesFromSetters": {"i_school_psychologist_experiment":{"Mode": "Inc", "Value": 1}}}
 
                 },

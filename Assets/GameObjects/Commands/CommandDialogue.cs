@@ -15,7 +15,10 @@ public class CommandDialogue : Command
 
     public override void execute(Data data)
     {
-        GameManager.Instance.dialogueShow(NPC, Topic);
+        if (TopicID.StartsWith("CONTINUE>"))
+            GameManager.Instance.dialogueContinue(TopicID.Substring(9));
+        else
+            GameManager.Instance.dialogueShow(NPC, Topic);
     }
 }
 

@@ -8,6 +8,14 @@
             "Value": "Underwear",
             "Condition":"(_clothes=\"None\") AND (_panties!=\"None\")"
         },
+        "Barefoot":{
+            "Value": "Barefoot",
+            "Condition":"(_shoes=\"None\")"
+        },
+        "School":{
+            "Value": "School",
+            "Condition":"(_clothes=\"School\") AND (_panties!=\"None\") AND (_bra!=\"None\")"
+        },
         "Default":{
             "Value": "Casual"
         }

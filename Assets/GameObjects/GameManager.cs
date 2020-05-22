@@ -78,7 +78,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Texture CurrentTexture{ get => GameData.currentLocation?.Texture; }
+    public Texture CurrentTexture{
+        get
+        {
+            if (GameData.currentEventStage == null || GameData.currentEventStage.Texture == null)
+                return GameData.currentLocation?.Texture;
+            else
+                return GameData.currentEventStage.Texture;
+
+
+        }
+    }
 
     public UINPCsPresentContainer UINPCsPresentContainer;
 
@@ -109,6 +119,7 @@ public class GameManager : MonoBehaviour
         _preferencesPath = Path.Combine(Application.dataPath, "preferences.json");
         preferencesLoad();
     }
+
 
     private string _preferencesPath;
 
@@ -154,6 +165,8 @@ public class GameManager : MonoBehaviour
         StartMenu.show();
 
         LoadingScreen.SetActive(false);
+
+        UIDialogue.hide();
     }
 
     void Update()
@@ -166,6 +179,11 @@ public class GameManager : MonoBehaviour
     public void console(string command)
     {
         Debug.Log(command);
+    }
+
+    public void dialogueContinue(string stageID)
+    {
+        UIDialogue.stageShow(stageID);
     }
 
     public void dialogueShow(NPC npc)
@@ -308,9 +326,9 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void outfitWindowShow(OutfitRequirement outfitRequirement)
+    public void outfitWindowShow(OutfitRequirement outfitRequirement, CommandsCollection onClose)
     {
-        OutfitWindow.show(outfitRequirement);
+        OutfitWindow.show(outfitRequirement, onClose);
     }
 
     public string path(string p)

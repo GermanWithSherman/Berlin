@@ -13,6 +13,7 @@
     
     "properties": {
         "OutfitRequirement": {"$ref": "./OutfitRequirement.json"},
-        "Type": {"type": "string", "pattern": "^Outfit$" }
+        "Type": {"type": "string", "pattern": "^Outfit$" },
+        "onClose": {"$ref": "./CommandsCollection.json"}
     }
 }

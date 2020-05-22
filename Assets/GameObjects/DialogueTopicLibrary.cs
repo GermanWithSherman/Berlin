@@ -26,7 +26,7 @@ public class DialogueTopicLibrary : Library<DialogueTopic>
     {
         foreach (DialogueTopic topic in _greetings)
         {
-            if (topic.NPCFilter.isValid(npc))
+            if (topic.NPCFilter.isValid(npc) && topic.Condition.evaluate(GameManager.Instance.GameData))
                 return topic;
         }
         return null;
@@ -37,7 +37,7 @@ public class DialogueTopicLibrary : Library<DialogueTopic>
         var result = new List<DialogueTopic>();
         foreach (DialogueTopic topic in _dict.Values)
         {
-            if (!topic.IsGreeting && !topic.IsEventExclusive && topic.NPCFilter.isValid(npc))
+            if (!topic.IsGreeting && !topic.IsEventExclusive && topic.NPCFilter.isValid(npc) && topic.Condition.evaluate(GameManager.Instance.GameData))
                 result.Add(topic);
         }
         return result;

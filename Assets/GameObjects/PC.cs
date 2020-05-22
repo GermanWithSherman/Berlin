@@ -23,6 +23,7 @@ public class PC : NPC
         }
     }
 
+    
 
     public Int64 moneyCash = 0;
 
@@ -136,6 +137,30 @@ public class PC : NPC
     {
         if(!items.Contains(item))
             items.setItem(item.id,item);
+    }
+
+    public void itemRemove(Item item)
+    {
+        items.removeItem(item);
+        foreach(Outfit outfit in outfits.Values)
+        {
+
+        }
+    }
+
+    public void itemsRemove(ItemsFilter itemsFilter)
+    {
+        /*List<Item> itemsToRemove = new List<Item>();
+        foreach(Item item in ((Dictionary<string, Item>)items).Values)
+        {
+            if(itemsFilter.filter)
+        }*/
+        IEnumerable<Item> itemsToRemove = itemsFilter.filter(items);
+
+        foreach (Item item in itemsToRemove)
+        {
+            itemRemove(item);
+        }
     }
 
     public bool itemHas(Item item)

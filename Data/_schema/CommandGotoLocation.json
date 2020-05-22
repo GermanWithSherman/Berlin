@@ -14,6 +14,6 @@
     
     "properties": {
         "LocationID": {"type": "string" },
-        "Type": {"type": "string", "pattern": "^GotoLocation$" }
+        "Type": {"type": "string", "enum": ["GotoLocation"] }
     }
 }

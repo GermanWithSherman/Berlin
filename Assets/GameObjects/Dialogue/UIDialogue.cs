@@ -93,7 +93,10 @@ public class UIDialogue : MonoBehaviour
         textShow(t);
 
         if (line.TopicsVisible)
+        {
+            topicListShow(_npc);
             TopicListTransform.gameObject.SetActive(true);
+        }
         else
             TopicListTransform.gameObject.SetActive(false);
 
@@ -191,8 +194,15 @@ public class UIDialogue : MonoBehaviour
 
     public void stageShow(string stageId)
     {
-        DialogueStage stage = GameManager.Instance.DialogueLineCache.Stage(stageId,_currentTopic);
-        stageShow(stage);
+        try
+        {
+            DialogueStage stage = GameManager.Instance.DialogueLineCache.Stage(stageId, _currentTopic);
+            stageShow(stage);
+        }
+        catch
+        {
+            textShow("ERROR: The requested Dialoguestage can't be found");
+        }
     }
 
     private void topicListClear()
@@ -224,10 +234,18 @@ public class UIDialogue : MonoBehaviour
 
     public void topicShow(DialogueTopic topic)
     {
-        _currentTopic = topic;
-        DialogueStage stage = GameManager.Instance.DialogueLineCache[topic].StartStage();
-        stageShow(stage);
+        try
+        {
+            _currentTopic = topic;
+            DialogueStage stage = GameManager.Instance.DialogueLineCache[topic].StartStage();
+            stageShow(stage);
+        }
+        catch
+        {
+            textShow("ERROR: The requested Dialoguestage can't be found");
+        }
     }
 
     
 }
+

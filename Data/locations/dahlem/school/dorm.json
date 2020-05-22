@@ -128,6 +128,79 @@
                     "TargetLocationId": ".3_hallway",
                     "Duration": 30,
                     "Label": "Upstairs"
+                },
+                "2_211": {
+                    "TargetLocationId": ".2_211",
+                    "Duration": 30,
+                    "Condition": "b_school_dorm_211_access=true"
+                }
+            }
+        },
+        "2_hallway_intro":{
+            "Label":"Hallway 2. Floor",
+            "Text":{"Value": "Hallway 2. Floor"},
+            "TexturePath":{"Value":"locations/dahlem/school/dormHallway.jpg"},
+            "LocationConnections": {
+                "2_211": {
+                    "TargetLocationId": ".2_211",
+                    "Duration": 30
+                }
+            }
+        },
+        "2_211":{
+            "Label":"Room 211",
+            "Text":"Room 211",
+            "TexturePath":{"Value":"locations/dahlem/school/dorm311.jpg"},
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".2_hallway",
+                    "Duration": 30,
+                    "Label": "Leave"
+                }
+            },
+            "onShow": {
+                "janine_intro":{
+                    "Type": "Conditional",
+                    "Condition": "b_school_janine_introduced = false",
+                    "Commands": {
+                        "forcegreet":{
+                            "Type":"Dialogue",
+                            "NPCID": "school_janine",
+                            "TopicID": "school_janine_introduction"
+                        }
+                    }
+                },
+                "janine_intro_2":{
+                    "Type": "Conditional",
+                    "Condition": "b_school_janine_intro_showered = true",
+                    "Commands": {
+                        "forcegreet":{
+                            "Type":"Dialogue",
+                            "NPCID": "school_janine",
+                            "TopicID": "school_janine_intro_uniform"
+                        }
+                    }
+                }
+            }
+        },
+        "2_bath_intro":{
+            "Label":"Bathroom",
+            "Text":"Bathroom",
+            "TexturePath":{"Value":"locations/dahlem/school/dormBath3.jpg"},
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".2_hallway_intro",
+                    "Duration": 30,
+                    "Label": "Leave",
+                    "Condition": "b_school_janine_intro_showered=true"
+                }
+            },
+            "Options":{
+                "shower":{
+                    "Text": "Shower",
+                    "Commands": {"Event":{"Type": "Event","EventID": "bathShowerHairRemovalCream."},"SetShowered":{"Type": "Set","Values": {
+                        "b_school_janine_intro_showered": "true"
+                    }}}
                 }
             }
         },

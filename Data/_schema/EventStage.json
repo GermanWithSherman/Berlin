@@ -12,6 +12,7 @@
                 }
             }   
         },
-        "Text": { "$ref": "./CText.json" }
+        "Text": { "$ref": "./CText.json" },
+        "TexturePath" : { "$ref": "./ConditionalString.json" }
     }
 }

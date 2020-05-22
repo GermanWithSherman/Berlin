@@ -8,6 +8,7 @@ public class DialogServer : MonoBehaviour
 
     public Dialog AlarmClockDialogPrefab;
     public Dialog SelectHorizontalPrefab;
+    public Dialog SelectNamePrefab;
     public Dialog SexSelectDialogPrefab;
 
     public Transform canvas;
@@ -77,6 +78,8 @@ public class DialogServer : MonoBehaviour
                 return AlarmClockDialogPrefab;
             case "SelectHorizontal":
                 return SelectHorizontalPrefab;
+            case "SelectName":
+                return SelectNamePrefab;
             case "SexSelect":
                 return SexSelectDialogPrefab;
         }

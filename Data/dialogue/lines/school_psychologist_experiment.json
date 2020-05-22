@@ -1,0 +1,46 @@
+{
+    "stages": {
+        "start":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":{"Value": "<speaker=_PC>About the experiments...</speaker>"}
+                    }
+                },
+                "Options": {
+                    "stop":{
+                        "Text": "I'd like to stop them.",
+                        "TargetStage": ".stop"
+                    },
+                    "participate":{
+                        "Text": "I'd like take part in another one.",
+                        "TargetStage": ".participate"
+                    }
+                }
+            }
+        },
+        "stop":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":{"Value": "<speaker=_PC>I'd like to continue them.</speaker> Wait, that's the opposite of what you wanted to say. What is going on?"},
+                        "1":{"Value": "<speaker=_NPC1>That's great. I am happy to hear that.</speaker>"}
+                    }
+                }
+            }
+        },
+        "participate":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":{"Value": "<speaker=_PC>I'd like take part in another one.</speaker>"},
+                        "1":{"Value": "<speaker=_NPC1>Sorry, but it's not time for the next experiment yet.</speaker> <b>Dev Note: They are not implemented yet</b>"}
+                    }
+                }
+            }
+        }
+    }
+}

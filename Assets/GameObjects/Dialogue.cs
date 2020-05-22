@@ -165,6 +165,12 @@ public class DialogueTopic : IModable, IPrioritizable
 
     public int Priority = 0;
 
+    [JsonProperty("Condition")]
+    public string ConditionString;
+
+    [JsonIgnore]
+    public Condition Condition { get => GameManager.Instance.ConditionCache[ConditionString]; }
+
     public CText Title;
 
     public IModable copyDeep()
@@ -172,7 +178,12 @@ public class DialogueTopic : IModable, IPrioritizable
         var result = new DialogueTopic();
 
         result.NPCFilter = Modable.copyDeep(NPCFilter);
+        result.Priority = Modable.copyDeep(Priority);
         result.Title = Modable.copyDeep(Title);
+
+        result.IsEventExclusive = Modable.copyDeep(IsEventExclusive);
+        result.IsGreeting = Modable.copyDeep(IsGreeting);
+        result.ConditionString = Modable.copyDeep(ConditionString);
 
         return result;
     }

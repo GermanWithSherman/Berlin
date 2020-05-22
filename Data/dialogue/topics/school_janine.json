@@ -1,0 +1,17 @@
+{
+    "topics":{
+        "school_janine_introduction":{
+            "IsGreeting": true,
+            "IsEventExclusive":true
+        },
+        "school_janine_intro_uniform":{
+            "IsGreeting": true,
+            "IsEventExclusive":true
+        },
+        "school_janine_greeting":{
+            "IsGreeting": true,
+            "NPCFilter": {"IDs": ["school_janine"]},
+            "Priority": 1000000
+        }
+    }
+}

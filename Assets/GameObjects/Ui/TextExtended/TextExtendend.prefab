@@ -50,8 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5494f4f8e69e4634782c575a73e5403b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ImagePrefab: {fileID: 8120405571951056428, guid: 0782db4c3191eb94ab6d14bf94aff087,
+  ImagePrefab: {fileID: 4838656960252397408, guid: e57af34539456cc4d8f8a38d9fc839c5,
     type: 3}
+  ImageHeight: 200
   TextPrefab: {fileID: 409730081447511040, guid: 14675317a682d6049b9d8cf87810adda,
     type: 3}
 --- !u!114 &9846484035395724

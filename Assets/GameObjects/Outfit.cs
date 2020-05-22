@@ -50,6 +50,11 @@ public class Outfit
         return this[keyparts[0]]?.getDynamic(keyparts[1]);
     }
 
+    public void removeItem(Item item)
+    {
+        items.setItem(item.Slot, (Item)null);
+    }
+
     public void setItem(string slot, Item item)
     {
         items.setItem(slot,item);

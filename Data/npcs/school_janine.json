@@ -1,0 +1,16 @@
+{
+    "TemplateID": "default_female",
+    "NameFirst": "Janine",
+    "NameLast": "Schneider",
+    "TexturePath": {
+        "Value": "npc/school/students/janinePortrait.jpg"
+    },
+    "Schedules":{
+        "dahlem/school/dorm.2_211": {
+            "0": {
+                "TimeStart": 0,
+                "TimeEnd": 2359
+            }
+        }
+    }
+}

@@ -23,8 +23,10 @@ public class UIRLocations : UIUpdateListener
 
         foreach (LocationConnection locationConnection in locationConnections)
         {
-            UIRLocation uIRLocation = Instantiate(RLPrefab, transform);
-            uIRLocation.setRLocation(locationConnection);
+            if (locationConnection.Condition.evaluate(GameManager.Instance.GameData)) {
+                UIRLocation uIRLocation = Instantiate(RLPrefab, transform);
+                uIRLocation.setRLocation(locationConnection);
+            }
         }
     }
 

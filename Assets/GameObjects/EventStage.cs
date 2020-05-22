@@ -16,6 +16,10 @@ public class EventStage
 
     public ModableDictionary<Option> Options = new ModableDictionary<Option> ();
 
+    [JsonIgnore]
+    public Texture Texture { get => GameManager.Instance.TextureCache[TexturePath]; }
+    public Conditional<string> TexturePath;
+
     public void execute()
     {
         GameManager gameManager = GameManager.Instance;

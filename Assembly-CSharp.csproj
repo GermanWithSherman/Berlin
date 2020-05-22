@@ -91,6 +91,7 @@
     <Compile Include="Assets\GameObjects\Commands\CommandGotoLocation.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandInterrupt.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandItemAdd.cs" />
+    <Compile Include="Assets\GameObjects\Commands\CommandItemRemove.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandNone.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandOutfit.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandPause.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="Assets\GameObjects\DialogueTopicLibrary.cs" />
     <Compile Include="Assets\GameObjects\EventGroup.cs" />
     <Compile Include="Assets\GameObjects\EventStage.cs" />
-    <Compile Include="Assets\GameObjects\Extensions\RawImageExtensions.cs" />
     <Compile Include="Assets\GameObjects\Extensions\TransformExtensions.cs" />
     <Compile Include="Assets\GameObjects\FunctionParameters.cs" />
     <Compile Include="Assets\GameObjects\FunctionsLibrary.cs" />
@@ -169,8 +169,10 @@
     <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogServer.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\AlarmClockDialogPrefab.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectHorizontal.cs" />
+    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectNameDialog.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SexSelectDialogPrefab.cs" />
     <Compile Include="Assets\GameObjects\Ui\FlexibleGridLayout.cs" />
+    <Compile Include="Assets\GameObjects\Ui\ImageAutosize\ImageAutosize.cs" />
     <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindow.cs" />
     <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindowItem.cs" />
     <Compile Include="Assets\GameObjects\Ui\Messages\ErrorDialog.cs" />

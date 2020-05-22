@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class UIImageMain : UIUpdateListener
 {
-    public UnityEngine.UI.RawImage RawImage;
+    //public UnityEngine.UI.RawImage RawImage;
+    public ImageAutosize Image;
 
     public override void uiUpdate(GameManager gameManager)
     {
-        RawImage.texture = gameManager.CurrentTexture;
-        RawImage.SizeToParent();
+        Image.texture = gameManager.CurrentTexture;
+        //RawImage.SizeToParent();
     }
 }
