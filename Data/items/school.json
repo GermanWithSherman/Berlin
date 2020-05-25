@@ -7,6 +7,14 @@
             "Slot": "Clothes",
             "Gender": "f",
             "Style": "School"
+        },
+        "schoolUniformM1":{
+            "Label":"School Uniform",
+            "TexturePath":"items/clothes/m_school/1.jpg",
+            "Price": 8000,
+            "Slot": "Clothes",
+            "Gender": "m",
+            "Style": "School"
         }
     }
 }

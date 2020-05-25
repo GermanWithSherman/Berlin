@@ -1,0 +1,17 @@
+{
+    "topics":{
+        "school_michel_introduction":{
+            "IsGreeting": true,
+            "IsEventExclusive":true
+        },
+        "school_michel_greeting":{
+            "IsGreeting": true,
+            "NPCFilter": {"IDs": ["school_michel"]},
+            "Priority": 1000000
+        },
+        "school_michel_students":{
+            "Title": "Students",
+            "NPCFilter": {"IDs": ["school_michel"]}
+        }
+    }
+}

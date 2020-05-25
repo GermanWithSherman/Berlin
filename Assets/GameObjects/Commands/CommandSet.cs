@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +32,7 @@ public class CommandSet : Command
 
 public class ValueSetter: IModable
 {
-    public enum SetMode { Set, Inc }
+    public enum SetMode { Set, Inc, Cooldown }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public SetMode Mode;
@@ -44,6 +45,10 @@ public class ValueSetter: IModable
     {
         switch (Mode)
         {
+            case (SetMode.Cooldown):
+                DateTime now = GameManager.Instance.GameData.WorldData.DateTime;
+                TimeSpan cooldown = new TimeSpan(0, 0, (int)Value);
+                return now + cooldown;
             case (SetMode.Inc):
                 return modeInc(currentValue);
             case (SetMode.Set):

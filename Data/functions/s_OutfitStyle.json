@@ -14,7 +14,7 @@
         },
         "School":{
             "Value": "School",
-            "Condition":"(_clothes=\"School\") AND (_panties!=\"None\") AND (_bra!=\"None\")"
+            "Condition":"(_clothes=\"School\") AND (_panties!=\"None\")"
         },
         "Default":{
             "Value": "Casual"

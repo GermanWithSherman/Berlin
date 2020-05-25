@@ -18,6 +18,11 @@
                 }
             }
         },
+        "dormBathroomTemplate":{
+            "Label":"Bathroom",
+            "Text":"Bathroom",
+            "TexturePath":{"Value":"locations/dahlem/school/dormBath3.jpg"}
+        },
         "dormOwnedRoomTemplate":{
             "LocationConnections": {
                 "leave": {
@@ -152,6 +157,15 @@
                 }
             }
         },
+        "1_bathroom":{
+            "Inherit": "dahlem/school/dorm.dormBathroomTemplate",
+            "LocationConnections": {
+                "LocationConnectionID": {
+                    "TargetLocationId": ".1_hallway",
+                    "Duration": 30
+                }
+            }
+        },
         "1_hallway":{
             "Label":"Hallway 1. Floor",
             "Text":{"Value": "Hallway 1. Floor"},
@@ -166,6 +180,12 @@
                     "TargetLocationId": ".2_hallway",
                     "Duration": 30,
                     "Label": "Upstairs"
+                },
+                "1_bathroom":{
+                    "TargetLocationId": ".1_bathroom",
+                    "Duration": 30,
+                    "Label" : "Bathroom",
+                    "Condition": "i_school_dorm_room⊆[100;200)"
                 },
                 "1_107":{
                     "TargetLocationId": ".1_107",
@@ -185,6 +205,19 @@
                     "TargetLocationId": ".1_hallway",
                     "Duration": 30,
                     "Label": "Leave"
+                }
+            },
+            "onShow": {
+                "michel_intro":{
+                    "Type": "Conditional",
+                    "Condition": "b_school_michel_introduced = false",
+                    "Commands": {
+                        "forcegreet":{
+                            "Type":"Dialogue",
+                            "NPCID": "school_michel",
+                            "TopicID": "school_michel_introduction"
+                        }
+                    }
                 }
             }
         },
@@ -292,6 +325,25 @@
                     "TargetLocationId": ".4_hallway",
                     "Duration": 30,
                     "Label": "Upstairs"
+                },
+                "3_314":{
+                    "TargetLocationId": ".3_314",
+                    "Duration": 30,
+                    "Condition": "b_school_314_known=true"
+                }
+            }
+        },
+        "3_314":{
+            "Label":"Room 314",
+            "Text": {
+                "Value": "Room 314 ({NPC.school_pierre.nameFirst}s room)"
+            },
+            "TexturePath":{"Value":"locations/dahlem/school/dorm414.png"},
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".3_hallway",
+                    "Duration": 30,
+                    "Label": "Leave"
                 }
             }
         },
