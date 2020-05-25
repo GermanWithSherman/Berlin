@@ -1,0 +1,27 @@
+{
+    "interrupts":{
+        "dream":{
+            "Commands": {
+                "dream":{
+                    "Type":"Event",
+                    "EventID": "dream."
+                },
+                "pause":{
+                    "Type": "Pause"
+                }
+            },
+            "Listen": ["SleepMiddle"],
+            "Priority": 0
+        },
+        "wakeUp":{
+            "Commands": {
+                "dream":{
+                    "Type":"Event",
+                    "EventID": "wakeup."
+                }
+            },
+            "Listen": ["SleepEnd"],
+            "Priority": 0
+        }
+    }
+}

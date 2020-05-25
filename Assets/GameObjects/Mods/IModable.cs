@@ -78,6 +78,11 @@ public static class Modable
         return mod;
     }
 
+    public static bool mod(bool original, bool mod)
+    {
+        return mod;
+    }
+
     public static int mod(int original, int mod)
     {
         return mod;

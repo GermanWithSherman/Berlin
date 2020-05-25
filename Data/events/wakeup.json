@@ -1,0 +1,15 @@
+{
+    "EventStages":{
+        "main":{
+            "Text": "You wake up.",
+            "Options": {
+                "GetUp":{
+                    "Text":"Get Up",
+                    "Commands": {
+                        "End":{"Type":"EventEnd"}
+                    }
+                }
+            }
+        }
+    }
+}

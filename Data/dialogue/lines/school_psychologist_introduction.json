@@ -73,7 +73,8 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "0":"She opens the file and places it on her desk. You can see that a few paragraphes are marked, but you can't read them upside down.",
-                        "1":"<speaker=_NPC1>According to this file you are a normal student. I think you will fit in here quite well.</speaker>"
+                        "1":"<speaker=_NPC1>According to this file you are a normal student. I think you will fit in here quite well.</speaker>",
+                        "2":"<speaker=_NPC1>I think we are done here for now. Please head over to the dormitory and speak to the secretary there. She will make sure you get a bedroom and a school uniform.</speaker>"
                     }
                 },
                 "onShow": {

@@ -17,6 +17,37 @@
                 }
             }
         },
+        "dormOwnedRoomTemplate":{
+            "LocationConnections": {
+                "leave": {
+                    "#IsAbstract": true,
+                    "OutfitRequirement":{
+                        "ForbiddenStyles": ["Naked","Underwear","Barefoot"],
+                        "Instruction": "You should put on some clothes before leaving."
+                    }
+                }
+            },
+            
+            "Options":{
+                "bed":{
+                    "Text": "Lay down in bed",
+                    "Commands": {
+                        "0":{
+                            "Type": "Event",
+                            "EventID": "bed."
+                        }
+                    }
+                },
+                "outfit":{
+                    "Text":"Change Outfit",
+                    "Commands":{
+                        "outfit":{
+                            "Type":"Outfit"
+                        }
+                    }
+                }
+            }
+        },
         "0_hallway":{
             "Label":"Dorm",
             "Text":{"Value": "Dorm"},
@@ -111,6 +142,25 @@
                     "TargetLocationId": ".2_hallway",
                     "Duration": 30,
                     "Label": "Upstairs"
+                },
+                "1_107":{
+                    "TargetLocationId": ".1_107",
+                    "Duration": 30,
+                    "Label" : "Your Room (107)",
+                    "Condition": "i_school_dorm_room=107"
+                }
+            }
+        },
+        "1_107":{
+            "Inherit": "dahlem/school/dorm.dormOwnedRoomTemplate",
+            "Label":"Room 107",
+            "Text":{"Value": "Room 107"},
+            "TexturePath":{"Value":"locations/dahlem/school/dorm207.jpg"},
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".1_hallway",
+                    "Duration": 30,
+                    "Label": "Leave"
                 }
             }
         },

@@ -18,8 +18,14 @@ public class ModableStringList : List<string>, IModable
     {
         ModableStringList _modable = (ModableStringList)modable;
 
-        for (int i = 0; i < Count; i++)
-            this[i] = Modable.mod(this[i], _modable[i]);
+        //for (int i = 0; i < Count; i++)
+        //    this[i] = Modable.mod(this[i], _modable[i]);
+
+        foreach(string s in _modable)
+        {
+            if (!Contains(s))
+                Add(s);
+        }
     }
 
 }

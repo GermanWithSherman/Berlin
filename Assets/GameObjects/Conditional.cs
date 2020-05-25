@@ -135,7 +135,6 @@ public class Conditional<T> : Conditional
         {
             case (ConditionalMode.Default):
                 
-
                 List<Value<T>> values = Values.Values.ToList();
                                 
                 values.Sort(Value<T>.ComparePriorities);
@@ -151,6 +150,24 @@ public class Conditional<T> : Conditional
                     result.Add(Value);
 
                 return result;
+            case (ConditionalMode.Random):
+                List<Value<T>> ranvalues = Values.Values.ToList();
+                List<T> validValues = new List<T>();
+
+                foreach (Value<T> value in ranvalues)
+                {
+                    if (value.Condition.evaluate(data))
+                        validValues.Add(value.value(data));
+                }
+
+                if (Value != null)
+                    validValues.Add(Value);
+
+                if(validValues.Count > 0)
+                    result = new List<T>() { validValues.GetRandom() };
+
+                return result;
+
         }
         return result;
     }

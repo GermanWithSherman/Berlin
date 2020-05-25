@@ -1,0 +1,77 @@
+{
+    "EventStages":{
+        "main":{
+            "TexturePath": {
+                "Mode": "Random",
+                "Values":{
+                    "female_1":{
+                        "Value": "events/bed/female_naked_1.jpg",
+                        "Condition": "PC.genderVisible=\"f\""
+                    }    
+                } 
+            },
+            "Options":{
+                "StandUp":{
+                    "Text":"Stand up",
+                    "Commands":{
+                        "StandUp":{
+                            "Type":"EventEnd"
+                        }
+                    }
+                },
+                "GoToSleep":{
+                    "Text":"Go to sleep",
+                    "Commands":{
+                        "sleep":{
+                            "Type":"Sleep",
+                            "AlarmTimeRef":"i_SleepAlarmTime",
+                            "AlarmActivatedRef":"b_SleepAlarmClockActivated"
+                            
+                        }
+                    }
+                },
+                "AlarmClockActivate":{
+                    "Text":"Activate Alarm Clock",
+                    "State":{
+                        "Values":{
+                            "0":{"Value":{"Visible":false},"Condition":"b_SleepAlarmClockActivated=true"}
+                        }
+                    },
+                    "Commands":{
+                        "sleep":{
+                            "Type": "Set",
+                            "Values":{"b_SleepAlarmClockActivated":true}
+                        }
+                    }
+                },
+                "AlarmClockDeactivate":{
+                    "Text":"Deactivate Alarm Clock",
+                    "State":{"Values":{
+                        "0":{"Value":{"Visible":false},"Condition":"b_SleepAlarmClockActivated=false"}
+                    }},
+                    "Commands":{
+                        "sleep":{
+                            "Type": "Set",
+                            "Values":{"b_SleepAlarmClockActivated":false}
+                        }
+                    }
+                },
+                "AlarmClockSet":{
+                    "Text": "Set Alarm Clock",
+                    "Commands":{
+                        "alarmClockDialog":{
+                            "Type":"Dialog",
+                            "DialogID":"AlarmClock",
+                            "Settings":{
+                                "Targets":{
+                                    "time": "i_SleepAlarmTime"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}

@@ -37,5 +37,6 @@ public class UIOption : MonoBehaviour
         
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => option.execute());
+        button.onClick.AddListener(() => GameManager.Instance.uiUpdate());
     }
 }
