@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameObjects\Activity.cs" />
+    <Compile Include="Assets\GameObjects\ActivityLibrary.cs" />
     <Compile Include="Assets\GameObjects\CText.cs" />
     <Compile Include="Assets\GameObjects\Cache\Cache.cs" />
     <Compile Include="Assets\GameObjects\Cache\ConditionCache.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarDateTime.cs" />
     <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarHunger.cs" />
     <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarMoney.cs" />
+    <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarSleep.cs" />
     <Compile Include="Assets\GameObjects\Ui\TextExtended\ButtonTextExtended.cs" />
     <Compile Include="Assets\GameObjects\Ui\TextExtended\TextExtended.cs" />
     <Compile Include="Assets\GameObjects\Ui\Tooltip\Tooltip.cs" />

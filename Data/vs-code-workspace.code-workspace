@@ -19,6 +19,7 @@
 			{"fileMatch": ["npcs/*.json"],"url": "./_schema/NPC.json"},
 			{"fileMatch": ["npctemplates/*.json"],"url": "./_schema/NPCTemplate.json"},
 			{"fileMatch": ["servicepoints/*.json"],"url": "./_schema/ServicePoint.json"},
+			{"fileMatch": ["services/*.json"],"url": "./_schema/ServicesFile.json"},
 			{"fileMatch": ["shoptypes/*.json"],"url": "./_schema/ShopType.json"}
 		]
 

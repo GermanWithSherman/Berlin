@@ -13,7 +13,7 @@ public class ServiceWindowService : MonoBehaviour
     {
         _service = service;
 
-        textMeshProUGUI.text = service.label;
+        textMeshProUGUI.text = service.Label;
 
         Button.onClick.RemoveAllListeners();
         Button.onClick.AddListener(service.buy);
@@ -28,16 +28,16 @@ public class ServiceWindowService : MonoBehaviour
 
         GameManager gameManager = GameManager.Instance;
 
-        if (gameManager.PC.moneyCash < _service.price)
+        if (gameManager.PC.moneyCash < _service.Price)
         {
             Button.interactable = false;
-            textMeshProUGUI.text = $"{_service.label}\nInsufficient funds";
+            textMeshProUGUI.text = $"{_service.Label}\nInsufficient funds";
             textMeshProUGUI.color = Color.red;
         }
         else
         {
             Button.interactable = true;
-            textMeshProUGUI.text = $"{_service.label}";
+            textMeshProUGUI.text = $"{_service.Label}";
             textMeshProUGUI.color = Color.black;
         }
 

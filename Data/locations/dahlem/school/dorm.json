@@ -12,6 +12,7 @@
                     "Duration": 120
                 },
                 "enter": {
+                    "Label": "Enter",
                     "TargetLocationId": ".0_hallway",
                     "Duration": 60
                 }
@@ -54,6 +55,7 @@
             "TexturePath":{"Value":"locations/dahlem/school/dormEntry.jpg"},
             "LocationConnections": {
                 "leave": {
+                    "Label": "Leave",
                     "TargetLocationId": ".",
                     "Duration": 60
                 },
@@ -82,8 +84,20 @@
             "TexturePath":{"Value":"locations/dahlem/school/dormKitchen.jpg"},
             "LocationConnections": {
                 "leave": {
+                    "Label": "Hallway",
                     "TargetLocationId": ".0_hallway",
                     "Duration": 30
+                }
+            },
+            "Options":{
+                "freezer":{
+                    "Text": "Open Freezer",
+                    "Commands": {
+                        "service":{
+                            "Type": "Services",
+                            "ServicePointID": "dormFreezer"
+                        }
+                    }
                 }
             }
         },
@@ -93,8 +107,17 @@
             "TexturePath":{"Value":"locations/dahlem/school/dormLiving.jpg"},
             "LocationConnections": {
                 "leave": {
+                    "Label": "Hallway",
                     "TargetLocationId": ".0_hallway",
                     "Duration": 30
+                }
+            },
+            "Options":{
+                "TV":{
+                    "Text": "Watch TV",
+                    "Commands": {
+                        "TVEvent":{"Type": "Event", "EventID": "tv."}
+                    }
                 }
             }
         },
@@ -110,6 +133,7 @@
             "TexturePath":{"Value":"locations/dahlem/school/dormBureau.jpg"},
             "LocationConnections": {
                 "leave": {
+                    "Label": "Hallway",
                     "TargetLocationId": ".0_hallway",
                     "Duration": 30
                 }

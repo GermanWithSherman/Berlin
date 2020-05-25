@@ -1,0 +1,4 @@
+{
+    "Title": "Freezer",
+    "ServiceIDs": ["freezer.water","freezer.meal"]
+}

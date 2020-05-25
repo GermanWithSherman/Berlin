@@ -11,15 +11,17 @@
         "Type"
     ],
     "anyOf": [
+        {"required": ["Event"]},
         {"required": ["EventID"]},
         {"required": ["EventGroup","EventStage"]}
     ],
     "additionalProperties": false,
     
     "properties": {
+        "Event":{"$ref": "./EventStage.json"},
         "EventID": {"type": "string" },
         "EventGroup": {"type": "string" },
         "EventStage": {"type": "string" },
-        "Type": {"type": "string", "pattern": "^Event$" }
+        "Type": {"type": "string", "enum": ["Event"] }
     }
 }

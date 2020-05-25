@@ -3,6 +3,8 @@
     "anyOf": [
         {"$ref": "./CommandBreak.json"},
         {"$ref": "./CommandConditional.json"},
+        
+        {"$ref": "./CommandConsume.json"},
         {"$ref": "./CommandContinue.json"},
         {"$ref": "./CommandDialog.json"},
         {"$ref": "./CommandDialogue.json"},

@@ -28,6 +28,21 @@
                             "AlarmActivatedRef":"b_SleepAlarmClockActivated"
                             
                         }
+                    },
+                    "State": {
+                        "Values": {
+                            "notTired":{
+                                "Value": {
+                                    "Enabled": false,
+                                    "Text": "You are not tired enough to sleep."
+                                },
+                                "Condition": "PC.statSleep>900000"
+                            },
+                            "tired":{
+                                "Value": {"Enabled": true},
+                                "Condition": "PC.statSleep<=900000"
+                            }
+                        }
                     }
                 },
                 "AlarmClockActivate":{

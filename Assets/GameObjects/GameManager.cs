@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public TextureCache TextureCache;
     public WeightedStringListCache WeightedStringListCache;
 
+    public ActivityLibrary ActivityLibrary;
     public DialogueTopicLibrary DialogueTopicLibrary;
     public FunctionsLibrary FunctionsLibrary;
     public ItemsLibrary ItemsLibrary;
@@ -145,6 +146,9 @@ public class GameManager : MonoBehaviour
         ModsServer = new ModsServer(path("mods"), Preferences);
 
         List<string> modsPaths = ModsServer.ActivatedModsPaths;
+
+        ActivityLibrary = new ActivityLibrary();
+
         DialogueTopicLibrary = new DialogueTopicLibrary(path("dialogue/topics"), pathsMods(modsPaths, "dialogue/topics") );
         Thread dialogueTopicLibraryLoadThread = DialogueTopicLibrary.loadThreaded();
 
@@ -387,13 +391,7 @@ public class GameManager : MonoBehaviour
     {
         timeAdd(seconds);
 
-        Activity activity = new Activity();
-
-        if(activityId == "sleep")
-        {
-            activity.statSleep *= -2;
-            activity.statHunger /= 2;
-        }
+        Activity activity = ActivityLibrary[activityId];
 
         PC.timePass(seconds, activity);
     }

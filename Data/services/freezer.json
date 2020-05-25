@@ -1,0 +1,39 @@
+{
+    "meal":{
+        "Label":"Prepare Meal",
+        "Category": "Food",
+        "StayOpen": false,
+        "onBuy":{
+            "consume":{
+                "Type": "Consume",
+                "Hunger":200000,
+                "Calories":200000
+            },
+            "time":{
+                "Type": "TimePass",
+                "Duration": 1200
+            },
+            "event":{
+                "Type":"Event",
+                "Event": {
+                    "TexturePath": {"Value":"events/consume/pizza.jpg"},
+                    "Text": "You prepare and eat your meal.",
+                    "Options":{
+                        "end":{
+                            "Text": "Finish",
+                            "Commands": {
+                                "end":{
+                                    "Type": "EventEnd"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "water":{
+        "Label": "Water",
+        "Category": "Drink"
+    }
+}

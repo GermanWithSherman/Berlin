@@ -8,11 +8,28 @@ public class CommandSleep : Command
     public string AlarmActivatedRef;
     public string AlarmTimeRef;
     public int Duration = -1;
+    public float MaxSleepFactor = 1.2f;
 
 
     public override void execute(Data data)
     {
         int duration = Duration;
+
+        
+
+        int currentSleepStat;
+
+        if (data is GameData)
+            currentSleepStat = ((GameData)data).CharacterData.PC.statSleep;
+        else
+            currentSleepStat = data["PC.statSleep"];
+
+        Activity sleepActivity = GameManager.Instance.ActivityLibrary["sleep"];
+
+        //https://stackoverflow.com/questions/17944/how-to-round-up-the-result-of-integer-division
+        int requiredSleepSeconds = (1000000 - currentSleepStat - 1) / sleepActivity.statSleep + 1;
+        int maximumSleepSeconds = Mathf.CeilToInt(requiredSleepSeconds * MaxSleepFactor);
+
         if (!String.IsNullOrEmpty(AlarmTimeRef))
         {
             int alarmTime = data[AlarmTimeRef];
@@ -28,8 +45,11 @@ public class CommandSleep : Command
 
         }
 
+        if (duration > maximumSleepSeconds)
+            duration = UnityEngine.Random.Range(requiredSleepSeconds, maximumSleepSeconds);
+
         if (duration < 0)
-            duration = 3600; // TODO: calculate required sleep
+            duration = requiredSleepSeconds;//= 3600; // TODO: calculate required sleep
 
         CommandsCollection sleepCommands = SleepCommandList(duration);
         sleepCommands.execute();

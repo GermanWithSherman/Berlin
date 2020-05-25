@@ -31,7 +31,7 @@ public class Servicepoint : IModable
 
             foreach(Service service in Services)
             {
-                string cat = service.category;
+                string cat = service.Category;
                 ServiceCategory serviceCategory;
                 if (!result.ContainsKey(cat))
                     result.Add(cat, new ServiceCategory(cat));

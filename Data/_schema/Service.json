@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "Service",
+    "required": [
+        "Label","Category"
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "Label": {"type":"string" },
+        "Description": { "$ref": "./CText.json" },
+        "Price":{"type":"integer"},
+        "Category":{"type":"string"},
+        "onBuy": { "$ref": "./CommandsCollection.json" },
+        "StayOpen":{"type":"boolean","description": "Whether the ServicePoint-Window stays open after this service was bought. Default: false."}
+    }
+}

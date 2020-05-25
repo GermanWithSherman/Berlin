@@ -1,0 +1,35 @@
+{
+    "EventStages":{
+        "main":{
+            "Inherit": {"Value":"tv.options"},
+            "Text": "You turn on the TV.",
+            "TexturePath": {"Value": "events/tv/tv_start.jpg"}
+        },
+        "options":{
+            "Options": {
+                "30minutes":{
+                    "Text": "Watch for 30 minutes",
+                    "Commands":{
+                        "event":{
+                            "Type": "Event",
+                            "EventID": "tv.watch"
+                        }
+                    }
+                },
+                "Stop":{
+                    "Text":"Stop",
+                    "Commands": {
+                        "End":{"Type":"EventEnd"}
+                    }
+                }
+            }
+        },
+        "watch":{
+            "Inherit": {"Value":"tv.options"},
+            "TexturePath": {"Value": "events/tv/tv_start.jpg"},
+            "Commands": {
+                "time":{"Type":"TimePass","Duration": 1800}
+            }
+        }
+    }
+}
