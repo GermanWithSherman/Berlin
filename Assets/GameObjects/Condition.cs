@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 public class Condition : IModable
 {
-    private const string regex_identifier = "[a-zA-Z0-9'\\._\\-\\+\\(\\)\\[\\],\"]+";
+    private const string regex_identifier = "[a-zA-Z0-9'\\._\\-\\+\\(\\)\\[\\],\"\\{\\}:]+";
     private const string regex_operator = "[><=]{1,2}|!=|⊆";
     private const string regex_whitespace = "\\s*";
 
@@ -14,7 +15,7 @@ public class Condition : IModable
 
 
     enum Modes { Plain, Equals, HEquals, LEquals, NEquals, Higher, Lower, ElementOf, AND, OR, XOR }
-    enum Types { Field, Value, Condition }
+    enum Types { Field, Value, Condition, Object }
 
     private Types leftType;
     private Types rightType;
@@ -193,6 +194,13 @@ public class Condition : IModable
                     continue;
                 }
 
+                if(stringValues[i].Length >= 3 && stringValues[i][0] == '{')
+                {
+                    value[i] = stringValues[i];
+                    valueType[i] = Types.Object;
+                    continue;
+                }
+
                 long l = 0;
                 if (long.TryParse(stringValues[i], out l))
                 {
@@ -314,6 +322,9 @@ public class Condition : IModable
                 case Modes.NEquals:
                     result = !eq(left,right);
                     break;
+                case Modes.ElementOf:
+                    result = elementOf(left, right);
+                    break;
                 default:
                     throw new GameException($"Unhandled Condition Type {mode.ToString()}");
             }
@@ -325,6 +336,18 @@ public class Condition : IModable
         }
 
         return result;
+    }
+
+    private static bool elementOf(dynamic left, dynamic right)
+    {
+        if(left is DateTime)
+        {
+            var jObject = JObject.Parse((string)right);
+            TimeFilter timeFilter = jObject.ToObject<TimeFilter>();
+            return timeFilter.isValid(left);
+        }
+        Debug.LogWarning($"Unknown Type of left in Condition.elementOf: {left.GetType()}");
+        return false;
     }
 
     private static bool isNumber(dynamic v)

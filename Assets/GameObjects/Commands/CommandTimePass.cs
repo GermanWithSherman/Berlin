@@ -7,7 +7,7 @@ public class CommandTimePass : Command
 
     public string ActivityID = "";
     public int Duration = 0;
-
+    public int ToTime = -1;
     public CommandTimePass() { }
 
     public CommandTimePass(int time)
@@ -23,7 +23,11 @@ public class CommandTimePass : Command
 
     public override void execute(Data data)
     {
-        GameManager.Instance.timePass(Duration, ActivityID);
+        int duration = Duration;
+        if (ToTime >= 0)
+            duration = GameManager.Instance.timeSecondsTils(ToTime);
+
+        GameManager.Instance.timePass(duration, ActivityID);
         return;
     }
 }

@@ -30,13 +30,34 @@
                 }
             }
         },
+        "class":{
+            "TexturePath": {"Value":"locations/dahlem/school/classroom.jpg"},
+            "OpeningTimes": {
+                "0": {
+                    "TimeStart": 615,
+                    "TimeEnd": 800
+                    
+                }
+            },
+            "LocationConnections": {
+                "leave": {
+                    "Label": "Leave",
+                    "TargetLocationId": ".hallway",
+                    "Duration": 0
+                }
+            },
+            "onShow": {
+                "SchoolEvent":{
+                    "Type": "Event",
+                    "EventID": "school_class."
+                }
+            }
+        },
         "hallway":{
             "Label":"Hallway",
             "Text":"Hallway",            
             "TexturePath":{
-                "Values":{
-                    "default":{"Value":"locations/dahlem/school/schoolHallway.jpg"}
-                }
+                "Value":"locations/dahlem/school/schoolHallway.jpg"
             },
             "LocationConnections": {
                 "leave": {
@@ -47,6 +68,11 @@
                 "psychologistOffice":{
                     "TargetLocationId": ".psychologistOffice",
                     "Duration": 60
+                },
+                "class":{
+                    "TargetLocationId": ".class",
+                    "Duration": 0,
+                    "Label": "Go to Class"
                 }
             }
         },

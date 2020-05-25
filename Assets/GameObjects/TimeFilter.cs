@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 public class TimeFilter
 {
-    public short TimeStart;
-    public short TimeEnd;
+    public short TimeStart=0;
+    public short TimeEnd=2359;
     public ModableStringList Days;
 
     public bool isValid(DateTime dateTime)

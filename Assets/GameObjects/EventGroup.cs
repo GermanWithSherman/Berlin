@@ -21,14 +21,26 @@ public class EventGroup : IModable
     {
         get
         {
+            EventStage result;
+
             if (String.IsNullOrEmpty(key))
-                return EventStages[Default];
+            {
+                result = EventStages[Default];
+                result.StageID = Default;
+                return result;
+            }
 
             if (EventStages.ContainsKey(key))
-                return EventStages[key];
+            {
+                result = EventStages[key];
+                result.StageID = key;
+                return result;
+            }
 
             Debug.LogWarning($"Requested sublocation {key} is not present in location {id}");
-            return EventStages[Default];
+            result = EventStages[Default];
+            result.StageID = Default;
+            return result;
         }
     }
 
@@ -45,12 +57,12 @@ public class EventGroup : IModable
     [OnDeserialized]
     internal void OnDeserializedMethod(StreamingContext context)
     {
-        foreach (KeyValuePair<string, EventStage> kv in EventStages)
+        /*foreach (KeyValuePair<string, EventStage> kv in EventStages)
         {
             string eventId = kv.Key;
             EventStage eventStage = kv.Value;
             eventStage.id = id + "." + eventId;
-        }
+        }*/
 
         if (!EventStages.ContainsKey(Default))
         {

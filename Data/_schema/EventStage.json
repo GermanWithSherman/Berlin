@@ -4,6 +4,7 @@
     "additionalProperties": false,
     "properties": {
         "Commands": { "$ref": "./CommandsCollection.json" },
+        "Inherit" : { "$ref": "./ConditionalString.json" },
         "Options":{
             "additionalProperties": false,
             "patternProperties": {

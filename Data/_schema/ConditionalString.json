@@ -32,6 +32,6 @@
                 }
             }   
         },
-        "Mode":{"type":"string","enum": ["Default", "Enum"]}
+        "Mode":{"type":"string","enum": ["Default", "Enum", "Random"]}
     }
 }

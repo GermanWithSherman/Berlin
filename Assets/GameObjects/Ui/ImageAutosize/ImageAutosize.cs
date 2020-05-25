@@ -26,7 +26,10 @@ public class ImageAutosize : MonoBehaviour, ILayoutGroup
         set
         {
             if (Child != null)
+            {
                 Child.texture = value;
+                updateChild();
+            }
         }
     }
 

@@ -1,0 +1,20 @@
+{
+    "EventStages":{
+        "main":{
+            "TexturePath": {"Value": "events/school/classes/inFrontOfClass.jpg"},
+            "Text":{
+                "Value": "First School day"
+            },
+            "Options":{
+                "SitJanineKnown":{
+                    "Text": "Sit down next to Janine",
+                    "State": {"Values": {"KnowsJanine":{"Condition": "b_school_janine_introduced=false","Value": {"Visible": false}}}}
+                },
+                "SitJanineUnknown":{
+                    "Text": "Sit down next to the blond girl",
+                    "State": {"Values": {"KnowsJanine":{"Condition": "b_school_janine_introduced=true","Value": {"Visible": false}}}}
+                }
+            }
+        }
+    }
+}

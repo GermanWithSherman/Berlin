@@ -73,7 +73,7 @@ public abstract class Cache<T> : MonoBehaviour where T : IModable
 
     protected virtual T getInvalidKeyEntry(string key)
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException($"Handling of invalid key {key} not implemented");
     }
 
     protected T loadFromFileWithMods(string key)

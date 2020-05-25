@@ -1,0 +1,317 @@
+{
+    
+    "EventStages":{
+        "main":{
+            "Commands": {
+                "SetCurrentClass":{
+                    "Type": "Set", "Values": {
+                        "i_school_cclass": 1
+                    }
+                },
+
+                "FirstDay":{
+                    "Type": "Conditional",
+                    "Condition": "b_school_firstDayDone=1",
+                    "Commands": {
+                        "GotoFirstDayEvent":{
+                            "Type": "Event",
+                            "EventID": "school_class_firstDay."
+                        },
+                        "Break":{"Type": "Break"}
+                    }
+                },
+                "ClassDefault":{
+                    "Type": "Event",
+                    "EventID": "school_class.class"
+                }
+            }
+        },
+        "break":{
+            "TexturePath": {"Value": "events/school/break/break.jpg"},
+            "Options":{
+                "end":{
+                    "Text": "End Break",
+                    "Commands": {
+                        "endEvent":{
+                            "Type": "Event",
+                            "EventID": "school_class.break_end"
+                        }
+                    }
+                }
+            }
+        },
+        "break_end":{
+            "Commands": {
+                "setTime1":{"Type": "Conditional", "Condition": "i_school_cclass==1","Commands": {"setTime":{"Type":"TimePass","ToTime": 93500}}},
+                "setTime2":{"Type": "Conditional", "Condition": "i_school_cclass==2","Commands": {"setTime":{"Type":"TimePass","ToTime": 112500}}},
+                "setTime3":{"Type": "Conditional", "Condition": "i_school_cclass==3","Commands": {"setTime":{"Type":"TimePass","ToTime": 131500}}},
+                "inCclass":{"Type":"Set","ValuesFromSetters": {"i_school_cclass":{"Mode": "Inc", "Value":1}}},
+                "ClassDefault":{
+                    "Type": "Event",
+                    "EventID": "school_class.class"
+                }
+            }
+        },
+
+        "class":{
+            "Inherit": {
+                "Values":{
+                    "1":{"Value": ".class_1","Condition": "i_school_cclass==1"},
+                    "2":{"Value": ".class_2","Condition": "i_school_cclass==2"},
+                    "3":{"Value": ".class_3","Condition": "i_school_cclass==3"},
+                    "4":{"Value": ".class_4","Condition": "i_school_cclass==4"}
+                }
+            },
+            "Options":{
+                "Participate":{
+                    "Text": "Participate actively",
+                    "Commands": {"NextEvent":{"Type":"Event","EventID": "school_class.participate_participate"}}
+                },
+                "Listen":{
+                    "Text": "Listen attentively",
+                    "Commands": {"NextEvent":{"Type":"Event","EventID": "school_class.participate_listen"}}
+                },
+                "ListenLess":{
+                    "Text": "Listen occasionally",
+                    "Commands": {"NextEvent":{"Type":"Event","EventID": "school_class.participate_listenLess"}}
+                },
+                "Daydream":{
+                    "Text": "Daydream",
+                    "Commands": {"NextEvent":{"Type":"Event","EventID": "school_class.participate_daydream"}}
+                }
+            }
+        },
+        "class_end":{
+            "Commands": {
+                "setTime1":{"Type": "Conditional", "Condition": "i_school_cclass==1","Commands": {"setTime":{"Type":"TimePass","ToTime": 91500}}},
+                "setTime2":{"Type": "Conditional", "Condition": "i_school_cclass==2","Commands": {"setTime":{"Type":"TimePass","ToTime": 110500}}},
+                "setTime3":{"Type": "Conditional", "Condition": "i_school_cclass==3","Commands": {"setTime":{"Type":"TimePass","ToTime": 125500}}},
+                "endSchool":{"Type": "Conditional", "Condition": "i_school_cclass==4",
+                    "Commands": {
+                        "setTime":{"Type":"TimePass","ToTime": 144500},
+                        "endEvent":{"Type":"EventEnd"},
+                        "break":{"Type": "Break"}
+                    }
+                    
+                },
+                "ClassDefault":{
+                    "Type": "Event",
+                    "EventID": "school_class.break"
+                }
+            }
+        },
+        "class_1":{
+            "Inherit": {
+                "Values":{
+                    "Mo":{"Value": ".class_math","Condition": "World.DateTime⊆{\"Days\":[\"Mo\"]}"},
+                    "Tu":{"Value": ".class_history","Condition": "World.DateTime⊆{\"Days\":[\"Tu\"]}"},
+                    "We":{"Value": ".class_politics","Condition": "World.DateTime⊆{\"Days\":[\"We\"]}"},
+                    "Th":{"Value": ".class_english","Condition": "World.DateTime⊆{\"Days\":[\"Th\"]}"},
+                    "Fr":{"Value": ".class_german","Condition": "World.DateTime⊆{\"Days\":[\"Fr\"]}"}
+                }
+            }
+        },
+        "class_2":{
+            "Inherit": {
+                "Values":{
+                    "Mo":{"Value": ".class_german","Condition": "World.DateTime⊆{\"Days\":[\"Mo\"]}"},
+                    "Tu":{"Value": ".class_physics","Condition": "World.DateTime⊆{\"Days\":[\"Tu\"]}"},
+                    "We":{"Value": ".class_biology","Condition": "World.DateTime⊆{\"Days\":[\"We\"]}"},
+                    "Th":{"Value": ".class_physics","Condition": "World.DateTime⊆{\"Days\":[\"Th\"]}"},
+                    "Fr":{"Value": ".class_history","Condition": "World.DateTime⊆{\"Days\":[\"Fr\"]}"}
+                }
+            }
+        },
+        "class_3":{
+            "Inherit": {
+                "Values":{
+                    "Mo":{"Value": ".class_biology","Condition": "World.DateTime⊆{\"Days\":[\"Mo\"]}"},
+                    "Tu":{"Value": ".class_english","Condition": "World.DateTime⊆{\"Days\":[\"Tu\"]}"},
+                    "We":{"Value": ".class_math","Condition": "World.DateTime⊆{\"Days\":[\"We\"]}"},
+                    "Th":{"Value": ".class_politics","Condition": "World.DateTime⊆{\"Days\":[\"Th\"]}"},
+                    "Fr":{"Value": ".class_???","Condition": "World.DateTime⊆{\"Days\":[\"Fr\"]}"}
+                }
+            }
+        },
+        "class_4":{
+            "Inherit": {
+                "Values":{
+                    "Mo":{"Value": ".class_art","Condition": "World.DateTime⊆{\"Days\":[\"Mo\"]}"},
+                    "Tu":{"Value": ".class_cs","Condition": "World.DateTime⊆{\"Days\":[\"Tu\"]}"},
+                    "We":{"Value": ".class_sports","Condition": "World.DateTime⊆{\"Days\":[\"We\"]}"},
+                    "Th":{"Value": ".class_cs","Condition": "World.DateTime⊆{\"Days\":[\"Th\"]}"},
+                    "Fr":{"Value": ".class_sports","Condition": "World.DateTime⊆{\"Days\":[\"Fr\"]}"}
+                }
+            }
+        },
+        "class_art":{
+            "TexturePath": {
+                "Value": "npc/school/staff/teacher_art_horizontal.jpg"
+            },
+            "Text": {
+                "Values": {
+                    "0":"Art Class"
+                }
+            }
+        },
+        "class_biology":{
+            "TexturePath": {
+                "Value": "npc/school/staff/teacher_biology_horizontal.png"
+            },
+            "Text": {
+                "Values": {
+                    "0":"Biology Class"
+                }
+            }
+        },
+        "class_cs":{
+            "TexturePath": {
+                "Value": "npc/school/staff/teacher_cs_horizontal.png"
+            },
+            "Text": {
+                "Values": {
+                    "0":"Computational Science Class"
+                }
+            }
+        },
+        "class_english":{
+            "TexturePath": {
+                "Value": "npc/school/staff/teacher_english_horizontal.png"
+            },
+            "Text": {
+                "Values": {
+                    "0":"English Class"
+                }
+            }
+        },
+        "class_german":{
+            "TexturePath": {
+                "Value": "npc/school/staff/teacher_german_horizontal.png"
+            },
+            "Text": {
+                "Values": {
+                    "0":"German Class"
+                }
+            }
+        },
+        "class_history":{
+            "TexturePath": {
+                "Value": "npc/school/staff/teacher_history_horizontal.png"
+            },
+            "Text": {
+                "Values": {
+                    "0":"History Class"
+                }
+            }
+        },
+        "class_math":{
+            "TexturePath": {
+                "Value": "npc/school/staff/teacher_math_horizontal.png"
+            },
+            "Text": {
+                "Values": {
+                    "0":"Math Class"
+                }
+            }
+        },
+        "class_physics":{
+            "TexturePath": {
+                "Value": "npc/school/staff/teacher_physics_horizontal.jpg"
+            },
+            "Text": {
+                "Values": {
+                    "0":"Physics Class"
+                }
+            }
+        },
+        "class_politics":{
+            "TexturePath": {
+                "Value": "npc/school/staff/teacher_politics_horizontal.jpg"
+            },
+            "Text": {
+                "Values": {
+                    "0":"Politics Class"
+                }
+            }
+        },
+        "class_sports":{
+            "TexturePath": {
+                "Value": "npc/school/staff/teacher_sports_horizontal.jpg"
+            },
+            "Text": {
+                "Values": {
+                    "0":"Physical Education Class"
+                }
+            }
+        },
+        "participate_generic":{
+            "Options":{
+                "end":{
+                    "Text": "End Class",
+                    "Commands": {
+                        "endEvent":{
+                            "Type": "Event",
+                            "EventID": "school_class.class_end"
+                        }
+                    }
+                }
+            }
+        },
+        "participate_participate":{
+            "Inherit": {"Value": ".participate_generic"},
+            "TexturePath": {
+                "Mode": "Random",
+                "Values":{
+                    "female_1":{
+                        "Condition": "",
+                        "Value": "events/school/classes/participate_participate_f_1.jpg"
+                    },
+                    "female_2":{
+                        "Condition": "",
+                        "Value": "events/school/classes/participate_participate_f_2.jpg"
+                    },
+                    "male_1":{
+                        "Condition": "",
+                        "Value": "events/school/classes/participate_participate_m_1.jpg"
+                    }
+                }
+            }
+            
+        },
+        "participate_listen":{
+            "Inherit": {"Value": ".participate_generic"},
+            "TexturePath": {
+                "Mode": "Random",
+                "Values":{
+                    "female_1":{
+                        "Condition": "",
+                        "Value": "events/school/classes/participate_listen_f_1.jpg"
+                    },
+                    "male_1":{
+                        "Condition": "",
+                        "Value": "events/school/classes/participate_listen_m_1.jpg"
+                    }
+                }
+            }
+        },
+        "participate_listenLess":{
+            "Inherit": {"Value": ".participate_generic"},
+            "TexturePath": {
+                "Mode": "Random",
+                "Values":{
+                    "female_1":{
+                        "Condition": "",
+                        "Value": "events/school/classes/participate_listenLess_f_1.jpg"
+                    },
+                    "male_1":{
+                        "Condition": "",
+                        "Value": "events/school/classes/participate_listenLess_m_1.jpg"
+                    }
+                }
+            }
+        },
+        "participate_daydream":{
+            "Inherit": {"Value": ".participate_generic"}
+        }
+    }
+}

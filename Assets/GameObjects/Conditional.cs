@@ -40,7 +40,7 @@ public abstract class Conditional : IModable
 
 public class Conditional<T> : Conditional
 {
-    public enum ConditionalMode { Default, Enum }
+    public enum ConditionalMode { Default, Enum, Random }
 
     [JsonProperty]
     private T Value = default(T);
@@ -96,10 +96,63 @@ public class Conditional<T> : Conditional
             case (ConditionalMode.Enum):
                 string index = (string)data["KEY"];
                 return Values[index].value(data);
+            case (ConditionalMode.Random):
+                List<Value<T>> possibleValues = Values.Values.ToList();
+                List<Value<T>> validValues = new List<Value<T>>();
+
+                foreach (Value<T> value in possibleValues)
+                {
+                    if (value.Condition.evaluate(data))
+                        validValues.Add( value);
+                }
+
+                if (validValues.Count > 0)
+                {
+                    return validValues.GetRandom();
+                }
+                
+                Debug.Log("No valid value, returning default");
+
+                return default;
 
         }
 
         return default;
+    }
+
+    public IEnumerable<T> values()
+    {
+        GameManager gameManager = GameManager.Instance;
+        GameData gameData = gameManager.GameData;
+        return values(gameData);
+    }
+
+    public IEnumerable<T> values(Data data)
+    {
+        var result = new List<T>();
+
+        switch (Mode)
+        {
+            case (ConditionalMode.Default):
+                
+
+                List<Value<T>> values = Values.Values.ToList();
+                                
+                values.Sort(Value<T>.ComparePriorities);
+
+
+                foreach (Value<T> value in values)
+                {
+                    if (value.Condition.evaluate(data))
+                        result.Add( value.value(data));
+                }
+
+                if (Value != null)
+                    result.Add(Value);
+
+                return result;
+        }
+        return result;
     }
 
     
@@ -125,7 +178,7 @@ public class Conditional<T> : Conditional
     public override IModable copyDeep()
     {
         var result = new Conditional<T>();
-
+        result.Mode = Mode;
         result.Value = Value;
         result.Values = Modable.copyDeep(Values);//(ModableDictionary<Value<T>>)Values.copyDeep();
 
