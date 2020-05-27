@@ -4,23 +4,7 @@ using UnityEngine;
 
 public class ActivityLibrary : Library<Activity>
 {
-    public Activity this[string key]
-    {
-        get
-        {
-            if (_dict.TryGetValue(key, out Activity activity))
-                return activity;
-            return _defaultValue;
-        }
-    }
 
-    private Activity _defaultValue
-    {
-        get
-        {
-            return _dict["default"];
-        }
-    }
 
     public ActivityLibrary()
     {
@@ -37,5 +21,12 @@ public class ActivityLibrary : Library<Activity>
 
         _dict.Add("default", defaultActivity);
         _dict.Add("sleep", sleep);
+    }
+
+    protected override Activity getInvalidKeyEntry(string key)
+    {
+        if (_dict.TryGetValue("default", out Activity result))
+            return result;
+        throw new GameException("Activity default is missing");
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class CommandEvent : Command
 {
     [JsonProperty("Event")]
-    private EventStage _event;
+    private EventStage _event=null;
 
 
     [JsonIgnore]

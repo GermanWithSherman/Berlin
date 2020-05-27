@@ -54,44 +54,6 @@ public class InterruptServer : Library<Interrupt>
         return result;
     }
 
-    /*private void loadFromFolder(string path)
-    {
-        if (!Directory.Exists(path))
-        {
-            Debug.LogError($"Path {path} does not exist");
-            return;
-        }
-
-        string[] filePaths = Directory.GetFiles(path);
-
-        foreach (string filePath in filePaths)
-        {
-
-            JObject deserializationData = GameManager.File2Data(filePath);
-            Dictionary<string,Interrupt> interruptsRaw = deserializationData.ToObject<Dictionary<string, Interrupt>>();
-
-            foreach (KeyValuePair<string, Interrupt> kv in interruptsRaw)
-            {
-                Interrupt interrupt = kv.Value;
-                interrupt.id = kv.Key;
-
-                foreach (string listenId in interrupt.listen)
-                {
-                    if (!interrupts.ContainsKey(listenId))
-                        interrupts[listenId] = new List<Interrupt>();
-                    interrupts[listenId].Add(interrupt);
-                }
-            }
-        }
-
-        foreach (KeyValuePair< string, List<Interrupt>> kv in interrupts)
-        {
-            List<Interrupt> list = kv.Value;
-            list.Sort(Interrupt.ComparePriorities);
-        }
-
-    }*/
-
     private Interrupt selectedInterrupt(string keyword)
     {
         if (!interruptsByType.ContainsKey(keyword))

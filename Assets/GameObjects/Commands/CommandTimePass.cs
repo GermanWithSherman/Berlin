@@ -27,7 +27,24 @@ public class CommandTimePass : Command
         if (ToTime >= 0)
             duration = GameManager.Instance.timeSecondsTils(ToTime);
 
-        GameManager.Instance.timePass(duration, ActivityID);
+        int timeTilMidnight = GameManager.Instance.timeSecondsTils(0,false);
+
+        if(duration > timeTilMidnight)
+        {
+            
+            CommandTimePass timePassTilMidnight = new CommandTimePass(timeTilMidnight,ActivityID);
+            CommandInterrupt dayStartInterrupt = new CommandInterrupt("dayStart");
+            CommandTimePass timePassAfterMidnight = new CommandTimePass(duration-timeTilMidnight, ActivityID);
+
+            CommandsCollection commands = new CommandsCollection() { timePassTilMidnight, dayStartInterrupt, timePassAfterMidnight };
+            commands.execute();
+        }
+        else
+        {
+            GameManager.Instance.timePass(duration, ActivityID);
+        }
+
+        
         return;
     }
 }

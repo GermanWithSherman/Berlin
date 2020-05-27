@@ -134,6 +134,9 @@
     <Compile Include="Assets\GameObjects\Location.cs" />
     <Compile Include="Assets\GameObjects\LocationConnection.cs" />
     <Compile Include="Assets\GameObjects\LocationConnections.cs" />
+    <Compile Include="Assets\GameObjects\LocationType.cs" />
+    <Compile Include="Assets\GameObjects\LocationTypeLibrary.cs" />
+    <Compile Include="Assets\GameObjects\Misc.cs" />
     <Compile Include="Assets\GameObjects\Mods\IInheritable.cs" />
     <Compile Include="Assets\GameObjects\Mods\IModable.cs" />
     <Compile Include="Assets\GameObjects\Mods\Mod.cs" />
@@ -163,6 +166,8 @@
     <Compile Include="Assets\GameObjects\ShopType.cs" />
     <Compile Include="Assets\GameObjects\StringExtensions.cs" />
     <Compile Include="Assets\GameObjects\SubLocation.cs" />
+    <Compile Include="Assets\GameObjects\Template.cs" />
+    <Compile Include="Assets\GameObjects\TemplateLibrary.cs" />
     <Compile Include="Assets\GameObjects\TimeFilter.cs" />
     <Compile Include="Assets\GameObjects\Ui\Console.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialog.cs" />
@@ -195,6 +200,7 @@
     <Compile Include="Assets\GameObjects\Ui\TextExtended\TextExtended.cs" />
     <Compile Include="Assets\GameObjects\Ui\Tooltip\Tooltip.cs" />
     <Compile Include="Assets\GameObjects\Ui\Tooltip\TooltipProvider.cs" />
+    <Compile Include="Assets\GameObjects\Ui\UIBackground.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIImageMain.cs" />
     <Compile Include="Assets\GameObjects\Ui\UINPCPresent.cs" />
     <Compile Include="Assets\GameObjects\Ui\UINPCsPresentContainer.cs" />

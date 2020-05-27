@@ -6,6 +6,7 @@
                 "Value": "Dorm"
             },
             "TexturePath":{"Value":"locations/dahlem/school/dorm.jpg"},
+            "LocationTypeID": "outside",
             "LocationConnections": {
                 "leave": {
                     "TargetLocationId": "dahlem/school/school.",

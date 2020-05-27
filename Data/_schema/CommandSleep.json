@@ -16,6 +16,6 @@
         "AlarmActivatedRef": {"type": "string" },
         "AlarmTimeRef": {"type": "string" },
         "Duration":{"type":"integer","minimum": -1},
-        "Type": {"type": "string", "pattern": "^Sleep$" }
+        "Type": {"type": "string", "enum": ["Sleep"] }
     }
 }

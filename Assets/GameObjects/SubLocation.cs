@@ -20,6 +20,10 @@ public class SubLocation : IModable, IInheritable
     public Conditional<string> TexturePath;// = new Conditional<string>();
 
     [JsonIgnore]
+    public LocationType LocationType { get => GameManager.Instance.LocationTypeLibrary[LocationTypeID]; }
+    public string LocationTypeID;
+
+    [JsonIgnore]
     public Texture TexturePreview {
         get
         {

@@ -25,11 +25,6 @@ public abstract class Conditional : IModable
         if (original == null)
             return ((Conditional<T>)mod.copyDeep());
 
-        /*if (original.GetType() != mod.GetType())
-        {
-            Debug.LogError("Type mismatch");
-            return original;
-        }*/
 
         original.mod(mod);
 

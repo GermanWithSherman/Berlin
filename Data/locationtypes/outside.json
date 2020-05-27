@@ -1,0 +1,10 @@
+{
+    "TemplateID": {
+        "Values": {
+            "0":{
+                "ValueType": "Reference",
+                "Key": "World.DayPhase"
+            }
+        }
+    }
+}

@@ -9,10 +9,6 @@ public class ItemsLibrary : Library<Item>
 {
     //private Dictionary<string, Item> dict = new Dictionary<string, Item>();
 
-    public Item this[string key]
-    {
-        get => _dict[key];
-    }
 
     public ItemsLibrary(string path, IEnumerable<string> modsPaths, bool loadInstantly = false)
     {

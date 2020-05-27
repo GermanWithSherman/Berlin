@@ -16,11 +16,13 @@
 			{"fileMatch": ["interrupts/*.json"],"url": "./_schema/InterruptFile.json"},
 			{"fileMatch": ["items/*.json"],"url": "./_schema/ItemsFile.json"},
 			{"fileMatch": ["locations/*.json"],"url": "./_schema/Location.json"},
+			{"fileMatch": ["locationtypes/*.json"],"url": "./_schema/LocationType.json"},
 			{"fileMatch": ["npcs/*.json"],"url": "./_schema/NPC.json"},
 			{"fileMatch": ["npctemplates/*.json"],"url": "./_schema/NPCTemplate.json"},
 			{"fileMatch": ["servicepoints/*.json"],"url": "./_schema/ServicePoint.json"},
 			{"fileMatch": ["services/*.json"],"url": "./_schema/ServicesFile.json"},
-			{"fileMatch": ["shoptypes/*.json"],"url": "./_schema/ShopType.json"}
+			{"fileMatch": ["shoptypes/*.json"],"url": "./_schema/ShopType.json"},
+			{"fileMatch": ["templates/*.json"],"url": "./_schema/Template.json"}
 		]
 
 	},

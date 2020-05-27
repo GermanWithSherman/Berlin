@@ -25,7 +25,9 @@ public class CommandSet : Command
 
         foreach (KeyValuePair<string, ValueSetter> kv in ValuesFromSetters)
         {
-            data[kv.Key] = kv.Value.Target(data[kv.Key]);
+            dynamic target = kv.Value.Target(data[kv.Key]);
+            data[kv.Key] = target;
+            Debug.Log($"{kv.Key} => {target}");
         }
     }
 }

@@ -9,10 +9,6 @@ public class DialogueTopicLibrary : Library<DialogueTopic>
 
     private List<DialogueTopic> _greetings;
 
-    public DialogueTopic this[string key]
-    {
-        get => _dict[key];
-    }
 
     public DialogueTopicLibrary(string path, IEnumerable<string> modsPaths, bool loadInstantly = false)
     {

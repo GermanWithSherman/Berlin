@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using TMPro;
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public Preferences Preferences;
+
+    public Misc Misc;
 
     public GameData GameData = new GameData();
 
@@ -37,7 +40,9 @@ public class GameManager : MonoBehaviour
     public DialogueTopicLibrary DialogueTopicLibrary;
     public FunctionsLibrary FunctionsLibrary;
     public ItemsLibrary ItemsLibrary;
+    public LocationTypeLibrary LocationTypeLibrary;
     public NPCsLibrary NPCsLibrary;
+    public TemplateLibrary TemplateLibrary;
 
     public DialogServer DialogServer;
     public InterruptServer InterruptServer;
@@ -68,6 +73,16 @@ public class GameManager : MonoBehaviour
 
     public IEnumerable<LocationConnection> CurrentReachableLocations{get => GameData.currentLocation?.LocationConnections.VisibleLocationConnections;}
 
+    public Template CurrentTemplate
+    {
+        get
+        {
+            if (GameData.currentLocation != null)
+                return GameData.currentLocation.LocationType.Template;
+            return TemplateLibrary[""];
+        }
+    }
+
     public string CurrentText
     {
         get
@@ -90,6 +105,9 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+
+    public CultureInfo CultureInfo = CultureInfo.CreateSpecificCulture("en-US");
 
     public UINPCsPresentContainer UINPCsPresentContainer;
 
@@ -161,10 +179,21 @@ public class GameManager : MonoBehaviour
         InterruptServer = new InterruptServer(path("interrupts"), pathsMods(modsPaths, "interrupts"));
         Thread interruptServerLoadThread = InterruptServer.loadThreaded();
 
+        LocationTypeLibrary = new LocationTypeLibrary(path("locationtypes"), pathsMods(modsPaths, "locationtypes"));
+        Thread locationTypeLibraryLoadThread = LocationTypeLibrary.loadThreaded();
+
+        TemplateLibrary = new TemplateLibrary(path("templates"), pathsMods(modsPaths, "templates"));
+        Thread templateLibraryLoadThread = TemplateLibrary.loadThreaded();
+
+        Misc = File2Object<Misc>(path("misc.json"));
+
+
         dialogueTopicLibraryLoadThread.Join();
         functionsLibraryLoadThread.Join();
         itemsLibraryLoadThread.Join();
         interruptServerLoadThread.Join();
+        locationTypeLibraryLoadThread.Join();
+        templateLibraryLoadThread.Join();
 
         StartMenu.show();
 
@@ -241,6 +270,11 @@ public class GameManager : MonoBehaviour
         return data;
     }
 
+    public static T File2Object<T>(string path)
+    {
+        return File2Data(path).ToObject<T>();
+    }
+
     public void gameLoad()
     {
         gameLoad(QuicksavePath);
@@ -304,6 +338,8 @@ public class GameManager : MonoBehaviour
 
         uiUpdate();
     }
+
+    
 
     private void npcsPresentUpdate()
     {
@@ -396,7 +432,7 @@ public class GameManager : MonoBehaviour
         PC.timePass(seconds, activity);
     }
 
-    public int timeSecondsTils(int targetTime)
+    public int timeSecondsTils(int targetTime,bool sameTimeAllowed=true)
     {
         DateTime now = GameData.WorldData.DateTime;
 
@@ -408,6 +444,9 @@ public class GameManager : MonoBehaviour
 
         if (diff < 0)
             diff += 86400;
+
+        if(diff == 0 && !sameTimeAllowed)
+            diff = 86400;
 
         return diff;
     }
@@ -436,6 +475,9 @@ public class GameManager : MonoBehaviour
 
     private void _uiUpdate()
     {
+        Debug.Log($"DayNight: {Misc.dayNightState(GameData.WorldData.DateTime)}");
+
+
         uiUpdatePending = false;
 
         foreach (UIUpdateListener listener in updateListeners)
