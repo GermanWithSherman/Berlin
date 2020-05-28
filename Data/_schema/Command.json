@@ -16,6 +16,8 @@
         {"$ref": "./CommandInterrupt.json"},
         
         {"$ref": "./CommandItemAdd.json"},
+        {"$ref": "./CommandNoteAdd.json"},
+        {"$ref": "./CommandNoteRemove.json"},
         {"$ref": "./CommandItemRemove.json"},
         {"$ref": "./CommandOutfit.json"},
         {"$ref": "./CommandPause.json"},

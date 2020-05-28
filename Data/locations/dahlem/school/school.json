@@ -7,9 +7,14 @@
             },
             "TexturePath":{
                 "Values":{
+                    "night":{
+                        "Value": "locations/dahlem/school/schoolExteriorNight.jpg",
+                        "Condition": "World.DayPhase=\"night\""
+                    },
                     "default":{"Value":"locations/dahlem/school/schoolExterior.jpg"}
                 }
             },
+            "LocationTypeID": "outside",
             "LocationConnections": {
                 "leave": {
                     "TargetLocationId": "dahlem/public.",

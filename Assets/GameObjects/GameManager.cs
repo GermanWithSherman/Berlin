@@ -116,6 +116,8 @@ public class GameManager : MonoBehaviour
 
     public UIDialogue UIDialogue;
 
+    public UINotes UINotes;
+
     public UIPanelView UIServicesWindow;
 
     public UiShopWindow UiShopWindow;
@@ -200,6 +202,7 @@ public class GameManager : MonoBehaviour
         LoadingScreen.SetActive(false);
 
         UIDialogue.hide();
+        UINotes.hide();
     }
 
     void Update()
@@ -365,6 +368,28 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
+    internal void noteAdd(string noteID, string text)
+    {
+        GameData.Notes[noteID] = new Note(text, GameData.WorldData.DateTime);
+    }
+
+    internal void noteRemove(string noteID)
+    {
+        GameData.Notes.Remove(noteID);
+    }
+
+    public void notesHide()
+    {
+        UINotes.hide();
+    }
+
+    public void notesShow()
+    {
+        UINotes.showNotes(GameData.Notes.Values);
+    }
+
+    
+
 
     public void outfitWindowShow(OutfitRequirement outfitRequirement, CommandsCollection onClose)
     {
@@ -486,4 +511,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    
 }

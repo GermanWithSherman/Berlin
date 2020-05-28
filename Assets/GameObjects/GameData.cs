@@ -23,6 +23,8 @@ public class GameData: Data
 
     public InterruptPersistentDataCollection Interrupts = new InterruptPersistentDataCollection();
 
+    public Dictionary<string, Note> Notes = new Dictionary<string, Note>();
+
     [JsonConverter(typeof(EventStageConverter))]
     public EventStage currentEventStage;
 

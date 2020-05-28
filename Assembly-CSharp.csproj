@@ -94,6 +94,8 @@
     <Compile Include="Assets\GameObjects\Commands\CommandItemAdd.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandItemRemove.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandNone.cs" />
+    <Compile Include="Assets\GameObjects\Commands\CommandNoteAdd.cs" />
+    <Compile Include="Assets\GameObjects\Commands\CommandNoteRemove.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandOutfit.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandPause.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandServices.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="Assets\GameObjects\NPCRaw.cs" />
     <Compile Include="Assets\GameObjects\NPCTemplate.cs" />
     <Compile Include="Assets\GameObjects\NPCsLibrary.cs" />
+    <Compile Include="Assets\GameObjects\Note.cs" />
     <Compile Include="Assets\GameObjects\Option.cs" />
     <Compile Include="Assets\GameObjects\Outfit.cs" />
     <Compile Include="Assets\GameObjects\OutfitRequirement.cs" />
@@ -204,6 +207,8 @@
     <Compile Include="Assets\GameObjects\Ui\UIImageMain.cs" />
     <Compile Include="Assets\GameObjects\Ui\UINPCPresent.cs" />
     <Compile Include="Assets\GameObjects\Ui\UINPCsPresentContainer.cs" />
+    <Compile Include="Assets\GameObjects\Ui\UINote.cs" />
+    <Compile Include="Assets\GameObjects\Ui\UINotes.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIOption.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIOptionsContainer.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIRLocation.cs" />

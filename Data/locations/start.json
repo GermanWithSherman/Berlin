@@ -153,7 +153,14 @@
                         "FirstName":{"Type":"Set","ValuesFromLists": {"PC.nameFirst": "names_first_male_90s"}}
                     }
                 },
-                "LastName":{"Type":"Set","ValuesFromLists": {"PC.nameLast": "names_last"}}
+                "LastName":{"Type":"Set","ValuesFromLists": {"PC.nameLast": "names_last"}},
+                "note":{
+                    "Type": "NoteAdd",
+                    "NoteID": "school_intro_gotoPsychologist",
+                    "Text": {
+                        "Value": "I am new at this school. I am told to visit the school psychologist first. I should find her in her office in the main school building."
+                    }
+                }
             }
         }
     }

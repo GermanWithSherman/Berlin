@@ -78,7 +78,15 @@
                     }
                 },
                 "onShow": {
-                    "setIntroduced":{"Type": "Set","Values": {"b_school_psychologist_introduced": true}}
+                    "setIntroduced":{"Type": "Set","Values": {"b_school_psychologist_introduced": true}},
+                    "noteRemove":{"Type":"NoteRemove","NoteID": "school_intro_gotoPsychologist"},
+                    "noteAdd":{
+                        "Type": "NoteAdd",
+                        "NoteID": "school_intro_gotoDormSecretary",
+                        "Text": {
+                            "Value": "I should go to the schools dorm and ask the secretary for my room."
+                        }
+                    }
                 }
             }
         },
@@ -115,7 +123,15 @@
                     }
                 },
                 "onShow": {
-                    "setIntroduced":{"Type": "Set","Values": {"b_school_psychologist_introduced": true}}
+                    "setIntroduced":{"Type": "Set","Values": {"b_school_psychologist_introduced": true}},
+                    "noteRemove":{"Type":"NoteRemove","NoteID": "school_intro_gotoPsychologist"},
+                    "noteAdd":{
+                        "Type": "NoteAdd",
+                        "NoteID": "school_intro_gotoDormSecretary",
+                        "Text": {
+                            "Value": "I should go to the schools dorm and ask the secretary for my room."
+                        }
+                    }
                 }
             }
         },
@@ -214,8 +230,22 @@
                     },
                     "setIntroduced":{"Type": "Set","Values": {"b_school_psychologist_introduced": true}},
                     "setDormAccess":{"Type": "Set","Values": {"b_school_dorm_211_access": true}},
-                    "setExperiment":{"Type": "Set","Values": {"b_school_psychologist_participant": true},"ValuesFromSetters": {"i_school_psychologist_experiment":{"Mode": "Inc", "Value": 1}}}
-
+                    "setExperiment":{"Type": "Set","Values": {"b_school_psychologist_participant": true},"ValuesFromSetters": {"i_school_psychologist_experiment":{"Mode": "Inc", "Value": 1}}},
+                    "noteRemove":{"Type":"NoteRemove","NoteID": "school_intro_gotoPsychologist"},
+                    "noteAddExperiment":{
+                        "Type": "NoteAdd",
+                        "NoteID": "school_psycho_experiment",
+                        "Text": {
+                            "Value": "I agreed to take part in the psychologists experiments."
+                        }
+                    },
+                    "noteAddGotoDorm":{
+                        "Type": "NoteAdd",
+                        "NoteID": "school_psycho_experiment",
+                        "Text": {
+                            "Value": "I should go to the dorm and visit the psychologists assistant in room 204."
+                        }
+                    }
                 },
                 "Options": {
                     "comply":{

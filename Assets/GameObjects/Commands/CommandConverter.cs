@@ -71,6 +71,12 @@ public class CommandConverter : JsonConverter
             case (Command.Type.ItemRemove):
                 result = new CommandItemRemove();
                 break;
+            case (Command.Type.NoteAdd):
+                result = new CommandNoteAdd();
+                break;
+            case (Command.Type.NoteRemove):
+                result = new CommandNoteRemove();
+                break;
             case (Command.Type.Outfit):
                 result = new CommandOutfit();
                 break;
