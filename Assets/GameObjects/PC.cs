@@ -39,7 +39,8 @@ public class PC : NPC
     public int statSleep;
     private int _statSleep { get => statSleep; set => statSleep = Mathf.Clamp(value, 0, 1000000); }
 
-    
+    public override bool ShouldSerializeTexturePath() => true;
+
     private static GameManager gameManager { get => GameManager.Instance; }
 
 

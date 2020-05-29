@@ -63,7 +63,7 @@ public class NPC : Data, IInheritable, IModable
     public Texture Texture { get => GameManager.Instance.TextureCache[TexturePath]; }
 
     public Conditional<string> TexturePath;
-    public bool ShouldSerializeTexturePath() => false;
+    public virtual bool ShouldSerializeTexturePath() => false;
 
     [JsonIgnore]
     public bool inheritanceResolved = false;
@@ -123,6 +123,9 @@ public class NPC : Data, IInheritable, IModable
                 break;
             case "height":
                 Height = (int)value;
+                break;
+            case "texturePath":
+                TexturePath = new Conditional<string>((string)value,0,true);
                 break;
             case "weight":
                 Weight = (int)value;

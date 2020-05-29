@@ -54,8 +54,11 @@ public class Conditional<T> : Conditional
 
     public Conditional() { }
 
-    public Conditional(T v,int p=0){
-        Values.Add("#def",new Value<T>(v,p));
+    public Conditional(T v,int p=0,bool singleValue = false){
+        if (singleValue)
+            Value = v;
+        else
+            Values.Add("#def", new Value<T>(v, p));
     }
 
     public T value()

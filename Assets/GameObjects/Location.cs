@@ -40,7 +40,13 @@ public class Location : IModable
 
     public IModable copyDeep()
     {
-        throw new NotImplementedException();
+        var result = new Location();
+
+        result.ID = Modable.copyDeep(ID);
+        result.Default = Modable.copyDeep(Default);
+        result.subLocations = Modable.copyDeep(subLocations);
+
+        return result;
     }
 
     public void mod(IModable modable)

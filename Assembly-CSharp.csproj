@@ -172,6 +172,8 @@
     <Compile Include="Assets\GameObjects\Template.cs" />
     <Compile Include="Assets\GameObjects\TemplateLibrary.cs" />
     <Compile Include="Assets\GameObjects\TimeFilter.cs" />
+    <Compile Include="Assets\GameObjects\Ui\CharacterWidget.cs" />
+    <Compile Include="Assets\GameObjects\Ui\CharacterWidgetStat.cs" />
     <Compile Include="Assets\GameObjects\Ui\Console.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialog.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogResolver.cs" />
@@ -179,6 +181,8 @@
     <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogServer.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\AlarmClockDialogPrefab.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectHorizontal.cs" />
+    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectImageDialog.cs" />
+    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectImageDialogImage.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectNameDialog.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SexSelectDialogPrefab.cs" />
     <Compile Include="Assets\GameObjects\Ui\FlexibleGridLayout.cs" />

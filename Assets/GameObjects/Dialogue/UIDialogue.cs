@@ -44,45 +44,7 @@ public class UIDialogue : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public string lineParse(string input)
-    {
-        string pattern = @"<(\w+)(?>=(\w+))?>(.*?)</\1>";
-        string result = String.Empty;
-        int pos = 0;
-
-        foreach (Match match in Regex.Matches(input, pattern, RegexOptions.IgnoreCase))
-        {
-            try
-            {
-                int length = match.Index - pos;
-                result += input.Substring(pos, length);
-
-                string tagType = match.Groups[1].Value;
-                string parameter = match.Groups[2].Value;
-                string content = match.Groups[3].Value;
-                switch (tagType)
-                {
-                    case ("speaker"):
-                        result += "<i><b>" + content + "</b></i>";
-                        //NPC speaker = Data[parameter];
-                        //result += speaker.GenderVisible;
-                        break;
-                    default:
-                        result += $"<{tagType}>{lineParse(content)}</{tagType}>";
-                        break;
-                }
-            }
-            catch (Exception e)
-            {
-                result += "{ERROR: " + e.GetType() + " }";
-            }
-            pos = match.Index + match.Length;
-        }
-
-        result += input.Substring(pos);
-
-        return result;
-    }
+    
 
     public void lineShow(DialogueLine line)
     {
@@ -113,7 +75,8 @@ public class UIDialogue : MonoBehaviour
         if (String.IsNullOrEmpty(t))
             return;
 
-        t = lineParse(t) + "\n\n";
+        //t = lineParse(t) + "\n\n";
+        t += "\n\n";
 
         //Text.Text += t;
         Text.addText(t);

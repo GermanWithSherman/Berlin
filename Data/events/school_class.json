@@ -11,7 +11,7 @@
 
                 "FirstDay":{
                     "Type": "Conditional",
-                    "Condition": "b_school_firstDayDone=1",
+                    "Condition": "b_school_firstDayDone=false",
                     "Commands": {
                         "GotoFirstDayEvent":{
                             "Type": "Event",

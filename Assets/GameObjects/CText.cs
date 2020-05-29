@@ -52,7 +52,9 @@ public class CText : IModable
         foreach (CText cText in Values.Values)
             result.Add(cText.Text(gameData));
 
-        return String.Join(JoinWith, result);
+        var resultString = String.Join(JoinWith, result);
+
+        return resultString;
     }
 
     private static string format(dynamic data, string format)
@@ -126,10 +128,49 @@ public class CText : IModable
 
         result += input.Substring(pos);
 
+        result = lineParse(result);
 
         return result;
     }
- 
+
+    private static string lineParse(string input)
+    {
+        string pattern = @"<(\w+)(?>=([\w\.]+))?>(.*?)</\1>";
+        string result = String.Empty;
+        int pos = 0;
+
+        foreach (Match match in Regex.Matches(input, pattern, RegexOptions.IgnoreCase))
+        {
+            try
+            {
+                int length = match.Index - pos;
+                result += input.Substring(pos, length);
+
+                string tagType = match.Groups[1].Value;
+                string parameter = match.Groups[2].Value;
+                string content = match.Groups[3].Value;
+                switch (tagType)
+                {
+                    case ("speaker"):
+                        result += "<i><b>" + content + "</b></i>";
+                        break;
+                    default:
+                        result += $"<{tagType}>{lineParse(content)}</{tagType}>";
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                result += "{ERROR: " + e.GetType() + " }";
+            }
+            pos = match.Index + match.Length;
+        }
+
+        result += input.Substring(pos);
+
+        return result;
+    }
+
 
     public void mod(CText modable)
     {
