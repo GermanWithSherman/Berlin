@@ -75,4 +75,42 @@ public class CommandSleep : Command
 
         return result;
     }
+
+    public override IModable copyDeep()
+    {
+        var result = new CommandSleep();
+
+        result.AlarmActivatedRef = Modable.copyDeep(AlarmActivatedRef);
+        result.AlarmTimeRef = Modable.copyDeep(AlarmTimeRef);
+        result.Duration = Modable.copyDeep(Duration);
+        result.MaxSleepFactor = Modable.copyDeep(MaxSleepFactor);
+        return result;
+    }
+
+    private void mod(CommandSleep original, CommandSleep mod)
+    {
+        AlarmActivatedRef = Modable.mod(original.AlarmActivatedRef, mod.AlarmActivatedRef);
+        AlarmTimeRef = Modable.mod(original.AlarmTimeRef, mod.AlarmTimeRef);
+        Duration = Modable.mod(original.Duration, mod.Duration);
+        MaxSleepFactor = Modable.mod(original.MaxSleepFactor, mod.MaxSleepFactor);
+
+    }
+
+    public void mod(CommandSleep modable)
+    {
+        if (modable == null) return;
+        mod(this, modable);
+    }
+
+    public override void mod(IModable modable)
+    {
+        CommandSleep modCommand = modable as CommandSleep;
+        if (modCommand == null)
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod(modCommand);
+    }
 }

@@ -47,4 +47,40 @@ public class CommandTimePass : Command
         
         return;
     }
+
+    public override IModable copyDeep()
+    {
+        var result = new CommandTimePass();
+
+        result.ActivityID = Modable.copyDeep(ActivityID);
+        result.Duration = Modable.copyDeep(Duration);
+        result.ToTime = Modable.copyDeep(ToTime);
+        return result;
+    }
+
+    private void mod(CommandTimePass original, CommandTimePass mod)
+    {
+        ActivityID = Modable.mod(original.ActivityID, mod.ActivityID);
+        Duration = Modable.mod(original.Duration, mod.Duration);
+        ToTime = Modable.mod(original.ToTime, mod.ToTime);
+
+    }
+
+    public void mod(CommandTimePass modable)
+    {
+        if (modable == null) return;
+        mod(this, modable);
+    }
+
+    public override void mod(IModable modable)
+    {
+        CommandTimePass modCommand = modable as CommandTimePass;
+        if (modCommand == null)
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod(modCommand);
+    }
 }

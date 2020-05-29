@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [JsonConverter(typeof(CommandConverter))]
-public abstract class Command
+public abstract class Command : IModable
 {
     public static bool breakActive = false;
     public static bool pauseActive = false;
@@ -27,5 +27,6 @@ public abstract class Command
         execute(GameManager.Instance.GameData);
     }
     public abstract void execute(Data data);
-
+    public abstract void mod(IModable modable);
+    public abstract IModable copyDeep();
 }

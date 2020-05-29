@@ -30,6 +30,42 @@ public class CommandSet : Command
             Debug.Log($"{kv.Key} => {target}");
         }
     }
+
+    public override IModable copyDeep()
+    {
+        var result = new CommandSet();
+
+        result.Values = Modable.copyDeep(Values);
+        result.ValuesFromLists = Modable.copyDeep(ValuesFromLists);
+        result.ValuesFromSetters = Modable.copyDeep(ValuesFromSetters);
+        return result;
+    }
+
+    private void mod(CommandSet original, CommandSet mod)
+    {
+        Values = Modable.mod(original.Values, mod.Values);
+        ValuesFromLists = Modable.mod(original.ValuesFromLists, mod.ValuesFromLists);
+        ValuesFromSetters = Modable.mod(original.ValuesFromSetters, mod.ValuesFromSetters);
+
+    }
+
+    public void mod(CommandSet modable)
+    {
+        if (modable == null) return;
+        mod(this, modable);
+    }
+
+    public override void mod(IModable modable)
+    {
+        CommandSet modCommand = modable as CommandSet;
+        if (modCommand == null)
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod(modCommand);
+    }
 }
 
 public class ValueSetter: IModable

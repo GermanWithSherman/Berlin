@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,11 @@ public static class Modable
         return original;
     }
 
+    public static float copyDeep(float original)
+    {
+        return original;
+    }
+
     public static int copyDeep(int original)
     {
         return original;
@@ -45,6 +51,11 @@ public static class Modable
     public static int? copyDeep(int? original)
     {
         return original;
+    }
+
+    public static JToken copyDeep(JToken original)
+    {
+        return JObject.Parse(original.ToString());
     }
 
     public static string copyDeep(string original)
@@ -83,9 +94,28 @@ public static class Modable
         return mod;
     }
 
+    public static float mod(float original, float mod)
+    {
+        return mod;
+    }
+
     public static int mod(int original, int mod)
     {
         return mod;
+    }
+
+    public static JToken mod(JToken original, JToken mod)
+    {
+        JObject originalObject = original as JObject;
+        JObject modObject = mod as JObject;
+
+        if (originalObject == null || modObject == null)
+            return mod;
+
+        originalObject.Merge(modObject, new JsonMergeSettings { MergeArrayHandling = MergeArrayHandling.Union });
+
+        return originalObject;
+        //return mod;
     }
 
     public static int? mod(int? original, int? mod)

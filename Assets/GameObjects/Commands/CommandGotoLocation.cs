@@ -59,4 +59,36 @@ public class CommandGotoLocation : Command
 
         return result;
     }
+
+    public override IModable copyDeep()
+    {
+        var result = new CommandGotoLocation();
+
+        result.LocationID = Modable.copyDeep(LocationID);
+
+        return result;
+    }
+
+    private void mod(CommandGotoLocation original, CommandGotoLocation mod)
+    {
+        LocationID = Modable.mod(original.LocationID, mod.LocationID);
+    }
+
+    public void mod(CommandGotoLocation modable)
+    {
+        if (modable == null) return;
+        mod(this, modable);
+    }
+
+    public override void mod(IModable modable)
+    {
+        CommandGotoLocation modCommand = modable as CommandGotoLocation;
+        if (modCommand == null)
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod(modCommand);
+    }
 }

@@ -35,4 +35,42 @@ public class CommandItemAdd : Command
                 GameManager.Instance.PC.currentOutfit.addItem(item);
         }
     }
+
+    public override IModable copyDeep()
+    {
+        var result = new CommandItemAdd();
+
+        result.Count = Modable.copyDeep(Count);
+        result.Equip = Modable.copyDeep(Equip);
+        result.ItemID = Modable.copyDeep(ItemID);
+        result.ShopID = Modable.copyDeep(ShopID);
+        return result;
+    }
+
+    private void mod(CommandItemAdd original, CommandItemAdd mod)
+    {
+        Count = Modable.mod(original.Count, mod.Count);
+        Equip = Modable.mod(original.Equip, mod.Equip);
+
+        ItemID = Modable.mod(original.ItemID, mod.ItemID);
+        ShopID = Modable.mod(original.ShopID, mod.ShopID);
+    }
+
+    public void mod(CommandItemAdd modable)
+    {
+        if (modable == null) return;
+        mod(this, modable);
+    }
+
+    public override void mod(IModable modable)
+    {
+        CommandItemAdd modCommand = modable as CommandItemAdd;
+        if (modCommand == null)
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod(modCommand);
+    }
 }

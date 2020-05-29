@@ -9,4 +9,11 @@ public class CommandContinue : Command
         Command.pauseActive = false;
         Command.pausedCommands.execute();
     }
+
+    public override IModable copyDeep()
+    {
+        return new CommandContinue();
+    }
+
+    public override void mod(IModable modable) { }
 }

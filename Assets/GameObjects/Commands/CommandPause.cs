@@ -9,4 +9,11 @@ public class CommandPause : Command
         Command.pauseActive = true;
         Command.pausedCommands = new CommandsCollection();
     }
+
+    public override IModable copyDeep()
+    {
+        return new CommandPause();
+    }
+
+    public override void mod(IModable modable) { }
 }
