@@ -55,7 +55,7 @@ public class SubLocation : IModable, IInheritable
     [JsonIgnore]
     public bool inheritanceResolved = false;
 
-    public void execute(GameManager gameManager)
+    public void onShowExecute(GameManager gameManager)
     {
 
         onShow.execute();
@@ -113,6 +113,8 @@ public class SubLocation : IModable, IInheritable
         TexturePreviewPath = Modable.mod(original.TexturePreviewPath, mod.TexturePreviewPath);
 
         onShow = Modable.mod(original.onShow, mod.onShow);
+
+        Inherit = Modable.mod(original.Inherit, mod.Inherit);
     }
 
     public void mod(SubLocation modSublocation)
@@ -143,6 +145,8 @@ public class SubLocation : IModable, IInheritable
         result.TexturePath = Modable.copyDeep(TexturePath);
         result.TexturePreviewPath = Modable.copyDeep(TexturePreviewPath);
         result.onShow = Modable.copyDeep(onShow);
+
+        result.Inherit = Modable.copyDeep(Inherit);
         return result;
     }
 

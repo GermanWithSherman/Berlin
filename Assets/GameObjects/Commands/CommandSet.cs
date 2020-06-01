@@ -70,12 +70,14 @@ public class CommandSet : Command
 
 public class ValueSetter: IModable
 {
-    public enum SetMode { Set, Inc, Cooldown }
+    public enum SetMode { Set, Inc, Cooldown, Object }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public SetMode Mode;
 
     public dynamic Value;
+
+    public Value<dynamic> ValueObject;
 
     private dynamic modeInc(dynamic currentValue) => (int)currentValue + (int)Value;
 
@@ -91,6 +93,8 @@ public class ValueSetter: IModable
                 return modeInc(currentValue);
             case (SetMode.Set):
                 return Value;
+            case (SetMode.Object):
+                return ValueObject.value();
         }
         return null;
     }
@@ -104,7 +108,12 @@ public class ValueSetter: IModable
     {
         var result = new ValueSetter();
         result.Mode = Mode;
-        result.Value = Modable.copyDeep(Value);
+
+        if(Value != null)
+            result.Value = Modable.copyDeep(Value);
+
+        result.ValueObject = Modable.copyDeep(ValueObject);
+
         return result;
     }
 }

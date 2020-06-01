@@ -17,6 +17,8 @@ public class GameData: Data
         set => set(key,value);
     }
 
+    public UISettings UISettings = new UISettings();
+
     public CharacterData CharacterData = new CharacterData();
     public ShopData ShopData = new ShopData();
     public WorldData WorldData = new WorldData();
@@ -68,6 +70,8 @@ public class GameData: Data
                     return CharacterData.PC[keyParts[1]];
                 case "Shop":
                     return ShopData[keyParts[1]];
+                case "UI":
+                    return UISettings[keyParts[1]];
                 case "World":
                     return WorldData[keyParts[1]];
             }
@@ -143,6 +147,9 @@ public class GameData: Data
                     return;
                 case "Shop":
                     ShopData[keyParts[1]] = value;
+                    return;
+                case "UI":
+                    UISettings[keyParts[1]] = value;
                     return;
                 case "World":
                     WorldData[keyParts[1]] = value;

@@ -8,13 +8,13 @@ using UnityEngine;
 public class Condition : IModable
 {
     private const string regex_identifier = "[a-zA-Z0-9'\\._\\-\\+\\(\\)\\[\\];,\"\\{\\}:]+";
-    private const string regex_operator = "[><=]{1,2}|!=|⊆";
+    private const string regex_operator = "[><=]{1,2}|!=|!?⊆";
     private const string regex_whitespace = "\\s*";
 
     private const string regex_string_operator = regex_whitespace + "(" + regex_identifier + ")" + regex_whitespace + "(" + regex_operator + ")" + regex_whitespace + "(" + regex_identifier + ")" + regex_whitespace;
 
 
-    enum Modes { Plain, Equals, HEquals, LEquals, NEquals, Higher, Lower, ElementOf, AND, OR, XOR }
+    enum Modes { Plain, Equals, HEquals, LEquals, NEquals, Higher, Lower, ElementOf, NElementOf, AND, OR, XOR }
     enum Types { Field, Value, Condition, Object, Interval, DateTime }
 
     private Types leftType;
@@ -154,6 +154,9 @@ public class Condition : IModable
                     break;
                 case "⊆":
                     mode = Modes.ElementOf;
+                    break;
+                case "!⊆":
+                    mode = Modes.NElementOf;
                     break;
             }
 
@@ -365,6 +368,9 @@ public class Condition : IModable
                 case Modes.ElementOf:
                     result = elementOf(left, right);
                     break;
+                case Modes.NElementOf:
+                    result = !elementOf(left, right);
+                    break;
                 default:
                     throw new GameException($"Unhandled Condition Type {mode.ToString()}");
             }
@@ -448,6 +454,14 @@ public class Condition : IModable
                         break;
                 }
                 return true;
+            }
+            return false;
+        }else if (left is string && right is IEnumerable<string>)
+        {
+            foreach(string entry in ((IEnumerable<string>)right))
+            {
+                if (entry.Equals(left))
+                    return true;
             }
             return false;
         }

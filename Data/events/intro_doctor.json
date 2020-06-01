@@ -486,6 +486,13 @@
                     "8":"Finally you put on the jeans, the shirt and the shoes. Each of these items is clearly made for girls but at least they are not too girly."
                 }
             },
+            "Commands": {
+                "RemoveMaleItems":{"Type": "ItemRemove","ItemsFilter": {"Genders": ["m"]}},
+                "Bra":{"Type":"ItemAdd","ShopID":"all_bras_f","Equip":true},
+                "Clothes":{"Type":"ItemAdd","ItemID":"jeans_2","Equip":true},
+                "Panties":{"Type":"ItemAdd","ShopID":"all_panties_f","Equip":true},
+                "Shoes":{"Type":"ItemAdd","ItemID":"shoes_flat_1","Equip":true}
+            },
             "Options":{
                 "Continue":{
                     "Text": "...",
@@ -505,10 +512,13 @@
             "Text": {
                 "JoinWith": "\n",
                 "Values":{
-                    "0":"Face."
+                    "5_d_0":"The doctor watches as you put your clothes on.",
+                    "5_d_1":"<speaker>Very well. Don't worry, you will get used to this in time. Speaking about getting used: there is one change to your body you propably didn't have mentioned yet.</speaker>",
+                    "5_d_2":"He leads you to a mirror so you can see your face. You were hoping that they didn't change this part as well, but of course they did."
                 }
             },
             "Options":{
+                
                 "Mirror":{
                     "Text": "Look into the mirror",
                     "Commands": {
@@ -519,8 +529,92 @@
                                 "Targets": {
                                     "PATH": "PC.texturePath"
                                 },
-                                "Path":"media/npc/random_f"
+                                "Path":"media/npc/random_f",
+                                "onComplete": {"5_event":{"Type": "Event","EventID": "intro_doctor.face2"}}
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "face2":{
+            "TexturePath": {
+                "Values":{
+                    "5_d":{
+                        "Key": "PC.texturePath",
+                        "ValueType": "Reference"
+                    }
+                }
+            },
+            "Text": {
+                "JoinWith": "\n",
+                "Values":{
+                    "5_d_0":"You can't believe what you are seeing. There is no trace of your former face left. You look like a real girl now!"
+                }
+            },
+            "Options":{
+                "Continue":{
+                    "Text": "...",
+                    "Commands": {
+                        "enter":{
+                            "Type": "Event",
+                            "EventID": "intro_doctor.finish"
+                        }
+                    }
+                }
+            }
+        },
+        "finish":{
+            "TexturePath": {
+                "Value": "events/limo_black.jpg"
+            },
+            "Text": {
+                "JoinWith": "\n",
+                "Values":{
+                    "5_d_1":"<speaker>Okay, that's all for now. These two gentlemen will escort you to your new home. You will also meet Mrs. {NPC.school_psychologist.nameLast} there. She will explain everything you need to know to you.</speaker>",
+                    "5_d_2":"One of the policemen takes a black bag and puts it over your head. That can't be normal procedure, right? Then they lead you out of the building to the back seat of a car.",
+                    "5_d_3":"The three of your drive for about half an hour before the car stops and the bag over your head get removed."
+                }
+            },
+            "Options":{
+                "Continue":{
+                    "Text": "Take a look around",
+                    "Commands": {
+                        "enter":{
+                            "Type": "Event",
+                            "EventID": "intro_doctor.lookAround"
+                        }
+                    }
+                }
+            }
+        },
+        "lookAround":{
+            "TexturePath": {
+                "Value": "locations/dahlem/school/schoolExterior.jpg"
+            },
+            "Text": {
+                "JoinWith": "\n",
+                "Values":{
+                    "5_d_0":"You are standing in front of a big building. It appears to be a school.",
+                    "5_d_1":"The policemen escort you inside and to a door near the entrace. The sign on the door reads School Psychologist."
+                }
+            },
+            "Options":{
+                "Continue":{
+                    "Text": "Enter the Office",
+                    "Commands": {
+                        "5_forcegreet":{
+                            "Type":"Dialogue",
+                            "NPCID": "school_psychologist",
+                            "TopicID": "school_psychologist_criminal_intro"
+                        },
+                        "9_endEvent":{
+                            "Type": "EventEnd"
+                        },
+                        "9_gotoLocation":{
+                            "Type": "GotoLocation",
+                            "LocationID": "dahlem/school/school.psychologistOffice",
+                            "SkipOnShow": true
                         }
                     }
                 }

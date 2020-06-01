@@ -2,19 +2,19 @@
     "Values":{
         "Naked":{
             "Value": "Naked",
-            "Condition":"(_clothes=\"None\") AND (_panties=\"None\")"
+            "Condition":"(\"None\"⊆_clothes) AND (\"None\"⊆_panties)"
         },
         "Underwear":{
             "Value": "Underwear",
-            "Condition":"(_clothes=\"None\") AND (_panties!=\"None\")"
+            "Condition":"(\"None\"⊆_clothes) AND (\"None\"!⊆_panties)"
         },
         "Barefoot":{
             "Value": "Barefoot",
-            "Condition":"(_shoes=\"None\")"
+            "Condition":"(\"None\"⊆_shoes)"
         },
         "School":{
             "Value": "School",
-            "Condition":"(_clothes=\"School\") AND (_panties!=\"None\")"
+            "Condition":"(\"School\"⊆_clothes) AND (\"None\"!⊆_shoes)"
         },
         "Default":{
             "Value": "Casual"

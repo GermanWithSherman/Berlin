@@ -10,6 +10,7 @@ public class ItemsFilter : IModable
 
     public int[] Price;
     public int[] Skimpiness;
+    public int[] Height;
 
     public static IEnumerable<Item> filterSlot(ItemsCollection itemsCollection, string slot)
     {
@@ -20,7 +21,16 @@ public class ItemsFilter : IModable
 
     public IModable copyDeep()
     {
-        throw new System.NotImplementedException();
+        var result = new ItemsFilter();
+
+        result.Genders = Modable.copyDeep(Genders);
+        result.Slots = Modable.copyDeep(Slots);
+        result.Styles = Modable.copyDeep(Styles);
+        result.Price = Modable.copyDeep(Price);
+        result.Skimpiness = Modable.copyDeep(Skimpiness);
+        result.Height = Modable.copyDeep(Height);
+
+        return result;
     }
 
     public IEnumerable<Item> filter(ItemsCollection itemsCollection)
@@ -44,8 +54,20 @@ public class ItemsFilter : IModable
             if (Slots.Count > 0 && !Slots.Contains(item.Slot))
                 continue;
 
-            if (Styles.Count > 0 && !Styles.Contains(item.Style))
-                continue;
+            if (Styles.Count > 0)
+            {
+                bool styleMatched = false;
+                foreach(string style in Styles)
+                {
+                    if (item.Style.Contains(style))
+                    {
+                        styleMatched = true;
+                        break;
+                    }
+                }
+                if (!styleMatched)
+                    continue;
+            }
 
             if (Price != null)
             {
@@ -75,6 +97,20 @@ public class ItemsFilter : IModable
                 }
             }
 
+            if (Height != null)
+            {
+                if (Height.Length == 1)
+                {
+                    if (item.Height != Height[0])
+                        continue;
+                }
+                else
+                {
+                    if (item.Height < Height[0] || item.Height > Height[1])
+                        continue;
+                }
+            }
+
             result.Add(item);
         }
 
@@ -82,8 +118,30 @@ public class ItemsFilter : IModable
         return result;
     }
 
+    private void mod(ItemsFilter original, ItemsFilter mod)
+    {
+        Genders = Modable.mod(original.Genders, mod.Genders);
+        Slots = Modable.mod(original.Slots, mod.Slots);
+        Styles = Modable.mod(original.Styles, mod.Styles);
+        Price = Modable.mod(original.Price, mod.Price);
+        Skimpiness = Modable.mod(original.Skimpiness, mod.Skimpiness);
+        Height = Modable.mod(original.Height, mod.Height);
+    }
+
+    public void mod(ItemsFilter modSublocation)
+    {
+        if (modSublocation == null) return;
+        mod(this, modSublocation);
+    }
+
     public void mod(IModable modable)
     {
-        throw new System.NotImplementedException();
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((ItemsFilter)modable);
     }
 }

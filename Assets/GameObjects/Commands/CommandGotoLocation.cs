@@ -6,6 +6,7 @@ using UnityEngine;
 public class CommandGotoLocation : Command
 {
     public string LocationID = "";
+    public bool SkipOnShow;
 
     [JsonIgnore]
     public SubLocation Location;
@@ -27,9 +28,9 @@ public class CommandGotoLocation : Command
     public override void execute(Data data)
     {
         if (Location != null)
-            GameManager.Instance.locationGoto(Location);
+            GameManager.Instance.locationGoto(Location, SkipOnShow);
         else
-            GameManager.Instance.locationGoto(LocationID);
+            GameManager.Instance.locationGoto(LocationID, SkipOnShow);
     }
 
     public static CommandsCollection GotoCommandsList(LocationConnection locationConnection)
@@ -37,23 +38,9 @@ public class CommandGotoLocation : Command
         var result = new CommandsCollection();
         if (locationConnection.interruptible)
         {
-            /*Command interruptCommand = new Command();
-            interruptCommand.type = Command.Type.Interrupt;
-            interruptCommand.p["keywords"] = new string[] { locationConnection.Type };
-            Add("interrupt", interruptCommand);*/
             result.Add(new CommandInterrupt(locationConnection.Type));
         }
-
-        /*Command timePassCommand = new Command();
-        timePassCommand.type = Command.Type.TimePass;
-        timePassCommand.p["v"] = locationConnection.Duration;
-        Add("timePass", timePassCommand);*/
         result.Add(new CommandTimePass(locationConnection.Duration.GetValueOrDefault(0)));
-
-        /*Command locationCommand = new Command();
-        locationCommand.type = Command.Type.GotoLocation;
-        locationCommand.p["location"] = locationConnection.TargetLocation;
-        Add("location",locationCommand);*/
         result.Add(new CommandGotoLocation(locationConnection.TargetLocation));
 
 
@@ -65,6 +52,7 @@ public class CommandGotoLocation : Command
         var result = new CommandGotoLocation();
 
         result.LocationID = Modable.copyDeep(LocationID);
+        result.SkipOnShow = Modable.copyDeep(SkipOnShow);
 
         return result;
     }
@@ -72,6 +60,7 @@ public class CommandGotoLocation : Command
     private void mod(CommandGotoLocation original, CommandGotoLocation mod)
     {
         LocationID = Modable.mod(original.LocationID, mod.LocationID);
+        SkipOnShow = Modable.mod(original.SkipOnShow, mod.SkipOnShow);
     }
 
     public void mod(CommandGotoLocation modable)

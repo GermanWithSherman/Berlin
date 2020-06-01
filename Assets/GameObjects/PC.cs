@@ -23,7 +23,9 @@ public class PC : NPC
         }
     }
 
-    
+    public string nameFirstBorn;
+    public string nameLastBorn;
+
 
     public Int64 moneyCash = 0;
 
@@ -51,6 +53,10 @@ public class PC : NPC
         {
             case "moneyCash":
                 return moneyCash;
+            case "nameFirstBorn":
+                return nameFirstBorn;
+            case "nameLastBorn":
+                return nameLastBorn;
             case "statHunger":
                 return statHunger;
             case "statHygiene":
@@ -80,6 +86,12 @@ public class PC : NPC
         {
             case "moneyCash":
                 moneyCash = value;
+                return;
+            case "nameFirstBorn":
+                nameFirstBorn = value;
+                return;
+            case "nameLastBorn":
+                nameLastBorn = value;
                 return;
             case "statHunger":
                 _statHunger = (int)value;

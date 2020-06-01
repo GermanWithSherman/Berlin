@@ -1,0 +1,11 @@
+b_school_psychologist_participant:  Can the PC take part in the psychologists experiments?
+b_school_psychologist_hypnosis:     Is the PC hypnosized?
+
+s_school_psychologist_intro_stage:  gotoAssistant
+
+i_school_psychologist_experiment:   The number of experiments the psychologist has performed on the PC.
+
+s_pc_background:                    What did the PC do before the game started?
+                                    Known values:
+                                        -criminal (Mod: bs_criminal)
+                                        -pupil

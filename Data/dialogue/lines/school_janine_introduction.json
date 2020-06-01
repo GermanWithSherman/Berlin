@@ -1,7 +1,7 @@
 {
     "stages": {
         "start":{
-            "0":{
+            "5_pupil":{
                 "Text": {
                     "JoinWith": "\n\n",
                     "Values":{
@@ -16,6 +16,7 @@
                         "TargetStage": ".roommate"
                     }
                 },
+                "Condition": "s_pc_background=\"pupil\"",
                 "LeaveEnabled": false,
                 "TopicsVisible": false
             }

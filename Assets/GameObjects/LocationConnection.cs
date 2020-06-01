@@ -81,7 +81,7 @@ public class LocationConnection : IModable
         TargetLocationId = Modable.mod(original.TargetLocationId, mod.TargetLocationId);
         OutfitRequirement = Modable.mod(original.OutfitRequirement, mod.OutfitRequirement);
         Type = Modable.mod(original.Type, mod.Type);
-
+        ConditionString = Modable.mod(original.ConditionString, mod.ConditionString);
 
     }
 
@@ -114,7 +114,7 @@ public class LocationConnection : IModable
         result.TargetLocationId = Modable.copyDeep(TargetLocationId);
         result.OutfitRequirement = Modable.copyDeep(OutfitRequirement);
         result.Type = Modable.copyDeep(Type);
-
+        result.ConditionString = Modable.copyDeep(ConditionString);
         return result;
     }
 }

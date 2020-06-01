@@ -237,10 +237,16 @@
                     "Duration": 30,
                     "Label": "Upstairs"
                 },
-                "2_211": {
+                "2_211_intro": {
+                    "TargetLocationId": ".2_211_intro",
+                    "Duration": 30,
+                    "Condition": "s_school_psychologist_intro_stage=\"gotoAssistant\""
+                },
+                "2_211":{
                     "TargetLocationId": ".2_211",
                     "Duration": 30,
-                    "Condition": "b_school_dorm_211_access=true"
+                    "Label" : "Your Room (211)",
+                    "Condition": "i_school_dorm_room=211"
                 }
             }
         },
@@ -256,12 +262,29 @@
             }
         },
         "2_211":{
+            "Inherit": "dahlem/school/dorm.dormOwnedRoomTemplate",
+            "TexturePath":{"Value":"locations/dahlem/school/dorm311.jpg"},
+            
             "Label":"Room 211",
             "Text":"Room 211",
-            "TexturePath":{"Value":"locations/dahlem/school/dorm311.jpg"},
+            
             "LocationConnections": {
                 "leave": {
                     "TargetLocationId": ".2_hallway",
+                    "Duration": 30,
+                    "Label": "Leave"
+                }
+            }
+        },
+        "2_211_intro":{
+            "TexturePath":{"Value":"locations/dahlem/school/dorm311.jpg"},
+            
+            "Label":"Room 211",
+            "Text":"Room 211",
+            
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".2_hallway_intro",
                     "Duration": 30,
                     "Label": "Leave"
                 }

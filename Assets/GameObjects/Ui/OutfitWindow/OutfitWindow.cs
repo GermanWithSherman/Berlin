@@ -23,7 +23,7 @@ public class OutfitWindow : MonoBehaviour
     {
         try
         {
-            if (_outfitRequirement.isValid(currentCharacter.currentOutfit))
+            if (_outfitRequirement == null || _outfitRequirement.isValid(currentCharacter.currentOutfit))
             {
                 hide();
                 _onClose.execute();

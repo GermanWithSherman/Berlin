@@ -126,21 +126,6 @@ public abstract class Cache<T> : MonoBehaviour where T : class,IModable
             return result;
         }
 
-        /*string data = key;
-        if (hashKey)
-            key = System.Convert.ToString(key.GetHashCode());
-        int indexOfKey = keys.IndexOf(key);
-        if (indexOfKey >= 0)
-        {
-            keys.RemoveAt(indexOfKey);
-            keys.Add(key);
-            return _strongReferences[key];
-        }
-        else
-        {
-            add(data);
-            return _strongReferences[key];
-        }*/
 
     }
 

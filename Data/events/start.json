@@ -18,6 +18,7 @@
                         "PC.BMI":23,
                         "PC.moneyCash":10000,
                         "PC.statHunger":1000000,
+                        "UI.isVisibleStatusBar":false,
                         "World.DateTime":"2020-04-09T06:00:00"
                     }
                     

@@ -16,8 +16,10 @@ public class Item : IModable
 
     public string Slot = "Clothes";
 
-    public string Style = "Casual"; //Casual, Glamour, Dance, Sports, Swimming; not enum for easy modability
+    //public string Style = "Casual"; //Casual, Glamour, Dance, Sports, Swimming; not enum for easy modability
+    public ModableStringList Style = new ModableStringList() { "Casual" };
 
+    public int Height = 0;
     public int Skimpiness = 0;
 
     public string Gender = "fm"; //f, fm, m
@@ -38,7 +40,7 @@ public class Item : IModable
         result.Style = Modable.copyDeep(Style);
         result.Skimpiness = Modable.copyDeep(Skimpiness);
         result.Gender = Modable.copyDeep(Gender);
-
+        result.Height = Modable.copyDeep(Height);
         return result;
     }
 
@@ -62,7 +64,7 @@ public class Item : IModable
         Style = Modable.mod(original.Style, mod.Style);
         Skimpiness = Modable.mod(original.Skimpiness, mod.Skimpiness);
         Gender = Modable.mod(original.Gender, mod.Gender);
-
+        Height = Modable.mod(original.Height, mod.Height);
     }
     public void mod(Item modItem)
     {

@@ -1,13 +1,13 @@
 {
     "subLocations":{
-        "skipIntro_Backstory":{
+        "skipIntro_Backstory_Male":{
             "onShow":{
                 "sexSelectDialog":{
                     "Type":"Dialog",
                     "DialogID":"SelectHorizontal",
                     "Settings":{
                         "Options":{
-                            "Criminal":{"Text": "<align=\"center\"><b><size=200%>Criminal</size></b></align>\n<align=\"left\">You have been charged with sexual assault by your ex girlfriend.</align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":3}}}}
+                            "Criminal":{"Text": "<align=\"center\"><b><size=200%>Criminal</size></b></align>\n<align=\"left\">You have been charged with sexual assault by your ex girlfriend.</align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":"criminal"}}}}
                         }
                     }
                 }
@@ -16,18 +16,11 @@
         "skipIntro_Finish":{
             "onShow":{
                 
-                "backGroundCriminal":{
+                "6_backGroundCriminal":{
                     "Type": "Conditional",
-                    "Condition": "i_Temp_PCBackground=3",
+                    "Condition": "s_pc_background=\"criminal\"",
                     "Commands": {
-                        "event":{"Type":"Event","EventID": "intro_criminal."},
-                        "note":{
-                            "Type": "NoteAdd",
-                            "NoteID": "school_intro_gotoPsychologist",
-                            "Text": {
-                                "Value": "I am new at this school. I am told to visit the school psychologist first. I should find her in her office in the main school building."
-                            }
-                        }
+                        "event":{"Type":"Event","EventID": "intro_criminal."}
                     }
                 }
             }

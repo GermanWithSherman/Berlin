@@ -219,6 +219,7 @@
     <Compile Include="Assets\GameObjects\Ui\UIOptionsContainer.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIRLocation.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIRLocations.cs" />
+    <Compile Include="Assets\GameObjects\Ui\UISettings.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIUpdateListener.cs" />
     <Compile Include="Assets\GameObjects\Ui\UiShopItem.cs" />
     <Compile Include="Assets\GameObjects\Ui\UiShopWindow.cs" />

@@ -133,6 +133,8 @@ public class GameManager : MonoBehaviour
     private bool uiUpdatePending;
     public List<UIUpdateListener> updateListeners;
 
+    public UISettings UISettings { get => GameData.UISettings; }
+
     private void Awake()
     {
         LoadingScreen.SetActive(true);
@@ -382,13 +384,13 @@ public class GameManager : MonoBehaviour
         uiUpdate();
     }
 
-    public void locationGoto(string subLocationId)
+    public void locationGoto(string subLocationId, bool skipOnShow = false)
     {
         SubLocation subLocation = LocationCache.SubLocation(subLocationId);
-        locationGoto(subLocation);
+        locationGoto(subLocation, skipOnShow);
     }
 
-    public void locationGoto(SubLocation subLocation)
+    public void locationGoto(SubLocation subLocation, bool skipOnShow = false)
     {
         
 
@@ -397,7 +399,8 @@ public class GameManager : MonoBehaviour
 
         npcsPresentUpdate();
 
-        subLocation.execute(this);
+        if(!skipOnShow)
+            subLocation.onShowExecute(this);
 
         uiUpdate();
     }

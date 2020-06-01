@@ -50,9 +50,32 @@ public class DialogueLine : IModable, IPrioritizable
         return Priority;
     }
 
+    private void mod(DialogueLine original, DialogueLine mod)
+    {
+        Priority = Modable.mod(original.Priority, mod.Priority);
+        Options = Modable.mod(original.Options, mod.Options);
+        _text = Modable.mod(original._text, mod._text);
+        ConditionString = Modable.mod(original.ConditionString, mod.ConditionString);
+        LeaveEnabled = Modable.mod(original.LeaveEnabled, mod.LeaveEnabled);
+        TopicsVisible = Modable.mod(original.TopicsVisible, mod.TopicsVisible);
+        onShow = Modable.mod(original.onShow, mod.onShow);
+    }
+
+    public void mod(DialogueLine modSublocation)
+    {
+        if (modSublocation == null) return;
+        mod(this, modSublocation);
+    }
+
     public void mod(IModable modable)
     {
-        throw new System.NotImplementedException();
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((DialogueLine)modable);
     }
 
     public string Text(Data data)
@@ -147,9 +170,26 @@ public class DialogueStages :  IModable
         return result;
     }
 
+    private void mod(DialogueStages original, DialogueStages mod)
+    {
+        stages = Modable.mod(original.stages, mod.stages);
+    }
+
+    public void mod(DialogueStages modSublocation)
+    {
+        if (modSublocation == null) return;
+        mod(this, modSublocation);
+    }
+
     public void mod(IModable modable)
     {
-        throw new System.NotImplementedException();
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((DialogueStages)modable);
     }
 }
 

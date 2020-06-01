@@ -1,0 +1,86 @@
+{
+    "stages": {
+        "start":{
+            "5_criminal":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "image":"<img>npc/school/students/janinePortrait.jpg</img>",
+                        "0":"<speaker=_NPC1>Hello. You are the special case, right? I was informed that you might arrive today.</speaker>",
+                        "1":"<speaker=_NPC1>I am {_NPC1.nameFirst} {_NPC1.nameLast}. And I guess I am your roommate now.</speaker>"
+                    }
+                },
+                "Options": {
+                    "Roommate?":{
+                        "Text": "Roommate?",
+                        "TargetStage": ".criminal_roommate"
+                    }
+                },
+                "Condition": "s_pc_background=\"criminal\"",
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "criminal_roommate":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>Roommate? I didn't think I would have a roommate.</speaker>",
+                        "1":"<speaker=_NPC1>Most girls have roommates, silly. Unless your parents pay a lot of extra money. And you surely are not one of these cases.</speaker> She laughes.",
+                        "2":"<speaker=_NPC1>What's your name anyways?</speaker>"
+                    }
+                },
+                "Options": {
+                    "5_TellNameMale":{
+                        "Text": "Tell her your male name",
+                        "TargetStage": ".criminal_tellNameMale"
+                    },
+                    "5_TellNameFemale":{
+                        "Text": "Tell her your female name",
+                        "TargetStage": ".criminal_tellNameFemale"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "criminal_tellNameMale":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_1":"<speaker=_PC>I am {_PC.nameFirstBorn}.</speaker>",
+                        "5_d_2":"<speaker=_NPC1>That's not funny. You should really get used to your female persona. I assume you know that you will get punished if anybody figures out that you are a boy?</speaker>",
+                        "5_d_3":"<speaker=_NPC1>So lets try that again: what's your name?</speaker>"
+                    }
+                },
+                "Options": {
+                    "5_TellNameFemale":{
+                        "Text": "Tell her your female name",
+                        "TargetStage": ".criminal_tellNameFemale"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "criminal_tellNameFemale":{
+            "5_d_0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_1":"<speaker=_PC>I am {_PC.nameFirst}.</speaker>",
+                        "5_d_2":"<speaker=_NPC1>Nice to meet you, {_PC.nameFirst}.</speaker>",
+                        "5_d_3":"<speaker=_NPC1>As you know I am asked to help you adopting to your new role. If you want to know anything: just ask me.</speaker>",
+                        "5_d_4":"<speaker=_NPC1>Oh, and by the way: there is a school uniform for you in your wardrobe. It should fit you nicely.</speaker>"
+                    }
+                },
+                "onShow": {
+                    "5_Uniform":{"Type":"ItemAdd","ItemID":"schoolUniformF1","Equip":false},
+                    "8_gotoLocation":{"Type": "GotoLocation","LocationID": "dahlem/school/dorm.2_211"}
+                }
+            }
+        }
+    }
+}

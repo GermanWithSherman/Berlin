@@ -10,7 +10,11 @@
             "Options":{
                 "intro":{
                     "Text":"Test",
-                    "Commands":{}
+                    "Commands":{
+                        "1":{
+                            "Type": "Outfit"
+                        }
+                    }
                 },
                 "skipIntro":{
                     "Text":"Skip Intro",
@@ -81,7 +85,7 @@
                             "Average":{"Text": "<align=\"center\"><b><size=200%>Average</size></b></align>\n<align=\"left\">You look like a typical girl. You have an average height and your face is distinctively female.\n<color=\"blue\">No special modifiers</color></align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":3}}}},
                             "Attractive":{"Text": "<align=\"center\"><b><size=200%>Attractive</size></b></align>\n<align=\"left\">You have goods looks. Your skin is soft like silk, your breasts are a little bigger than average and your figure is destinctively feminine.\n<color=\"green\">Most men find you more attractive</color>\n<color=\"green\">Establishing friendships will be easier with most women</color>\n<color=\"orange\">You will attract people with \"special\" interests</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>", "State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":5}}}}
                         },
-                        "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Living"}}
+                        "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Backstory_Female"}}
                     }
                 }
             }
@@ -102,12 +106,12 @@
                             "Average":{"Text": "<align=\"center\"><b><size=200%>Average</size></b></align>\n<align=\"left\">You look like a typical boy. You have an average height and your face is distinctively male. Your voice has a normal male pitch.\n<color=\"blue\">No special modifiers</color></align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":3}}}},
                             "Manly":{"Text": "<align=\"center\"><b><size=200%>Manly</size></b></align>\n<align=\"left\">You are taller than most boys and you have some muscles. You face is distinctively male. Your voice is a little deeper than most boys voices.\n<color=\"green\">Most women find you more attractive</color>\n<color=\"green\">Establishing friendships will be easier with most men</color>\n<color=\"orange\">People with \"special\" interests will shun you</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>", "State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":5}}}}
                         },
-                        "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Backstory"}}
+                        "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Backstory_Male"}}
                     }
                 }
             }
         },
-        "skipIntro_Backstory":{
+        "skipIntro_Backstory_Female":{
             "onShow":{
                 "sexSelectDialog":{
                     "Type":"Dialog",
@@ -115,11 +119,31 @@
                     "Settings":{
                         
                         "Targets":{
-                            "RESULT": "i_Temp_PCBackground"
+                            "RESULT": "s_pc_background"
                         },
                         "Headline":"What is your current situation?\n<size=50%><i><color=\"red\">Choose carefully. This coice has major implications.</color></i></size>",
                         "Options":{
-                            "SchoolNew":{"Text": "<align=\"center\"><b><size=200%>New at school</size></b></align>\n<align=\"left\">You are the new boy at a boarding school.</align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":1}}}}
+                            "SchoolNew":{"Text": "<align=\"center\"><b><size=200%>New at school</size></b></align>\n<align=\"left\">You are the new boy at a boarding school.</align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":"pupil"}}}}
+                            
+                        },
+                        "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Finish"}}
+                    }
+                }
+            }
+        },
+        "skipIntro_Backstory_Male":{
+            "onShow":{
+                "sexSelectDialog":{
+                    "Type":"Dialog",
+                    "DialogID":"SelectHorizontal",
+                    "Settings":{
+                        
+                        "Targets":{
+                            "RESULT": "s_pc_background"
+                        },
+                        "Headline":"What is your current situation?\n<size=50%><i><color=\"red\">Choose carefully. This coice has major implications.</color></i></size>",
+                        "Options":{
+                            "SchoolNew":{"Text": "<align=\"center\"><b><size=200%>New at school</size></b></align>\n<align=\"left\">You are the new boy at a boarding school.</align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":"pupil"}}}}
                             
                         },
                         "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Finish"}}
@@ -151,7 +175,7 @@
         "skipIntro_Finish":{
             "onShow":{
                 
-                "clothesFemale":{
+                "5_female":{
                     "Type":"Conditional",
                     "Condition": "PC.genderVisible=\"f\"",
                     "Commands":{
@@ -162,7 +186,7 @@
                         "FirstName":{"Type":"Set","ValuesFromLists": {"PC.nameFirst": "names_first_female_90s"}}
                     }
                 },
-                "clothesMale":{
+                "5_male":{
                     "Type":"Conditional",
                     "Condition": "PC.genderVisible=\"m\"",
                     "Commands":{
@@ -172,31 +196,30 @@
                         "FirstName":{"Type":"Set","ValuesFromLists": {"PC.nameFirst": "names_first_male_90s"}}
                     }
                 },
-                "LastName":{"Type":"Set","ValuesFromLists": {"PC.nameLast": "names_last"}},
-                "backGroundSchool":{
+                "5_LastName":{"Type":"Set","ValuesFromLists": {"PC.nameLast": "names_last"}},
+                "6_additionalNames":{
+                    "Type": "Set",
+                    "ValuesFromSetters": {
+                        "PC.nameFirstBorn":{"Mode":"Object","ValueObject":{"ValueType": "Reference","Key": "PC.nameFirst"}},
+                        "PC.nameLastBorn":{"Mode":"Object","ValueObject":{"ValueType": "Reference","Key": "PC.nameLast"}}
+                    }
+                },
+                "6_backGroundSchool":{
                     "Type": "Conditional",
-                    "Condition": "i_Temp_PCBackground!=3",
+                    "Condition": "s_pc_background=\"pupil\"",
                     "Commands": {
-                        "goto":{"Type":"GotoLocation","LocationID":"dahlem/public."},
-                        "note":{
+                        "5_goto":{"Type":"GotoLocation","LocationID":"dahlem/public."},
+                        "5_note":{
                             "Type": "NoteAdd",
                             "NoteID": "school_intro_gotoPsychologist",
                             "Text": {
                                 "Value": "I am new at this school. I am told to visit the school psychologist first. I should find her in her office in the main school building."
                             }
-                        }
-                    }
-                },
-                "backGroundCriminal":{
-                    "Type": "Conditional",
-                    "Condition": "i_Temp_PCBackground=3",
-                    "Commands": {
-                        "event":{"Type":"Event","EventID": "intro_criminal."},
-                        "note":{
-                            "Type": "NoteAdd",
-                            "NoteID": "school_intro_gotoPsychologist",
-                            "Text": {
-                                "Value": "I am new at this school. I am told to visit the school psychologist first. I should find her in her office in the main school building."
+                        },
+                        "5_showStatusBar":{
+                            "Type": "Set",
+                            "Values": {
+                                "UI.isVisibleStatusBar":null
                             }
                         }
                     }

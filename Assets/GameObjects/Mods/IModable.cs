@@ -53,6 +53,18 @@ public static class Modable
         return original;
     }
 
+    public static int[] copyDeep(int[] original)
+    {
+        if (original == null)
+            return null;
+        return (int[])original.Clone();
+    }
+
+    public static long copyDeep(long original)
+    {
+        return original;
+    }
+
     public static JToken copyDeep(JToken original)
     {
         //return JObject.Parse(original.ToString());
@@ -101,6 +113,16 @@ public static class Modable
     }
 
     public static int mod(int original, int mod)
+    {
+        return mod;
+    }
+
+    public static int[] mod(int[] original, int[] mod)
+    {
+        return mod;
+    }
+
+    public static long mod(long original, long mod)
     {
         return mod;
     }

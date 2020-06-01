@@ -3,9 +3,6 @@
     "type": "object",
     "title": "CommandGotoLocation",
     "description": "CommandGotoLocation schema.",
-    "default": {},
-    "examples": [
-    ],
     "required": [
         "LocationID",
         "Type"
@@ -14,6 +11,7 @@
     
     "properties": {
         "LocationID": {"type": "string" },
-        "Type": {"type": "string", "enum": ["GotoLocation"] }
+        "Type": {"type": "string", "enum": ["GotoLocation"] },
+        "SkipOnShow":{"type":"boolean"}
     }
 }

@@ -14,6 +14,14 @@ public class StatusBarSleep : UIUpdateListener
 
     public override void uiUpdate(GameManager gameManager)
     {
-        set(gameManager.PC.statSleep);
+        if (gameManager.UISettings.isVisibleStatusSleep())
+        {
+            show();
+            set(gameManager.PC.statSleep);
+        }
+        else
+        {
+            hide();
+        }
     }
 }

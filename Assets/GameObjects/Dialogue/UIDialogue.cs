@@ -203,9 +203,10 @@ public class UIDialogue : MonoBehaviour
             DialogueStage stage = GameManager.Instance.DialogueLineCache[topic].StartStage();
             stageShow(stage);
         }
-        catch
+        catch(Exception e)
         {
             textShow("ERROR: The requested Dialoguestage can't be found");
+            Debug.LogError(e);
         }
     }
 

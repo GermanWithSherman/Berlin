@@ -229,8 +229,16 @@
                         "ValuesFromSetters": { "PC.moneyCash":{"Mode": "Inc", "Value": 50000} }
                     },
                     "setIntroduced":{"Type": "Set","Values": {"b_school_psychologist_introduced": true}},
-                    "setDormAccess":{"Type": "Set","Values": {"b_school_dorm_211_access": true}},
-                    "setExperiment":{"Type": "Set","Values": {"b_school_psychologist_participant": true},"ValuesFromSetters": {"i_school_psychologist_experiment":{"Mode": "Inc", "Value": 1}}},
+                    "setDormAccess":{"Type": "Set","Values": {"s_school_psychologist_intro_stage": "gotoAssistant"}},
+                    "setExperiment":{"Type": "Set",
+                        "Values": {
+                            "b_school_psychologist_participant": "<speaker=_NPC1>You will watch a video with this headset. Try to remember everything you see, I will ask you some question afterwards. And drink the water beforehead. The video is long and you shouldn't get thirsty watching it. That's all.</speaker>",
+                            "b_school_psychologist_hypnosis": true
+                        },
+                        "ValuesFromSetters": {
+                            "i_school_psychologist_experiment":{"Mode": "Inc", "Value": 1}
+                        }
+                    },
                     "noteRemove":{"Type":"NoteRemove","NoteID": "school_intro_gotoPsychologist"},
                     "noteAddExperiment":{
                         "Type": "NoteAdd",
@@ -243,7 +251,7 @@
                         "Type": "NoteAdd",
                         "NoteID": "school_psycho_experiment",
                         "Text": {
-                            "Value": "I should go to the dorm and visit the psychologists assistant in room 204."
+                            "Value": "I should go to the dorm and visit the psychologists assistant in room 211."
                         }
                     }
                 },

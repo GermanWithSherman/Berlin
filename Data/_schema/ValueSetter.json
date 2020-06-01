@@ -14,7 +14,10 @@
     "additionalProperties": false,
     
     "properties": {
-        "Mode":{"type":"string","enum": ["Inc","Set", "Cooldown"]},
-        "Value": {}
+        "Mode":{"type":"string","enum": ["Inc","Set", "Cooldown","Object"]},
+        "Value":{
+            "type":["boolean","integer","null","number","string"]
+        },
+        "ValueObject": {"$ref": "./ValueDynamic.json"}
     }
 }

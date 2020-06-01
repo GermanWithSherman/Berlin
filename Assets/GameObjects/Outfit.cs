@@ -69,10 +69,10 @@ public class Outfit
 
     private void updateStyle()
     {
-        string braStyle = "None";
-        string clothesStyle = "None";
-        string pantiesStyle = "None";
-        string shoesStyle = "None";
+        string[] braStyle = new string[] { "None" };
+        string[] clothesStyle = new string[] { "None" };
+        string[] pantiesStyle = new string[] { "None" };
+        string[] shoesStyle = new string[] { "None" };
 
         Item bra = items.getItem("Bra");
         Item clothes = items.getItem("Clothes");
@@ -80,13 +80,13 @@ public class Outfit
         Item shoes = items.getItem("Shoes");
 
         if (bra != null)
-            braStyle = bra.Style;
+            braStyle = bra.Style.ToArray();
         if (clothes != null)
-            clothesStyle = clothes.Style;
+            clothesStyle = clothes.Style.ToArray();
         if (panties != null)
-            pantiesStyle = panties.Style;
+            pantiesStyle = panties.Style.ToArray();
         if (shoes != null)
-            shoesStyle = shoes.Style;
+            shoesStyle = shoes.Style.ToArray();
 
         FunctionParameters parameters = new FunctionParameters();
         parameters.Add("_bra", braStyle);

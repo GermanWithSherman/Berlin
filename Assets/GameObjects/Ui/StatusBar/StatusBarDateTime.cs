@@ -9,7 +9,14 @@ public class StatusBarDateTime : UIUpdateListener
 
     public override void uiUpdate(GameManager gameManager)
     {
-        
-        Text.text = gameManager.GameData.WorldData.DateTime.ToString("F", gameManager.CultureInfo);
+        if (gameManager.UISettings.isVisibleStatusTime())
+        {
+            show();
+            Text.text = gameManager.GameData.WorldData.DateTime.ToString("F", gameManager.CultureInfo);
+        }
+        else
+        {
+            hide();
+        }
     }
 }
