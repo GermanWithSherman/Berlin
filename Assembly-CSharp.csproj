@@ -158,6 +158,7 @@
     <Compile Include="Assets\GameObjects\OutfitRequirement.cs" />
     <Compile Include="Assets\GameObjects\PC.cs" />
     <Compile Include="Assets\GameObjects\Preferences.cs" />
+    <Compile Include="Assets\GameObjects\SaveFile.cs" />
     <Compile Include="Assets\GameObjects\Schedule.cs" />
     <Compile Include="Assets\GameObjects\Schedules.cs" />
     <Compile Include="Assets\GameObjects\Service.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectImageDialogImage.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectNameDialog.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SexSelectDialogPrefab.cs" />
+    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\YesNoDialog.cs" />
     <Compile Include="Assets\GameObjects\Ui\FlexibleGridLayout.cs" />
     <Compile Include="Assets\GameObjects\Ui\ImageAutosize\ImageAutosize.cs" />
     <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindow.cs" />

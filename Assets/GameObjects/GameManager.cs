@@ -12,6 +12,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public const string PlayerVersion = "0.0.1";
+
     public static GameManager Instance { get; private set; }
 
     public Preferences Preferences;
@@ -64,10 +66,10 @@ public class GameManager : MonoBehaviour
         get
         {
 
-            if (GameData.currentEventStage == null)
+            if (GameData.CurrentEventStage == null)
                 return GameData.currentLocation.Options.Values;
             else
-                return GameData.currentEventStage.Options.Values;
+                return GameData.CurrentEventStage.Options.Values;
         }
     }
 
@@ -87,20 +89,20 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if (GameData.currentEventStage == null)
+            if (GameData.CurrentEventStage == null)
                 return GameData.currentLocation.Text.Text(GameData);
             else
-                return GameData.currentEventStage.Text.Text(GameData);
+                return GameData.CurrentEventStage.Text.Text(GameData);
         }
     }
 
     public Texture CurrentTexture{
         get
         {
-            if (GameData.currentEventStage == null || GameData.currentEventStage.Texture == null)
+            if (GameData.CurrentEventStage == null || GameData.CurrentEventStage.Texture == null)
                 return GameData.currentLocation?.Texture;
             else
-                return GameData.currentEventStage.Texture;
+                return GameData.CurrentEventStage.Texture;
 
 
         }
@@ -234,7 +236,7 @@ public class GameManager : MonoBehaviour
 
     public void eventEnd()
     {
-        GameData.currentEventStage = null;
+        GameData.CurrentEventStage = null;
         uiUpdate();
     }
 
@@ -252,7 +254,7 @@ public class GameManager : MonoBehaviour
 
     public void eventExecute(EventStage eventStage)
     {
-        GameData.currentEventStage = eventStage;
+        GameData.CurrentEventStage = eventStage;
         eventStage?.execute();
         uiUpdate();
     }
@@ -285,11 +287,65 @@ public class GameManager : MonoBehaviour
 
     public void gameLoad(string path)
     {
-        JObject deserializationData = File2Data(path);
-        GameData = deserializationData.ToObject<GameData>();
+        try
+        {
+            SaveFile saveFile = File2Object<SaveFile>(path);
+            Debug.Log($"Game loaded from {path}");
+
+            List<string> problems = new List<string>();
+
+            if(saveFile.PlayerVersion != PlayerVersion)
+            {
+                problems.Add($"PlayerVersion: {saveFile.PlayerVersion} > {PlayerVersion}");
+            }
+
+            foreach (ModInfo saveModInfo in saveFile.Mods)
+            {
+                ModInfo installedModInfo = ModsServer.ActivatedModInfo(saveModInfo.ID);
+                if (String.IsNullOrEmpty(installedModInfo.ID))
+                {
+                    problems.Add($"Mod {saveModInfo.ID}: {saveModInfo.Version} > not installed");
+                }else if (saveModInfo.Version != installedModInfo.Version)
+                {
+                    problems.Add($"Mod {saveModInfo.ID}: {saveModInfo.Version} > {installedModInfo.Version}");
+                }
+            }
+
+            if (problems.Count > 0)
+            {
+
+                var dialogSettings = new YesNoDialogSettings();
+
+                dialogSettings.Title = "Continue Loading?";
+                dialogSettings.Text = "Error while loading savegame. Load anyway?\n" + String.Join("\n",problems);
+
+                dialogSettings.onYes = delegate { gameDataLoad(saveFile.GameData); };
+                dialogSettings.onNo = delegate { StartMenu.show(); };
+
+                DialogServer.dialogShow(DialogServer.YesNoDialog, dialogSettings);
+            }
+            else
+            {
+                gameDataLoad(saveFile.GameData);
+            }
+
+            
+
+
+        }
+        catch(Exception e)
+        {
+            ErrorMessage.Show("Error: "+e.Message);
+            Debug.LogError(e);
+        }
+    }
+
+    public void gameDataLoad(GameData gameData)
+    {
+        GameData = gameData;
         npcsPresentUpdate();
         uiUpdate();
-        Debug.Log($"Game loaded from {path}");
+        
 
         OutfitWindow.setCharacter(PC);
     }
@@ -310,7 +366,11 @@ public class GameManager : MonoBehaviour
 
     public void gameSave(string path)
     {
-        Data2File(GameData,path);
+        SaveFile saveFile = new SaveFile();
+        saveFile.GameData = GameData;
+        saveFile.Mods = ModsServer.ActivatedModsInfo;
+        saveFile.PlayerVersion = PlayerVersion;
+        Data2File(saveFile, path);
         Debug.Log($"Game save at {path}");
 
     }
@@ -332,7 +392,7 @@ public class GameManager : MonoBehaviour
     {
         
 
-        GameData.currentEventStage = null;
+        GameData.CurrentEventStage = null;
         GameData.currentLocation = subLocation;
 
         npcsPresentUpdate();

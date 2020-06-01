@@ -86,6 +86,8 @@ public class NPC : Data, IInheritable, IModable
                 return birthDate;
             case "height":
                 return Height;
+            case "texturePath":
+                return TexturePath.value();
             case "known":
                 return 1;
             case "weight":

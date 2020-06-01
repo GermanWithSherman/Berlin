@@ -35,6 +35,23 @@ public class ModsServer
         }
     }
 
+    
+
+    public IEnumerable<ModInfo> ActivatedModsInfo
+    {
+        get
+        {
+            var result = new List<ModInfo>();
+
+            foreach (Mod mod in _modLoadOrder)
+            {
+                result.Add(new ModInfo(mod));
+            }
+
+            return result;
+        }
+    }
+
     private Dictionary<string, Mod> _mods = new Dictionary<string, Mod>();
 
     private List<Mod> _modLoadOrder = new List<Mod>();
@@ -86,6 +103,16 @@ public class ModsServer
         }
 
         preferences.ActivatedModIDs = _modLoadOrderIDs;
+    }
+
+    public ModInfo ActivatedModInfo (string modID)
+    {
+        if(_mods.TryGetValue(modID, out Mod mod))
+        {
+            if (_modLoadOrder.Contains(mod))
+                return new ModInfo(mod);
+        }
+        return new ModInfo();
     }
 
     private void modAdd(Mod mod)

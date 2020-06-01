@@ -9,7 +9,7 @@ using UnityEngine;
 public class GameData: Data
 {
 
-    public DateTime savegameTime;
+    
 
     public new dynamic this[string key]
     {
@@ -26,12 +26,16 @@ public class GameData: Data
     public Dictionary<string, Note> Notes = new Dictionary<string, Note>();
 
     [JsonConverter(typeof(EventStageConverter))]
-    public EventStage currentEventStage;
+    public EventStage CurrentEventStage;
 
     [JsonIgnore]
     public SubLocation currentLocation;
-    [JsonProperty]
-    private string _currentLocationId;
+    [JsonProperty("CurrentLocationId")]
+    private string _currentLocationId
+    {
+        get => currentLocation?.ID;
+        set { currentLocation = GameManager.Instance.LocationCache.SubLocation(value); }
+    }
 
     [JsonIgnore]
     public IEnumerable<NPC> NpcsPresent = new List<NPC>();
@@ -153,7 +157,7 @@ public class GameData: Data
     }
 
     #region Serialization
-    [OnDeserialized]
+    /*[OnDeserialized]
     internal void OnDeserializedMethod(StreamingContext context)
     {
         GameManager gameManager = GameManager.Instance;
@@ -161,30 +165,10 @@ public class GameData: Data
         currentLocation = gameManager.LocationCache.SubLocation(_currentLocationId);
 
         
-    }
-
-    /*internal void AfterLinkedMethod()
-    {
-        //We have to wait until GameManager set GameData to this
-        List<NPC> npcsPresent = new List<NPC>();
-        foreach (string id in _npcsPresentIds)
-            //npcsPresent.Add(CharacterData[id]);
-            npcsPresent.Add(GameManager.Instance.NPCsLibrary[id]);
-        NpcsPresent = npcsPresent;
     }*/
     
 
-    [OnSerializing]
-    internal void OnSerializingMethod(StreamingContext context)
-    {
-        _currentLocationId = currentLocation.ID;
-
-        /*_npcsPresentIds = new List<string>();
-        foreach (NPC npc in NpcsPresent)
-            _npcsPresentIds.Add(npc.id);*/
-
-        savegameTime = DateTime.UtcNow;
-    }
+    
 
     
 

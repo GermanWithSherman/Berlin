@@ -49,3 +49,16 @@ public class Mod : IDependentObject<Mod>
         }
     }
 }
+
+public struct ModInfo
+{
+    public string ID;
+    public string Version;
+
+
+    public ModInfo(Mod mod)
+    {
+        ID = mod.ID;
+        Version = mod.Version;
+    }
+}

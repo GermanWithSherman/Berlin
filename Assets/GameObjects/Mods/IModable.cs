@@ -55,7 +55,8 @@ public static class Modable
 
     public static JToken copyDeep(JToken original)
     {
-        return JObject.Parse(original.ToString());
+        //return JObject.Parse(original.ToString());
+        return original.DeepClone();
     }
 
     public static string copyDeep(string original)

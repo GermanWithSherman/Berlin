@@ -53,6 +53,9 @@ public class LocationCache : Cache<Location>
 
     public SubLocation SubLocation(string key)
     {
+        if (String.IsNullOrEmpty(key))
+            return null;
+
         string[] keyparts = key.Split('.');
 
         if(keyparts.Length == 2)

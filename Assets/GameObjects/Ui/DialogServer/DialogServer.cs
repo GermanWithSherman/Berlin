@@ -11,6 +11,7 @@ public class DialogServer : MonoBehaviour
     public Dialog SelectImageDialogPrefab;
     public Dialog SelectNamePrefab;
     public Dialog SexSelectDialogPrefab;
+    public Dialog YesNoDialog;
 
     public Transform canvas;
 
@@ -85,6 +86,8 @@ public class DialogServer : MonoBehaviour
                 return SelectNamePrefab;
             case "SexSelect":
                 return SexSelectDialogPrefab;
+            case "YesNo":
+                return YesNoDialog;
         }
         throw new System.NotImplementedException($"Dialog with id {dialogId} is not available");
     }
