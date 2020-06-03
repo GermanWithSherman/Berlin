@@ -10,4 +10,9 @@ public class GameException : System.Exception
     {
         Message = message;
     }
+
+    public override string ToString()
+    {
+        return $"{Message}\n{base.ToString()}";
+    }
 }

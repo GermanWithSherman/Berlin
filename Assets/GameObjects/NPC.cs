@@ -34,7 +34,28 @@ public class NPC : Data, IInheritable, IModable
 
     public string GenderVisible;
 
+    public string BreastSize
+    {
+        get => breastVolumeToSize(BreastVolume);
+        set
+        {
+            BreastVolume = breastSizeToVolume(value);
+        }
+    }
+
+    
+
+    public int BreastVolume;
+    public string HairColor;
+    public int HairLength;
+    public string HairStyle;
+    public string HairBodyColor;
+    public int HairBodyLength;
+    public string HairPubicColor;
+    public int HairPubicLength;
+    public string HairPubicStyle;
     public int Height = 1700; //in mm
+    public int PenisLength;
     public int Weight = 6000; //in g
 
     [JsonIgnore]
@@ -67,6 +88,30 @@ public class NPC : Data, IInheritable, IModable
 
     [JsonIgnore]
     public bool inheritanceResolved = false;
+
+
+    private int breastSizeToVolume(string value)
+    {
+        switch (value)
+        {
+            case "None":
+                return 0;
+            default:
+                return UnityEngine.Random.Range(100,1000);
+
+        }
+    }
+
+    private string breastVolumeToSize(int breastVolume)
+    {
+        switch (breastVolume)
+        {
+            case 0:
+                return "None";
+            default:
+                return "C";
+        }
+    }
 
     protected override dynamic get(string key)
     {
@@ -200,8 +245,6 @@ public class NPC : Data, IInheritable, IModable
 
     public void inherit(NPC parent)
     {
-        //if (parent != null)
-        //    inherit(parent);
         if (parent == null)
             return;
 
@@ -210,59 +253,10 @@ public class NPC : Data, IInheritable, IModable
 
         mod(parentCopy, this);
 
-        
-
     }
 
     public bool isInheritanceResolved() => inheritanceResolved;
 
-    
-
-    /*
-
-    private void mod(NPC original, NPC mod)
-    {
-        birthDate = Modable.mod(original.birthDate, mod.birthDate);
-
-        nameFirst = Modable.mod(original.nameFirst, mod.nameFirst);
-
-        nameLast = Modable.mod(original.nameLast, mod.nameLast);
-
-        genderVisible = Modable.mod(original.genderVisible, mod.genderVisible);
-
-        schedules = Modable.mod(original.schedules, mod.schedules);
-        //TODO: etc.
-    }
-
-    public void mod(NPC modNPC)
-    {
-        if (modNPC == null) return;
-        mod(this, modNPC);
-    }
-
-    public void mod(IModable modable)
-    {
-        if (modable.GetType() != GetType())
-        {
-            Debug.LogError("Type mismatch");
-            return;
-        }
-
-        mod((NPC)modable);
-    }
-
-    public IModable copyDeep()
-    {
-        var result = new NPC();
-
-        result.birthDate = Modable.copyDeep(birthDate);
-        result.nameFirst = Modable.copyDeep(nameFirst);
-        result.nameLast = Modable.copyDeep(nameLast);
-        result.genderVisible = Modable.copyDeep(genderVisible);
-        result.schedules = Modable.copyDeep(schedules);
-        //TODO: etc.
-        return result;
-    }*/
 }
 
 public class NPCComparer : IEqualityComparer<NPC>

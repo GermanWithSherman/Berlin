@@ -78,6 +78,10 @@
                 },
                 "onShow": {
                     "5_Uniform":{"Type":"ItemAdd","ItemID":"schoolUniformF1","Equip":false},
+                    "5_Set":{"Type": "Set","Values": {
+                        "i_school_dorm_room": 211,
+                        "s_school_psychologist_intro_stage": null
+                    }},
                     "8_gotoLocation":{"Type": "GotoLocation","LocationID": "dahlem/school/dorm.2_211"}
                 }
             }

@@ -103,6 +103,8 @@ public class GameData: Data
                     return (decimal)_additionalData[key];
                 case 's':
                 default:
+                    if (_additionalData[key] == null)
+                        return "";
                     return _additionalData[key].ToString();
             }
         }

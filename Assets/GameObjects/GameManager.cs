@@ -563,14 +563,21 @@ public class GameManager : MonoBehaviour
 
     private void _uiUpdate()
     {
-        Debug.Log($"DayNight: {Misc.dayNightState(GameData.WorldData.DateTime)}");
-
-
-        uiUpdatePending = false;
-
-        foreach (UIUpdateListener listener in updateListeners)
+        try
         {
-            listener.uiUpdate(this);
+            Debug.Log($"DayNight: {Misc.dayNightState(GameData.WorldData.DateTime)}");
+
+
+            uiUpdatePending = false;
+
+            foreach (UIUpdateListener listener in updateListeners)
+            {
+                listener.uiUpdate(this);
+            }
+        }
+        catch(Exception e)
+        {
+            ErrorMessage.Show($"Error performing UI-Update:\n{e}");
         }
     }
 

@@ -263,6 +263,10 @@ public class Condition : IModable
 
     private static bool eq(dynamic left, dynamic right)
     {
+        if ((right == null && left != null) || left == null)
+            return false;
+        
+
         if (left.GetType() != right.GetType())
         {
             if (isInt(left) && isInt(right))
@@ -284,6 +288,8 @@ public class Condition : IModable
 
     private static bool higher(dynamic left, dynamic right)
     {
+        if (left == null) left = 0;
+        if (right == null) right = 0;
 
         if (isNumber(left) && isNumber(right))
         {
@@ -303,7 +309,10 @@ public class Condition : IModable
 
     private static bool lower(dynamic left, dynamic right)
     {
-        if(isNumber(left) && isNumber(right))
+        if (left == null) left = 0;
+        if (right == null) right = 0;
+
+        if (isNumber(left) && isNumber(right))
         {
             return (left < right);
         }
