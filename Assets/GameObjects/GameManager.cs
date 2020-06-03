@@ -167,6 +167,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        PC test = new PC();
+        test.HairPubicStyle = "Black and white";
+
+        PC mod = new PC();
+        mod.HairPubicStyle = "Pink";
+
+        test = Modable.mod(test,mod);
+
+        //PC copy = Modable.copyDeep(test);
+        Debug.Log(test.HairPubicStyle);
+
+
         ModsServer = new ModsServer(path("mods"), Preferences);
 
         List<string> modsPaths = ModsServer.ActivatedModsPaths;

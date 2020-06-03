@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
 
+[Modable(ModableAttribute.FieldOptions.OptOut)]
 public class PC : NPC
 {
 
     public ItemsCollection items = new ItemsCollection();
 
-    public Dictionary<string, Outfit> outfits = new Dictionary<string, Outfit>();
+    public ModableDictionary<Outfit> outfits = new ModableDictionary<Outfit>();
     public string currentOutfitId="DEFAULT";
     [JsonIgnore]
     public Outfit currentOutfit

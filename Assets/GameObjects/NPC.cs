@@ -4,7 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC : Data, IInheritable, IModable
+[Modable(ModableAttribute.FieldOptions.OptOut)]
+public class NPC : Data, IInheritable, IModable, IModableAutofields
 {
     [JsonIgnore]
     public string id;
