@@ -9,8 +9,8 @@ using UnityEngine;
 public class CText : IModable
 {
     public string Value; //Plain Text
-
-    public ModableDictionary<CText> D = new ModableDictionary<CText>();
+    public ModableDictionary<CText> Values = new ModableDictionary<CText>();
+    public string JoinWith = " ";
 
     [JsonIgnore]
     public Condition Condition
@@ -49,10 +49,12 @@ public class CText : IModable
         if (!String.IsNullOrEmpty(Value))
             result.Add(parse(Value, gameData));
 
-        foreach (CText cText in D.Values)
+        foreach (CText cText in Values.Values)
             result.Add(cText.Text(gameData));
 
-        return String.Join(" ", result);
+        var resultString = String.Join(JoinWith, result);
+
+        return resultString;
     }
 
     private static string format(dynamic data, string format)
@@ -68,35 +70,113 @@ public class CText : IModable
     private static string parse(string s, Data gameData)
     {
         string result = String.Empty;
-        string pattern = @"{([\w\.]*)(?>\|(\w+))?}";
+        //string pattern = @"{([\w\.]*)(?>\|(\w+))?}";
+        string pattern = @"{(\>?[\w\.\(\),\\:,""]*)(?>\| (\w +))?}";
+        //string functionPattern = @"^>([\w]+)\(([\w\.\(\),\\""]+(?>,[\w\.\(\),\\""]+)*)\)$";
+        //string functionPattern = @"^\>(\w+)\(((?>\w+:)?(?>\\"")?\w+(?>\\"")?(?>,(?>\w+:)?(?>\\"")?\w+(?>\\"")?)*)\)$";
+
         string input = s;
 
         int pos = 0;
 
         foreach (Match match in Regex.Matches(input, pattern, RegexOptions.IgnoreCase))
         {
-            int length = match.Index - pos;
-            result += input.Substring(pos, length);
+            try
+            {
+                int length = match.Index - pos;
+                result += input.Substring(pos, length);
 
-            if (match.Groups.Count > 2 && !String.IsNullOrEmpty(match.Groups[2].Value))
-                result += format(gameData[match.Groups[1].Value], match.Groups[2].Value);
-            else
-                result += gameData[match.Groups[1].Value];
+                string dataString = match.Groups[1].Value;
+
+                dynamic d;
+
+                if (dataString[0] == '>')
+                {
+                    /*Match functionMatch = Regex.Match(dataString, functionPattern, RegexOptions.IgnoreCase);
+                    string functionID = functionMatch.Groups[1].Value;
+                    string functionParametersString = functionMatch.Groups[2].Value;*/
+
+                    int indexOfOpen = dataString.IndexOf('(');
+                    int indexOfClose= dataString.LastIndexOf(')');
+
+                    string functionID = dataString.Substring(1,indexOfOpen-1);
+                    string functionParametersString = dataString.Substring(indexOfOpen+1, indexOfClose-indexOfOpen-1);
+
+                    FunctionParameters functionParameters = new FunctionParameters(gameData, functionParametersString.Split(','));
+
+                    dataString = GameManager.Instance.FunctionsLibrary.functionExecute(functionID, functionParameters);
+
+                    d = dataString;
+                }
+                else
+                {
+                    d = gameData[match.Groups[1].Value];
+                }
+
+                if (match.Groups.Count > 2 && !String.IsNullOrEmpty(match.Groups[2].Value))
+                    result += format(d, match.Groups[2].Value);
+                else
+                    result += d;
+                
+            }
+            catch(Exception e)
+            {
+                result += "{ERROR: "+e.GetType()+" }";
+            }
             pos = match.Index + match.Length;
-            //match.Groups[1].Value, match.Index
         }
 
         result += input.Substring(pos);
 
+        result = lineParse(result);
 
         return result;
     }
- 
+
+    private static string lineParse(string input)
+    {
+        string pattern = @"<(\w+)(?>=([\w\.]+))?>(.*?)</\1>";
+        string result = String.Empty;
+        int pos = 0;
+
+        foreach (Match match in Regex.Matches(input, pattern, RegexOptions.IgnoreCase))
+        {
+            try
+            {
+                int length = match.Index - pos;
+                result += input.Substring(pos, length);
+
+                string tagType = match.Groups[1].Value;
+                string parameter = match.Groups[2].Value;
+                string content = match.Groups[3].Value;
+                switch (tagType)
+                {
+                    case ("speaker"):
+                        result += "<i><b>" + content + "</b></i>";
+                        break;
+                    default:
+                        result += $"<{tagType}>{lineParse(content)}</{tagType}>";
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                result += "{ERROR: " + e.GetType() + " }";
+            }
+            pos = match.Index + match.Length;
+        }
+
+        result += input.Substring(pos);
+
+        return result;
+    }
+
 
     public void mod(CText modable)
     {
+        JoinWith = Modable.mod(JoinWith, modable.JoinWith);
         Value = Modable.mod(Value, modable.Value);
-        D = Modable.mod(D, modable.D);
+        Values = Modable.mod(Values, modable.Values);
         C = Modable.mod(C, modable.C);
     }
 
@@ -115,8 +195,9 @@ public class CText : IModable
     public IModable copyDeep()
     {
         var result = new CText();
+        result.JoinWith = Modable.copyDeep(JoinWith);
         result.Value = Modable.copyDeep(Value);
-        result.D = Modable.copyDeep(D);
+        result.Values = Modable.copyDeep(Values);
         result.C = Modable.copyDeep(C);
         return result;
     }

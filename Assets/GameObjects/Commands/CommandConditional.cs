@@ -21,4 +21,40 @@ public class CommandConditional : Command
         if (Condition.evaluate(data))
             Commands.execute(data);
     }
+
+    public override IModable copyDeep()
+    {
+        var result = new CommandConditional();
+
+        result.Commands = Modable.copyDeep(Commands);
+        result.ConditionString = Modable.copyDeep(ConditionString);
+
+        return result;
+    }
+
+    private void mod(CommandConditional original, CommandConditional mod)
+    {
+        Commands = Modable.mod(original.Commands, mod.Commands);
+        ConditionString = Modable.mod(original.ConditionString, mod.ConditionString);
+
+
+    }
+
+    public void mod(CommandConditional modable)
+    {
+        if (modable == null) return;
+        mod(this, modable);
+    }
+
+    public override void mod(IModable modable)
+    {
+        CommandConditional commandConditional = modable as CommandConditional;
+        if (commandConditional == null)
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod(commandConditional);
+    }
 }

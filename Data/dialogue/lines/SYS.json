@@ -1,0 +1,20 @@
+{
+    "stages":{
+        "start":{
+            "1":{
+                "Text": ""
+            }
+        },
+        "blank":{
+            "1":{
+                "Text": ""
+            }
+        },
+        "blank_noTopic":{
+            "1":{
+                "Text": "",
+                "TopicsVisible": false
+            }
+        }
+    }
+}

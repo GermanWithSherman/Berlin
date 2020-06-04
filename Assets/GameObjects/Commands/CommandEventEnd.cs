@@ -8,4 +8,11 @@ public class CommandEventEnd : Command
     {
         GameManager.Instance.eventEnd();
     }
+
+    public override IModable copyDeep()
+    {
+        return new CommandEventEnd();
+    }
+
+    public override void mod(IModable modable) { }
 }

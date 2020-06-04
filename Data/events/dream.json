@@ -1,0 +1,37 @@
+{
+    "EventStages":{
+        "main":{
+            "Inherit": {
+                "Mode": "Random",
+                "Values":{
+                    "fly":{
+                        "Value": "dream.fly"
+                    }
+                }
+            },
+            "Options":{
+                "Continue":{
+                    "Text": "Zzzzzz...",
+                    "Commands": {
+                        "continue":{"Type":"Continue"}
+                    }
+                }
+            }
+        },
+        "fly":{
+            "Text": "You dream about flying high in the air.",
+            "TexturePath": {
+                "Values": {
+                    "f":{
+                        "Value": "events/dream/fly_f.jpg",
+                        "Condition": "PC.genderVisible=\"f\""
+                    },
+                    "m":{
+                        "Value": "events/dream/fly_m.jpg",
+                        "Condition": "PC.genderVisible=\"m\""
+                    }
+                }
+            }
+        }
+    }
+}

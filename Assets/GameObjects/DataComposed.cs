@@ -84,6 +84,11 @@ public class DataCombined : Data
             if (_dict.ContainsKey(keyParts[0]))
                 return _dict[keyParts[0]][keyParts[1]];
         }
+        else
+        {
+            if (_dict.ContainsKey(key))
+                return _dict[key];
+        }
 
         return null;
     }

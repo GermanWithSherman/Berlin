@@ -1,0 +1,15 @@
+{
+    "interrupts":{
+        "dayStart":{
+            "Listen": ["dayStart"],
+            "Commands": {
+                "stat_days_played":{
+                    "Type": "Set",
+                    "ValuesFromSetters": {
+                        "i_stat_daysPlayed":{"Mode": "Inc","Value":1}
+                    }
+                }
+            }
+        }
+    }
+}

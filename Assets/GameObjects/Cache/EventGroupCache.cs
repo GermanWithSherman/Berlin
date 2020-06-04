@@ -21,28 +21,45 @@ public class EventGroupCache : Cache<EventGroup>
     public EventStage EventStage(string key)
     {
         string[] keyparts = key.Split('.');
+        EventStage result = null;
 
         if (keyparts.Length == 2)
         {
             EventGroup eventGroup = this[keyparts[0]];
             EventStage eventStage = eventGroup[keyparts[1]];
-            return eventStage;
+            result = eventStage;
+            result.GroupID = keyparts[0];
+            result.StageID = keyparts[1];
         }
         else if(keyparts.Length == 1)
         {
             Debug.LogWarning($"Malformed EventStage Key '{key}', assuming '{key}.'");
             EventGroup eventGroup = this[key];
             EventStage eventStage = eventGroup[""];
-            return eventStage;
+            
+            result = eventStage;
+            result.GroupID = key;
+            result.StageID = "";
         }
 
-        return null;
+        result = Modable.copyDeep(result);
+
+        result.inherit();
+        /*foreach(string InheritID in result.InheritIDs)
+        {
+            result = Modable.mod(EventStage(InheritID), result);
+        }*/
+
+        
+
+        return result;
     }
 
     public EventStage EventStage(string eventGroupId, string eventStageId)
     {
-        EventGroup eventGroup = this[eventGroupId];
-        EventStage eventStage = eventGroup[eventStageId];
-        return eventStage;
+        /*EventGroup eventGroup = this[eventGroupId];
+        EventStage eventStage = eventGroup[eventStageId];*/
+        return EventStage($"{eventGroupId}.{eventStageId}");
+        //return eventStage;
     }
 }

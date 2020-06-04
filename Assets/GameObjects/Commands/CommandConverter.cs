@@ -47,6 +47,9 @@ public class CommandConverter : JsonConverter
             case (Command.Type.Dialog):
                 result = new CommandDialog();
                 break;
+            case (Command.Type.Dialogue):
+                result = new CommandDialogue();
+                break;
             case (Command.Type.Event):
                 result = new CommandEvent();
                 break;
@@ -64,6 +67,15 @@ public class CommandConverter : JsonConverter
                 break;
             case (Command.Type.ItemAdd):
                 result = new CommandItemAdd();
+                break;
+            case (Command.Type.ItemRemove):
+                result = new CommandItemRemove();
+                break;
+            case (Command.Type.NoteAdd):
+                result = new CommandNoteAdd();
+                break;
+            case (Command.Type.NoteRemove):
+                result = new CommandNoteRemove();
                 break;
             case (Command.Type.Outfit):
                 result = new CommandOutfit();

@@ -7,17 +7,53 @@
     "examples": [
     ],
     "required": [
-        
+        "Label",
+        "Slot",
+        "Gender"
     ],
-    "additionalProperties": false,
+    "oneOf": [
+        {
+            
+            "properties": {
+                "Slot": {"type": "string", "enum": ["Shoes"] },
+                "Height":{"type":"integer","description": "in mm"}
+            },
+            "required": [
+                "Height"
+            ]
+        },
+        {
+            "properties": {
+                "Slot": {"type": "string", "enum": ["Clothes"] }
+            },
+            "required": [
+            ]
+        },
+        {
+            "properties": {
+                "Slot": {"type": "string", "enum": ["Bra"] }
+            },
+            "required": [
+            ]
+        },
+        {
+            "properties": {
+                "Slot": {"type": "string", "enum": ["Panties"] }
+            },
+            "required": [
+            ]
+        }
+    ],
+    
     
     "properties": {
         "Label": {"type": "string" },
         "Price": {"type": "integer", "minimum": 0 },
         "Slot": {"type": "string", "examples": ["Bra","Clothes","Panties","Shoes"] },
-        "Style": { "$ref": "./OutfitStyle.json"},
+        "Style": { "type":"array","items":{ "$ref": "./OutfitStyle.json" }},
         "Skimpiness": {"type": "integer", "minimum":0 },
         "Gender": {"type": "string", "enum": ["f","fm","m"] },
         "TexturePath": {"type": "string" }
+        
     }
 }

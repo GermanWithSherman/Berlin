@@ -1,0 +1,165 @@
+{
+    "stages": {
+        "start":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "image":"<img>npc/school/students/michelPortrait.png</img>",
+                        "0":"<speaker=_NPC1>Hello. You are the new student, right? I suppose I am your new roommate. My name is {_NPC1.nameFirst} {_NPC1.nameLast}.</speaker>",
+                        "1":"He reaches out to shake your hand."
+                    }
+                },
+                "Options": {
+                    "IntroduceYourself":{
+                        "Text": "Introduce Yourself",
+                        "TargetStage": ".introduceYourself"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "introduceYourself":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"You take his hand and shake it.",
+                        "1":"<speaker=_PC>I am {_PC.nameFirst} {_PC.nameLast}. Nice to meet you.</speaker>",
+                        "2":"He smiles.",
+                        "3":"<speaker=_NPC1>Feel free to make yourself at home.</speaker> He points at what appears to be his bed. <speaker=_NPC1>Just stay away from my stuff and we will get along quite well.</speaker>",
+                        "4":"<speaker=_NPC1>And if you have any questions: just ask.</speaker>"
+                    }
+                },
+                "onShow": {
+                    "setIntroduced":{"Type": "Set","Values": {"b_school_michel_introduced": true}}
+                },
+                "Options": {
+                    "bathroom":{
+                        "TargetStage": ".bathroom",
+                        "Text": "About the bathroom..."
+                    },
+                    "dorm":{
+                        "TargetStage": ".dorm",
+                        "Text": "About the bathroom..."
+                    },
+                    "uniform":{
+                        "TargetStage": ".uniform",
+                        "Text": "About the school uniform..."
+                    },
+                    "finish":{
+                        "TargetStage": ".finish",
+                        "Text": "That's all"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "bathroom":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>About the bathroom..</speaker>",
+                        "1":"<speaker=_NPC1>Ah, yes. It's down the hallway. You can use your key for this room to get inside.</speaker>",
+                        "2":"<speaker=_NPC1>And don't worry. There are enough showers and warm water for everyone.</speaker>",
+                        "3":"<speaker=_NPC1>Don't forget that you can't use the bathrooms on the other floors. Unless you are invited in, if you know what I mean.</speaker> He winks."
+                    }
+                },
+                "Options": {
+                    "bathroom":{
+                        "TargetStage": ".dorm",
+                        "Text": "About the dorm..."
+                    },
+                    "uniform":{
+                        "TargetStage": ".uniform",
+                        "Text": "About the school uniform..."
+                    },
+                    "finish":{
+                        "TargetStage": ".finish",
+                        "Text": "That's all"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "dorm":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>About the dorm...</speaker>",
+                        "1":"<speaker=_NPC1>Well, there is not much to say. The kitchen is right next to the entrance. You can make yourself something to eat there.</speaker>",
+                        "2":"<speaker=_NPC1>Every floor has a living room. The equipment varies slightly and you might meet other people at different places.</speaker>",
+                        "3":"<speaker=_NPC1>The boys are located on the 1st and 3rd floor, the girls live on the 2nd and 4th floor.</speaker>"
+                    }
+                },
+                "Options": {
+                    "bathroom":{
+                        "TargetStage": ".bathroom",
+                        "Text": "About the bathroom..."
+                    },
+                    "uniform":{
+                        "TargetStage": ".uniform",
+                        "Text": "About the school uniform..."
+                    },
+                    "finish":{
+                        "TargetStage": ".finish",
+                        "Text": "That's all"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "finish":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>That's all for now. Thank you.</speaker>",
+                        "1":"<speaker=_NPC1>You are welcome. Just talk to me if you want to know something. I guess we will see a lot of each other.</speaker>"
+                    }
+                }
+            }
+        },
+        "uniform":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>About the school uniform...</speaker>",
+                        "1":"<speaker=_NPC1>Yes?</speaker>",
+                        "2":"<speaker=_PC>Do we really have to wear them?</speaker>",
+                        "3":"<speaker=_NPC1>Yes. But only during classes. You are free to change into anything you want after classes. There are some rules about how much skin you are allowed on the school ground even after classes... but they are mainly for the girls. As long as you wear at least shorts and a shirt you are fine.</speaker>",
+                        "4":"<speaker=_PC>Where do I get one?</speaker>",
+                        "5":"<speaker=_NPC1>You should already have one. It's inside of your wardrobe.</speaker>",
+                        "6":"You open the indicated wardrobe. He is right. You have been provided with pants, a shirt, a tie and a jacket.",
+                        "7":"<speaker=_NPC1>I know, it's not the best quality. If you don't like it there is a tailor near the church who makes all kinds of school uniforms.</speaker>",
+                        "8":"<speaker=_NPC1>The rules for boys are simple: wear pants, a shirt, a tie and a matching jacket. Girls have to wear a skirt. I guess you could wear a skirt as well. It's not forbidden. But why would any man want to do so?</speaker>",
+                        "9":"He laughes out."
+                    }
+                },
+                "Options": {
+                    "bathroom":{
+                        "TargetStage": ".bathroom",
+                        "Text": "About the bathroom..."
+                    },
+                    "dorm":{
+                        "TargetStage": ".dorm",
+                        "Text": "About the dorm..."
+                    },
+                    "finish":{
+                        "TargetStage": ".finish",
+                        "Text": "That's all"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        }
+    }
+}

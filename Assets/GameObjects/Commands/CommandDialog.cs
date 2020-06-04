@@ -21,4 +21,40 @@ public class CommandDialog : Command
 
         GameManager.Instance.DialogServer.dialogShow(dialog, setting);
     }
+
+    public override IModable copyDeep()
+    {
+        var result = new CommandDialog();
+
+        result.DialogID = Modable.copyDeep(DialogID);
+        result.Settings = Modable.copyDeep(Settings);
+
+        return result;
+    }
+
+    private void mod(CommandDialog original, CommandDialog mod)
+    {
+        DialogID = Modable.mod(original.DialogID, mod.DialogID);
+        Settings = Modable.mod(original.Settings, mod.Settings);
+
+
+    }
+
+    public void mod(CommandDialog modable)
+    {
+        if (modable == null) return;
+        mod(this, modable);
+    }
+
+    public override void mod(IModable modable)
+    {
+        CommandDialog modCommand = modable as CommandDialog;
+        if (modCommand == null)
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod(modCommand);
+    }
 }

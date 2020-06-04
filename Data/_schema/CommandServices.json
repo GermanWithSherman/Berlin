@@ -15,6 +15,6 @@
     
     "properties": {
         "ServicePointID": {"type": "string" },
-        "Type": {"type": "string", "pattern": "^Services$" }
+        "Type": {"type": "string", "enum": ["Services"] }
     }
 }

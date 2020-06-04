@@ -1,0 +1,159 @@
+{
+    "stages": {
+        "start":{
+            "5_pupil":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "image":"<img>npc/school/students/janinePortrait.jpg</img>",
+                        "0":"<speaker=_NPC1>Hello. You are the new student for the psychological experiment, right? I was informed that you might arrive today.</speaker>",
+                        "1":"<speaker=_NPC1>I am {_NPC1.nameFirst} {_NPC1.nameLast}. And I guess I am your roommate now.</speaker>"
+                    }
+                },
+                "Options": {
+                    "Roommate?":{
+                        "Text": "Roommate?",
+                        "TargetStage": ".roommate"
+                    }
+                },
+                "Condition": "s_pc_background=\"pupil\"",
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "roommate":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>Roommate? I thought boys and girls have seperated rooms.</speaker>",
+                        "1":"<speaker=_NPC1>That's true. You didn't read the contract you signed, did you? That's no surprise, nobody does.</speaker> She laughes.",
+                        "2":"<speaker=_NPC1>What's your name anyways?</speaker>"
+                    }
+                },
+                "Options": {
+                    "TellName":{
+                        "Text": "Tell her your name",
+                        "TargetStage": ".tellName"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "tellName":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>I am... ehm...</speaker>",
+                        "1":"She laughes again. <speaker=_NPC1>Did you forget your own name?</speaker>",
+                        "2":"Of course you didn't! It's... wait, what was it again? It's {_PC.nameFirst}. Why is it so hard to remember it?",
+                        "3":"<speaker=_PC>No. I am ...ahhh....</speaker>",
+                        "4":"<speaker=_NPC1>Is it Lisa?</speaker>"
+                    }
+                },
+                "Options": {
+                    "Lisa":{
+                        "Text": "Yes",
+                        "TargetStage": ".nameChosen",
+                        "Commands": {"setName":{"Type": "Set","Values": {"PC.nameFirst": "Lisa"}}}
+                    },
+                    "No":{
+                        "Text": "No!",
+                        "TargetStage": ".tellName2nAttempt"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "tellName2nAttempt":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>No, of course not.</speaker>",
+                        "1":"<speaker=_NPC1>So what is it then? Is it a secret?</speaker>",
+                        "2":"<speaker=_PC>No... I... just a second...</speaker>",
+                        "3":"<speaker=_NPC1>Jacqueline? Is that your name?</speaker>"
+                    }
+                },
+                "Options": {
+                    "Lisa":{
+                        "Text": "Yes",
+                        "TargetStage": ".nameChosen",
+                        "Commands": {"setName":{"Type": "Set","Values": {"PC.nameFirst": "Jacqueline"}}}
+                    },
+                    "No":{
+                        "Text": "No!",
+                        "TargetStage": ".tellName3rdAttempt"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "tellName3rdAttempt":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>No... why would you...</speaker>",
+                        "1":"How weird. Why can't you just tell her your name? And why does she keep guessing female names?"
+                    }
+                },
+                "Options": {
+                    "NameSelect":{
+                        "Text": "Figure out your name",
+                        "TargetStage": "SYS.blank",
+                        "Commands": {
+                            "nameSelect":{
+                                "Type":"Dialog",
+                                "DialogID": "SelectName",
+                                "Settings": {
+                                    "Targets": {"name":"PC.nameFirst"},
+                                    "ListID": "names_first_female_90s",
+                                    "FreeChoice": false,
+                                    "onComplete": {
+                                        "dialogue":{"Type": "Dialogue", "TopicID": "CONTINUE>.nameChosen", "NPCID": ""}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "nameChosen":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>I am {PC.nameFirst}.</speaker>",
+                        "1":"Wait, what? That's not your name! Why did you say that? What is going on?",
+                        "2":"<speaker=_NPC1>Nice to meet you, {PC.nameFirst}. I assume you feel a little... weird? Don't worry, I will explain it to you in time.</speaker>",
+                        "3":"<speaker=_NPC1>But first you have to take a shower. That's actually very important. Here, take this.</speaker> She hands you a tube with some kind of liquid inside.",
+                        "4":"<speaker=_NPC1>Use it on all of your body and on your face. But don't put it anywhere else on your head. Just head to the end of the hallway, you will find the bathroom there. And don't worry, we are the only students at school today.</speaker>"
+                        
+                    }
+                },
+                "Options": {
+                    "Comply":{
+                        "Text": "Comply",
+                        "TargetStage": "SYS.blank_noTopic",
+                        "Say":"You decide you can figure out this weirdness out later. You take the tube and head for the bathroom.",
+                        "Commands": {
+                            "goto":{"Type": "GotoLocation","LocationID": "dahlem/school/dorm.2_bath_intro"},
+                            "setIntroduced":{"Type": "Set","Values": {"b_school_janine_introduced": true}}
+                        }
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        }
+    }
+}

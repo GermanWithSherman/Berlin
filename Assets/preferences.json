@@ -2,8 +2,6 @@
   "DataPath": "I:/ownCloud/Development/Unity/Berlin/Data",
   "SavePath": "I:/ownCloud/Development/Unity/Berlin-Savegames",
   "ActivatedModIDs": [
-    "mother",
-    "testMod2",
-    "testMod"
+    "bs_criminal"
   ]
 }

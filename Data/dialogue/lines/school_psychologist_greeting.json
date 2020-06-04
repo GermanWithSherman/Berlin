@@ -1,0 +1,23 @@
+{
+    "stages": {
+        "start":{
+            "participant":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":{"Value": "<speaker=_NPC1>Hello, {PC.nameFirst}. Are you here for another experiment?</speaker>"}
+                    }
+                },
+                "Condition": "b_school_psychologist_participant=true"
+            },
+            "noparticipant":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":{"Value": "<speaker=_NPC1>Hello, {PC.nameFirst}.</speaker>"}
+                    }
+                }
+            }
+        }
+    }
+}

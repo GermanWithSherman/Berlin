@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
 
+[Modable(ModableAttribute.FieldOptions.OptOut)]
 public class PC : NPC
 {
 
     public ItemsCollection items = new ItemsCollection();
 
-    public Dictionary<string, Outfit> outfits = new Dictionary<string, Outfit>();
+    public ModableDictionary<Outfit> outfits = new ModableDictionary<Outfit>();
     public string currentOutfitId="DEFAULT";
     [JsonIgnore]
     public Outfit currentOutfit
@@ -22,6 +23,9 @@ public class PC : NPC
             return outfits[currentOutfitId];
         }
     }
+
+    public string nameFirstBorn;
+    public string nameLastBorn;
 
 
     public Int64 moneyCash = 0;
@@ -38,7 +42,8 @@ public class PC : NPC
     public int statSleep;
     private int _statSleep { get => statSleep; set => statSleep = Mathf.Clamp(value, 0, 1000000); }
 
-    
+    public override bool ShouldSerializeTexturePath() => true;
+
     private static GameManager gameManager { get => GameManager.Instance; }
 
 
@@ -49,6 +54,10 @@ public class PC : NPC
         {
             case "moneyCash":
                 return moneyCash;
+            case "nameFirstBorn":
+                return nameFirstBorn;
+            case "nameLastBorn":
+                return nameLastBorn;
             case "statHunger":
                 return statHunger;
             case "statHygiene":
@@ -78,6 +87,12 @@ public class PC : NPC
         {
             case "moneyCash":
                 moneyCash = value;
+                return;
+            case "nameFirstBorn":
+                nameFirstBorn = value;
+                return;
+            case "nameLastBorn":
+                nameLastBorn = value;
                 return;
             case "statHunger":
                 _statHunger = (int)value;
@@ -136,6 +151,30 @@ public class PC : NPC
     {
         if(!items.Contains(item))
             items.setItem(item.id,item);
+    }
+
+    public void itemRemove(Item item)
+    {
+        items.removeItem(item);
+        foreach(Outfit outfit in outfits.Values)
+        {
+
+        }
+    }
+
+    public void itemsRemove(ItemsFilter itemsFilter)
+    {
+        /*List<Item> itemsToRemove = new List<Item>();
+        foreach(Item item in ((Dictionary<string, Item>)items).Values)
+        {
+            if(itemsFilter.filter)
+        }*/
+        IEnumerable<Item> itemsToRemove = itemsFilter.filter(items);
+
+        foreach (Item item in itemsToRemove)
+        {
+            itemRemove(item);
+        }
     }
 
     public bool itemHas(Item item)

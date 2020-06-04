@@ -9,4 +9,11 @@ public class CommandFlush : Command
         Command.pauseActive = false;
         Command.pausedCommands = new CommandsCollection();
     }
+
+    public override IModable copyDeep()
+    {
+        return new CommandFlush();
+    }
+
+    public override void mod(IModable modable) { }
 }

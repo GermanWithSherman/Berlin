@@ -9,7 +9,7 @@ using UnityEngine;
 public class GameData: Data
 {
 
-    public DateTime savegameTime;
+    
 
     public new dynamic this[string key]
     {
@@ -17,19 +17,27 @@ public class GameData: Data
         set => set(key,value);
     }
 
+    public UISettings UISettings = new UISettings();
+
     public CharacterData CharacterData = new CharacterData();
     public ShopData ShopData = new ShopData();
     public WorldData WorldData = new WorldData();
 
     public InterruptPersistentDataCollection Interrupts = new InterruptPersistentDataCollection();
 
+    public Dictionary<string, Note> Notes = new Dictionary<string, Note>();
+
     [JsonConverter(typeof(EventStageConverter))]
-    public EventStage currentEventStage;
+    public EventStage CurrentEventStage;
 
     [JsonIgnore]
     public SubLocation currentLocation;
-    [JsonProperty]
-    private string _currentLocationId;
+    [JsonProperty("CurrentLocationId")]
+    private string _currentLocationId
+    {
+        get => currentLocation?.ID;
+        set { currentLocation = GameManager.Instance.LocationCache.SubLocation(value); }
+    }
 
     [JsonIgnore]
     public IEnumerable<NPC> NpcsPresent = new List<NPC>();
@@ -39,7 +47,7 @@ public class GameData: Data
 
     protected override dynamic get(string key)
     {
-        string[] keyParts = key.Split(new char[] { '.' },2);
+        string[] keyParts = key.Split(new char[] { '.' });
 
         if(keyParts.Length == 1)
         {
@@ -62,8 +70,18 @@ public class GameData: Data
                     return CharacterData.PC[keyParts[1]];
                 case "Shop":
                     return ShopData[keyParts[1]];
+                case "UI":
+                    return UISettings[keyParts[1]];
                 case "World":
                     return WorldData[keyParts[1]];
+            }
+        }
+        else if (keyParts.Length == 3)
+        {
+            switch (keyParts[0])
+            {
+                case "NPC":
+                    return GameManager.Instance.NPCsLibrary[keyParts[1]][keyParts[2]];
             }
         }
 
@@ -73,6 +91,8 @@ public class GameData: Data
             {
                 case 'b':
                     return (bool)_additionalData[key];
+                case 'c':
+                    return (DateTime)_additionalData[key];
                 case 'i':
                     return (int)_additionalData[key];
                 case 'f':
@@ -83,6 +103,8 @@ public class GameData: Data
                     return (decimal)_additionalData[key];
                 case 's':
                 default:
+                    if (_additionalData[key] == null)
+                        return "";
                     return _additionalData[key].ToString();
             }
         }
@@ -128,6 +150,9 @@ public class GameData: Data
                 case "Shop":
                     ShopData[keyParts[1]] = value;
                     return;
+                case "UI":
+                    UISettings[keyParts[1]] = value;
+                    return;
                 case "World":
                     WorldData[keyParts[1]] = value;
                     return;
@@ -141,7 +166,7 @@ public class GameData: Data
     }
 
     #region Serialization
-    [OnDeserialized]
+    /*[OnDeserialized]
     internal void OnDeserializedMethod(StreamingContext context)
     {
         GameManager gameManager = GameManager.Instance;
@@ -149,30 +174,10 @@ public class GameData: Data
         currentLocation = gameManager.LocationCache.SubLocation(_currentLocationId);
 
         
-    }
-
-    /*internal void AfterLinkedMethod()
-    {
-        //We have to wait until GameManager set GameData to this
-        List<NPC> npcsPresent = new List<NPC>();
-        foreach (string id in _npcsPresentIds)
-            //npcsPresent.Add(CharacterData[id]);
-            npcsPresent.Add(GameManager.Instance.NPCsLibrary[id]);
-        NpcsPresent = npcsPresent;
     }*/
     
 
-    [OnSerializing]
-    internal void OnSerializingMethod(StreamingContext context)
-    {
-        _currentLocationId = currentLocation.ID;
-
-        /*_npcsPresentIds = new List<string>();
-        foreach (NPC npc in NpcsPresent)
-            _npcsPresentIds.Add(npc.id);*/
-
-        savegameTime = DateTime.UtcNow;
-    }
+    
 
     
 

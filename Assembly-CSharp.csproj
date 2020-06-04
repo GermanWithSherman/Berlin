@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameObjects\Activity.cs" />
+    <Compile Include="Assets\GameObjects\ActivityLibrary.cs" />
     <Compile Include="Assets\GameObjects\CText.cs" />
     <Compile Include="Assets\GameObjects\Cache\Cache.cs" />
     <Compile Include="Assets\GameObjects\Cache\ConditionCache.cs" />
@@ -84,13 +85,17 @@
     <Compile Include="Assets\GameObjects\Commands\CommandConverter.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandDebug.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandDialog.cs" />
+    <Compile Include="Assets\GameObjects\Commands\CommandDialogue.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandEvent.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandEventEnd.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandFlush.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandGotoLocation.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandInterrupt.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandItemAdd.cs" />
+    <Compile Include="Assets\GameObjects\Commands\CommandItemRemove.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandNone.cs" />
+    <Compile Include="Assets\GameObjects\Commands\CommandNoteAdd.cs" />
+    <Compile Include="Assets\GameObjects\Commands\CommandNoteRemove.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandOutfit.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandPause.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandServices.cs" />
@@ -110,7 +115,7 @@
     <Compile Include="Assets\GameObjects\DialogueTopicLibrary.cs" />
     <Compile Include="Assets\GameObjects\EventGroup.cs" />
     <Compile Include="Assets\GameObjects\EventStage.cs" />
-    <Compile Include="Assets\GameObjects\Extensions\RawImageExtensions.cs" />
+    <Compile Include="Assets\GameObjects\Extensions\ListExtensions.cs" />
     <Compile Include="Assets\GameObjects\Extensions\TransformExtensions.cs" />
     <Compile Include="Assets\GameObjects\FunctionParameters.cs" />
     <Compile Include="Assets\GameObjects\FunctionsLibrary.cs" />
@@ -131,6 +136,9 @@
     <Compile Include="Assets\GameObjects\Location.cs" />
     <Compile Include="Assets\GameObjects\LocationConnection.cs" />
     <Compile Include="Assets\GameObjects\LocationConnections.cs" />
+    <Compile Include="Assets\GameObjects\LocationType.cs" />
+    <Compile Include="Assets\GameObjects\LocationTypeLibrary.cs" />
+    <Compile Include="Assets\GameObjects\Misc.cs" />
     <Compile Include="Assets\GameObjects\Mods\IInheritable.cs" />
     <Compile Include="Assets\GameObjects\Mods\IModable.cs" />
     <Compile Include="Assets\GameObjects\Mods\Mod.cs" />
@@ -144,11 +152,13 @@
     <Compile Include="Assets\GameObjects\NPCRaw.cs" />
     <Compile Include="Assets\GameObjects\NPCTemplate.cs" />
     <Compile Include="Assets\GameObjects\NPCsLibrary.cs" />
+    <Compile Include="Assets\GameObjects\Note.cs" />
     <Compile Include="Assets\GameObjects\Option.cs" />
     <Compile Include="Assets\GameObjects\Outfit.cs" />
     <Compile Include="Assets\GameObjects\OutfitRequirement.cs" />
     <Compile Include="Assets\GameObjects\PC.cs" />
     <Compile Include="Assets\GameObjects\Preferences.cs" />
+    <Compile Include="Assets\GameObjects\SaveFile.cs" />
     <Compile Include="Assets\GameObjects\Schedule.cs" />
     <Compile Include="Assets\GameObjects\Schedules.cs" />
     <Compile Include="Assets\GameObjects\Service.cs" />
@@ -160,7 +170,11 @@
     <Compile Include="Assets\GameObjects\ShopType.cs" />
     <Compile Include="Assets\GameObjects\StringExtensions.cs" />
     <Compile Include="Assets\GameObjects\SubLocation.cs" />
+    <Compile Include="Assets\GameObjects\Template.cs" />
+    <Compile Include="Assets\GameObjects\TemplateLibrary.cs" />
     <Compile Include="Assets\GameObjects\TimeFilter.cs" />
+    <Compile Include="Assets\GameObjects\Ui\CharacterWidget.cs" />
+    <Compile Include="Assets\GameObjects\Ui\CharacterWidgetStat.cs" />
     <Compile Include="Assets\GameObjects\Ui\Console.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialog.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogResolver.cs" />
@@ -168,8 +182,13 @@
     <Compile Include="Assets\GameObjects\Ui\DialogServer\DialogServer.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\AlarmClockDialogPrefab.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectHorizontal.cs" />
+    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectImageDialog.cs" />
+    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectImageDialogImage.cs" />
+    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SelectNameDialog.cs" />
     <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\SexSelectDialogPrefab.cs" />
+    <Compile Include="Assets\GameObjects\Ui\DialogServer\Dialogs\YesNoDialog.cs" />
     <Compile Include="Assets\GameObjects\Ui\FlexibleGridLayout.cs" />
+    <Compile Include="Assets\GameObjects\Ui\ImageAutosize\ImageAutosize.cs" />
     <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindow.cs" />
     <Compile Include="Assets\GameObjects\Ui\ItemSelectWindow\ItemSelectWindowItem.cs" />
     <Compile Include="Assets\GameObjects\Ui\Messages\ErrorDialog.cs" />
@@ -185,17 +204,22 @@
     <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarDateTime.cs" />
     <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarHunger.cs" />
     <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarMoney.cs" />
+    <Compile Include="Assets\GameObjects\Ui\StatusBar\StatusBarSleep.cs" />
     <Compile Include="Assets\GameObjects\Ui\TextExtended\ButtonTextExtended.cs" />
     <Compile Include="Assets\GameObjects\Ui\TextExtended\TextExtended.cs" />
     <Compile Include="Assets\GameObjects\Ui\Tooltip\Tooltip.cs" />
     <Compile Include="Assets\GameObjects\Ui\Tooltip\TooltipProvider.cs" />
+    <Compile Include="Assets\GameObjects\Ui\UIBackground.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIImageMain.cs" />
     <Compile Include="Assets\GameObjects\Ui\UINPCPresent.cs" />
     <Compile Include="Assets\GameObjects\Ui\UINPCsPresentContainer.cs" />
+    <Compile Include="Assets\GameObjects\Ui\UINote.cs" />
+    <Compile Include="Assets\GameObjects\Ui\UINotes.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIOption.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIOptionsContainer.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIRLocation.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIRLocations.cs" />
+    <Compile Include="Assets\GameObjects\Ui\UISettings.cs" />
     <Compile Include="Assets\GameObjects\Ui\UIUpdateListener.cs" />
     <Compile Include="Assets\GameObjects\Ui\UiShopItem.cs" />
     <Compile Include="Assets\GameObjects\Ui\UiShopWindow.cs" />

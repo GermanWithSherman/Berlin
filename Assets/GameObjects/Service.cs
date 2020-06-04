@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class Service
 {
-    public string label;
+    public string Label;
 
     public CText Description = new CText();
 
-    public int price;
-    public string category;
+    public int Price;
+    public string Category;
 
-    public Dictionary<string, Command> onBuy = new Dictionary<string, Command>();
+    public bool StayOpen = false;
+
+    public CommandsCollection onBuy = new CommandsCollection();
 
     public void buy()
     {
-        GameManager.Instance.PC.moneyPay(price);
+        GameManager.Instance.PC.moneyPay(Price);
 
         execute();
+
+        if (!StayOpen)
+            GameManager.Instance.UIServicesWindow.hide();
     }
 
     private void execute()

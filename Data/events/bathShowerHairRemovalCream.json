@@ -1,0 +1,16 @@
+{
+    "EventStages":{
+        "main":{
+            "Text": "You undress and jump under the shower. You use the cream as instructed. It feels very nice and warm on your skin. After a few minutes you realize that your hair is falling off. The cream seems to be a hair removal cream and you just removed all your hair except for your hair on your head.",
+            "TexturePath": {
+                "Value": "events/hairRemoval/hairRemoval.jpg"
+            },
+            "Options":{
+                "leave":{
+                    "Text": "Leave",
+                    "Commands": {"end":{"Type": "EventEnd"}}
+                }
+            }
+        }
+    }
+}

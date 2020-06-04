@@ -17,13 +17,16 @@ public class OutfitWindow : MonoBehaviour
 
     private OutfitRequirement _outfitRequirement;
 
+    private CommandsCollection _onClose = new CommandsCollection();
+
     public void close()
     {
         try
         {
-            if (_outfitRequirement.isValid(currentCharacter.currentOutfit))
+            if (_outfitRequirement == null || _outfitRequirement.isValid(currentCharacter.currentOutfit))
             {
                 hide();
+                _onClose.execute();
                 return;
             }
             throw new GameException(_outfitRequirement.Instruction);
@@ -69,12 +72,13 @@ public class OutfitWindow : MonoBehaviour
     public void show()
     {
         OutfitRequirement outfitRequirement = new OutfitRequirement();
-        show(outfitRequirement);
+        show(outfitRequirement, new CommandsCollection());
     }
 
-    public void show(OutfitRequirement outfitRequirement)
+    public void show(OutfitRequirement outfitRequirement, CommandsCollection onClose)
     {
         _outfitRequirement = outfitRequirement;
+        _onClose = onClose;
         gameObject.SetActive(true);
         updateItems();
     }

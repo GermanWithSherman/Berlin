@@ -22,6 +22,7 @@ public class EventStageConverter : JsonConverter
     {
         if (!(value is EventStage))
             throw new Exception("EventStage expected");
-        writer.WriteValue(((EventStage)value).id);
+        EventStage es = ((EventStage)value);
+        writer.WriteValue($"{es.GroupID}.{es.StageID}");
     }
 }

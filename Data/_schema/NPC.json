@@ -2,6 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "type":"object",
     "required": [
+        "TemplateID"
     ],
     "additionalProperties": false,
     
@@ -17,9 +18,16 @@
                 "^.*$": {
                     "$ref": "./TimeFilters.json"
                 }
-            }  
+            },
+            "examples": [
+                {
+                    "LocationID.SublocationID":{"0":{"TimeStart":0,"TimeEnd":2359}}
+                }
+            ]
         },
-        "TexturePath" : { "$ref": "./ConditionalString.json" }
+        "TexturePath" : { "$ref": "./ConditionalString.json", "examples": [{
+            "Value": "npc/mother/portrait.jpg"
+        }] }
     }
     
 }

@@ -21,6 +21,6 @@
         "Equip": {"type":"boolean"},
         "ItemID": {"type":"string"},
         "ShopID": {"type":"string"},
-        "Type": {"type": "string", "pattern": "^ItemAdd$" }
+        "Type": {"type": "string", "enum": ["ItemAdd"] }
     }
 }

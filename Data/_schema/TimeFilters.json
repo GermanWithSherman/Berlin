@@ -5,7 +5,12 @@
     "description": "TimeFilters schema.",
     "default": {},
     "additionalProperties": false,
-    
+    "examples": [
+        {
+            "0":{"TimeStart":600,"TimeEnd":2000}
+        }
+
+    ],
 
     "patternProperties": {
         "^.*$": {

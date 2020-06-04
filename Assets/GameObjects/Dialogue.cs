@@ -7,6 +7,11 @@ public class DialogueLine : IModable, IPrioritizable
 {
     //public string TopicID;
 
+    public bool TopicsVisible = true;
+    public bool LeaveEnabled = true;
+
+    public CommandsCollection onShow = new CommandsCollection();
+
     public int Priority = 0;
 
     [JsonProperty("Condition")]
@@ -32,6 +37,10 @@ public class DialogueLine : IModable, IPrioritizable
         result.Priority = Modable.copyDeep(Priority);
         result.Options = Modable.copyDeep(Options);
         result._text = Modable.copyDeep(_text);
+        result.ConditionString = Modable.copyDeep(ConditionString);
+        result.LeaveEnabled = Modable.copyDeep(LeaveEnabled);
+        result.TopicsVisible = Modable.copyDeep(TopicsVisible);
+        result.onShow = Modable.copyDeep(onShow);
 
         return result;
     }
@@ -41,9 +50,32 @@ public class DialogueLine : IModable, IPrioritizable
         return Priority;
     }
 
+    private void mod(DialogueLine original, DialogueLine mod)
+    {
+        Priority = Modable.mod(original.Priority, mod.Priority);
+        Options = Modable.mod(original.Options, mod.Options);
+        _text = Modable.mod(original._text, mod._text);
+        ConditionString = Modable.mod(original.ConditionString, mod.ConditionString);
+        LeaveEnabled = Modable.mod(original.LeaveEnabled, mod.LeaveEnabled);
+        TopicsVisible = Modable.mod(original.TopicsVisible, mod.TopicsVisible);
+        onShow = Modable.mod(original.onShow, mod.onShow);
+    }
+
+    public void mod(DialogueLine modSublocation)
+    {
+        if (modSublocation == null) return;
+        mod(this, modSublocation);
+    }
+
     public void mod(IModable modable)
     {
-        throw new System.NotImplementedException();
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((DialogueLine)modable);
     }
 
     public string Text(Data data)
@@ -55,10 +87,12 @@ public class DialogueLine : IModable, IPrioritizable
 public class DialogueOption : Option, IModable
 {
     public string TargetStage;
+    public string Say;
 
     public new IModable copyDeep()
     {
         DialogueOption result = (DialogueOption)base.copyDeep<DialogueOption>();
+        result.Say = Modable.copyDeep(Say);
         result.TargetStage = Modable.copyDeep(TargetStage);
         return result;
     }
@@ -66,6 +100,7 @@ public class DialogueOption : Option, IModable
     public void mod(DialogueOption modable)
     {
         base.mod(modable);
+        Say = Modable.mod(Say, modable.Say);
         TargetStage = Modable.mod(TargetStage, modable.TargetStage);
     }
 
@@ -135,9 +170,26 @@ public class DialogueStages :  IModable
         return result;
     }
 
+    private void mod(DialogueStages original, DialogueStages mod)
+    {
+        stages = Modable.mod(original.stages, mod.stages);
+    }
+
+    public void mod(DialogueStages modSublocation)
+    {
+        if (modSublocation == null) return;
+        mod(this, modSublocation);
+    }
+
     public void mod(IModable modable)
     {
-        throw new System.NotImplementedException();
+        if (modable.GetType() != GetType())
+        {
+            Debug.LogError("Type mismatch");
+            return;
+        }
+
+        mod((DialogueStages)modable);
     }
 }
 
@@ -146,11 +198,18 @@ public class DialogueTopic : IModable, IPrioritizable
     [JsonIgnore]
     public string ID;
 
+    public bool IsEventExclusive = false;
     public bool IsGreeting = false;
 
     public NPCFilter NPCFilter = new NPCFilter();
 
     public int Priority = 0;
+
+    [JsonProperty("Condition")]
+    public string ConditionString;
+
+    [JsonIgnore]
+    public Condition Condition { get => GameManager.Instance.ConditionCache[ConditionString]; }
 
     public CText Title;
 
@@ -159,7 +218,12 @@ public class DialogueTopic : IModable, IPrioritizable
         var result = new DialogueTopic();
 
         result.NPCFilter = Modable.copyDeep(NPCFilter);
+        result.Priority = Modable.copyDeep(Priority);
         result.Title = Modable.copyDeep(Title);
+
+        result.IsEventExclusive = Modable.copyDeep(IsEventExclusive);
+        result.IsGreeting = Modable.copyDeep(IsGreeting);
+        result.ConditionString = Modable.copyDeep(ConditionString);
 
         return result;
     }

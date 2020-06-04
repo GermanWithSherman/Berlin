@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using UnityEngine;
 
-public class ItemsCollection : Dictionary<string,string>
+public class ItemsCollection : ModableDictionary<string>, IModable
 {
 
     private Dictionary<string, Item> cache = new Dictionary<string, Item>();
@@ -80,6 +80,11 @@ public class ItemsCollection : Dictionary<string,string>
         return getItemDict().Values;
     }
 
+    public void removeItem(Item item)
+    {
+        setItem(item.id, (Item)null);
+    }
+
     public void setItem(string key, Item item)
     {
         if (item == null)
@@ -132,6 +137,10 @@ public class ItemsCollection : Dictionary<string,string>
         return result;
     }
 
+    public new IModable copyDeep()
+    {
+        return base.copyDeep<ItemsCollection>();
+    }
 
     [OnDeserialized]
     internal void OnDeserializedMethod(StreamingContext context)

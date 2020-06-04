@@ -49,15 +49,15 @@ Mike;90
 Jakob;86
 Michael;81
 Martin;77
-André;74
+AndrÃ©;74
 Stephan;70
 Matthias;66
 Hendrik;63
-Björn;60
+BjÃ¶rn;60
 Luca;57
 Nicholas;54
 Steven;52
-René;49
+RenÃ©;49
 Vincent;47
 Sascha;44
 Jonathan;42
@@ -91,7 +91,7 @@ Janis;11
 Henry;10
 Henrik;10
 Bastian;9
-Sören;9
+SÃ¶ren;9
 Leonard;9
 Johann;8
 Michel;8
@@ -168,7 +168,7 @@ Conrad;1
 Tristan;1
 Armin;1
 Collin;1
-Sönke;1
+SÃ¶nke;1
 Klaas;1
 Cem;1
 Rico;1

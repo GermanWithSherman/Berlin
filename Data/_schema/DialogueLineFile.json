@@ -13,11 +13,12 @@
         "$schema" :{"type":"string"},
         "stages":{
             "type":"object",
+            "required": ["start"],
             "patternProperties": {
                 "^.*$": {
                     "$ref": "./DialogueStage.json"
                 }
-            } 
+            }
         }
     }
     

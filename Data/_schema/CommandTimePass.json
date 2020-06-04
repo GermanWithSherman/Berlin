@@ -7,14 +7,18 @@
     "examples": [
     ],
     "required": [
-        "Duration",
         "Type"
+    ],
+    "oneOf": [
+        {"required": ["Duration"]},
+        {"required": ["ToTime"]}
     ],
     "additionalProperties": false,
     
     "properties": {
         "ActivityID": {"type": "string" },
-        "Duration": {"type":"integer","minimum": 0, "maximum": 315360000},
-        "Type": {"type": "string", "pattern": "^TimePass$" }
+        "Duration": {"type":"integer","minimum": 0, "maximum": 315360000, "description": "Duration in seconds"},
+        "ToTime": {"type":"integer","description": "Format: hhmmss"},
+        "Type": {"type": "string", "enum": ["TimePass"] }
     }
 }

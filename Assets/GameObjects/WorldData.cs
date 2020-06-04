@@ -17,11 +17,13 @@ public class WorldData:Data
     
     private string dayPhase()
     {
-        if(DateTime.Hour >= 22 || DateTime.Hour < 6)
+        /*if(DateTime.Hour >= 22 || DateTime.Hour < 6)
         {
             return "night";
         }
-        return "day";
+        return "day";*/
+
+        return GameManager.Instance.Misc.dayNightState(DateTime);
     }
 
     protected override dynamic get(string key)

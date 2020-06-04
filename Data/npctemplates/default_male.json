@@ -1,0 +1,5 @@
+{
+    "Parent":"default",
+    "NameFirst":{"ValueType":"WeightedStringList","Key":"names_first_male_90s"},
+    "GenderVisible":{"ValueType":"Plain","Value":"m"}
+}

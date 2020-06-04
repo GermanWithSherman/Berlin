@@ -1,13 +1,131 @@
 {
     "subLocations":{
         "main":{
-            "Label":"Hallway",
+            "Label":"School",
             "Text":{
-                "Value": "Hallway"
+                "Value": "School"
             },
             "TexturePath":{
                 "Values":{
-                    "default":{"Value":"locations/apartments/testHallway.jpg"}
+                    "night":{
+                        "Value": "locations/dahlem/school/schoolExteriorNight.jpg",
+                        "Condition": "World.DayPhase=\"night\""
+                    },
+                    "default":{"Value":"locations/dahlem/school/schoolExterior.jpg"}
+                }
+            },
+            "LocationTypeID": "outside",
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": "dahlem/public.",
+                    "Duration": 300
+                },
+                "inside":{
+                    "TargetLocationId": ".hallway",
+                    "Duration": 60,
+                    "Label": "Inside"
+                },
+                "dorm":{
+                    "TargetLocationId": "dahlem/school/dorm.",
+                    "Duration": 120
+                },
+                "sportsfield":{
+                    "TargetLocationId": ".sportsfield",
+                    "Duration": 300
+                }
+            }
+        },
+        "class":{
+            "TexturePath": {"Value":"locations/dahlem/school/classroom.jpg"},
+            "OpeningTimes": {
+                "0": {
+                    "TimeStart": 615,
+                    "TimeEnd": 800
+                    
+                }
+            },
+            "LocationConnections": {
+                "leave": {
+                    "Label": "Leave",
+                    "TargetLocationId": ".hallway",
+                    "Duration": 0
+                }
+            },
+            "onShow": {
+                "SchoolEvent":{
+                    "Type": "Event",
+                    "EventID": "school_class."
+                }
+            }
+        },
+        "hallway":{
+            "Label":"Hallway",
+            "Text":"Hallway",            
+            "TexturePath":{
+                "Value":"locations/dahlem/school/schoolHallway.jpg"
+            },
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".",
+                    "Duration": 60,
+                    "Label": "Leave"
+                },
+                "psychologistOffice":{
+                    "TargetLocationId": ".psychologistOffice",
+                    "Duration": 60
+                },
+                "class":{
+                    "TargetLocationId": ".class",
+                    "Duration": 0,
+                    "Label": "Go to Class"
+                }
+            }
+        },
+        "psychologistOffice":{
+            "Label":"Psychologist Office",
+            "Text":{
+                "Value": "Psychologist Office"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"Value":"locations/dahlem/school/schoolPsychologistOffice.jpg"}
+                }
+            },
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".hallway",
+                    "Duration": 60,
+                    "Label": "Leave"
+                }
+            },
+            "onShow": {
+                "psychologist_intro":{
+                    "Type": "Conditional",
+                    "Condition": "b_school_psychologist_introduced = false",
+                    "Commands": {
+                        "forcegreet":{
+                            "Type":"Dialogue",
+                            "NPCID": "school_psychologist",
+                            "TopicID": "school_psychologist_introduction"
+                        }
+                    }
+                }
+            }
+        },
+        "sportsfield":{
+            "Label":"Sportsfield",
+            "Text":{
+                "Value": "Sportsfield"
+            },
+            "TexturePath":{
+                "Values":{
+                    "default":{"Value":"locations/dahlem/school/sportsfield.png"}
+                }
+            },
+            "LocationConnections": {
+                "leave": {
+                    "TargetLocationId": ".",
+                    "Duration": 240
                 }
             }
         }

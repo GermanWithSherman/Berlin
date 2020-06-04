@@ -4,6 +4,7 @@
     "additionalProperties": false,
     "properties": {
         "Commands": { "$ref": "./CommandsCollection.json" },
+        "Inherit" : { "$ref": "./ConditionalString.json" },
         "Options":{
             "additionalProperties": false,
             "patternProperties": {
@@ -12,6 +13,7 @@
                 }
             }   
         },
-        "Text": { "$ref": "./CText.json" }
+        "Text": { "$ref": "./CText.json" },
+        "TexturePath" : { "$ref": "./ConditionalString.json" }
     }
 }

@@ -16,12 +16,14 @@ public class AlarmClockDialogPrefab : Dialog<AlarmClockDialogSetting>
 
         int time = Int32.Parse(timeParts[0]) * 10000 + Int32.Parse(timeParts[1]) * 100 + Int32.Parse(timeParts[2]);
 
-        //data["time"] = time;
+        _data["time"] = time;
 
-        //submit();
+        submit();
     }
 
-    public override void setSettings(DialogSetting settings){}
+    public override void setSettings(DialogSetting settings){
+        _settings = (AlarmClockDialogSetting)settings;
+    }
 }
 
 public class AlarmClockDialogSetting : DialogSetting { }

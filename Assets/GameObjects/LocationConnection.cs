@@ -44,6 +44,12 @@ public class LocationConnection : IModable
 
     public OutfitRequirement OutfitRequirement = new OutfitRequirement();
 
+    [JsonProperty("Condition")]
+    public string ConditionString;
+
+    [JsonIgnore]
+    public Condition Condition { get => GameManager.Instance.ConditionCache[ConditionString]; }
+
 
     public LocationConnection() { }
 
@@ -65,6 +71,26 @@ public class LocationConnection : IModable
         }
     }
 
+    private void mod(LocationConnection original, LocationConnection mod)
+    {
+        Duration = Modable.mod(original.Duration, mod.Duration);
+        interruptible = Modable.mod(original.interruptible, mod.interruptible);
+        Label = Modable.mod(original.Label, mod.Label);
+        TexturePath = Modable.mod(original.TexturePath, mod.TexturePath);
+        Visible = Modable.mod(original.Visible, mod.Visible);
+        TargetLocationId = Modable.mod(original.TargetLocationId, mod.TargetLocationId);
+        OutfitRequirement = Modable.mod(original.OutfitRequirement, mod.OutfitRequirement);
+        Type = Modable.mod(original.Type, mod.Type);
+        ConditionString = Modable.mod(original.ConditionString, mod.ConditionString);
+
+    }
+
+    public void mod(LocationConnection modable)
+    {
+        if (modable == null) return;
+        mod(this, modable);
+    }
+
     public void mod(IModable modable)
     {
         if (modable.GetType() != GetType())
@@ -73,9 +99,7 @@ public class LocationConnection : IModable
             return;
         }
 
-        LocationConnection modLocationConnection = (LocationConnection)modable;
-
-        Duration = modLocationConnection.Duration == null ? Duration : modLocationConnection.Duration;
+        mod((LocationConnection)modable);
     }
 
     public IModable copyDeep()
@@ -90,7 +114,7 @@ public class LocationConnection : IModable
         result.TargetLocationId = Modable.copyDeep(TargetLocationId);
         result.OutfitRequirement = Modable.copyDeep(OutfitRequirement);
         result.Type = Modable.copyDeep(Type);
-
+        result.ConditionString = Modable.copyDeep(ConditionString);
         return result;
     }
 }

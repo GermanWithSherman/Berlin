@@ -7,8 +7,17 @@ public abstract class Data
 {
     public dynamic this[string key]
     {
-        get => get(key);
+        get => getOrSpecial(key);
         set => set(key, value);
+    }
+
+    protected dynamic getOrSpecial(string key)
+    {
+        if (key[0] == '"' && key.Length >= 2)
+        {
+            return key.Substring(1, key.Length-2);
+        }
+        return get(key);
     }
 
     protected abstract dynamic get(string key);
@@ -17,7 +26,7 @@ public abstract class Data
 
     public virtual bool tryGetValue(string key, out dynamic result)
     {
-        result = get(key);
+        result = getOrSpecial(key);
         
 
         if (result is null)

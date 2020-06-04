@@ -1,0 +1,16 @@
+{
+    "TemplateID": "default_male",
+    "NameFirst": "Pierre",
+    "NameLast": "Schwarz",
+    "TexturePath": {
+        "Value": "npc/school/students/pierrePortrait.png"
+    },
+    "Schedules":{
+        "dahlem/school/dorm.3_314": {
+            "0": {
+                "TimeStart": 0,
+                "TimeEnd": 2359
+            }
+        }
+    }
+}

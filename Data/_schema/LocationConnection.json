@@ -7,14 +7,32 @@
     "description": "LocationConnection schema.",
     "default": {},
     "examples": [
-
+        {
+            "TargetLocationId": "LocationID.SublocationID",
+            "Duration": 300
+        }
     ],
-    "required": [
-        "TargetLocationId"
+    "oneOf": [
+        {
+            "required": [
+                "TargetLocationId"
+            ]
+        },
+        {
+            "required": [
+                "#IsAbstract"
+            ],
+            "properties": {
+                "#IsAbstract":{"enum": [true]}
+            }
+        }
     ],
+    
     "additionalProperties": false,
     
     "properties": {
+        "#IsAbstract":{"type":"boolean"},
+        "Condition":{"type":"string"},
         "Duration":{"type":"integer", "minimum": 0},
         "Label":{"type":"string"},
         "OutfitRequirement": {"$ref": "./OutfitRequirement.json"},

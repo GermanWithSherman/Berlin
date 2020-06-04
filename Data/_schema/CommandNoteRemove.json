@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "CommandNoteRemove",
+    "default": {},
+    "required": [
+        "Type",
+        "NoteID"
+    ],
+    "additionalProperties": false,
+    
+    "properties": {
+        "NoteID":{"type":"string"},
+        "Type": {"type": "string", "enum": ["NoteRemove"] }
+    }
+}

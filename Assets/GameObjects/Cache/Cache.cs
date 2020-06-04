@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public abstract class Cache<T> : MonoBehaviour where T : IModable
+public abstract class Cache<T> : MonoBehaviour where T : class,IModable
 {
     public string Folder;
 
@@ -18,14 +18,15 @@ public abstract class Cache<T> : MonoBehaviour where T : IModable
     }
 
     private List<string> keys = new List<string>();
-    private Dictionary<string,T> entries = new Dictionary<string,T>();
+    private Dictionary<string,T> _strongReferences = new Dictionary<string,T>();
+    private Dictionary<string, WeakReference<T>> _weakReferences = new Dictionary<string, WeakReference<T>>();
 
     protected virtual T create(string key)
     {
         return loadFromFileWithMods(key);
     }
 
-    protected void add(string key)
+    /*protected void add(string key)
     {
         string data = key;
 
@@ -35,41 +36,102 @@ public abstract class Cache<T> : MonoBehaviour where T : IModable
         if (keys.Count >= size)
         {
             string keyToRemove = keys[0];
-            entries.Remove(keyToRemove);
+            _strongReferences.Remove(keyToRemove);
             keys.RemoveAt(0);
         }
-        entries.Add(key, create(data));
+
+        if (_strongReferences.ContainsKey(key))
+            throw new ArgumentException($"Trying to add already existing key {key} in {GetType()}");
+
+        _strongReferences.Add(key, create(data));
         keys.Add(key);
+    }*/
+
+    private void strongReferencesCrop()
+    {
+        if (keys.Count >= size)
+        {
+            string keyToRemove = keys[0];
+            _strongReferences.Remove(keyToRemove);
+            keys.RemoveAt(0);
+        }
     }
 
-    
-
-    public virtual T get(string key)
+    private void strongReferencesPromote(string key)
     {
-        if (String.IsNullOrEmpty(key))
-            return getInvalidKeyEntry(key);
-
-        string data = key;
-        if (hashKey)
-            key = System.Convert.ToString(key.GetHashCode());
         int indexOfKey = keys.IndexOf(key);
         if (indexOfKey >= 0)
         {
             keys.RemoveAt(indexOfKey);
             keys.Add(key);
-            return entries[key];
         }
         else
         {
-            add(data);
-            return entries[key];
+            keys.Add(key);
+            strongReferencesCrop();
         }
+    }
+
+    protected void add(string key, T value)
+    {
+        if (!_strongReferences.ContainsKey(key))
+            _strongReferences.Add(key,value);
+        strongReferencesPromote(key);
+        if (!_weakReferences.ContainsKey(key))
+            _weakReferences.Add(key, new WeakReference<T>(value));
+        else
+            _weakReferences[key].SetTarget(value);
+    }
+
+
+    
+
+    public virtual T get(string key)
+    {
+        string treatedKey = key;
+
+        if (String.IsNullOrEmpty(key))
+            return getInvalidKeyEntry(key);
+
+        if (hashKey)
+            treatedKey = System.Convert.ToString(key.GetHashCode());
+
+        T result;
+
+        if (_strongReferences.ContainsKey(treatedKey))
+        {
+            strongReferencesPromote(treatedKey);
+            return _strongReferences[treatedKey];
+        }
+        else if (_weakReferences.ContainsKey(treatedKey))
+        {
+            
+            if(_weakReferences[treatedKey].TryGetTarget(out result))
+            {
+                add(treatedKey,result);
+                return result;
+            }
+            else
+            {
+                result = create(key);
+                add(treatedKey, result);
+                return result;
+            }
+
+        }
+        else
+        {
+            result = create(key);
+            add(treatedKey, result);
+            return result;
+        }
+
 
     }
 
     protected virtual T getInvalidKeyEntry(string key)
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException($"Handling of invalid key {key} not implemented");
     }
 
     protected T loadFromFileWithMods(string key)

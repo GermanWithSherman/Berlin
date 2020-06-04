@@ -1,0 +1,16 @@
+{
+    "dayNightCycle":{
+        "1": ["night","night","night","night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night","night","night","night"],
+        "2": ["night","night","night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night","night","night"],
+        "3": ["night","night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night","night"],
+        "4": ["night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night"],
+        "5": ["night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3"],
+        "6": ["dusk3","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","day","day","day","day","day","day","day","day","day","day","dusk1","dusk2"],
+        "7": ["night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3"],
+        "8": ["night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night"],
+        "9": ["night","night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night","night"],
+        "10":["night","night","night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night","night","night"],
+        "11":["night","night","night","night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night","night","night","night"],
+        "12":["night","night","night","night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night","night","night","night"]
+    }
+}

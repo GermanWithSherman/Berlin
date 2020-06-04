@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIDialogueOption : MonoBehaviour
 {
-
+    public Button Button;
     public TextMeshProUGUI Text;
 
     private DialogueOption _dialogueOption;
@@ -25,6 +26,25 @@ public class UIDialogueOption : MonoBehaviour
     {
         _dialogueOption = dialogueOption;
         Text.text = dialogueOption.Text;
+
+        if (dialogueOption.Visible == false)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        if (dialogueOption.Enabled == false)
+        {
+            Text.color = Color.red;
+            Text.text = $"{dialogueOption.Text} ({dialogueOption.Text})";
+            Button.interactable = false;
+        }
+        else //true or null
+        {
+            Text.color = Color.black;
+            Text.text = dialogueOption.Text;
+            Button.interactable = true;
+        }
     }
 
 }

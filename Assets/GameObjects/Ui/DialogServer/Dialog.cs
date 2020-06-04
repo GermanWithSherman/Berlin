@@ -6,6 +6,16 @@ using UnityEngine;
 public abstract class Dialog : MonoBehaviour{
     protected DialogServer _dialogServer;
 
+    public void hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void show()
+    {
+        gameObject.SetActive(true);
+    }
+
     public abstract void setSettings(DialogSetting settings);
 
     public void setServer(DialogServer dialogServer)

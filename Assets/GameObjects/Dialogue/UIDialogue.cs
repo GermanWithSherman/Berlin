@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIDialogue : MonoBehaviour
 {
@@ -9,13 +12,17 @@ public class UIDialogue : MonoBehaviour
 
     private DialogueTopic _currentTopic;
 
-    public TextMeshProUGUI Text;
+    //public TextMeshProUGUI Text;
+    public TextExtended Text;
+    public ScrollRect TextScrollRect;
 
     public UIDialogueOption OptionPrefab;
     public UIDialogueTopic TopicPrefab;
 
     public Transform OptionListTransform;
     public Transform TopicListTransform;
+
+    public GameObject FinishButton;
 
 
     public Data Data; //Data used to display text
@@ -24,6 +31,7 @@ public class UIDialogue : MonoBehaviour
     public void close()
     {
         hide();
+        GameManager.Instance.uiUpdate();
     }
 
     public void finish()
@@ -36,17 +44,51 @@ public class UIDialogue : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    
+
     public void lineShow(DialogueLine line)
     {
+        line.onShow.execute();
+
         string t = line.Text(Data);
-        Text.text += t + "\n\n";
+
+        textShow(t);
+
+        if (line.TopicsVisible)
+        {
+            topicListShow(_npc);
+            TopicListTransform.gameObject.SetActive(true);
+        }
+        else
+            TopicListTransform.gameObject.SetActive(false);
+
+        if (line.LeaveEnabled)
+            FinishButton.SetActive(true);
+        else
+            FinishButton.SetActive(false);
 
         optionListShow(line.Options.Values);
+    }
+
+    private void textShow(string t)
+    {
+        if (String.IsNullOrEmpty(t))
+            return;
+
+        //t = lineParse(t) + "\n\n";
+        t += "\n\n";
+
+        //Text.Text += t;
+        Text.addText(t);
+        Canvas.ForceUpdateCanvases(); 
+        TextScrollRect.verticalNormalizedPosition = 0f; //do ForceUpdateCanvases first to take the new text into account
     }
 
     public void optionExecute(DialogueOption option)
     {
         option.execute();
+
+        textShow(option.Say);
 
         stageShow(option.TargetStage);
     }
@@ -80,20 +122,28 @@ public class UIDialogue : MonoBehaviour
         Data = new DataComposed(dict);
     }
 
-    public void show(NPC npc)
+    public void show(NPC npc, DialogueTopic topic = null)
     {
         _npc = npc;
 
         setData(_npc);
 
-        Text.text = "";
-        List<DialogueTopic> dialogueTopics = GameManager.Instance.DialogueTopicLibrary.getTopicsByNPC(_npc);
-        topicListShow(dialogueTopics);
+        Text.Text = "";
+        //List<DialogueTopic> dialogueTopics = GameManager.Instance.DialogueTopicLibrary.getTopicsByNPC(_npc);
+        //topicListShow(dialogueTopics);
+        topicListShow(_npc);
         optionListClear();
 
-        DialogueTopic greetingTopic = GameManager.Instance.DialogueTopicLibrary.getGreetingTopicByNPC(_npc);
-        if (greetingTopic != null)
-            topicShow(greetingTopic);
+        if (topic == null)
+        {
+            DialogueTopic greetingTopic = GameManager.Instance.DialogueTopicLibrary.getGreetingTopicByNPC(_npc);
+            if (greetingTopic != null)
+                topicShow(greetingTopic);
+        }
+        else
+        {
+            topicShow(topic);
+        }
 
         gameObject.SetActive(true);
 
@@ -107,8 +157,15 @@ public class UIDialogue : MonoBehaviour
 
     public void stageShow(string stageId)
     {
-        DialogueStage stage = GameManager.Instance.DialogueLineCache.Stage(stageId,_currentTopic);
-        stageShow(stage);
+        try
+        {
+            DialogueStage stage = GameManager.Instance.DialogueLineCache.Stage(stageId, _currentTopic);
+            stageShow(stage);
+        }
+        catch
+        {
+            textShow("ERROR: The requested Dialoguestage can't be found");
+        }
     }
 
     private void topicListClear()
@@ -131,12 +188,28 @@ public class UIDialogue : MonoBehaviour
         }
     }
 
+    private void topicListShow(NPC _npc)
+    {
+        List<DialogueTopic> dialogueTopics = GameManager.Instance.DialogueTopicLibrary.getTopicsByNPC(_npc);
+        topicListShow(dialogueTopics);
+    }
+        
+
     public void topicShow(DialogueTopic topic)
     {
-        _currentTopic = topic;
-        DialogueStage stage = GameManager.Instance.DialogueLineCache[topic].StartStage();
-        stageShow(stage);
+        try
+        {
+            _currentTopic = topic;
+            DialogueStage stage = GameManager.Instance.DialogueLineCache[topic].StartStage();
+            stageShow(stage);
+        }
+        catch(Exception e)
+        {
+            textShow("ERROR: The requested Dialoguestage can't be found");
+            Debug.LogError(e);
+        }
     }
 
     
 }
+

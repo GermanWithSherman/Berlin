@@ -1,0 +1,8 @@
+{
+    "topics":{
+        "SYS":{
+            "IsGreeting": true,
+            "IsEventExclusive":true
+        }
+    }
+}

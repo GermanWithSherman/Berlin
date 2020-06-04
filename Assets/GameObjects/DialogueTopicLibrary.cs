@@ -9,10 +9,6 @@ public class DialogueTopicLibrary : Library<DialogueTopic>
 
     private List<DialogueTopic> _greetings;
 
-    public DialogueTopic this[string key]
-    {
-        get => _dict[key];
-    }
 
     public DialogueTopicLibrary(string path, IEnumerable<string> modsPaths, bool loadInstantly = false)
     {
@@ -26,7 +22,7 @@ public class DialogueTopicLibrary : Library<DialogueTopic>
     {
         foreach (DialogueTopic topic in _greetings)
         {
-            if (topic.NPCFilter.isValid(npc))
+            if (topic.NPCFilter.isValid(npc) && topic.Condition.evaluate(GameManager.Instance.GameData))
                 return topic;
         }
         return null;
@@ -37,7 +33,7 @@ public class DialogueTopicLibrary : Library<DialogueTopic>
         var result = new List<DialogueTopic>();
         foreach (DialogueTopic topic in _dict.Values)
         {
-            if (!topic.IsGreeting && topic.NPCFilter.isValid(npc))
+            if (!topic.IsGreeting && !topic.IsEventExclusive && topic.NPCFilter.isValid(npc) && topic.Condition.evaluate(GameManager.Instance.GameData))
                 result.Add(topic);
         }
         return result;
@@ -49,7 +45,7 @@ public class DialogueTopicLibrary : Library<DialogueTopic>
         _greetings = new List<DialogueTopic>();
         foreach (DialogueTopic topic in _dict.Values)
         {
-            if (topic.IsGreeting)
+            if (topic.IsGreeting && !topic.IsEventExclusive)
                 _greetings.Add(topic);
         }
         Prioritizable.Sort(_greetings);

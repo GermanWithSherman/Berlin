@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public class StatusBarDateTime : UIUpdateListener
@@ -8,6 +9,14 @@ public class StatusBarDateTime : UIUpdateListener
 
     public override void uiUpdate(GameManager gameManager)
     {
-        Text.text = gameManager.GameData.WorldData.DateTime.ToString();
+        if (gameManager.UISettings.isVisibleStatusTime())
+        {
+            show();
+            Text.text = gameManager.GameData.WorldData.DateTime.ToString("F", gameManager.CultureInfo);
+        }
+        else
+        {
+            hide();
+        }
     }
 }

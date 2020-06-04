@@ -11,8 +11,10 @@ public class LocationCache : Cache<Location>
 
     protected override Location create(string key)
     {
+        var result = base.create(key);
 
-        List<string> locationPaths = new List<string>() { GameManager.Instance.DataPath };
+        result?.linkIds(key);
+        /*List<string> locationPaths = new List<string>() { GameManager.Instance.DataPath };
         locationPaths.AddRange(GameManager.Instance.ModsServer.ActivatedModsPaths);
 
         Location result = null;
@@ -31,12 +33,13 @@ public class LocationCache : Cache<Location>
             result.mod(location);
         }
 
-        result.linkIds(key);
-
+        result?.linkIds(key);
+        */
         return result;
+
     }
 
-    private Location loadLocation(string path)
+    /*private Location loadLocation(string path)
     {
         if (!File.Exists(path))
             return null;
@@ -46,10 +49,13 @@ public class LocationCache : Cache<Location>
         Location location = deserializationData.ToObject<Location>();
 
         return location;
-    }
+    }*/
 
     public SubLocation SubLocation(string key)
     {
+        if (String.IsNullOrEmpty(key))
+            return null;
+
         string[] keyparts = key.Split('.');
 
         if(keyparts.Length == 2)

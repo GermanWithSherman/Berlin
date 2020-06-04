@@ -20,6 +20,10 @@ public class SubLocation : IModable, IInheritable
     public Conditional<string> TexturePath;// = new Conditional<string>();
 
     [JsonIgnore]
+    public LocationType LocationType { get => GameManager.Instance.LocationTypeLibrary[LocationTypeID]; }
+    public string LocationTypeID;
+
+    [JsonIgnore]
     public Texture TexturePreview {
         get
         {
@@ -51,7 +55,7 @@ public class SubLocation : IModable, IInheritable
     [JsonIgnore]
     public bool inheritanceResolved = false;
 
-    public void execute(GameManager gameManager)
+    public void onShowExecute(GameManager gameManager)
     {
 
         onShow.execute();
@@ -100,12 +104,17 @@ public class SubLocation : IModable, IInheritable
 
         LocationConnections = Modable.mod(original.LocationConnections, mod.LocationConnections);
 
+        OpeningTimes = Modable.mod(original.OpeningTimes, mod.OpeningTimes);
         Options = Modable.mod(original.Options, mod.Options);
 
         Text = Modable.mod(original.Text, mod.Text);
 
         TexturePath = Modable.mod(original.TexturePath, mod.TexturePath);
         TexturePreviewPath = Modable.mod(original.TexturePreviewPath, mod.TexturePreviewPath);
+
+        onShow = Modable.mod(original.onShow, mod.onShow);
+
+        Inherit = Modable.mod(original.Inherit, mod.Inherit);
     }
 
     public void mod(SubLocation modSublocation)
@@ -130,10 +139,14 @@ public class SubLocation : IModable, IInheritable
         var result = new SubLocation();
         result.Label = Modable.copyDeep(Label);
         result.LocationConnections = Modable.copyDeep(LocationConnections);
+        result.OpeningTimes = Modable.copyDeep(OpeningTimes);
         result.Options = Modable.copyDeep(Options);
         result.Text = Modable.copyDeep(Text);
         result.TexturePath = Modable.copyDeep(TexturePath);
         result.TexturePreviewPath = Modable.copyDeep(TexturePreviewPath);
+        result.onShow = Modable.copyDeep(onShow);
+
+        result.Inherit = Modable.copyDeep(Inherit);
         return result;
     }
 

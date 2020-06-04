@@ -14,6 +14,15 @@ public class StatusBarHunger : UIUpdateListener
 
     public override void uiUpdate(GameManager gameManager)
     {
-        set(gameManager.PC.statHunger);
+        
+        if (gameManager.UISettings.isVisibleStatusHunger())
+        {
+            show();
+            set(gameManager.PC.statHunger);
+        }
+        else
+        {
+            hide();
+        }
     }
 }

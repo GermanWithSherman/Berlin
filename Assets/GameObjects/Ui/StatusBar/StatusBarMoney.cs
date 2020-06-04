@@ -17,6 +17,14 @@ public class StatusBarMoney : UIUpdateListener
 
     public override void uiUpdate(GameManager gameManager)
     {
-        set(gameManager.PC.moneyCash);
+        if (gameManager.UISettings.isVisibleStatusMoney())
+        {
+            show();
+            set(gameManager.PC.moneyCash);
+        }
+        else
+        {
+            hide();
+        }
     }
 }

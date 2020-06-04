@@ -7,13 +7,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [JsonConverter(typeof(CommandConverter))]
-public abstract class Command
+public abstract class Command : IModable
 {
     public static bool breakActive = false;
     public static bool pauseActive = false;
     public static CommandsCollection pausedCommands = new CommandsCollection();
 
-    public enum Type { None, Debug, Break, Pause, Continue, Flush, Consume, Sleep, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass, ItemAdd, Conditional }
+    public enum Type { None, Debug, Break, Pause, Continue, Flush, Consume, Sleep, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass, ItemAdd, ItemRemove, Conditional, Dialogue, NoteAdd, NoteRemove }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public Type type = Type.None;
@@ -27,5 +27,6 @@ public abstract class Command
         execute(GameManager.Instance.GameData);
     }
     public abstract void execute(Data data);
-
+    public abstract void mod(IModable modable);
+    public abstract IModable copyDeep();
 }

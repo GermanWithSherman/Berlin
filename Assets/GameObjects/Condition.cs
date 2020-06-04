@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -6,15 +7,15 @@ using UnityEngine;
 
 public class Condition : IModable
 {
-    private const string regex_identifier = "[a-zA-Z0-9'\\._\\-\\+\\(\\)\\[\\],\"]+";
-    private const string regex_operator = "[><=]{1,2}|!=|⊆";
+    private const string regex_identifier = "[a-zA-Z0-9'\\._\\-\\+\\(\\)\\[\\];,\"\\{\\}:]+";
+    private const string regex_operator = "[><=]{1,2}|!=|!?⊆";
     private const string regex_whitespace = "\\s*";
 
     private const string regex_string_operator = regex_whitespace + "(" + regex_identifier + ")" + regex_whitespace + "(" + regex_operator + ")" + regex_whitespace + "(" + regex_identifier + ")" + regex_whitespace;
 
 
-    enum Modes { Plain, Equals, HEquals, LEquals, NEquals, Higher, Lower, ElementOf, AND, OR, XOR }
-    enum Types { Field, Value, Condition }
+    enum Modes { Plain, Equals, HEquals, LEquals, NEquals, Higher, Lower, ElementOf, NElementOf, AND, OR, XOR }
+    enum Types { Field, Value, Condition, Object, Interval, DateTime }
 
     private Types leftType;
     private Types rightType;
@@ -154,6 +155,9 @@ public class Condition : IModable
                 case "⊆":
                     mode = Modes.ElementOf;
                     break;
+                case "!⊆":
+                    mode = Modes.NElementOf;
+                    break;
             }
 
             dynamic[] value = new dynamic[2];
@@ -193,6 +197,22 @@ public class Condition : IModable
                     continue;
                 }
 
+                if(stringValues[i].Length >= 3 && stringValues[i][0] == '{')
+                {
+                    value[i] = stringValues[i];
+                    valueType[i] = Types.Object;
+                    continue;
+                }
+
+                if (stringValues[i].Length >= 3 && (stringValues[i][0] == '[' || stringValues[i][0] == '('))
+                {
+                    value[i] = stringValues[i];
+                    valueType[i] = Types.Interval;
+                    continue;
+                }
+
+                
+
                 long l = 0;
                 if (long.TryParse(stringValues[i], out l))
                 {
@@ -209,7 +229,14 @@ public class Condition : IModable
                     continue;
                 }
 
-                
+                if (DateTime.TryParse(stringValues[i], out DateTime dateTime))
+                {
+                    value[i] = dateTime;
+                    valueType[i] = Types.DateTime;
+                    continue;
+                }
+
+
 
                 value[i] = stringValues[i];
                 valueType[i] = Types.Field;
@@ -236,6 +263,10 @@ public class Condition : IModable
 
     private static bool eq(dynamic left, dynamic right)
     {
+        if ((right == null && left != null) || left == null)
+            return false;
+        
+
         if (left.GetType() != right.GetType())
         {
             if (isInt(left) && isInt(right))
@@ -245,25 +276,54 @@ public class Condition : IModable
             return false;
         }
 
+        if(left is DateTime)
+        {
+            DateTime leftTime = (DateTime)left;
+            DateTime rightTime= (DateTime)right;
+            return (DateTime.Compare(leftTime, rightTime) == 0);
+        }
+
         return (left == right);
     }
 
     private static bool higher(dynamic left, dynamic right)
     {
+        if (left == null) left = 0;
+        if (right == null) right = 0;
+
         if (isNumber(left) && isNumber(right))
         {
             return (left > right);
         }
+
+        if (left is DateTime && right is DateTime)
+        {
+            DateTime leftTime = (DateTime)left;
+            DateTime rightTime = (DateTime)right;
+            return (DateTime.Compare(leftTime, rightTime) > 0);
+        }
+
         Debug.LogWarning($"Comparing incompatible types {left.GetType()} and {right.GetType()}");
         return false;
     }
 
     private static bool lower(dynamic left, dynamic right)
     {
-        if(isNumber(left) && isNumber(right))
+        if (left == null) left = 0;
+        if (right == null) right = 0;
+
+        if (isNumber(left) && isNumber(right))
         {
             return (left < right);
         }
+
+        if (left is DateTime && right is DateTime)
+        {
+            DateTime leftTime = (DateTime)left;
+            DateTime rightTime = (DateTime)right;
+            return (DateTime.Compare(leftTime, rightTime) < 0);
+        }
+
         Debug.LogWarning($"Comparing incompatible types {left.GetType()} and {right.GetType()}");
         return false;
     }
@@ -314,6 +374,12 @@ public class Condition : IModable
                 case Modes.NEquals:
                     result = !eq(left,right);
                     break;
+                case Modes.ElementOf:
+                    result = elementOf(left, right);
+                    break;
+                case Modes.NElementOf:
+                    result = !elementOf(left, right);
+                    break;
                 default:
                     throw new GameException($"Unhandled Condition Type {mode.ToString()}");
             }
@@ -325,6 +391,91 @@ public class Condition : IModable
         }
 
         return result;
+    }
+
+    private static bool elementOf(dynamic left, dynamic right)
+    {
+        if(left is DateTime)
+        {
+            var jObject = JObject.Parse((string)right);
+            TimeFilter timeFilter = jObject.ToObject<TimeFilter>();
+            return timeFilter.isValid(left);
+        }else if (isNumber(left))
+        {
+            string intervalString = (string)right;
+            string interval = intervalString.Substring(1,intervalString.Length-2);
+            char intervalLeft = intervalString[0];
+            char intervalRight = intervalString[intervalString.Length-1];
+
+            string[] intervalParts = interval.Split(new char[] {';' },2);
+
+            if (intervalParts.Length != 2)
+                return false;
+
+            if(Int64.TryParse(intervalParts[0],out long leftValue) && Int64.TryParse(intervalParts[1], out long rightValue))
+            {
+                switch (intervalLeft)
+                {
+                    case ('('):
+                        if (leftValue >= left)
+                            return false;
+                        break;
+                    case ('['):
+                        if (leftValue > left)
+                            return false;
+                        break;
+                }
+                switch (intervalRight)
+                {
+                    case (')'):
+                        if (rightValue <= left)
+                            return false;
+                        break;
+                    case ('['):
+                        if (rightValue > left)
+                            return false;
+                        break;
+                }
+                return true;
+            }
+            else if(Double.TryParse(intervalParts[0], out double leftValueD) && Double.TryParse(intervalParts[1], out double rightValueD))
+            {
+                switch (intervalLeft)
+                {
+                    case ('('):
+                        if (leftValueD >= left)
+                            return false;
+                        break;
+                    case ('['):
+                        if (leftValueD > left)
+                            return false;
+                        break;
+                }
+                switch (intervalRight)
+                {
+                    case (')'):
+                        if (rightValueD <= left)
+                            return false;
+                        break;
+                    case ('['):
+                        if (rightValueD > left)
+                            return false;
+                        break;
+                }
+                return true;
+            }
+            return false;
+        }else if (left is string && right is IEnumerable<string>)
+        {
+            foreach(string entry in ((IEnumerable<string>)right))
+            {
+                if (entry.Equals(left))
+                    return true;
+            }
+            return false;
+        }
+        Debug.LogWarning($"Unknown Type of left in Condition.elementOf: {left.GetType()}");
+        return false;
     }
 
     private static bool isNumber(dynamic v)

@@ -15,6 +15,7 @@
         "Genders": { "$ref": "./ModableStringList.json" },
         "Slots": { "$ref": "./ModableStringList.json" },
         "Styles": { "$ref": "./ModableStringList.json", "examples": [ ["Casual"] ] },
+        "Height": { "$ref": "./MinMax.json" },
         "Price": { "$ref": "./MinMax.json" },
         "Skimpiness": { "$ref": "./MinMax.json" }
     }

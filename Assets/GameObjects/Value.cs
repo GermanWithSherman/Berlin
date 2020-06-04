@@ -98,7 +98,7 @@ public class Value<T>: Value
                 return _value;
             case ValueTypes.Reference:
                 if (String.IsNullOrEmpty(Key))
-                    throw new KeyNotFoundException("Parameter K missing");
+                    throw new KeyNotFoundException("Parameter Key missing");
                 return gameData[Key];
             case ValueTypes.WeightedStringList:
                 if(typeof(T) == typeof(System.String))
@@ -172,3 +172,5 @@ public class Value<T>: Value
         return result;
     }
 }
+
+

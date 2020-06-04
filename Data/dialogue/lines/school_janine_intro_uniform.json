@@ -1,0 +1,157 @@
+{
+    "stages": {
+        "start":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "image":"<img>npc/school/students/janinePortrait.jpg</img>",
+                        "0":"<speaker=_NPC1>So how did it go? It feels great, doesn't it? It makes the skin way softer.</speaker>"
+                    }
+                },
+                "Options": {
+                    "Protest":{
+                        "Text": "Protest",
+                        "TargetStage": ".protestShower"
+                    },
+                    "Agree":{
+                        "Text": "Agree",
+                        "TargetStage": ".agreeShower"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "protestShower":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>I didn't agree...</speaker>",
+                        "1":"<speaker=_NPC1>Sorry, but you actually did agree. You should have read your contract, silly.</speaker>"
+                    }
+                },
+                "Options": {
+                    "Accept":{
+                        "Text": "Accept",
+                        "TargetStage": ".agreeShower"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "agreeShower":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "-1":"This day becomes weirder and weirder. Taking a look around you notice that your suitcase is missing. <speaker=_PC>Where is my suitcase?</speaker>",
+                        "0":"<speaker=_NPC1>I have locked it away. You don't need it at the moment or anytime soon.</speaker>",
+                        "1":"<speaker=_NPC1>The most important thing right now is that you get a school uniform. I just fetched one for you from the storage room upstairs.</speaker> She points at what you assume will be your bed."
+                    }
+                },
+                "Options": {
+                    "Accept":{
+                        "Text": "Take a look",
+                        "TargetStage": ".inspectUniform"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "inspectUniform":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "image":"<img>events/school/uniform.jpg</img>",
+                        "0":"On top of the bed lies a uniform. It includes a shirt, a tie, a jacket and a skirt! It's obviously tailored for girls."
+                    }
+                },
+                "Options": {
+                    "Accept":{
+                        "Text": "Are you kidding?",
+                        "TargetStage": ".uniformDiscussion"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "uniformDiscussion":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"For some strange reason you feel like putting the uniform on would feel right. But this time your common sense is stronger. You are a man after all, not a girl!",
+                        "1":"<speaker=_PC>You are kidding, right?</speaker>",
+                        "2":"She giggles. <speaker=_NPC1>No, not at all. I think it's time I tell you what you signed up for. You see, we are conducting an experiment to probe gender barriers. We want to prove that masculinity is a cultural construct. That's why we transform you into a girl.</speaker>",
+                        "3":"<speaker=_NPC1>Nobody in this school except for the psychologist and the both of us will know who you really are.</speaker>"
+                    }
+                },
+                "Options": {
+                    "Protest":{
+                        "Text": "Protest",
+                        "TargetStage": ".transformationProtest"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "transformationProtest":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1":"<speaker=_PC>No way! I don't want that!</speaker>",
+                        "2":"She laughes out. <speaker=_NPC1>Sorry, but the contract you signed is binding. You don't have a choice now. Also you've gotten a mild form of hypnosis already. Not enough to invalidate our results but enough to make you compliant. Remember how you where not able to remember your former name? That's what I am talking about.</speaker>"
+                    }
+                },
+                "Options": {
+                    "Protest":{
+                        "Text": "Protest",
+                        "TargetStage": ".transformationProtest2"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "transformationProtest2":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1":"<speaker=_PC>Okay. I guess I have now other choice.</speaker> Now way! That's the opposite of what you wanted to say! Can this hypnosis really be this effective? What else is affected?",
+                        "2":"She grins. <speaker=_NPC1>Good. Put your uniform on then. Oh, by the way, I also have matching underwear for you.</speaker>"
+                    }
+                },
+                "Options": {
+                    "Protest":{
+                        "Text": "Comply",
+                        "TargetStage": ".uniformWear"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "uniformWear":{
+            "0":{
+                "Text": "",
+                "onShow": {
+                    "RemoveMaleItems":{"Type": "ItemRemove","ItemsFilter": {"Genders": ["m"]}},
+                    "Bra":{"Type":"ItemAdd","ShopID":"all_bras_f","Equip":false},
+                    "Clothes":{"Type":"ItemAdd","ItemID":"schoolUniformF1","Equip":false},
+                    "Panties":{"Type":"ItemAdd","ShopID":"all_panties_f","Equip":false},
+                    "Shoes":{"Type":"ItemAdd","ShopID":"all_shoes_f","Equip":false},
+                    "Outfit":{"Type":"Outfit","OutfitRequirement": {"AllowedStyles": ["School"]}}
+                }
+            }
+        }
+    }
+}

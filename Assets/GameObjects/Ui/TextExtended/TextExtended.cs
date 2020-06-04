@@ -10,7 +10,9 @@ public class TextExtended : MonoBehaviour
 {
     private string _text = "";
 
-    public RawImage ImagePrefab;
+    //public RawImage ImagePrefab;
+    public ImageAutosize ImagePrefab;
+    public int ImageHeight = 200;
     public TextMeshProUGUI TextPrefab;
 
     public string Text
@@ -19,11 +21,8 @@ public class TextExtended : MonoBehaviour
         set => setText(value);
     }
 
-
-    private void setText(string text)
+    public void addText(string text)
     {
-        transform.childrenDestroyAll();
-
         int i = 0;
 
         string pattern = @"<img>([^<]+)</img>";
@@ -40,15 +39,27 @@ public class TextExtended : MonoBehaviour
             }
             else
             {
-                RawImage image = Instantiate(ImagePrefab, transform);
+                ImageAutosize image = Instantiate(ImagePrefab, transform);
                 image.texture = GameManager.Instance.TextureCache[result];
-                LayoutElement layoutElement = image.GetComponent<LayoutElement>();
-                layoutElement.preferredHeight = image.texture.height;
-                layoutElement.preferredWidth = image.texture.width;
+                image.PreferredHeight = ImageHeight;
+                //image.SizeToHeight(ImageHeight);
+                //image.MinHeight = ImageMinHeight;
+                //
+                /*RectTransform rectTransform = image.GetComponent<RectTransform>();
+                rectTransform.sizeDelta = new Vector2(200,200);*/
+                //LayoutElement layoutElement = image.GetComponent<LayoutElement>();
+                //layoutElement.preferredHeight = image.texture.height;
+                //layoutElement.preferredWidth = image.texture.width;
             }
             i++;
         }
+    }
 
+    private void setText(string text)
+    {
+        transform.childrenDestroyAll();
+
+        addText(text);
 
     }
 }

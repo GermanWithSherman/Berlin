@@ -1,0 +1,74 @@
+{
+    "stages": {
+        "start":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":{"Value": "<speaker=_PC>About the experiments...</speaker>"}
+                    }
+                },
+                "Options": {
+                    "stop":{
+                        "Text": "I'd like to stop them.",
+                        "TargetStage": ".stop"
+                    },
+                    "5_participate":{
+                        "Text": "I'd like take part in another one.",
+                        "TargetStage": ".participate",
+                        "State": {"Values": {"5_d_1":{"Condition": "i_school_psychologist_experiment=0","Value": {"Visible": false}}}}
+                    },
+                    "5_participateFirst":{
+                        "Text": "I'd like take part in one.",
+                        "TargetStage": ".participate",
+                        "State": {"Values": {"5_d_1":{"Condition": "i_school_psychologist_experiment>0","Value": {"Visible": false}}}}
+                    }
+                }
+            }
+        },
+        "stop":{
+            "5_d_hypno":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":{"Value": "<speaker=_PC>I'd like to continue them.</speaker> Wait, that's the opposite of what you wanted to say. What is going on?"},
+                        "1":{"Value": "<speaker=_NPC1>That's great. I am happy to hear that.</speaker>"}
+                    }
+                },
+                "Condition": "b_school_psychologist_hypnosis=true"
+            },
+            "5_d_nohypno":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":{"Value": "<speaker=_PC>I'd like to stop them.</speaker>"},
+                        "1":{"Value": "<speaker=_NPC1>Sorry, but that's not possible.</speaker>"}
+                    }
+                },
+                "Condition": "b_school_psychologist_hypnosis=false"
+            }
+        },
+        "participate":{
+            "5_d_another":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":{"Value": "<speaker=_PC>I'd like take part in another one.</speaker>"},
+                        "5_d_1":{"Value": "<speaker=_NPC1>Sorry, but it's not time for the next experiment yet.</speaker> <b>Dev Note: They are not implemented yet</b>"}
+                    }
+                },
+                "Condition": "i_school_psychologist_experiment>0"
+            },
+            "5_d_first":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":{"Value": "<speaker=_PC>I'd like take part in one.</speaker>"},
+                        "5_d_1":{"Value": "<speaker=_NPC1>Sorry, but it's not time for the next experiment yet.</speaker> <b>Dev Note: They are not implemented yet</b>"}
+                    }
+                },
+                "Condition": "i_school_psychologist_experiment=0"
+            }
+        }
+    }
+}

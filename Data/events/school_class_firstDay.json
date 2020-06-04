@@ -1,0 +1,49 @@
+{
+    "EventStages":{
+        "main":{
+            "TexturePath": {"Value": "npc/school/staff/teacher_math_portrait.png"},
+            "Text":{
+                "JoinWith": "\n\n",
+                "Values":{
+                    "0":"Before you can enter the classroom you are stopped by the teacher.",
+                    "1":"<speaker=NPC.school_teacher_math>Hello. You are the new student? {PC.nameFirst}, right?</speaker>",
+                    "2":"You confirm this.",
+                    "3":"<speaker=NPC.school_teacher_math>I am {>s_LANG(KEY:\"Mrs.\",NPC:NPC.school_teacher_math)} {NPC.school_teacher_math.nameLast}, your new class teacher. Let me introduce you to the class now.</speaker>"
+                }
+                
+            },
+            "Options":{
+                "GetIntroduced":{
+                    "Text": "Get Introduced",
+                    "Commands": {
+                        "Event":{
+                            "Type": "Event",
+                            "EventID": "school_class_firstDay.inFrontOfClass"
+                        }
+                    }
+                }
+            }
+        },
+        "inFrontOfClass":
+        {
+            "TexturePath": {"Value": "events/school/classes/inFrontOfClass.jpg"},
+            "Text":{
+                "JoinWith": "\n",
+                "Values":{
+                    "0": "You stand in front of the class. Everybody is looking at you. It feels quite emberassing.",
+                    "1": "{>s_LANG(KEY:\"Mrs.\",NPC:NPC.school_teacher_math)} {NPC.school_teacher_math.nameLast} asks you a few questions and after answering them she allows you to sit down."
+                }
+            },
+            "Options":{
+                "SitJanineKnown":{
+                    "Text": "Sit down next to Janine",
+                    "State": {"Values": {"KnowsJanine":{"Condition": "b_school_janine_introduced=false","Value": {"Visible": false}}}}
+                },
+                "SitMichelKnown":{
+                    "Text": "Sit down next to Michel",
+                    "State": {"Values": {"KnowsJanine":{"Condition": "b_school_michel_introduced=false","Value": {"Visible": false}}}}
+                }
+            }
+        }
+    }
+}

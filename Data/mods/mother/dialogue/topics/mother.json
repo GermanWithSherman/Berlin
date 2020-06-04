@@ -1,6 +1,0 @@
-{
-    "mother_ask4money":{
-        "Title": "Ask for Money",
-        "NPCFilter": { "IDs" : ["mother"] }
-    }
-}

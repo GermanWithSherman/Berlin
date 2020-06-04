@@ -1,0 +1,23 @@
+{
+    "topics":{
+        "school_psychologist_criminal_intro":{
+            "IsGreeting": true,
+            "IsEventExclusive":true
+        },
+        "school_psychologist_introduction":{
+            "IsGreeting": true,
+            "IsEventExclusive":true
+        },
+        "school_psychologist_greeting":{
+            "IsGreeting": true,
+            "NPCFilter": {"IDs": ["school_psychologist"]},
+            "Priority": 1000000
+        },
+        "school_psychologist_experiment":{
+            "Title": "Experiments",
+            "NPCFilter": {"IDs": ["school_psychologist"]},
+            "Priority": 1000000,
+            "Condition": "b_school_psychologist_participant=true"
+        }
+    }
+}

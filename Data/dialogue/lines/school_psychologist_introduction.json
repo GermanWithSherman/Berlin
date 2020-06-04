@@ -1,0 +1,270 @@
+{
+    "stages": {
+        "start":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "image":"<img>npc/school/staff/psychologist_horizontal.jpg</img>",
+                        "0":"<speaker=_NPC1>Hello. You must be {>s_LANG(KEY:\"Miss\",NPC:_PC)} {PC.nameLast}. Welcome to the Hermann-Acedemy.</speaker>",
+                        "1":"She points at a chair in front of her desk. <speaker=_NPC1>Please, take a seat.</speaker>"
+                    }
+                },
+                "Options": {
+                    "SitDown":{
+                        "Text": "Sit Down",
+                        "TargetStage": ".sitDown"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "sitDown":{
+            "0":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_NPC1>Let me introduce myself. I am {>s_LANG(KEY:\"Mrs.\",NPC:_NPC1)} {_NPC1.nameLast} and I am the school psychologist.</speaker>",
+                        "1":"She walks over to a file cabinet and takes out a file with your name on it."
+                    }
+                },
+                "Options": {
+                    "SitDown":{
+                        "Text": "...",
+                        "TargetStage": ".readFile"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "readFile":{
+            "offer":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"She opens the file and places it on her desk. You can see that a few paragraphes are marked, but you can't read them upside down.",
+                        "1":"<speaker=_NPC1>I think that you are a very interesting case. You are a perfect candidate for my research.</speaker>",
+                        "2":"<speaker=_NPC1>I'd like to offer you a very special opportunity that would benefit both of us. Let me do some experiments with you.</speaker>",
+                        "3":"<speaker=_NPC1>In return I will pay you 500 ₱ each month as well as some bonus payments from time to time.</speaker>"
+                    }
+                },
+                "Options": {
+                    "experiments":{
+                        "Text": "What kind of experiments?",
+                        "TargetStage": ".experimentDetails"
+                    },
+                    "accept":{
+                        "Text": "Accept",
+                        "TargetStage": ".experimentAccept"
+                    },
+                    "decline":{
+                        "Text": "Decline",
+                        "TargetStage": ".experimentDecline"
+                    }
+                },
+                "Condition": "PC.genderVisible=\"m\"",
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            },
+            "default":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"She opens the file and places it on her desk. You can see that a few paragraphes are marked, but you can't read them upside down.",
+                        "1":"<speaker=_NPC1>According to this file you are a normal student. I think you will fit in here quite well.</speaker>",
+                        "2":"<speaker=_NPC1>I think we are done here for now. Please head over to the dormitory and speak to the secretary there. She will make sure you get a bedroom and a school uniform.</speaker>"
+                    }
+                },
+                "onShow": {
+                    "setIntroduced":{"Type": "Set","Values": {"b_school_psychologist_introduced": true}},
+                    "noteRemove":{"Type":"NoteRemove","NoteID": "school_intro_gotoPsychologist"},
+                    "noteAdd":{
+                        "Type": "NoteAdd",
+                        "NoteID": "school_intro_gotoDormSecretary",
+                        "Text": {
+                            "Value": "I should go to the schools dorm and ask the secretary for my room."
+                        }
+                    }
+                }
+            }
+        },
+        "experimentDetails":{
+            "offer":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_NPC1>I can't go into too much detail. Not knowing about the nature of the experiments is a cucial part of them. But I can assure you that they are not hurtful.</speaker>",
+                        "1":"<speaker=_NPC1>Also these experiments will affect your everyday life in a big way. But don't worry, I believe you will enjoy this.</speaker>"
+                    }
+                },
+                "Options": {
+                    "accept":{
+                        "Text": "Accept",
+                        "TargetStage": ".experimentAccept"
+                    },
+                    "decline":{
+                        "Text": "Decline",
+                        "TargetStage": ".experimentDecline"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "experimentDecline":{
+            "offer":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_NPC1>That's a shame.</speaker>",
+                        "1":"<speaker=_NPC1>I think we are done here for now. Please head over to the dormitory and speak to the secretary there. She will make sure you get a bedroom and a school uniform.</speaker>"
+                    }
+                },
+                "onShow": {
+                    "setIntroduced":{"Type": "Set","Values": {"b_school_psychologist_introduced": true}},
+                    "noteRemove":{"Type":"NoteRemove","NoteID": "school_intro_gotoPsychologist"},
+                    "noteAdd":{
+                        "Type": "NoteAdd",
+                        "NoteID": "school_intro_gotoDormSecretary",
+                        "Text": {
+                            "Value": "I should go to the schools dorm and ask the secretary for my room."
+                        }
+                    }
+                }
+            }
+        },
+        "experimentAccept":{
+            "offer":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_NPC1>That's fabulous.</speaker>",
+                        "1":"She opens her desk and takes out a contract and hands it over to you as well as a pen. The contract is at least 100 sites long and full of complicated scientific terms. After reading the first two pages you give up and skip to the last page. It lists your payments as described by {>s_LANG(KEY:\"Mrs.\",NPC:_NPC1)} {_NPC1.nameLast}."
+                    }
+                },
+                "Options": {
+                    "accept":{
+                        "Text": "Sign the contract",
+                        "TargetStage": ".experimentSignContract"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "experimentSignContract":{
+            "offer":{
+                "Text": {
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_NPC1>Thank you.</speaker> She takes the contract and places it back in her desk.",
+                        "1":"<speaker=_NPC1>Lets not waste time now. I have already prepared the first experiment for you.</speaker>",
+                        "2":"She signals you to stand up and leads you to a psychologist chair. On a small table next to it lies a VR headset. There is also a small glass of what appears to be water.",
+                        "3":"<speaker=_NPC1>You will watch a video with this headset. Try to remember everything you see, I will ask you some question afterwards. And drink the water beforehead. The video is long and you shouldn't get thirsty watching it. That's all.</speaker>"
+                    }
+                },
+                "Options": {
+                    "accept":{
+                        "Text": "Comply",
+                        "TargetStage": ".experimentVR"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "experimentVR":{
+            "default":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"You drink the water. It tastes a little peculiar. Was it stale maybe?",
+                        "1":"You put the headset on afterwards."
+                    }
+                },
+                "Options": {
+                    "accept":{
+                        "Text": "...",
+                        "TargetStage": ".experimentVRAfter"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "experimentVRAfter":{
+            "default":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"You feel the headset being removed from your head. You feel dizzy. How much time passed?",
+                        "1":"<speaker=_NPC1>Welcome back. I hope you enjoyed the show. What do you remember.</speaker>"
+                    }
+                },
+                "Options": {
+                    "accept":{
+                        "Text": "Tell her",
+                        "TargetStage": ".experimentVRAfterRemember"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        },
+        "experimentVRAfterRemember":{
+            "default":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>Ehmmm...</speaker> Weird. You feel like remembering what you have seen. But for some reason it is impossible to bring it to your consciousness.",
+                        "1":"<speaker=_NPC1>Don't worry, if you don't remember it. That's fine.</speaker> She smiles. Even though her smile is warm it makes you feel uncomfortable.",
+                        "2":"<speaker=_NPC1>We are done here for now. Here is your payment.</speaker> She gives you the promised 500 ₱ <speaker=_NPC1>Now head over to the dormitory and go to room 204. You will meet my student assistant there. She will make sure you get a school uniform and fit in.</speaker>"
+                    }
+                },
+                "onShow": {
+                    "payment":{
+                        "Type": "Set",
+                        "ValuesFromSetters": { "PC.moneyCash":{"Mode": "Inc", "Value": 50000} }
+                    },
+                    "setIntroduced":{"Type": "Set","Values": {"b_school_psychologist_introduced": true}},
+                    "setDormAccess":{"Type": "Set","Values": {"s_school_psychologist_intro_stage": "gotoAssistant"}},
+                    "setExperiment":{"Type": "Set",
+                        "Values": {
+                            "b_school_psychologist_participant": "<speaker=_NPC1>You will watch a video with this headset. Try to remember everything you see, I will ask you some question afterwards. And drink the water beforehead. The video is long and you shouldn't get thirsty watching it. That's all.</speaker>",
+                            "b_school_psychologist_hypnosis": true
+                        },
+                        "ValuesFromSetters": {
+                            "i_school_psychologist_experiment":{"Mode": "Inc", "Value": 1}
+                        }
+                    },
+                    "noteRemove":{"Type":"NoteRemove","NoteID": "school_intro_gotoPsychologist"},
+                    "noteAddExperiment":{
+                        "Type": "NoteAdd",
+                        "NoteID": "school_psycho_experiment",
+                        "Text": {
+                            "Value": "I agreed to take part in the psychologists experiments."
+                        }
+                    },
+                    "noteAddGotoDorm":{
+                        "Type": "NoteAdd",
+                        "NoteID": "school_psycho_experiment",
+                        "Text": {
+                            "Value": "I should go to the dorm and visit the psychologists assistant in room 211."
+                        }
+                    }
+                },
+                "Options": {
+                    "comply":{
+                        "Text": "Comply",
+                        "TargetStage": "SYS.blank",
+                        "Say": "<speaker=_PC>Yes, Mistress.</speaker> Wait, that wasn't how you wanted to phrase it. Or was it?"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
+            }
+        }
+    }
+}

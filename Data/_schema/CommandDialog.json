@@ -29,6 +29,6 @@
                 }
             }
         },
-        "Type": {"type": "string", "pattern": "^Dialog$" }
+        "Type": {"type": "string", "enum": ["Dialog"] }
     }
 }

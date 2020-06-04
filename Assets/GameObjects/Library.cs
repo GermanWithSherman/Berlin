@@ -12,6 +12,23 @@ public abstract class Library<T> where T : IModable
     protected string path;
     protected IEnumerable<string> modsPaths;
 
+
+    public T this[string key]
+    {
+        get {
+            if(key == null)
+                return getInvalidKeyEntry("");
+            if (_dict.TryGetValue(key, out T result))
+                return result;
+            return getInvalidKeyEntry(key);
+        }
+    }
+
+    protected virtual T getInvalidKeyEntry(string key)
+    {
+        return default;
+    }
+
     public Thread loadThreaded()
     {
         Thread t = new Thread(new ThreadStart(load));

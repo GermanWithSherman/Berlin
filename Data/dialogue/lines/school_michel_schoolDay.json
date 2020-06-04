@@ -1,0 +1,19 @@
+{
+    "stages":{
+        "start":{
+            "default":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "0":"<speaker=_PC>Could you tell me something about the school day?</speaker>",
+                        "1":"<speaker=_NPC1>There is not much to say.</speaker>",
+                        "2":"<speaker=_NPC1>School starts at 07:45. You shouldn't be late or you will get detention time.</speaker>",
+                        "3":"<speaker=_NPC1>We have four courses each day. Each one lasts 90 minutes.</speaker>",
+                        "4":"<speaker=_NPC1>There are breaks between the course. You can use them to hang around with your fellow students.</speaker>",
+                        "5":"<speaker=_NPC1>There is also a lunch break.</speaker>"
+                    }
+                }
+            }
+        }
+    }
+}
