@@ -47,97 +47,99 @@ public static class Modable
     private static ConcurrentDictionary<Type, Delegate> _copyFunctions = new ConcurrentDictionary<Type, Delegate>();
     private static ConcurrentDictionary<Type, Delegate> _modFunctions = new ConcurrentDictionary<Type, Delegate>();
 
+    private static IEnumerable<FieldInfo> modFields<T>()
+    {
+        var result = new List<FieldInfo>();
+
+        ModableAttribute.FieldOptions fieldOptions = ModableAttribute.FieldOptions.OptIn;
+        var classAttribute = typeof(T).GetCustomAttribute<ModableAttribute>();
+        if (classAttribute != null)
+            fieldOptions = classAttribute.FieldOptIn;
+
+        foreach (var fieldInfo in typeof(T).GetFields())
+        {
+            bool copyThisField = false;
+            switch (fieldOptions)
+            {
+                case ModableAttribute.FieldOptions.OptIn:
+                    copyThisField = false;
+                    break;
+                case ModableAttribute.FieldOptions.OptOut:
+                    copyThisField = true;
+                    break;
+            }
+
+            var customExcludeAttribute = fieldInfo.GetCustomAttribute<ModExcludeAttribute>();
+            var customIncludeAttribute = fieldInfo.GetCustomAttribute<ModIncludeAttribute>();
+
+            if (customExcludeAttribute != null)
+                copyThisField = false;
+            else if (customIncludeAttribute != null)
+                copyThisField = true;
+
+            if (copyThisField)
+                result.Add(fieldInfo);
+
+        }
+        return result;
+    }
+
+    private static Delegate copyFunctionCreate<T>()
+    {
+        var statements = new List<Expression>();
+
+        ParameterExpression paramOriginal = Expression.Parameter(typeof(T));
+
+        ParameterExpression instanceParam = Expression.Variable(typeof(T));
+        BinaryExpression createInstance = Expression.Assign(instanceParam, Expression.New(typeof(T)));
+        statements.Add(createInstance);
+       
+        foreach(FieldInfo fieldInfo in modFields<T>()) { 
+            MemberExpression getProperty = Expression.Field(instanceParam, fieldInfo);
+
+            MemberExpression readValue = Expression.Field(paramOriginal, fieldInfo);
+
+            MethodInfo methodInfo = typeof(Modable).GetMethod("copyDeep", new[] { fieldInfo.FieldType });
+
+            if (methodInfo == null)
+            {
+                methodInfo = typeof(Modable).GetMethods().Where(mi => mi.Name == "copyDeep" && mi.GetGenericArguments().Any()).First();
+            }
+
+            if (methodInfo.IsGenericMethod)
+            {
+                try
+                {
+                    methodInfo = methodInfo.MakeGenericMethod(fieldInfo.FieldType);
+                }
+                catch
+                {
+                    Debug.LogWarning($"Failed to copy {fieldInfo.Name} ({fieldInfo.FieldType}) automatically");
+                    continue;
+                }
+            }
+
+            Expression call = Expression.Call(methodInfo, readValue);
+
+            BinaryExpression assignProperty = Expression.Assign(getProperty, call);
+            statements.Add(assignProperty);
+        }
+
+        var returnStatement = instanceParam;
+        statements.Add(returnStatement);
+
+        var body = Expression.Block(instanceParam.Type, new[] { instanceParam }, statements.ToArray());
+
+        var lambda = Expression.Lambda<Func<T, T>>(body, paramOriginal);
+        return lambda.Compile();
+    }
+
     private static T copyAutofields<T>(T original)
     {
         Delegate del;
         if (!_copyFunctions.TryGetValue(typeof(T), out del))
         {
-            var statements = new List<Expression>();
-
-            ParameterExpression paramOriginal = Expression.Parameter(typeof(T));
-
-            ParameterExpression instanceParam = Expression.Variable(typeof(T));
-            BinaryExpression createInstance = Expression.Assign(instanceParam, Expression.New(typeof(T)));
-            statements.Add(createInstance);
-
-
-            ModableAttribute.FieldOptions fieldOptions = ModableAttribute.FieldOptions.OptIn;
-            var classAttribute = typeof(T).GetCustomAttribute<ModableAttribute>();
-            if (classAttribute != null)
-                fieldOptions = classAttribute.FieldOptIn;
-
-
-
-            foreach (var fieldInfo in typeof(T).GetFields())
-            {
-                bool copyThisField = false;
-                switch (fieldOptions)
-                {
-                    case ModableAttribute.FieldOptions.OptIn:
-                        copyThisField = false;
-                        break;
-                    case ModableAttribute.FieldOptions.OptOut:
-                        copyThisField = true;
-                        break;
-                }
-
-                var customExcludeAttribute = fieldInfo.GetCustomAttribute<ModExcludeAttribute>();
-                var customIncludeAttribute = fieldInfo.GetCustomAttribute<ModIncludeAttribute>();
-
-                if (customExcludeAttribute != null)
-                    copyThisField = false;
-                else if (customIncludeAttribute != null)
-                    copyThisField = true;
-                //else
-                //    throw new Exception($"Type {typeof(T)} declares both ModExclude and ModInclude at field {fieldInfo.Name}");
-
-
-                if (copyThisField)
-                {
-
-                    MemberExpression getProperty = Expression.Field(instanceParam, fieldInfo);
-
-                    MemberExpression readValue = Expression.Field(paramOriginal, fieldInfo);
-
-                    MethodInfo methodInfo = typeof(Modable).GetMethod("copyDeep", new[] { fieldInfo.FieldType });
-                    //MethodInfo methodInfo = typeof(Modable).GetMethod("copyDeep");
-
-                    if (methodInfo == null)
-                    {
-                        methodInfo = typeof(Modable).GetMethods().Where(mi => mi.Name == "copyDeep" && mi.GetGenericArguments().Any()).First();
-                        //methodInfo = typeof(Modable).GetMethod("stupidDetour");
-                        //throw new Exception($"copyDeep not defined for type {fieldInfo.FieldType}");
-                    }
-
-                    if (methodInfo.IsGenericMethod)
-                    {
-                        try
-                        {
-                            methodInfo = methodInfo.MakeGenericMethod(fieldInfo.FieldType);
-                        }
-                        catch
-                        {
-                            Debug.LogWarning($"Failed to copy {fieldInfo.Name} ({fieldInfo.FieldType}) automatically");
-                            continue;
-                        }
-                    }
-
-                    Expression call = Expression.Call(methodInfo, readValue);
-
-                    BinaryExpression assignProperty = Expression.Assign(getProperty, call);
-                    statements.Add(assignProperty);
-
-                }
-                    
-            }
-
-            var returnStatement = instanceParam;
-            statements.Add(returnStatement);
-
-            var body = Expression.Block(instanceParam.Type, new[] { instanceParam }, statements.ToArray());
-
-            var lambda = Expression.Lambda<Func<T, T>>(body, paramOriginal);
-            del = lambda.Compile();
+            del = copyFunctionCreate<T>();
             _copyFunctions[typeof(T)] = del;
         }
         return ((Func<T, T>)del)(original);
@@ -206,7 +208,6 @@ public static class Modable
 
     public static JToken copyDeep(JToken original)
     {
-        //return JObject.Parse(original.ToString());
         return original.DeepClone();
     }
 
@@ -215,97 +216,66 @@ public static class Modable
         return original;
     }
 
+    private static Delegate modFunctionCreate<T>()
+    {
+        var statements = new List<Expression>();
+
+        ParameterExpression paramOriginal = Expression.Parameter(typeof(T));
+        ParameterExpression paramMod = Expression.Parameter(typeof(T));
+
+        
+        foreach (FieldInfo fieldInfo in modFields<T>())
+        {
+            MemberExpression originalProperty = Expression.Field(paramOriginal, fieldInfo);
+            MemberExpression modProperty = Expression.Field(paramMod, fieldInfo);
+
+            MethodInfo methodInfo = typeof(Modable).GetMethod("mod", new[] { fieldInfo.FieldType, fieldInfo.FieldType });
+
+            if (methodInfo == null)
+            {
+                methodInfo = typeof(Modable).GetMethods().Where(mi => mi.Name == "mod" && mi.GetGenericArguments().Any()).First();
+            }
+
+            if (methodInfo.IsGenericMethod)
+            {
+                try
+                {
+                    methodInfo = methodInfo.MakeGenericMethod(fieldInfo.FieldType);
+                }
+                catch
+                {
+                    Debug.LogWarning($"Failed to mod {fieldInfo.Name} ({fieldInfo.FieldType}) automatically");
+                    continue;
+                }
+            }
+
+            if (methodInfo == null)
+                Debug.LogError("WTF");
+
+            Expression call = Expression.Call(methodInfo, originalProperty, modProperty);
+
+            BinaryExpression assignProperty = Expression.Assign(originalProperty, call);
+            statements.Add(assignProperty);
+
+           
+
+        }
+
+        var returnStatement = paramOriginal;
+        statements.Add(returnStatement);
+
+        var body = Expression.Block(paramOriginal.Type, statements.ToArray());
+
+        var lambda = Expression.Lambda<Func<T, T, T>>(body, new[] { paramOriginal, paramMod });
+        return lambda.Compile();
+    }
+
     private static T modAutofields<T>(T original, T mod)
     {
         Delegate del;
         if (!_modFunctions.TryGetValue(typeof(T), out del))
         {
-            var statements = new List<Expression>();
-
-            ParameterExpression paramOriginal = Expression.Parameter(typeof(T));
-            ParameterExpression paramMod = Expression.Parameter(typeof(T));
-
-            //ParameterExpression instanceParam = Expression.Variable(typeof(T));
-            //BinaryExpression createInstance = Expression.Assign(instanceParam, Expression.New(typeof(T)));
-            //statements.Add(createInstance);
-
-
-            ModableAttribute.FieldOptions fieldOptions = ModableAttribute.FieldOptions.OptIn;
-            var classAttribute = typeof(T).GetCustomAttribute<ModableAttribute>();
-            if (classAttribute != null)
-                fieldOptions = classAttribute.FieldOptIn;
-
-
-
-            foreach (var fieldInfo in typeof(T).GetFields())
-            {
-                bool copyThisField = false;
-                switch (fieldOptions)
-                {
-                    case ModableAttribute.FieldOptions.OptIn:
-                        copyThisField = false;
-                        break;
-                    case ModableAttribute.FieldOptions.OptOut:
-                        copyThisField = true;
-                        break;
-                }
-
-                var customExcludeAttribute = fieldInfo.GetCustomAttribute<ModExcludeAttribute>();
-                var customIncludeAttribute = fieldInfo.GetCustomAttribute<ModIncludeAttribute>();
-
-                if (customExcludeAttribute != null)
-                    copyThisField = false;
-                else if (customIncludeAttribute != null)
-                    copyThisField = true;
-                //else
-                //    throw new Exception($"Type {typeof(T)} declares both ModExclude and ModInclude at field {fieldInfo.Name}");
-
-
-                if (copyThisField)
-                {
-
-                    MemberExpression originalProperty = Expression.Field(paramOriginal, fieldInfo);
-                    MemberExpression modProperty = Expression.Field(paramMod, fieldInfo);
-
-                    MethodInfo methodInfo = typeof(Modable).GetMethod("mod", new[] { fieldInfo.FieldType, fieldInfo.FieldType });
-
-                    if (methodInfo == null)
-                    {
-                        methodInfo = typeof(Modable).GetMethods().Where(mi => mi.Name == "mod" && mi.GetGenericArguments().Any()).First();
-                    }
-
-                    if (methodInfo.IsGenericMethod)
-                    {
-                        try
-                        {
-                            methodInfo = methodInfo.MakeGenericMethod(fieldInfo.FieldType);
-                        }
-                        catch
-                        {
-                            Debug.LogWarning($"Failed to mod {fieldInfo.Name} ({fieldInfo.FieldType}) automatically");
-                            continue;
-                        }
-                    }
-
-                    if (methodInfo == null)
-                        Debug.LogError("WTF");
-
-                    Expression call = Expression.Call(methodInfo, originalProperty, modProperty);
-
-                    BinaryExpression assignProperty = Expression.Assign(originalProperty, call);
-                    statements.Add(assignProperty);
-
-                }
-
-            }
-
-            var returnStatement = paramOriginal;
-            statements.Add(returnStatement);
-
-            var body = Expression.Block(paramOriginal.Type, statements.ToArray());
-
-            var lambda = Expression.Lambda<Func<T, T, T>>(body, new[] { paramOriginal, paramMod });
-            del = lambda.Compile();
+            del = modFunctionCreate<T>();
             _modFunctions[typeof(T)] = del;
         }
         return ((Func<T, T, T>)del)(original,mod);
@@ -317,7 +287,6 @@ public static class Modable
         {
             if (original == null)
                 return default;
-            //return (T)original.copyDeep();
             return copyDeep(original);
         }
 
@@ -325,7 +294,6 @@ public static class Modable
         if (original == null)
             return (T)mod.copyDeep();
 
-        //T originalCopy = (T)original.copyDeep();
         T originalCopy = copyDeep(original);
 
         if (original is IModableAutofields)
@@ -379,7 +347,6 @@ public static class Modable
         originalObject.Merge(modObject, new JsonMergeSettings { MergeArrayHandling = MergeArrayHandling.Union });
 
         return originalObject;
-        //return mod;
     }
 
     public static int? mod(int? original, int? mod)
