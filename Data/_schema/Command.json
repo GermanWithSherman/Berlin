@@ -2,6 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "anyOf": [
         {"$ref": "./CommandBreak.json"},
+        {"$ref": "./CommandCall.json"},
         {"$ref": "./CommandConditional.json"},
         
         {"$ref": "./CommandConsume.json"},

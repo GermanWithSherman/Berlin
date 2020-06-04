@@ -12,7 +12,9 @@
                     "Text":"Test",
                     "Commands":{
                         "1":{
-                            "Type": "Outfit"
+                            "Type": "Call",
+                            "ProcedureID": "sexSetF",
+                            "Parameters": ["PC"]
                         }
                     }
                 },

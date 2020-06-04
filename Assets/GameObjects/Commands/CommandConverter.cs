@@ -32,6 +32,9 @@ public class CommandConverter : JsonConverter
             case (Command.Type.Break):
                 result = new CommandBreak();
                 break;
+            case (Command.Type.Call):
+                result = new CommandCall();
+                break;
             case (Command.Type.Conditional):
                 result = new CommandConditional();
                 break;

@@ -11,11 +11,11 @@ public class GameData: Data
 
     
 
-    public new dynamic this[string key]
+    /*public new dynamic this[string key]
     {
         get => get(key);
         set => set(key,value);
-    }
+    }*/
 
     public UISettings UISettings = new UISettings();
 
@@ -53,8 +53,12 @@ public class GameData: Data
         {
             switch (key)
             {
-                case "example":
-                    return "tatata";
+                case "PC":
+                    return CharacterData.PC;
+                case "UI":
+                    return UISettings;
+                case "World":
+                    return WorldData;
             }
         }
         else if (keyParts.Length == 2)

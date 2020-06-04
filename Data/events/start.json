@@ -6,18 +6,21 @@
                 "Value": "Hallo mein Lieber!"
             },
             "Commands":{
-                "gtl":{
+                "8_gtl":{
                     "Type": "GotoLocation",
                     "LocationID":"start."
                 },
-                
-                "SET":{
+                "5_statsFill":{
+                    "Type":"Call",
+                    "ProcedureID": "statsFill",
+                    "Parameters": ["PC"]
+                },
+                "5_SET":{
                     "Type": "Set",
                     "Values":{
                         "PC.height":1910,
                         "PC.BMI":23,
                         "PC.moneyCash":10000,
-                        "PC.statHunger":1000000,
                         "UI.isVisibleStatusBar":false,
                         "World.DateTime":"2020-04-09T06:00:00"
                     }

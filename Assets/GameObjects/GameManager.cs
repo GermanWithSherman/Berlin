@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 {
     public const string PlayerVersion = "0.0.1";
 
+
     public static GameManager Instance { get; private set; }
 
     public Preferences Preferences;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     public ItemsLibrary ItemsLibrary;
     public LocationTypeLibrary LocationTypeLibrary;
     public NPCsLibrary NPCsLibrary;
+    public ProceduresLibrary ProceduresLibrary;
     public TemplateLibrary TemplateLibrary;
 
     public DialogServer DialogServer;
@@ -167,17 +169,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        PC test = new PC();
-        test.HairPubicStyle = "Black and white";
-
-        PC mod = new PC();
-        mod.HairPubicStyle = "Pink";
-
-        test = Modable.mod(test,mod);
-
-        //PC copy = Modable.copyDeep(test);
-        Debug.Log(test.HairPubicStyle);
-
 
         ModsServer = new ModsServer(path("mods"), Preferences);
 
@@ -200,6 +191,9 @@ public class GameManager : MonoBehaviour
         LocationTypeLibrary = new LocationTypeLibrary(path("locationtypes"), pathsMods(modsPaths, "locationtypes"));
         Thread locationTypeLibraryLoadThread = LocationTypeLibrary.loadThreaded();
 
+        ProceduresLibrary = new ProceduresLibrary(path("procedures"), pathsMods(modsPaths, "procedures"));
+        Thread proceduresLibraryLoadThread = ProceduresLibrary.loadThreaded();
+
         TemplateLibrary = new TemplateLibrary(path("templates"), pathsMods(modsPaths, "templates"));
         Thread templateLibraryLoadThread = TemplateLibrary.loadThreaded();
 
@@ -211,6 +205,7 @@ public class GameManager : MonoBehaviour
         itemsLibraryLoadThread.Join();
         interruptServerLoadThread.Join();
         locationTypeLibraryLoadThread.Join();
+        proceduresLibraryLoadThread.Join();
         templateLibraryLoadThread.Join();
 
         StartMenu.show();
@@ -487,7 +482,11 @@ public class GameManager : MonoBehaviour
 
         return result;
     }
-     
+
+    public void ProcedureExecute(string procedureID, IEnumerable<dynamic> parameters)
+    {
+        ProceduresLibrary.procedureExecute(procedureID,GameData,parameters);
+    }
 
     public void shopShow(string shopId)
     {

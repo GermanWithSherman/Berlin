@@ -17,10 +17,14 @@ public class ModableDictionary<V> : Dictionary<string,V>, IModable
         {
             string key = kv.Key;
             V value = kv.Value;
-            if (value is IModable)
+            /*if (value is IModable)
                 result.Add(key, (V)((IModable)value).copyDeep());
             else
-                result.Add(key, value);
+                result.Add(key, value);*/
+            if (typeof(V) is IModable)
+                result[key] = (V)Modable.copyDeep((IModable)value);
+            else
+                result[key] = value;
         }
         return result;
     }
