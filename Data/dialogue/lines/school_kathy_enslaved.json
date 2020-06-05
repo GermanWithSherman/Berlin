@@ -1,0 +1,161 @@
+{
+    "stages":{
+        "start":{
+            "5_d":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":"<speaker=_PC>{NPC.school_kathy.nameFirst}?</speaker>",
+                        "5_d_1":"She jumps up. At least as far as her constraints allow her to. She seems to be very afraid. You notice a big ballgag being stuck between her teeth.",
+                        "5_d_2":"It takes a few seconds before she realizes that it is you.",
+                        "5_d_3":"She looks around, then she calms down a little and points at the padlock of her cage with a questioning look."
+                    }
+                },
+                "TopicsVisible": false,
+                "LeaveEnabled": false,
+                "Options": {
+                    "5_unlock":{
+                        "Text": "Open the cage",
+                        "TargetStage": "school_kathy_enslaved.unlockCage"
+                    },
+                    "5_nokey":{
+                        "Text": "I have no key",
+                        "TargetStage": "school_kathy_enslaved.noKeyCage"
+                    }
+                }
+            }
+        },
+        "noKeyCage":{
+            "5_d":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":"<speaker=_PC>Sorry, I don't have the key.</speaker>",
+                        "5_d_1":"She looks dissapointed and lies down again."
+                    }
+                },
+                "TopicsVisible": false
+            }
+        },
+        "unlockCage":{
+            "5_d":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":"You open the cage and let her out. After hesitating for a short moment she crawls out.",
+                        "5_d_1":"You realize that her chains prevent her from standing up, effectively forcing her to stay on her fours or on her knees.",
+                        "5_d_2":"You take a closer look at her gag. It has a locking mechanism behind her head which she can't reach by herself. But you could free her easily."
+                    }
+                },
+                "TopicsVisible": false,
+                "LeaveEnabled": false,
+                "Options": {
+                    "5_gagRemove":{
+                        "Text": "Remove gag",
+                        "TargetStage": "school_kathy_enslaved.gagRemove"
+                    },
+                    "7_rape":{
+                        "Text": "Rape her",
+                        "TargetStage": "school_kathy_enslaved.rape",
+                        "State": {"Values":{"5_cantHaveSex":{"Condition": "b_sex_male==false","Value": {"Visible": false}}}}
+                    }
+                }
+            }
+        },
+        "rape":{
+            "5_d":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1_image":"<img>events/school/kathy/rape.jpg</img>",
+                        "5_d_0":"You push her to her knees. Restrained like this there is no way she could resist you. It takes a second before she realizes what you are about to do.",
+                        "5_d_1":"When she does she tries to violently struggle away from you. But there is no use. Holding her with a firm grip you push your cock into her.",
+                        "5_d_2":"She screams and struggles, which only makes the experience more exciting for you. You feel a massive orgasm building up and come right into her pussy.",
+                        "5_d_3":"Afterwards you push her back into her cage and lock it back up. Since she is a sobbin mess there is not much reistance left in her."
+                    }
+                },
+                "TopicsVisible": false
+            }
+        },
+        "gagRemove":{
+            "5_d":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1_image":"<img>events/school/kathy/gagRemove.jpg</img>",
+                        "5_d_0":"You carefully remove her gag. She slowly opens and closes her mouth. Her jaw obviously hurts from being stuck in this uncomfortable position for a long time.",
+                        "5_d_1":"<speaker=_NPC1>Thank you .... owwww.... I hate this thing.</speaker>"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false,
+                "Options": {
+                    "5_questionWhy":{
+                        "Text": "Why are you locked up?",
+                        "TargetStage": "school_kathy_enslaved.questionWhy"
+                    }
+                }
+            }
+        },
+        "questionWhy":{
+            "5_d":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":"<speaker=_PC>Why did {NPC.school_pierre.nameFirst} lock you up?</speaker>",
+                        "5_d_1":"<speaker=_NPC1>Because he is a bastard! He claims that I stole some of his drugs, but that ain't true!</speaker>",
+                        "5_d_2":"<speaker=_NPC1>We watched porn together. Really hardcore stuff. There was a guy. He was 50ish and bald. And he had abducted a girl about my age.</speaker>",
+                        "5_d_3":"<speaker=_NPC1>He kept her chained at all times and used her as his personal fuck toy.</speaker>",
+                        "5_d_4":"<speaker=_NPC1>It really wasn't my type of porn. But {NPC.school_pierre.nameFirst} enjoyed it very much. He proposed a roleplay where I would be his slave.</speaker>",
+                        "5_d_5":"<speaker=_NPC1>I didn't like the idea too much, but I didn't want to dissapoint him. So I agreed. Big mistake.</speaker>",
+                        "5_d_6":"<speaker=_NPC1>It turned out it wasn't a roleplay after all. I am his real sex slave now! And I think he also gave me drugs to eleminate my resitance.</speaker>",
+                        "5_d_7":"She begins to cry. <speaker=_NPC1>Please, can you unlock these chains? I don't want to be a toy anymore?</speaker>"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false,
+                "Options": {
+                    "5_questionPlan":{
+                        "Text": "What are your plans?",
+                        "TargetStage": "school_kathy_enslaved.questionPlan"
+                    }
+                }
+            }
+        },
+        "questionPlan":{
+            "5_d":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":"<speaker=_PC>What is your plan?</speaker>",
+                        "5_d_1":"<speaker=_NPC1>I think I have to run away. {NPC.school_pierre.nameFirst} has lots of good connections here and if I stay I will soon be right back where I am now. And probably worse.</speaker>",
+                        "5_d_2":"<speaker=_NPC1>I have some family outside the country. {NPC.school_pierre.nameFirst} can't reach me there. I will be save there.</speaker>"
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false,
+                "Options": {
+                    "5_freeHer":{
+                        "Text": "Free her",
+                        "TargetStage": "school_kathy_enslaved.freeHer"
+                    }
+                }
+            }
+        },
+        "freeHer":{
+            "5_d":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1_image":"<img>events/school/kathy/runawayOutfit.jpg</img>",
+                        "5_d_1":"You take the key and unlock her restraints With a sigh of relief she stands up and stretches are arms and legs. Then she quickly walks over to her wardobe and puts on some clothes. Afterwards she places some items in a big bag.",
+                        "5_d_2":"<speaker=_NPC1>I hope nobody recognizes me when I am dressed like this. I have been dressed as a slut for way too long.</speaker>",
+                        "5_d_3":"She gives you a hug. <speaker=_NPC1>Thank you sooo much. You are a true friend.</speaker>",
+                        "5_d_4":"She takes her bag and leaves."
+                    }
+                },
+                "TopicsVisible": false
+            }
+        }
+    }
+}

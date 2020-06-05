@@ -91,7 +91,7 @@
                         "Type": "Set",
                         "Values": {
                             "i_school_michel_topic_student": 4,
-                            "b_school_314_known": true
+                            "b_school_314_access": true
                         },
                         "ValuesFromSetters": {
                             "c_school_michel_topic_student_cd":{"Mode": "Cooldown", "Value":57600}

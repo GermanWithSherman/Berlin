@@ -23,7 +23,9 @@
 			{"fileMatch": ["servicepoints/*.json"],"url": "./_schema/ServicePoint.json"},
 			{"fileMatch": ["services/*.json"],"url": "./_schema/ServicesFile.json"},
 			{"fileMatch": ["shoptypes/*.json"],"url": "./_schema/ShopType.json"},
-			{"fileMatch": ["templates/*.json"],"url": "./_schema/Template.json"}
+			{"fileMatch": ["templates/*.json"],"url": "./_schema/Template.json"},
+
+			{"fileMatch": ["mods/*/info.json"],"url": "./_schema/Mod.json"}
 		]
 
 	},

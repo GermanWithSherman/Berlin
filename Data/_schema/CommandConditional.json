@@ -16,6 +16,6 @@
     "properties": {
         "Commands": {"$ref": "./CommandsCollection.json"},
         "Condition": {"type":"string"},
-        "Type": {"type": "string", "pattern": "^Conditional$" }
+        "Type": {"type": "string", "enum": ["Conditional"] }
     }
 }

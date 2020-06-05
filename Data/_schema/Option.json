@@ -42,14 +42,6 @@
                 }
             }
         },
-        "Text": {
-            "type": "string",
-            "title": "The Text schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": "",
-            "examples": [
-                "Subway Station"
-            ]
-        }
+        "Text": { "$ref": "./CText.json" }
     }
 }

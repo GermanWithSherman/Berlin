@@ -1,0 +1,21 @@
+{
+    "interrupts":{
+        "school_kathy_dayStart":{
+            "Listen": ["dayStart"],
+            "Commands": {
+                "5_enslavementStart":{
+                    "Type":"Conditional",
+                    "Commands":{
+                        "5_set":{
+                            "Type":"Set",
+                            "Values": {
+                                "b_school_kathy_enslaved": true
+                            }
+                        }
+                    },
+                    "Condition": "c_school_kathy_enslavement_start<World.DateTime"
+                }
+            }
+        }
+    }
+}

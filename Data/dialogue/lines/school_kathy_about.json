@@ -1,0 +1,28 @@
+{
+    "stages":{
+        "start":{
+            "5_male":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":"<speaker=_NPC1>I would love to tell you something about me.</speaker>",
+                        "5_d_1":"She hesitates for a second.",
+                        "5_d_2":"<speaker=_NPC1>But {NPC.school_pierre.nameFirst} really doesn't like me speaking to other guys.</speaker>"
+                    }
+                },
+                "Condition": "PC.genderVisible=\"m\""
+            },
+            "5_female":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":"<speaker=_NPC1>I would love to tell you something about me.</speaker>",
+                        "5_d_1":"She hesitates for a second.",
+                        "5_d_2":"<speaker=_NPC1>But {NPC.school_pierre.nameFirst} gets angry if I chat too much with other gals.</speaker>"
+                    }
+                },
+                "Condition": "PC.genderVisible=\"f\""
+            }
+        }
+    }
+}

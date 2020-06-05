@@ -1,0 +1,18 @@
+{
+    "topics":{
+        "school_pierre_kathy":{
+            "Title": "Kathy",
+            "NPCFilter": {"IDs": ["school_pierre"]}
+        },
+        "school_pierre_kathy_investigate":{
+            "IsEventExclusive": true,
+            "IsGreeting": true,
+            "NPCFilter": {"IDs": ["school_pierre"]}
+        },
+        "school_pierre_greeting":{
+            "IsGreeting": true,
+            "NPCFilter": {"IDs": ["school_pierre"]},
+            "Priority": 1000000
+        }
+    }
+}

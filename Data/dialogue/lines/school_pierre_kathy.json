@@ -1,0 +1,48 @@
+{
+    "stages":{
+        "start":{
+            "4_enslaved_female":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":"<speaker=_PC>About {NPC.school_kathy.nameFirst}...</speaker>",
+                        "5_d_1":"<speaker=_NPC1>Do you want to take her place? I might be tempted...</speaker>",
+                        "5_d_2":"<speaker=_NPC1>No? Then stop pestering me with this bitch.</speaker>"
+                    }
+                },
+                "Condition": "(b_school_kathy_enslaved_known=true) AND (PC.genderVisible=\"f\")"
+            },
+            "4_enslaved_male":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":"<speaker=_PC>About {NPC.school_kathy.nameFirst}...</speaker>",
+                        "5_d_1":"<speaker=_NPC1>No, I won't let you have your way with her. Stop asking!</speaker>"
+                    }
+                },
+                "Condition": "(b_school_kathy_enslaved_known=true) AND (PC.genderVisible=\"m\")"
+            },
+            "5_d_female":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":"<speaker=_NPC1>{NPC.school_kathy.nameFirst}? I keep her around for fun.</speaker>",
+                        "5_d_1":"<speaker=_NPC1>Why are you asking? Do you want to take her place?</speaker>"
+                    }
+                },
+                "Condition": "PC.genderVisible=\"f\""
+            },
+            "5_d_male":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "5_d_0":"<speaker=_NPC1>{NPC.school_kathy.nameFirst}? I keep her around for fun.</speaker>",
+                        "5_d_1":"<speaker=_NPC1>Did she tell you that I am her boyfriend? That's at least partly true. I will hurt you if you touch her. I will hurt you if you talk to her. I will hurt you if you look at her creepily.</speaker>",
+                        "7_d_0":"<speaker=_NPC1>I think you understand where I am going with this: if you ignore her completely we will get along fine.</speaker>"
+                    }
+                },
+                "Condition": "PC.genderVisible=\"m\""
+            }
+        }
+    }
+}

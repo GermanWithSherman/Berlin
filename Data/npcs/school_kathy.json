@@ -1,0 +1,32 @@
+{
+    "TemplateID": "default_female",
+    "NameFirst": "Katharina",
+    "NameNick": "Kathy",
+    "NameLast": "Gerhard",
+    "TexturePath": {
+        "Values":{
+            "5_d":{
+                "Value": "npc/school/students/kathyPortrait.jpg",
+                "Condition": "b_school_kathy_enslaved=false"
+            },
+            "5_enslaved":{
+                "Value": "npc/school/students/kathyPortraitE.jpg",
+                "Condition": "b_school_kathy_enslaved=true"
+            }
+        }
+    },
+    "Schedules":{
+        "dahlem/school/dorm.3_314": {
+            "5_goesToSchool": {
+                "TimeStart": 0,
+                "TimeEnd": 2359,
+                "Condition":"b_school_kathy_enslaved=false"
+            },
+            "5_enslaved": {
+                "TimeStart": 0,
+                "TimeEnd": 2359,
+                "Condition":"b_school_kathy_enslaved_known=true"
+            }
+        }
+    }
+}
