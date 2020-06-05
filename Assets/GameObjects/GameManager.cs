@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject LoadingScreen;
 
+    private bool uiUpdateBlocked = false;
     private bool uiUpdatePending;
     public List<UIUpdateListener> updateListeners;
 
@@ -172,7 +173,7 @@ public class GameManager : MonoBehaviour
 
         ModsServer = new ModsServer(path("mods"), Preferences);
 
-        List<string> modsPaths = ModsServer.ActivatedModsPaths;
+        IEnumerable<string> modsPaths = ModsServer.ActivatedModsPaths;
 
         ActivityLibrary = new ActivityLibrary();
 
@@ -218,7 +219,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (uiUpdatePending)
+        if (uiUpdatePending && !uiUpdateBlocked)
             _uiUpdate();
     }
 
@@ -298,6 +299,8 @@ public class GameManager : MonoBehaviour
     {
         try
         {
+            uiUpdateBlocked = true;
+
             SaveFile saveFile = File2Object<SaveFile>(path);
             Debug.Log($"Game loaded from {path}");
 
@@ -346,6 +349,10 @@ public class GameManager : MonoBehaviour
         {
             ErrorMessage.Show("Error: "+e.Message);
             Debug.LogError(e);
+        }
+        finally
+        {
+            uiUpdateBlocked = false;
         }
     }
 
@@ -412,7 +419,20 @@ public class GameManager : MonoBehaviour
         uiUpdate();
     }
 
-    
+    public bool npcIsPresent(string npcID)
+    {
+        return npcIsPresent(NPCsLibrary[npcID]);
+    }
+
+    public bool npcIsPresent(NPC npc)
+    {
+        foreach (NPC presentNPC in GameData.NpcsPresent)
+        {
+            if (presentNPC == npc)
+                return true;
+        }
+        return false;
+    }
 
     private void npcsPresentUpdate()
     {

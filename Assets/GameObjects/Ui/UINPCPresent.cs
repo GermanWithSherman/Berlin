@@ -24,8 +24,9 @@ public class UINPCPresent : MonoBehaviour
 
         Texture.texture = npc.Texture;
 
-        updateTooltipTextThread = new Thread(new ThreadStart(updateTooltipText));
-        updateTooltipTextThread.Start();
+        //updateTooltipTextThread = new Thread(new ThreadStart(updateTooltipText));
+        //updateTooltipTextThread.Start();
+        updateTooltipText();
     }
 
     public void updateTooltipText()

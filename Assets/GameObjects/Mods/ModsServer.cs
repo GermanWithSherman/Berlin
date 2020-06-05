@@ -4,30 +4,50 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class ModsServer
+internal class ModList : List<Mod>
 {
     private string _modsDictPath;
+    public string ModsDictPath { get => _modsDictPath; set => _modsDictPath = value; }
 
-    const string manifestFileName = "info.json";
+    public ModList() { }
 
-    
-
-    private List<string> _installedModIds = new List<string>();
-    
-    public List<Mod> ActivatedMods
+    public ModList(string modsDictPath)
     {
-        get
-        {
-            return _modLoadOrder;
-        }
+        _modsDictPath = modsDictPath;
     }
 
-    public List<string> ActivatedModsPaths
+    public IEnumerable<string> IDs
     {
         get
         {
             var result = new List<string>();
-            foreach (Mod mod in _modLoadOrder)
+            foreach (Mod mod in this)
+            {
+                result.Add(mod.ID);
+            }
+            return result;
+        }
+    }
+
+    public IEnumerable<ModInfo> ModInfos
+    {
+        get
+        {
+            var result = new List<ModInfo>();
+            foreach (Mod mod in this)
+            {
+                result.Add(new ModInfo(mod));
+            }
+            return result;
+        }
+    }
+
+    public IEnumerable<string> Paths
+    {
+        get
+        {
+            var result = new List<string>();
+            foreach (Mod mod in this)
             {
                 result.Add(Path.Combine(_modsDictPath, mod.ID));
             }
@@ -36,39 +56,57 @@ public class ModsServer
     }
 
     
+}
+
+public class ModsServer
+{
+    private string _modsDictPath;
+
+    const string manifestFileName = "info.json";
+
+    private Dictionary<string, Mod> _mods = new Dictionary<string, Mod>(); //All installed mods
+
+    private ModList _modLoadOrder;
+
+    public IEnumerable<Mod> ActivatedMods
+    {
+        get => _modLoadOrder;
+    }
+
+    public IEnumerable<Mod> DeactivatedMods
+    {
+        get
+        {
+            var result = new List<Mod>();
+            foreach (Mod mod in _mods.Values)
+            {
+                if (!_modLoadOrder.Contains(mod))
+                    result.Add(mod);
+            }
+            return result;
+        }
+    }
+
+    public IEnumerable<string> ActivatedModsIDs
+    {
+        get => _modLoadOrder.IDs;
+    }
 
     public IEnumerable<ModInfo> ActivatedModsInfo
     {
-        get
-        {
-            var result = new List<ModInfo>();
-
-            foreach (Mod mod in _modLoadOrder)
-            {
-                result.Add(new ModInfo(mod));
-            }
-
-            return result;
-        }
+        get => _modLoadOrder.ModInfos;
     }
 
-    private Dictionary<string, Mod> _mods = new Dictionary<string, Mod>();
-
-    private List<Mod> _modLoadOrder = new List<Mod>();
-    private List<string> _modLoadOrderIDs
+    public IEnumerable<string> ActivatedModsPaths
     {
-        get
-        {
-            var result = new List<string>();
-            foreach (Mod mod in _modLoadOrder) { result.Add(mod.ID); }
-            return result;
-        }
+        get => _modLoadOrder.Paths;
     }
-
 
     public ModsServer(string modsDictPath, Preferences preferences)
     {
         _modsDictPath = modsDictPath;
+
+        _modLoadOrder = new ModList(modsDictPath);
 
         string[] modFolders = Directory.GetDirectories(_modsDictPath);
 
@@ -77,37 +115,28 @@ public class ModsServer
             modLoad(modFolder);
         }
 
-        var activatedMods = new List<Mod>();
 
         foreach (Mod mod in _mods.Values)
         {
-            if (modLinkDependencies(mod) && preferences.ActivatedModIDs.Contains(mod.ID) && !activatedMods.Contains(mod))
-                activatedMods.Add(mod);
+            if (modDependenciesFullfilled(mod) && preferences.ActivatedModIDs.Contains(mod.ID) && !_modLoadOrder.Contains(mod))
+                _modLoadOrder.Add(mod);
         }
-
-
 
         try
         {
-            _modLoadOrder = DependencySorter.Sort(activatedMods);
+            _modLoadOrder = DependencySorter.Sort<Mod, ModList>(_modLoadOrder);
+            _modLoadOrder.ModsDictPath = _modsDictPath;
         }
         catch
         {
             ErrorMessage.Show("Unresolvable Error in Modlist");
             return;
         }
-
-        foreach (Mod mod in _modLoadOrder)
-        {
-            Debug.Log($"Mod activated: {mod.ID}");
-        }
-
-        preferences.ActivatedModIDs = _modLoadOrderIDs;
     }
 
-    public ModInfo ActivatedModInfo (string modID)
+    public ModInfo ActivatedModInfo(string modID)
     {
-        if(_mods.TryGetValue(modID, out Mod mod))
+        if (_mods.TryGetValue(modID, out Mod mod))
         {
             if (_modLoadOrder.Contains(mod))
                 return new ModInfo(mod);
@@ -123,11 +152,9 @@ public class ModsServer
             return;
         }
         _mods.Add(mod.ID, mod);
-        _installedModIds.Add(mod.ID);
     }
-    
 
-    private bool modLinkDependencies(Mod mod)
+    private bool modDependenciesFullfilled(Mod mod)
     {
         return mod.linkDependencies(_mods);
     }
@@ -146,4 +173,43 @@ public class ModsServer
 
         modAdd(mod);
     }
+
+    /*
+
+
+    public ModsServer(string modsDictPath, Preferences preferences)
+    {
+        _modsDictPath = modsDictPath;
+
+
+
+        var activatedMods = new List<Mod>();
+
+        foreach (Mod mod in Mods.Values)
+        {
+            if (modLinkDependencies(mod) && preferences.ActivatedModIDs.Contains(mod.ID) && !activatedMods.Contains(mod))
+                activatedMods.Add(mod);
+        }
+
+
+
+        
+
+        foreach (Mod mod in ActivatedMods)
+        {
+            mod.Activated = true;
+            Debug.Log($"Mod activated: {mod.ID}");
+        }
+
+        preferences.ActivatedModIDs = _modLoadOrderIDs;
+    }
+
+    
+
+    
+
+
+    
+
+    */
 }

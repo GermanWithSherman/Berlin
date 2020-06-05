@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,19 @@ public class TimeFilter
     public short TimeEnd=2359;
     public ModableStringList Days;
 
+    [JsonProperty("Condition")]
+    private string _conditionString;
+    [JsonIgnore]
+    public Condition Condition { get => GameManager.Instance.ConditionCache[_conditionString]; }
+
     public bool isValid(DateTime dateTime)
+    {
+        if (isValidDateTime(dateTime) && Condition.evaluate(GameManager.Instance.GameData))
+            return true;
+        return false;
+    }
+
+    public bool isValidDateTime(DateTime dateTime)
     {
         int time = dateTime.Minute + dateTime.Hour * 100;
         int day = (int)dateTime.DayOfWeek;

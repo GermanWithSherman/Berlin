@@ -8,6 +8,8 @@ using UnityEngine;
 [JsonConverter(typeof(CTextConverter))]
 public class CText : IModable
 {
+    public static implicit operator string(CText cText) => Text(cText);
+
     public string Value; //Plain Text
     public ModableDictionary<CText> Values = new ModableDictionary<CText>();
     public string JoinWith = " ";

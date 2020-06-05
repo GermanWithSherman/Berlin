@@ -8,6 +8,10 @@ public class FunctionParameters : Data
 
     public FunctionParameters() { }
 
+    public FunctionParameters(string rawParameters) : this(GameManager.Instance.GameData,rawParameters.Split(';')) {
+
+    }
+
     public FunctionParameters(string key, dynamic value)
     {
         data.Add(key, value);

@@ -16,7 +16,8 @@ public class Option : IModable, IInheritable
 
 
 
-    public string Text;
+    //public string Text;
+    public CText Text;
 
     public CommandsCollection Commands = new CommandsCollection();
 

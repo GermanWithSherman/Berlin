@@ -148,6 +148,8 @@
     <Compile Include="Assets\GameObjects\Mods\ModableList.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModableListDynamic.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModableTexture.cs" />
+    <Compile Include="Assets\GameObjects\Mods\ModsMenu.cs" />
+    <Compile Include="Assets\GameObjects\Mods\ModsMenuMod.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModsServer.cs" />
     <Compile Include="Assets\GameObjects\NPC.cs" />
     <Compile Include="Assets\GameObjects\NPCFilter.cs" />

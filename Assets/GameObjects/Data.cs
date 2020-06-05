@@ -17,6 +17,20 @@ public abstract class Data
         {
             return key.Substring(1, key.Length-2);
         }
+
+        int bracketOpenIndex = key.IndexOf('(',1);
+        int bracketCloseIndex = key.LastIndexOf(')');
+
+        if(bracketOpenIndex >= 0 && bracketCloseIndex >= 0 && bracketOpenIndex < bracketCloseIndex)
+        {
+            string functionName = key.Substring(0,bracketOpenIndex);
+            string parameters = key.Substring(bracketOpenIndex+1, bracketCloseIndex- bracketOpenIndex-1);
+            FunctionParameters functionParameters = new FunctionParameters(parameters);
+            dynamic result = GameManager.Instance.FunctionsLibrary.functionExecute(functionName,functionParameters);
+            Debug.Log($"Call function {functionName} with {parameters} => {result}");
+            return result;
+        }
+
         return get(key);
     }
 

@@ -18,8 +18,14 @@ public class FunctionsLibrary : Library<Conditional<string>>
     }
 
 
-    public string functionExecute(string id, FunctionParameters parameters)
+    public dynamic functionExecute(string id, FunctionParameters parameters)
     {
+        switch (id)
+        {
+            case "npcIsPresent":
+                return GameManager.Instance.npcIsPresent(parameters["_NPCID"]);
+        }
+
         if (!_dict.ContainsKey(id))
         {
             throw new NotImplementedException($"Function {id} can not be found");
