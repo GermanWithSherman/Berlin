@@ -113,8 +113,10 @@ public class GameManager : MonoBehaviour
 
     public CultureInfo CultureInfo = CultureInfo.CreateSpecificCulture("en-US");
 
-    public UINPCsPresentContainer UINPCsPresentContainer;
+    public GameObject SecondaryDisplayContent;
+    public bool SecondaryDisplayActive;
 
+    public UINPCsPresentContainer UINPCsPresentContainer;
 
     public OutfitWindow OutfitWindow;
 
@@ -170,6 +172,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        if(Display.displays.Length > 1)
+        {
+            SecondaryDisplayActive = true;
+            SecondaryDisplayContent.SetActive(true);
+            Display.displays[1].Activate();
+        }
+
 
         ModsServer = new ModsServer(path("mods"), Preferences);
 

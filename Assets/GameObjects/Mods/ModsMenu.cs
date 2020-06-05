@@ -22,7 +22,13 @@ public class ModsMenu : MonoBehaviour
         foreach(Mod mod in _modsServer.ActivatedMods)
         {
             ModsMenuMod uiMod = Instantiate(ModPrefab, ModsContainer);
-            uiMod.SetMod(mod);
+            uiMod.SetMod(mod,true);
+        }
+
+        foreach (Mod mod in _modsServer.DeactivatedMods)
+        {
+            ModsMenuMod uiMod = Instantiate(ModPrefab, ModsContainer);
+            uiMod.SetMod(mod, false);
         }
     }
 }

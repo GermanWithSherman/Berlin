@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,7 @@ internal class ModList : List<Mod>
         _modsDictPath = modsDictPath;
     }
 
-    public IEnumerable<string> IDs
+    public IList<string> IDs
     {
         get
         {
@@ -29,7 +30,7 @@ internal class ModList : List<Mod>
         }
     }
 
-    public IEnumerable<ModInfo> ModInfos
+    public IList<ModInfo> ModInfos
     {
         get
         {
@@ -42,7 +43,7 @@ internal class ModList : List<Mod>
         }
     }
 
-    public IEnumerable<string> Paths
+    public IList<string> Paths
     {
         get
         {
@@ -61,6 +62,7 @@ internal class ModList : List<Mod>
 public class ModsServer
 {
     private string _modsDictPath;
+    private Preferences _preferences;
 
     const string manifestFileName = "info.json";
 
@@ -105,6 +107,7 @@ public class ModsServer
     public ModsServer(string modsDictPath, Preferences preferences)
     {
         _modsDictPath = modsDictPath;
+        _preferences = preferences;
 
         _modLoadOrder = new ModList(modsDictPath);
 
@@ -132,6 +135,8 @@ public class ModsServer
             ErrorMessage.Show("Unresolvable Error in Modlist");
             return;
         }
+
+        _preferences.ActivatedModIDs = _modLoadOrder.IDs;
     }
 
     public ModInfo ActivatedModInfo(string modID)
@@ -143,6 +148,72 @@ public class ModsServer
         }
         return new ModInfo();
     }
+
+    public bool ModActivate(Mod mod)
+    {
+        if (!_modLoadOrder.Contains(mod))
+            _modLoadOrder.Add(mod);
+
+        try
+        {
+            _modLoadOrder = DependencySorter.Sort<Mod, ModList>(_modLoadOrder);
+            _modLoadOrder.ModsDictPath = _modsDictPath;
+        }
+        catch
+        {
+            ErrorMessage.Show("Unresolvable Error in Modlist");
+            _modLoadOrder.Remove(mod);
+            return false;
+        }
+        Debug.Log($"Mod {mod.ID} activated");
+        Debug.Log($"Activated mods:{String.Join(",",_modLoadOrder.IDs)}");
+        _preferences.ActivatedModIDs = _modLoadOrder.IDs;
+        return true;
+    }
+
+    public bool ModDeactivate(Mod mod)
+    {
+        if (!_modLoadOrder.Contains(mod))
+            return true;
+
+        _modLoadOrder.Remove(mod);
+
+        foreach (Mod otherMod in _modLoadOrder)
+        {
+            if (!modDependenciesFullfilled(otherMod))
+            {
+                ErrorMessage.Show($"Deactivation failed. Other mods depend on {mod.ID}");
+                _modLoadOrder.Add(mod);
+                return false;
+            }
+        }
+
+        try
+        {
+            _modLoadOrder = DependencySorter.Sort<Mod, ModList>(_modLoadOrder);
+            _modLoadOrder.ModsDictPath = _modsDictPath;
+        }
+        catch
+        {
+            ErrorMessage.Show("Unresolvable Error in Modlist");
+            _modLoadOrder.Add(mod);
+            return false;
+        }
+        Debug.Log($"Mod {mod.ID} deactivated");
+        Debug.Log($"Activated mods:{String.Join(",", _modLoadOrder.IDs)}");
+        _preferences.ActivatedModIDs = _modLoadOrder.IDs;
+        return true;
+    }
+
+    public bool ModStateSet(Mod mod, bool activated)
+    {
+        if (activated)
+            return ModActivate(mod);
+        else
+            return ModDeactivate(mod);
+    }
+
+
 
     private void modAdd(Mod mod)
     {

@@ -17,9 +17,9 @@ public class Preferences
     public OnUpdateMethod OnUpdate;
 
     [JsonProperty("ActivatedModIDs")]
-    private List<string> _activatedModIDs = new List<string>();
+    private IList<string> _activatedModIDs = new List<string>();
 
-    public List<string> ActivatedModIDs
+    public IList<string> ActivatedModIDs
     {
         get => _activatedModIDs;
         set
