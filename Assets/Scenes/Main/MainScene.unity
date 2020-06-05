@@ -1688,7 +1688,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1680595064}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.6880599
+  m_Size: 0.9999665
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9413,7 +9413,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1053.2269, y: -148.58281}
+  m_AnchoredPosition: {x: 1053.227, y: -148.5835}
   m_SizeDelta: {x: 1996.6205, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &962716868
@@ -9776,7 +9776,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070059576}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1070059579
 Camera:
   m_ObjectHideFlags: 0
@@ -14495,7 +14495,6 @@ MonoBehaviour:
   QuicksavePath: I:\ownCloud\Development\Unity\Berlin-Savegames\quicksave.json
   TextBoxMain: {fileID: 631625491}
   SecondaryDisplayContent: {fileID: 936959760}
-  SecondaryDisplayActive: 0
   UINPCsPresentContainer: {fileID: 1584895295}
   OutfitWindow: {fileID: 918231701}
   UIDialogue: {fileID: 428435806}

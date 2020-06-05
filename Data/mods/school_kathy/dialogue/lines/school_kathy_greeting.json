@@ -1,0 +1,34 @@
+{
+    "stages":{
+        "start":{
+            "1_enslaved_5":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1_image":"<img>events/school/kathy/cageSleep.jpg</img>",
+                        "5_d_1":"{_NPC1.nameFirst} is sleeping in her cage. It wouldn't be a good idea to speak to her with {NPC.school_pierre.nameFirst} around."
+                    }
+                },
+                "Condition": "(b_school_kathy_enslaved=true) AND (npcIsPresent(_NPCID:\"school_pierre\")=true)",
+                "TopicsVisible": false
+            },
+            "1_enslaved_7_pierreAbsent":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1_image":"<img>events/school/kathy/cageSleep.jpg</img>",
+                        "5_d_1":"{_NPC1.nameFirst} is sleeping in her cage. {NPC.school_pierre.nameFirst} is not here at the moment, so you might interact with her."
+                    }
+                },
+                "Options": {
+                    "5_talk":{
+                        "Text": "Talk to her",
+                        "TargetStage": "school_kathy_enslaved.start"
+                    }
+                },
+                "Condition": "b_school_kathy_enslaved=true",
+                "TopicsVisible": false
+            }
+        }
+    }
+}

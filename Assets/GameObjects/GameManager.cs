@@ -114,7 +114,24 @@ public class GameManager : MonoBehaviour
     public CultureInfo CultureInfo = CultureInfo.CreateSpecificCulture("en-US");
 
     public GameObject SecondaryDisplayContent;
-    public bool SecondaryDisplayActive;
+    private bool _secondaryDisplayActive;
+    public bool SecondaryDisplayActive
+    {
+        get => _secondaryDisplayActive;
+        set
+        {
+            _secondaryDisplayActive = value;
+            if (_secondaryDisplayActive)
+            {
+                SecondaryDisplayContent.SetActive(true);
+                Display.displays[1].Activate();
+            }
+            else
+            {
+                SecondaryDisplayContent.SetActive(false);
+            }
+        }
+    }
 
     public UINPCsPresentContainer UINPCsPresentContainer;
 
@@ -175,8 +192,7 @@ public class GameManager : MonoBehaviour
         if(Display.displays.Length > 1)
         {
             SecondaryDisplayActive = true;
-            SecondaryDisplayContent.SetActive(true);
-            Display.displays[1].Activate();
+            
         }
 
 

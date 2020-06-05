@@ -1,0 +1,9 @@
+{
+    "topics":{
+        "school_kathy_enslaved":{
+            "IsGreeting": true,
+            "IsEventExclusive": true,
+            "NPCFilter": {"IDs": ["school_kathy"]}
+        }
+    }
+}

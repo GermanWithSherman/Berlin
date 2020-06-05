@@ -4,11 +4,6 @@
             "Title": "Kathy",
             "NPCFilter": {"IDs": ["school_kathy"]}
         },
-        "school_kathy_enslaved":{
-            "IsGreeting": true,
-            "IsEventExclusive": true,
-            "NPCFilter": {"IDs": ["school_kathy"]}
-        },
         "school_kathy_greeting":{
             "IsGreeting": true,
             "NPCFilter": {"IDs": ["school_kathy"]},

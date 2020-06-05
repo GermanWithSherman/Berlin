@@ -60,29 +60,5 @@ public class ModableDictionary<V> : Dictionary<string,V>, IModable
                 this[modkv.Key] = modkv.Value;
             }
         }
-
-        /*foreach (KeyValuePair<string,V> modkv in modData)
-        {
-            if (!ContainsKey(modkv.Key))
-            {
-                this[modkv.Key] = Modable.copyDeep(modkv.Value);
-                continue;
-            }
-
-            if(this[modkv.Key].GetType() != modkv.Value.GetType()){
-                Debug.LogError("Type mismatch");
-                continue;
-            }
-
-            if(this[modkv.Key] is IModable)
-            {
-                //((IModable)this[modkv.Key]).mod((IModable)modkv.Value);
-                Modable.mod(this[modkv.Key], modkv.Value);
-                continue;
-            }
-
-            this[modkv.Key] = modkv.Value;
-
-        }*/
     }
 }
