@@ -12,7 +12,7 @@ public abstract class Value : IModable
     public abstract void mod(IModable modable);
 }
 
-public class Value<T>: Value
+public class Value<T>: Value, IModable
 {
     public enum ValueTypes
     {

@@ -40,11 +40,32 @@ public class ModableDictionary<V> : Dictionary<string,V>, IModable
 
         ModableDictionary<V> modData = (ModableDictionary<V>)modable;
 
-        foreach (KeyValuePair<string,V> modkv in modData)
+        if (typeof(V) is IModable)
+        {
+            foreach (KeyValuePair<string, V> modkv in modData)
+            {
+                if (!ContainsKey(modkv.Key))
+                {
+                    this[modkv.Key] = (V)Modable.copyDeep((IModable)modkv.Value);
+                    continue;
+                }
+
+                this[modkv.Key] = (V)Modable.mod((IModable)this[modkv.Key], (IModable)modkv.Value);
+            }
+        }
+        else
+        {
+            foreach (KeyValuePair<string, V> modkv in modData)
+            {
+                this[modkv.Key] = modkv.Value;
+            }
+        }
+
+        /*foreach (KeyValuePair<string,V> modkv in modData)
         {
             if (!ContainsKey(modkv.Key))
             {
-                this[modkv.Key] = modkv.Value;
+                this[modkv.Key] = Modable.copyDeep(modkv.Value);
                 continue;
             }
 
@@ -55,12 +76,13 @@ public class ModableDictionary<V> : Dictionary<string,V>, IModable
 
             if(this[modkv.Key] is IModable)
             {
-                ((IModable)this[modkv.Key]).mod((IModable)modkv.Value);
+                //((IModable)this[modkv.Key]).mod((IModable)modkv.Value);
+                Modable.mod(this[modkv.Key], modkv.Value);
                 continue;
             }
 
             this[modkv.Key] = modkv.Value;
 
-        }
+        }*/
     }
 }

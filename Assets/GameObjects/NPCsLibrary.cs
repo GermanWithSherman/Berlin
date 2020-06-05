@@ -4,36 +4,54 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
+
+
+
 
 public class NPCsLibrary : Cache<NPC>
 {
-    public string NPCsRawPath;
+    private class NPCsRawLibrary : Library<NPC>
+    {
+        public List<string> Ids
+        {
+            get => _dict.Keys.ToList(); //rawNPCDict.Keys.ToList();
+        }
 
-    private Dictionary<string, NPC> rawNPCDict = new Dictionary<string, NPC>();
+        public NPCsRawLibrary(string path, IEnumerable<string> modsPaths, bool loadInstantly = false)
+        {
+            this.path = path;
+            this.modsPaths = modsPaths;
+            if (loadInstantly)
+                load(path, modsPaths);
+        }
+    }
+
+    //private Dictionary<string, NPC> rawNPCDict = new Dictionary<string, NPC>();
+    private NPCsRawLibrary rawNPCsLibrary;//
 
     public List<string> Ids
     {
-        get => rawNPCDict.Keys.ToList();
+        get => rawNPCsLibrary.Ids; //rawNPCDict.Keys.ToList();
     }
 
-    /*public NPCRaw this[string key]
-    {
-        get => dict[key];
-    }*/
 
-    /*public NPCsLibrary(string path)
-    {
-        loadFromFolder(path);
-    }*/
 
-    void Start()
+    public void loadRawNpcsThreaded(string path, IEnumerable<string> modsPaths)
+    {
+        
+        rawNPCsLibrary = new NPCsRawLibrary(path, modsPaths,true);
+        //return rawNPCsLibrary.loadThreaded();
+    }
+
+    /*void Start()
     {
         loadFromFolder(GameManager.Instance.path(NPCsRawPath));
-    }
+    }*/
 
 
-    private void loadFromFolder(string path)
+    /*private void loadFromFolder(string path)
     {
         if (!Directory.Exists(path))
         {
@@ -52,11 +70,11 @@ public class NPCsLibrary : Cache<NPC>
             rawNPCDict.Add(Path.GetFileNameWithoutExtension(filePath),npc);
         }
 
-    }
+    }*/
 
     protected override NPC create(string key)
     {
-        NPC result = Modable.copyDeep(rawNPCDict[key]); //we don't want realized NPCRaws to clutter rawNPCDict, that's what the cache is for
+        NPC result = Modable.copyDeep(rawNPCsLibrary[key]); //we don't want realized NPCRaws to clutter rawNPCDict, that's what the cache is for
         result.templateApply();
 
         //Get the persistant Data from GameData
@@ -93,7 +111,7 @@ public class NPCsLibrary : Cache<NPC>
                 npc = NPCsRawLibrary[npcId];
                 isRaw = true;
             }*/
-            NPC npcRaw = rawNPCDict[npcId];
+            NPC npcRaw = rawNPCsLibrary[npcId];
 
             if(npcRaw.SchedulesDict.TryGetValue(subLocationID, out TimeFilters filters))
             {

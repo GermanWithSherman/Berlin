@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class TimeFilter
+[Modable(ModableAttribute.FieldOptions.OptOut)]
+public class TimeFilter : IModable, IModableAutofields
 {
     public short TimeStart=0;
     public short TimeEnd=2359;
@@ -16,6 +17,11 @@ public class TimeFilter
     private string _conditionString;
     [JsonIgnore]
     public Condition Condition { get => GameManager.Instance.ConditionCache[_conditionString]; }
+
+    public IModable copyDeep()
+    {
+        throw new NotImplementedException();
+    }
 
     public bool isValid(DateTime dateTime)
     {
@@ -64,6 +70,11 @@ public class TimeFilter
         }
 
         return false;
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new NotImplementedException();
     }
 }
 
