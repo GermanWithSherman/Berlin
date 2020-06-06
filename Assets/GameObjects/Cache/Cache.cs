@@ -74,13 +74,20 @@ public abstract class Cache<T> : MonoBehaviour where T : class,IModable
 
     protected void add(string key, T value)
     {
-        if (!_strongReferences.ContainsKey(key))
-            _strongReferences.Add(key,value);
-        strongReferencesPromote(key);
-        if (!_weakReferences.ContainsKey(key))
-            _weakReferences.Add(key, new WeakReference<T>(value));
-        else
-            _weakReferences[key].SetTarget(value);
+        try
+        {
+            if (!_strongReferences.ContainsKey(key))
+                _strongReferences.Add(key, value);
+            strongReferencesPromote(key);
+            if (!_weakReferences.ContainsKey(key))
+                _weakReferences[key] = new WeakReference<T>(value);
+            else
+                _weakReferences[key].SetTarget(value);
+        }
+        catch(Exception)
+        {
+            Debug.LogError($"Error Adding {key} to {GetType()}");
+        }
     }
 
 

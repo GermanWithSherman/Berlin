@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "ID","Version"
+    ],
+    "properties": {
+        "ID":{"type":"string","minLength":2},
+        "Name":{"type":"string","minLength":1},
+        "Version":{"type":"string","pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "Dependencies":{"type":"array","items": {"type":"string","minLength":2}}
+    }
+    
+}

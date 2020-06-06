@@ -32,11 +32,11 @@ public class InterruptServer : Library<Interrupt>
         }
     }
 
-    protected override ModableDictionary<Interrupt> loadFromFolder(string path)
+    protected override ModableObjectHashDictionary<Interrupt> loadFromFolder(string path)
     {
-        var result = new ModableDictionary<Interrupt>();
+        var result = new ModableObjectHashDictionary<Interrupt>();
 
-        ModableDictionary<InterruptsFile> dict = loadFromFolder<InterruptsFile>(path);
+        ModableObjectHashDictionary<InterruptsFile> dict = loadFromFolder<InterruptsFile>(path);
 
 
 

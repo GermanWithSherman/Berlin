@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class DependencySorter
 {
-    public static List<T> Sort<T>(IEnumerable<T> input) where T:IDependentObject<T>
+    public static L Sort<T, L>(IEnumerable<T> input) where T : IDependentObject<T> where L : IList<T>, new()
     {
 
         Dictionary<T, IList<T>> dependenciesLeft = new Dictionary<T, IList<T>>();
-        List<T> sortedObjects = new List<T>();
+        //List<T> sortedObjects = new List<T>();
+        L sortedObjects = new L();
         List<T> unsortedObjects = new List<T>();
 
         foreach (T dependentObject in input)

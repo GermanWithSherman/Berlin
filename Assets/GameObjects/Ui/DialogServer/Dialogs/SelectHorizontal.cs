@@ -50,6 +50,6 @@ public class SelectHorizontal : Dialog<SelectHorizontalSettings>
 public class SelectHorizontalSettings : DialogSetting
 {
     public string Headline;
-    public ModableDictionary<Option> Options = new ModableDictionary<Option>();
+    public ModableObjectSortedDictionary<Option> Options = new ModableObjectSortedDictionary<Option>();
 }
 

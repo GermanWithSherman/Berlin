@@ -8,6 +8,10 @@ public class FunctionParameters : Data
 
     public FunctionParameters() { }
 
+    public FunctionParameters(string rawParameters) : this(GameManager.Instance.GameData,rawParameters.Split(';')) {
+
+    }
+
     public FunctionParameters(string key, dynamic value)
     {
         data.Add(key, value);
@@ -21,6 +25,9 @@ public class FunctionParameters : Data
 
     public FunctionParameters(Data data,IEnumerable<string> keys)
     {
+        if (keys == null)
+            return;
+
         foreach (string key in keys)
         {
             string[] keyparts = key.Split(':');
@@ -28,6 +35,28 @@ public class FunctionParameters : Data
                 this.data.Add(key, data[key]);
             else
                 this.data.Add(keyparts[0], data[keyparts[1]]);
+        }
+    }
+
+    public FunctionParameters(Data data, IEnumerable<dynamic> values)
+    {
+        if (values == null)
+            return;
+
+        int i = 1;
+
+        foreach (dynamic value in values)
+        {
+            string parameterName = (i++).ToString();
+            string s = value as string;
+            if(s != null)
+            {
+                Add(parameterName,data[s]);
+            }
+            else
+            {
+                Add(parameterName, value);
+            }
         }
     }
 
@@ -52,6 +81,21 @@ public class FunctionParameters : Data
 
     protected override void set(string key, dynamic value)
     {
-        throw new System.NotImplementedException();
+        string[] keyParts = key.Split(new char[] { '.' }, 2);
+
+        if (keyParts.Length < 2)
+        {
+            Debug.LogError($"Can't set {key} in FunctionParameters");
+            return;
+        }
+
+        if (data.TryGetValue(keyParts[0], out dynamic entry))
+        {
+            Data entryData = entry as Data;
+            if (entryData != null)
+                entryData[keyParts[1]] = value;
+            else
+                Debug.LogError($"Key {key} is not Data in FunctionParameters");
+        }
     }
 }

@@ -1,17 +1,37 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 
-public class TimeFilter
+[Modable(ModableAttribute.FieldOptions.OptOut)]
+public class TimeFilter : IModable, IModableAutofields
 {
-    public short TimeStart=0;
-    public short TimeEnd=2359;
+    public int TimeStart=0;
+    public int TimeEnd =2359;
     public ModableStringList Days;
+    
+
+    [JsonProperty("Condition")]
+    private string _conditionString;
+    [JsonIgnore]
+    public Condition Condition { get => GameManager.Instance.ConditionCache[_conditionString]; }
+
+    public IModable copyDeep()
+    {
+        throw new NotImplementedException();
+    }
 
     public bool isValid(DateTime dateTime)
+    {
+        if (isValidDateTime(dateTime) && Condition.evaluate(GameManager.Instance.GameData))
+            return true;
+        return false;
+    }
+
+    public bool isValidDateTime(DateTime dateTime)
     {
         int time = dateTime.Minute + dateTime.Hour * 100;
         int day = (int)dateTime.DayOfWeek;
@@ -52,9 +72,14 @@ public class TimeFilter
 
         return false;
     }
+
+    public void mod(IModable modable)
+    {
+        throw new NotImplementedException();
+    }
 }
 
-public class TimeFilters : ModableDictionary<TimeFilter>, IModable
+public class TimeFilters : ModableObjectHashDictionary<TimeFilter>, IModable
 {
     public bool isValid(DateTime dateTime)
     {
@@ -71,7 +96,7 @@ public class TimeFilters : ModableDictionary<TimeFilter>, IModable
 
     public new IModable copyDeep()
     {
-        return base.copyDeep<TimeFilters>();
+        return copyDeep(this);
     }
 }
 

@@ -1,0 +1,21 @@
+{
+    "TemplateID": "default_female",
+    "NameFirst": "Katharina",
+    "NameNick": "Kathy",
+    "NameLast": "Gerhard",
+    "TexturePath": {
+        "Values":{
+            "5_default":{
+                "Value": "npc/school/students/kathyPortrait.jpg"
+            }
+        }
+    },
+    "Schedules":{
+        "dahlem/school/dorm.3_314": {
+            "5_default": {
+                "TimeStart": 0,
+                "TimeEnd": 2359
+            }
+        }
+    }
+}

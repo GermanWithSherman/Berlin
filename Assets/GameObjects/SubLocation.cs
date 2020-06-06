@@ -34,7 +34,7 @@ public class SubLocation : IModable, IInheritable
     }
     public Conditional<string> TexturePreviewPath;
 
-    public ModableDictionary<Option> Options = new ModableDictionary<Option> ();
+    public ModableObjectSortedDictionary<Option> Options = new ModableObjectSortedDictionary<Option> ();
 
     public TimeFilters OpeningTimes = new TimeFilters();
 

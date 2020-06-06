@@ -12,7 +12,7 @@ public abstract class Value : IModable
     public abstract void mod(IModable modable);
 }
 
-public class Value<T>: Value
+public class Value<T>: Value, IModable
 {
     public enum ValueTypes
     {
@@ -27,7 +27,7 @@ public class Value<T>: Value
     [JsonConverter(typeof(StringEnumConverter))]
     public ValueTypes ValueType = ValueTypes.None;
 
-    public ModableDictionary<string> Parameters = new ModableDictionary<string>();
+    public ModableValueTypeHashDictionary<string> Parameters = new ModableValueTypeHashDictionary<string>();
 
     public string Key; //Key for Reference and WeightedStringList and Function
 

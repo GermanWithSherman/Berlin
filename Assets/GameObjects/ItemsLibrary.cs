@@ -25,11 +25,11 @@ public class ItemsLibrary : Library<Item>
 
     }
 
-    protected override ModableDictionary<Item> loadFromFolder(string path)
+    protected override ModableObjectHashDictionary<Item> loadFromFolder(string path)
     {
-        var result = new ModableDictionary<Item>();
+        var result = new ModableObjectHashDictionary<Item>();
 
-        ModableDictionary<ItemsFile> dict = loadFromFolder<ItemsFile>(path);
+        ModableObjectHashDictionary<ItemsFile> dict = loadFromFolder<ItemsFile>(path);
 
 
 

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,17 @@ public class Mod : IDependentObject<Mod>
     public string ID;
     public string Name;
     public string Version;
+
+    [JsonIgnore]
+    public string DisplayName
+    {
+        get
+        {
+            if (!String.IsNullOrWhiteSpace(Name))
+                return Name;
+            return ID;
+        }
+    }
 
     [JsonProperty("Dependencies")]
     public List<string> dependencyIds = new List<string>();

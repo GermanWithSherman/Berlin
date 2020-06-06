@@ -1,0 +1,32 @@
+{
+    "sexSetF":{
+        "5_d_0":{
+            "Type":"Set",
+            "Values": {
+                "_P.1.genderVisible": "f",
+                "_P.1.breastVolume": 400,
+                "_P.1.hairLength": 300000,
+                "_P.1.hairBodyLength": 0,
+                "_P.1.hairPubicLength": 0,
+                "_P.1.height": 1650,
+                "_P.1.penisLength": 0,
+                "_P.1.weight": 55000
+            }
+        }
+    },
+    "sexSetM":{
+        "5_d_0":{
+            "Type":"Set",
+            "Values": {
+                "_P.1.genderVisible": "m",
+                "_P.1.breastVolume": 0,
+                "_P.1.hairLength": 50000,
+                "_P.1.hairBodyLength": 15000,
+                "_P.1.hairPubicLength": 15000,
+                "_P.1.height": 1800,
+                "_P.1.penisLength": 1000,
+                "_P.1.weight": 75000
+            }
+        }
+    }
+}

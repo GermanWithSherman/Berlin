@@ -11,7 +11,7 @@ public class PC : NPC
 
     public ItemsCollection items = new ItemsCollection();
 
-    public ModableDictionary<Outfit> outfits = new ModableDictionary<Outfit>();
+    public Dictionary<string,Outfit> outfits = new Dictionary<string, Outfit>();
     public string currentOutfitId="DEFAULT";
     [JsonIgnore]
     public Outfit currentOutfit

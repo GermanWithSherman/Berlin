@@ -79,6 +79,7 @@
     <Compile Include="Assets\GameObjects\CharacterData.cs" />
     <Compile Include="Assets\GameObjects\Commands\Command.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandBreak.cs" />
+    <Compile Include="Assets\GameObjects\Commands\CommandCall.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandConditional.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandConsume.cs" />
     <Compile Include="Assets\GameObjects\Commands\CommandContinue.cs" />
@@ -145,7 +146,10 @@
     <Compile Include="Assets\GameObjects\Mods\ModManifest.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModableDictionary.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModableList.cs" />
+    <Compile Include="Assets\GameObjects\Mods\ModableListDynamic.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModableTexture.cs" />
+    <Compile Include="Assets\GameObjects\Mods\ModsMenu.cs" />
+    <Compile Include="Assets\GameObjects\Mods\ModsMenuMod.cs" />
     <Compile Include="Assets\GameObjects\Mods\ModsServer.cs" />
     <Compile Include="Assets\GameObjects\NPC.cs" />
     <Compile Include="Assets\GameObjects\NPCFilter.cs" />
@@ -158,6 +162,8 @@
     <Compile Include="Assets\GameObjects\OutfitRequirement.cs" />
     <Compile Include="Assets\GameObjects\PC.cs" />
     <Compile Include="Assets\GameObjects\Preferences.cs" />
+    <Compile Include="Assets\GameObjects\ProceduresFile.cs" />
+    <Compile Include="Assets\GameObjects\ProceduresLibrary.cs" />
     <Compile Include="Assets\GameObjects\SaveFile.cs" />
     <Compile Include="Assets\GameObjects\Schedule.cs" />
     <Compile Include="Assets\GameObjects\Schedules.cs" />

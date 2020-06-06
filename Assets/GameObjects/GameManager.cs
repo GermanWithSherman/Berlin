@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 {
     public const string PlayerVersion = "0.0.1";
 
+
     public static GameManager Instance { get; private set; }
 
     public Preferences Preferences;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     public ItemsLibrary ItemsLibrary;
     public LocationTypeLibrary LocationTypeLibrary;
     public NPCsLibrary NPCsLibrary;
+    public ProceduresLibrary ProceduresLibrary;
     public TemplateLibrary TemplateLibrary;
 
     public DialogServer DialogServer;
@@ -111,8 +113,27 @@ public class GameManager : MonoBehaviour
 
     public CultureInfo CultureInfo = CultureInfo.CreateSpecificCulture("en-US");
 
-    public UINPCsPresentContainer UINPCsPresentContainer;
+    public GameObject SecondaryDisplayContent;
+    private bool _secondaryDisplayActive;
+    public bool SecondaryDisplayActive
+    {
+        get => _secondaryDisplayActive;
+        set
+        {
+            _secondaryDisplayActive = value;
+            if (_secondaryDisplayActive)
+            {
+                SecondaryDisplayContent.SetActive(true);
+                Display.displays[1].Activate();
+            }
+            else
+            {
+                SecondaryDisplayContent.SetActive(false);
+            }
+        }
+    }
 
+    public UINPCsPresentContainer UINPCsPresentContainer;
 
     public OutfitWindow OutfitWindow;
 
@@ -130,6 +151,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject LoadingScreen;
 
+    private bool uiUpdateBlocked = false;
     private bool uiUpdatePending;
     public List<UIUpdateListener> updateListeners;
 
@@ -167,25 +189,32 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        PC test = new PC();
-        test.HairPubicStyle = "Black and white";
-
-        PC mod = new PC();
-        mod.HairPubicStyle = "Pink";
-
-        test = Modable.mod(test,mod);
-
-        //PC copy = Modable.copyDeep(test);
-        Debug.Log(test.HairPubicStyle);
+        if(Display.displays.Length > 1)
+        {
+            SecondaryDisplayActive = true;
+            
+        }
 
 
         ModsServer = new ModsServer(path("mods"), Preferences);
 
-        List<string> modsPaths = ModsServer.ActivatedModsPaths;
+        loadStaticData();
+
+        StartMenu.show();
+
+        LoadingScreen.SetActive(false);
+
+        UIDialogue.hide();
+        UINotes.hide();
+    }
+
+    public void loadStaticData()
+    {
+        IEnumerable<string> modsPaths = ModsServer.ActivatedModsPaths;
 
         ActivityLibrary = new ActivityLibrary();
 
-        DialogueTopicLibrary = new DialogueTopicLibrary(path("dialogue/topics"), pathsMods(modsPaths, "dialogue/topics") );
+        DialogueTopicLibrary = new DialogueTopicLibrary(path("dialogue/topics"), pathsMods(modsPaths, "dialogue/topics"));
         Thread dialogueTopicLibraryLoadThread = DialogueTopicLibrary.loadThreaded();
 
         FunctionsLibrary = new FunctionsLibrary(path("functions"), pathsMods(modsPaths, "functions"));
@@ -200,9 +229,14 @@ public class GameManager : MonoBehaviour
         LocationTypeLibrary = new LocationTypeLibrary(path("locationtypes"), pathsMods(modsPaths, "locationtypes"));
         Thread locationTypeLibraryLoadThread = LocationTypeLibrary.loadThreaded();
 
+        ProceduresLibrary = new ProceduresLibrary(path("procedures"), pathsMods(modsPaths, "procedures"));
+        Thread proceduresLibraryLoadThread = ProceduresLibrary.loadThreaded();
+
         TemplateLibrary = new TemplateLibrary(path("templates"), pathsMods(modsPaths, "templates"));
         Thread templateLibraryLoadThread = TemplateLibrary.loadThreaded();
 
+        Thread rawNPCsLoadThread = NPCsLibrary.loadRawNpcsThreaded(path("npcs"), pathsMods(modsPaths, "npcs"));
+        //NPCsLibrary.loadRawNpcsThreaded(path("npcs"), pathsMods(modsPaths, "npcs"));
         Misc = File2Object<Misc>(path("misc.json"));
 
 
@@ -211,19 +245,14 @@ public class GameManager : MonoBehaviour
         itemsLibraryLoadThread.Join();
         interruptServerLoadThread.Join();
         locationTypeLibraryLoadThread.Join();
+        proceduresLibraryLoadThread.Join();
+        rawNPCsLoadThread.Join();
         templateLibraryLoadThread.Join();
-
-        StartMenu.show();
-
-        LoadingScreen.SetActive(false);
-
-        UIDialogue.hide();
-        UINotes.hide();
     }
 
     void Update()
     {
-        if (uiUpdatePending)
+        if (uiUpdatePending && !uiUpdateBlocked)
             _uiUpdate();
     }
 
@@ -303,6 +332,8 @@ public class GameManager : MonoBehaviour
     {
         try
         {
+            uiUpdateBlocked = true;
+
             SaveFile saveFile = File2Object<SaveFile>(path);
             Debug.Log($"Game loaded from {path}");
 
@@ -351,6 +382,10 @@ public class GameManager : MonoBehaviour
         {
             ErrorMessage.Show("Error: "+e.Message);
             Debug.LogError(e);
+        }
+        finally
+        {
+            uiUpdateBlocked = false;
         }
     }
 
@@ -417,7 +452,20 @@ public class GameManager : MonoBehaviour
         uiUpdate();
     }
 
-    
+    public bool npcIsPresent(string npcID)
+    {
+        return npcIsPresent(NPCsLibrary[npcID]);
+    }
+
+    public bool npcIsPresent(NPC npc)
+    {
+        foreach (NPC presentNPC in GameData.NpcsPresent)
+        {
+            if (presentNPC == npc)
+                return true;
+        }
+        return false;
+    }
 
     private void npcsPresentUpdate()
     {
@@ -487,7 +535,11 @@ public class GameManager : MonoBehaviour
 
         return result;
     }
-     
+
+    public void ProcedureExecute(string procedureID, IEnumerable<dynamic> parameters)
+    {
+        ProceduresLibrary.procedureExecute(procedureID,GameData,parameters);
+    }
 
     public void shopShow(string shopId)
     {

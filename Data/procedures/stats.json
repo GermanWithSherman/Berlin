@@ -1,0 +1,12 @@
+{
+    "statsFill":{
+        "5_d_0":{
+            "Type":"Set",
+            "Values": {
+                "_P.1.statHunger":1000000,
+                "_P.1.statHygiene":1000000,
+                "_P.1.statSleep":1000000
+            }
+        }
+    }
+}

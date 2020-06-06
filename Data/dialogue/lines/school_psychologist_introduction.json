@@ -232,7 +232,7 @@
                     "setDormAccess":{"Type": "Set","Values": {"s_school_psychologist_intro_stage": "gotoAssistant"}},
                     "setExperiment":{"Type": "Set",
                         "Values": {
-                            "b_school_psychologist_participant": "<speaker=_NPC1>You will watch a video with this headset. Try to remember everything you see, I will ask you some question afterwards. And drink the water beforehead. The video is long and you shouldn't get thirsty watching it. That's all.</speaker>",
+                            "b_school_psychologist_participant": true,
                             "b_school_psychologist_hypnosis": true
                         },
                         "ValuesFromSetters": {

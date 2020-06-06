@@ -11,11 +11,11 @@ public class GameData: Data
 
     
 
-    public new dynamic this[string key]
+    /*public new dynamic this[string key]
     {
         get => get(key);
         set => set(key,value);
-    }
+    }*/
 
     public UISettings UISettings = new UISettings();
 
@@ -53,8 +53,12 @@ public class GameData: Data
         {
             switch (key)
             {
-                case "example":
-                    return "tatata";
+                case "PC":
+                    return CharacterData.PC;
+                case "UI":
+                    return UISettings;
+                case "World":
+                    return WorldData;
             }
         }
         else if (keyParts.Length == 2)
@@ -87,47 +91,53 @@ public class GameData: Data
 
         if (_additionalData.ContainsKey(key))
         {
-            switch (key[0])
+            try
             {
-                case 'b':
-                    return (bool)_additionalData[key];
-                case 'c':
-                    return (DateTime)_additionalData[key];
-                case 'i':
-                    return (int)_additionalData[key];
-                case 'f':
-                    return (float)_additionalData[key];
-                case 'd':
-                    return (double)_additionalData[key];
-                case 'm':
-                    return (decimal)_additionalData[key];
-                case 's':
-                default:
-                    if (_additionalData[key] == null)
-                        return "";
-                    return _additionalData[key].ToString();
+                switch (key[0])
+                {
+                    case 'b':
+                        return (bool)_additionalData[key];
+                    case 'c':
+                        return (DateTime)_additionalData[key];
+                    case 'i':
+                        return (int)_additionalData[key];
+                    case 'f':
+                        return (float)_additionalData[key];
+                    case 'd':
+                        return (double)_additionalData[key];
+                    case 'm':
+                        return (decimal)_additionalData[key];
+                    case 's':
+                    default:
+                        if (_additionalData[key] == null)
+                            return "";
+                        return _additionalData[key].ToString();
+                }
+            }
+            catch
+            {
+                Debug.LogError("Failed to cast {key} in GameData.get()");
             }
         }
-        else
+        
+        Debug.LogWarning($"Requesting unknown value {key} from Gamedata. Returning default data.");
+        switch (key[0])
         {
-            Debug.LogWarning($"Requesting unknown value {key} from Gamedata. Returning default data.");
-            switch (key[0])
-            {
-                case 'b':
-                    return false;
-                case 'i':
-                    return 0;
-                case 'f':
-                    return 0f;
-                case 'd':
-                    return 0d;
-                case 'm':
-                    return 0m;
-                case 's':
-                default:
-                    return "";
-            }
+            case 'b':
+                return false;
+            case 'i':
+                return 0;
+            case 'f':
+                return 0f;
+            case 'd':
+                return 0d;
+            case 'm':
+                return 0m;
+            case 's':
+            default:
+                return "";
         }
+        
 
     }
 

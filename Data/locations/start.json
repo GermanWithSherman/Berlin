@@ -12,7 +12,9 @@
                     "Text":"Test",
                     "Commands":{
                         "1":{
-                            "Type": "Outfit"
+                            "Type": "Call",
+                            "ProcedureID": "sexSetF",
+                            "Parameters": ["PC"]
                         }
                     }
                 },
@@ -54,14 +56,16 @@
                                 "Type":"Conditional",
                                 "Condition": "PC.genderVisible=\"f\"",
                                 "Commands":{
-                                    "goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Female"}
+                                    "5_call_sexSetF":{"Type":"Call","ProcedureID": "sexSetF"},
+                                    "8_goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Female"}
                                 }
                             },
                             "goto_appearance_male":{
                                 "Type":"Conditional",
                                 "Condition": "PC.genderVisible=\"m\"",
                                 "Commands":{
-                                    "goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Male"}
+                                    "5_call_sexSetM":{"Type":"Call","ProcedureID": "sexSetM"},
+                                    "8_goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Male"}
                                 }
                             }
                         }

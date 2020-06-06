@@ -40,26 +40,26 @@ public abstract class Library<T> where T : IModable
 
     protected virtual void load(string path, IEnumerable<string> modPaths)
     {
-        ModableDictionary<T> original = loadFromFolder(path);
+        ModableObjectHashDictionary<T> original = loadFromFolder(path);
 
         foreach (string modPath in modPaths)
         {
-            ModableDictionary<T> mod = loadFromFolder(modPath);
+            ModableObjectHashDictionary<T> mod = loadFromFolder(modPath);
             original.mod(mod);
         }
 
         _dict = original;
     }
 
-    protected virtual ModableDictionary<T> loadFromFolder(string path)
+    protected virtual ModableObjectHashDictionary<T> loadFromFolder(string path)
     {
         //_dict = loadFromFolder<T>(path);
         return loadFromFolder<T>(path);
     }
 
-    protected ModableDictionary<S> loadFromFolder<S>(string path) where S : IModable
+    protected ModableObjectHashDictionary<S> loadFromFolder<S>(string path) where S : IModable
     {
-        ModableDictionary<S> result = new ModableDictionary< S>();
+        ModableObjectHashDictionary<S> result = new ModableObjectHashDictionary< S>();
         if (!Directory.Exists(path))
         {
             //Debug.LogError($"Path {path} does not exist");

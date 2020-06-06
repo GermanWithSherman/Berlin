@@ -19,7 +19,7 @@ public class EventStage : IModable, IInheritable
 
     public CommandsCollection Commands = new CommandsCollection();
 
-    public ModableDictionary<Option> Options = new ModableDictionary<Option> ();
+    public ModableObjectSortedDictionary<Option> Options = new ModableObjectSortedDictionary<Option> ();
 
     [JsonIgnore]
     public Texture Texture { get => GameManager.Instance.TextureCache[TexturePath]; }
