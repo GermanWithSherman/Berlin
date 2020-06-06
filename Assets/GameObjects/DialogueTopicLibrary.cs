@@ -51,11 +51,11 @@ public class DialogueTopicLibrary : Library<DialogueTopic>
         Prioritizable.Sort(_greetings);
     }
 
-    protected override ModableDictionary<DialogueTopic> loadFromFolder(string path)
+    protected override ModableObjectHashDictionary<DialogueTopic> loadFromFolder(string path)
     {
-        var result = new ModableDictionary<DialogueTopic>();
+        var result = new ModableObjectHashDictionary<DialogueTopic>();
 
-        ModableDictionary<DialogueTopicsFile> dict = loadFromFolder<DialogueTopicsFile>(path);
+        ModableObjectHashDictionary<DialogueTopicsFile> dict = loadFromFolder<DialogueTopicsFile>(path);
 
         foreach (DialogueTopicsFile dialogueTopicsFile in dict.Values)
         {

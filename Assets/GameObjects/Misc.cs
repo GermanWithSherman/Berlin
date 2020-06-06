@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Misc
 {
-    public ModableDictionary<string[]> dayNightCycle;
+    public ModableValueTypeHashDictionary<string[]> dayNightCycle;
 
     public string dayNightState(DateTime dateTime)
     {

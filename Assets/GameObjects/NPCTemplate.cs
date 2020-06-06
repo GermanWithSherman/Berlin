@@ -20,7 +20,7 @@ public class NPCTemplate : IModable, IInheritable
 
     public Value<int?> Age;
 
-    public ModableDictionary<TimeFilters> Schedules = new ModableDictionary<TimeFilters>();
+    public ModableObjectHashDictionary<TimeFilters> Schedules = new ModableObjectHashDictionary<TimeFilters>();
 
     [JsonIgnore]
     public bool inheritanceResolved = false;

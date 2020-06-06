@@ -7,10 +7,6 @@
         "Values":{
             "5_default":{
                 "Value": "npc/school/students/kathyPortrait.jpg"
-            },
-            "5_enslaved":{
-                "Value": "npc/school/students/kathyPortraitE.jpg",
-                "Condition": "b_school_kathy_enslaved=true"
             }
         }
     },

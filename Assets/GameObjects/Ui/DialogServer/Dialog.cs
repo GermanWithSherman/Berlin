@@ -62,5 +62,5 @@ public abstract class Dialog<T> : Dialog where T : DialogSetting
 public abstract class DialogSetting
 {
     public CommandsCollection onComplete = new CommandsCollection();
-    public ModableDictionary<string> Targets = new ModableDictionary<string>();
+    public ModableValueTypeHashDictionary<string> Targets = new ModableValueTypeHashDictionary<string>();
 }

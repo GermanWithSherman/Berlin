@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Obsolete]
-public class Schedules : ModableDictionary<Schedule>
+public class Schedules : ModableObjectHashDictionary<Schedule>
 {
     /*public bool isScheduled(DateTime dateTime)
     {

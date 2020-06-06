@@ -40,7 +40,7 @@ public class Conditional<T> : Conditional, IModable
     [JsonProperty]
     private T Value = default(T);
 
-    public ModableDictionary<Value<T>> Values = new ModableDictionary<Value<T>>();
+    public ModableObjectSortedDictionary<Value<T>> Values = new ModableObjectSortedDictionary<Value<T>>();
 
     [JsonConverter(typeof(StringEnumConverter))]
     public ConditionalMode Mode = ConditionalMode.Default;

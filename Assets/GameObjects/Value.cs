@@ -27,7 +27,7 @@ public class Value<T>: Value, IModable
     [JsonConverter(typeof(StringEnumConverter))]
     public ValueTypes ValueType = ValueTypes.None;
 
-    public ModableDictionary<string> Parameters = new ModableDictionary<string>();
+    public ModableValueTypeHashDictionary<string> Parameters = new ModableValueTypeHashDictionary<string>();
 
     public string Key; //Key for Reference and WeightedStringList and Function
 

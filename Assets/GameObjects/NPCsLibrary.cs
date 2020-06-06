@@ -38,11 +38,11 @@ public class NPCsLibrary : Cache<NPC>
 
 
 
-    public void loadRawNpcsThreaded(string path, IEnumerable<string> modsPaths)
+    public Thread loadRawNpcsThreaded(string path, IEnumerable<string> modsPaths)
     {
         
-        rawNPCsLibrary = new NPCsRawLibrary(path, modsPaths,true);
-        //return rawNPCsLibrary.loadThreaded();
+        rawNPCsLibrary = new NPCsRawLibrary(path, modsPaths);
+        return rawNPCsLibrary.loadThreaded();
     }
 
     /*void Start()

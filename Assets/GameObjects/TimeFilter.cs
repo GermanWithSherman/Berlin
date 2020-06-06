@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 [Modable(ModableAttribute.FieldOptions.OptOut)]
 public class TimeFilter : IModable, IModableAutofields
 {
-    public short TimeStart=0;
-    public short TimeEnd=2359;
+    public int TimeStart=0;
+    public int TimeEnd =2359;
     public ModableStringList Days;
+    
 
     [JsonProperty("Condition")]
     private string _conditionString;
@@ -78,7 +79,7 @@ public class TimeFilter : IModable, IModableAutofields
     }
 }
 
-public class TimeFilters : ModableDictionary<TimeFilter>, IModable
+public class TimeFilters : ModableObjectHashDictionary<TimeFilter>, IModable
 {
     public bool isValid(DateTime dateTime)
     {
@@ -95,7 +96,7 @@ public class TimeFilters : ModableDictionary<TimeFilter>, IModable
 
     public new IModable copyDeep()
     {
-        return base.copyDeep<TimeFilters>();
+        return copyDeep(this);
     }
 }
 

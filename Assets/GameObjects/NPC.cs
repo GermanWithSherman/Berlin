@@ -67,7 +67,7 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
     }
 
     [JsonProperty("Schedules")]
-    public ModableDictionary<TimeFilters> SchedulesDict = new ModableDictionary<TimeFilters>();
+    public ModableObjectHashDictionary<TimeFilters> SchedulesDict = new ModableObjectHashDictionary<TimeFilters>();
     //public ModableDictionary<Schedule> SchedulesDict = new ModableDictionary<Schedule>();
     public bool ShouldSerializeSchedulesDict() => false;
     //[JsonIgnore]
