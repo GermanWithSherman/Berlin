@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class ItemsFile : IModable
 {
-    public ModableDictionary<Item> Items = new ModableDictionary<Item>();
+    public ModableObjectHashDictionary<Item> Items = new ModableObjectHashDictionary<Item>();
 
     public IModable copyDeep()
     {

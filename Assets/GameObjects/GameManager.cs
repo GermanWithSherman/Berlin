@@ -114,7 +114,24 @@ public class GameManager : MonoBehaviour
     public CultureInfo CultureInfo = CultureInfo.CreateSpecificCulture("en-US");
 
     public GameObject SecondaryDisplayContent;
-    public bool SecondaryDisplayActive;
+    private bool _secondaryDisplayActive;
+    public bool SecondaryDisplayActive
+    {
+        get => _secondaryDisplayActive;
+        set
+        {
+            _secondaryDisplayActive = value;
+            if (_secondaryDisplayActive)
+            {
+                SecondaryDisplayContent.SetActive(true);
+                Display.displays[1].Activate();
+            }
+            else
+            {
+                SecondaryDisplayContent.SetActive(false);
+            }
+        }
+    }
 
     public UINPCsPresentContainer UINPCsPresentContainer;
 
@@ -175,18 +192,29 @@ public class GameManager : MonoBehaviour
         if(Display.displays.Length > 1)
         {
             SecondaryDisplayActive = true;
-            SecondaryDisplayContent.SetActive(true);
-            Display.displays[1].Activate();
+            
         }
 
 
         ModsServer = new ModsServer(path("mods"), Preferences);
 
+        loadStaticData();
+
+        StartMenu.show();
+
+        LoadingScreen.SetActive(false);
+
+        UIDialogue.hide();
+        UINotes.hide();
+    }
+
+    public void loadStaticData()
+    {
         IEnumerable<string> modsPaths = ModsServer.ActivatedModsPaths;
 
         ActivityLibrary = new ActivityLibrary();
 
-        DialogueTopicLibrary = new DialogueTopicLibrary(path("dialogue/topics"), pathsMods(modsPaths, "dialogue/topics") );
+        DialogueTopicLibrary = new DialogueTopicLibrary(path("dialogue/topics"), pathsMods(modsPaths, "dialogue/topics"));
         Thread dialogueTopicLibraryLoadThread = DialogueTopicLibrary.loadThreaded();
 
         FunctionsLibrary = new FunctionsLibrary(path("functions"), pathsMods(modsPaths, "functions"));
@@ -207,6 +235,8 @@ public class GameManager : MonoBehaviour
         TemplateLibrary = new TemplateLibrary(path("templates"), pathsMods(modsPaths, "templates"));
         Thread templateLibraryLoadThread = TemplateLibrary.loadThreaded();
 
+        Thread rawNPCsLoadThread = NPCsLibrary.loadRawNpcsThreaded(path("npcs"), pathsMods(modsPaths, "npcs"));
+        //NPCsLibrary.loadRawNpcsThreaded(path("npcs"), pathsMods(modsPaths, "npcs"));
         Misc = File2Object<Misc>(path("misc.json"));
 
 
@@ -216,14 +246,8 @@ public class GameManager : MonoBehaviour
         interruptServerLoadThread.Join();
         locationTypeLibraryLoadThread.Join();
         proceduresLibraryLoadThread.Join();
+        rawNPCsLoadThread.Join();
         templateLibraryLoadThread.Join();
-
-        StartMenu.show();
-
-        LoadingScreen.SetActive(false);
-
-        UIDialogue.hide();
-        UINotes.hide();
     }
 
     void Update()

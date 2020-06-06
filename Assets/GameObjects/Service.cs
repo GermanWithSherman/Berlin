@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Service
+[Modable(ModableAttribute.FieldOptions.OptOut)]
+public class Service : IModable, IModableAutofields
 {
     public string Label;
 
@@ -23,6 +24,16 @@ public class Service
 
         if (!StayOpen)
             GameManager.Instance.UIServicesWindow.hide();
+    }
+
+    public IModable copyDeep()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void mod(IModable modable)
+    {
+        throw new System.NotImplementedException();
     }
 
     private void execute()

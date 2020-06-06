@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using UnityEngine;
 
-public class ItemsCollection : ModableDictionary<string>, IModable
+public class ItemsCollection : ModableValueTypeHashDictionary<string>, IModable
 {
 
     private Dictionary<string, Item> cache = new Dictionary<string, Item>();
@@ -139,7 +139,7 @@ public class ItemsCollection : ModableDictionary<string>, IModable
 
     public new IModable copyDeep()
     {
-        return base.copyDeep<ItemsCollection>();
+        return copyDeep();
     }
 
     [OnDeserialized]

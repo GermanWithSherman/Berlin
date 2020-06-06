@@ -14,7 +14,7 @@ public class Location : IModable
 
     public string Default = "main";
 
-    public ModableDictionary<SubLocation> subLocations = new ModableDictionary<SubLocation>();
+    public ModableObjectHashDictionary<SubLocation> subLocations = new ModableObjectHashDictionary<SubLocation>();
 
     public SubLocation this[string key]
     {
@@ -57,7 +57,10 @@ public class Location : IModable
             return;
         }
 
-        subLocations.mod(((Location)modable).subLocations);
+        Location modableLocation = (Location)modable;
+
+        //subLocations.mod(((Location)modable).subLocations);
+        subLocations = Modable.mod(subLocations, modableLocation.subLocations);
     }
 
     /*[OnDeserialized]

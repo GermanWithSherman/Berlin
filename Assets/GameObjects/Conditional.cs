@@ -33,14 +33,14 @@ public abstract class Conditional : IModable
 
 }
 
-public class Conditional<T> : Conditional
+public class Conditional<T> : Conditional, IModable
 {
     public enum ConditionalMode { Default, Enum, Random }
 
     [JsonProperty]
     private T Value = default(T);
 
-    public ModableDictionary<Value<T>> Values = new ModableDictionary<Value<T>>();
+    public ModableObjectSortedDictionary<Value<T>> Values = new ModableObjectSortedDictionary<Value<T>>();
 
     [JsonConverter(typeof(StringEnumConverter))]
     public ConditionalMode Mode = ConditionalMode.Default;
@@ -175,8 +175,11 @@ public class Conditional<T> : Conditional
     public void mod(Conditional<T> modable)
     {
         if (modable == null) return;
+
         Value = (modable.Value != null && !modable.Value.Equals(default(T))) ? modable.Value : Value;
-        Values.mod(modable.Values);
+
+        Values = Modable.mod(Values,modable.Values);
+        //Values.mod(modable.Values);
     }
 
     public override void mod(IModable modable)

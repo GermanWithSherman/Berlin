@@ -22,7 +22,7 @@
         "dormBathroomTemplate":{
             "Label":"Bathroom",
             "Text":"Bathroom",
-            "TexturePath":{"Value":"locations/dahlem/school/dormBath3.jpg"}
+            "TexturePath":{"Value":"locations/dahlem/school/dormBath2.jpg"}
         },
         "dormOwnedRoomTemplate":{
             "LocationConnections": {
@@ -200,7 +200,7 @@
             "Inherit": "dahlem/school/dorm.dormOwnedRoomTemplate",
             "Label":"Room 107",
             "Text":{"Value": "Room 107"},
-            "TexturePath":{"Value":"locations/dahlem/school/dorm207.jpg"},
+            "TexturePath":{"Value":"locations/dahlem/school/dorm107.jpg"},
             "LocationConnections": {
                 "leave": {
                     "TargetLocationId": ".1_hallway",
@@ -263,7 +263,7 @@
         },
         "2_211":{
             "Inherit": "dahlem/school/dorm.dormOwnedRoomTemplate",
-            "TexturePath":{"Value":"locations/dahlem/school/dorm311.jpg"},
+            "TexturePath":{"Value":"locations/dahlem/school/dorm211.jpg"},
             
             "Label":"Room 211",
             "Text":"Room 211",
@@ -277,7 +277,7 @@
             }
         },
         "2_211_intro":{
-            "TexturePath":{"Value":"locations/dahlem/school/dorm311.jpg"},
+            "TexturePath":{"Value":"locations/dahlem/school/dorm211.jpg"},
             
             "Label":"Room 211",
             "Text":"Room 211",
@@ -353,7 +353,12 @@
                 "3_314":{
                     "TargetLocationId": ".3_314",
                     "Duration": 30,
-                    "Condition": "b_school_314_known=true"
+                    "Condition": "b_school_314_access=true"
+                },
+                "3_314_DEBUG":{
+                    "Label": "314 (DEBUG)",
+                    "TargetLocationId": ".3_314",
+                    "Duration": 30
                 }
             }
         },
@@ -362,12 +367,36 @@
             "Text": {
                 "Value": "Room 314 ({NPC.school_pierre.nameFirst}s room)"
             },
-            "TexturePath":{"Value":"locations/dahlem/school/dorm414.png"},
+            "TexturePath":{"Value":"locations/dahlem/school/dorm314.png"},
             "LocationConnections": {
                 "leave": {
                     "TargetLocationId": ".3_hallway",
                     "Duration": 30,
                     "Label": "Leave"
+                }
+            },
+            "Options":{
+                "5_lookForKathy":{
+                    "Text": {
+                        "Value": "Look for {NPC.school_kathy.nameFirst}"
+                    },
+                    "Commands": {
+                        "5_dialogue":{
+                            "Type": "Dialogue",
+                            "NPCID": "school_pierre",
+                            "TopicID": "school_pierre_kathy_investigate"
+                        }
+                    },
+                    "State": {
+                        "Values": {
+                            "5_d":{
+                                "Condition": "b_school_kathy_enslaved=false",
+                                "Value": {
+                                    "Visible": false
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },

@@ -1,5 +1,31 @@
+
+
+Global values:
+Put every custom value in the global space.
+You have to use the following prefixes (important for Conditions):
+b - Boolean (true or false)
+c - DateTime (YYYY-MM-ddThh:mm:ss)
+d - double
+f - float
+i - signed 32 bit integer
+m - decimal
+s - string
+
+
+b_school_classMet:                  Has the PC met all classmates (e.g. by going to school at the first day?)
+
 b_school_psychologist_participant:  Can the PC take part in the psychologists experiments?
 b_school_psychologist_hypnosis:     Is the PC hypnosized?
+
+b_school_314_access:                Has the PC access to room 314 in the dorm?
+
+b_school_kathy_introduced:          Has Kathy introduced herself to the PC?
+b_school_kathy_enslaved:            Is Kathy enslaved?
+b_school_kathy_enslaved_known:      Does the PC know it?
+
+b_sex_male:                         Can the PC have sex as a male?
+
+c_school_kathy_enslavement_start:   The time enslavement of Kathy starts (set by her introduction dialogue)
 
 s_school_psychologist_intro_stage:  gotoAssistant
 

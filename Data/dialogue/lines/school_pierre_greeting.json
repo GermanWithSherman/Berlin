@@ -1,0 +1,54 @@
+{
+    "stages":{
+        "start":{
+            "3_greeting_FirstTime_WasAtClass":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1_image":"<img>npc/school/students/pierrePortrait.png</img>",
+                        "5_introduction_1":"<speaker=_NPC1>Hello new kid. Wait... {_PC.nameFirst}, that's your name. I am {_NPC1.nameFirst}.</speaker>",
+                        "5_introduction_2":"<speaker=_NPC1>What do you want?</speaker>"
+                    }
+                },
+                "Condition": "(b_school_classMet=true) AND (b_school_pierre_introduced=false)",
+                "onShow": {
+                    "5_Set":{
+                        "Type": "Set",
+                        "Values": {
+                            "b_school_pierre_introduced": true
+                        }
+                    }
+                }
+            },
+            "3_greeting_FistTime":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1_image":"<img>npc/school/students/pierrePortrait.png</img>",
+                        "5_introduction_1":"<speaker=_NPC1>Do I know you? No? Okay then, you can call me {_NPC1.nameFirst}.</speaker>",
+                        "5_introduction_2":"<speaker=_NPC1>So what do you want?</speaker>"
+                    }
+                },
+                "Condition": "(b_school_classMet=false) AND (b_school_pierre_introduced=false)",
+                "onShow": {
+                    "5_Set":{
+                        "Type": "Set",
+                        "Values": {
+                            "b_school_pierre_introduced": true
+                        }
+                    }
+                }
+            },
+            "5_greeting":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1_image":"<img>npc/school/students/pierrePortrait.png</img>",
+                        "5_d":"<speaker=_NPC1>{_PC.nameFirst}. Why are you here?</speaker>"
+                    }
+                },
+                "Condition": "b_school_pierre_introduced=true"
+            }
+        }
+    }
+}

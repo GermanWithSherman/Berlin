@@ -15,7 +15,7 @@ public class EventGroup : IModable
     public string Default = "main";
 
     [JsonProperty]
-    private ModableDictionary<EventStage> EventStages = new ModableDictionary<EventStage>();
+    private ModableObjectHashDictionary<EventStage> EventStages = new ModableObjectHashDictionary<EventStage>();
 
     public EventStage this[string key]
     {

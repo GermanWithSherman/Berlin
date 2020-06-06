@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interrupt : IModable
+[Modable(ModableAttribute.FieldOptions.OptOut)]
+public class Interrupt : IModable, IModableAutofields
 {
     [JsonIgnore]
     public string id;
@@ -66,7 +67,7 @@ public class Interrupt : IModable
 
 public class InterruptsFile : IModable
 {
-    public ModableDictionary<Interrupt> interrupts;
+    public ModableObjectHashDictionary<Interrupt> interrupts;
 
     public IModable copyDeep()
     {

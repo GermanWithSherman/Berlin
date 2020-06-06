@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class CommandSet : Command
 {
-    public ModableDictionary<dynamic> Values = new ModableDictionary<dynamic>();
-    public ModableDictionary<dynamic> ValuesFromLists = new ModableDictionary<dynamic>();
-    public ModableDictionary<ValueSetter> ValuesFromSetters = new ModableDictionary<ValueSetter>();
+    public ModableValueTypeSortedDictionary<dynamic> Values = new ModableValueTypeSortedDictionary<dynamic>();
+    public ModableValueTypeSortedDictionary<dynamic> ValuesFromLists = new ModableValueTypeSortedDictionary<dynamic>();
+    public ModableObjectSortedDictionary<ValueSetter> ValuesFromSetters = new ModableObjectSortedDictionary<ValueSetter>();
     public override void execute(Data data)
     {
         foreach(KeyValuePair<string,dynamic> kv in Values)

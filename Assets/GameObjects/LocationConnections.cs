@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LocationConnections : ModableDictionary<LocationConnection>, IModable
+public class LocationConnections : ModableObjectSortedDictionary<LocationConnection>, IModable
 {
     public LocationConnections() { }
 
@@ -27,6 +27,6 @@ public class LocationConnections : ModableDictionary<LocationConnection>, IModab
 
     public new IModable copyDeep()
     {
-        return base.copyDeep<LocationConnections>();
+        return copyDeep(this);
     }
 }

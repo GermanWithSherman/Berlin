@@ -23,7 +23,7 @@ public class DialogueLine : IModable, IPrioritizable
         get => GameManager.Instance.ConditionCache[ConditionString];
     }
 
-    public ModableDictionary<DialogueOption> Options = new ModableDictionary<DialogueOption>();
+    public ModableObjectSortedDictionary<DialogueOption> Options = new ModableObjectSortedDictionary<DialogueOption>();
 
     [JsonProperty("Text")]
     private CText _text;
@@ -116,7 +116,7 @@ public class DialogueOption : Option, IModable
     }
 }
 
-public class DialogueStage : ModableDictionary<DialogueLine>, IModable
+public class DialogueStage : ModableObjectSortedDictionary<DialogueLine>, IModable
 {
 
     public DialogueLine Line()
@@ -146,7 +146,7 @@ public class DialogueStage : ModableDictionary<DialogueLine>, IModable
 
     public new IModable copyDeep()
     {
-        return base.copyDeep<DialogueStage>();
+        return copyDeep(this);
     }
 
 
@@ -154,7 +154,7 @@ public class DialogueStage : ModableDictionary<DialogueLine>, IModable
 
 public class DialogueStages :  IModable
 {
-    public ModableDictionary<DialogueStage> stages;
+    public ModableObjectHashDictionary<DialogueStage> stages;
 
     public DialogueStage StartStage()
     {
@@ -193,7 +193,8 @@ public class DialogueStages :  IModable
     }
 }
 
-public class DialogueTopic : IModable, IPrioritizable
+[Modable(ModableAttribute.FieldOptions.OptOut)]
+public class DialogueTopic : IModable, IPrioritizable, IModableAutofields
 {
     [JsonIgnore]
     public string ID;
@@ -239,9 +240,10 @@ public class DialogueTopic : IModable, IPrioritizable
     }
 }
 
-public class DialogueTopicsFile : IModable
+[Modable(ModableAttribute.FieldOptions.OptOut)]
+public class DialogueTopicsFile : IModable, IModableAutofields
 {
-    public ModableDictionary<DialogueTopic> topics = new ModableDictionary<DialogueTopic>();
+    public ModableObjectHashDictionary<DialogueTopic> topics = new ModableObjectHashDictionary<DialogueTopic>();
 
     public IModable copyDeep()
     {

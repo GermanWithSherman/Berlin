@@ -28,6 +28,7 @@
             "items": {
                 "type":"string"
             }
-        }
+        },
+        "Condition": {"type":"string"}
     }
 }

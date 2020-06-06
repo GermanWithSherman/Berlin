@@ -13,11 +13,11 @@ public class ProceduresLibrary : Library<CommandsCollection>
             load(path, modsPaths);
     }
 
-    protected override ModableDictionary<CommandsCollection> loadFromFolder(string path)
+    protected override ModableObjectHashDictionary<CommandsCollection> loadFromFolder(string path)
     {
-        var result = new ModableDictionary<CommandsCollection>();
+        var result = new ModableObjectHashDictionary<CommandsCollection>();
 
-        ModableDictionary<ProceduresFile> dict = loadFromFolder<ProceduresFile>(path);
+        ModableObjectHashDictionary<ProceduresFile> dict = loadFromFolder<ProceduresFile>(path);
 
         foreach (KeyValuePair<string, ProceduresFile> kv in dict)
         {

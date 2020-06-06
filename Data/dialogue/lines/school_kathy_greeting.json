@@ -1,0 +1,68 @@
+{
+    "stages":{
+        "start":{
+            "3_greeting_FirstTime_WasAtClass":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1_image":"<img>events/school/kathy/relaxedSoberHorizontal.jpg</img>",
+                        "5_introduction_1":"<speaker=_NPC1>Hello. You are {_PC.nameFirst}, right? I am {_NPC1.nameFirst}.</speaker>",
+                        "5_introduction_2":"<speaker=_NPC1>I am the girlfriend of {NPC.school_pierre.nameFirst}.</speaker>",
+                        "5_introduction_3":"<speaker=_NPC1>You want to speak with him, right?</speaker>"
+                    }
+                },
+                "Condition": "(b_school_classMet=true) AND (b_school_kathy_introduced=false)",
+                "onShow": {
+                    "5_Set":{
+                        "Type": "Set",
+                        "Values": {
+                            "b_school_kathy_introduced": true
+                        },
+                        "ValuesFromSetters": {
+                            "c_school_kathy_enslavement_start":{
+                                "Mode": "Cooldown",
+                                "Value": 604800
+                            }
+                        }
+                    }
+                }
+            },
+            "3_greeting_FistTime":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1_image":"<img>events/school/kathy/relaxedSoberHorizontal.jpg</img>",
+                        "5_introduction_1":"<speaker=_NPC1>Hello. You are new at school, right? I am {_NPC1.nameFirst}</speaker>.",
+                        "5_introduction_2":"<speaker=_NPC1>I am the girlfriend of {NPC.school_pierre.nameFirst}.</speaker>",
+                        "5_introduction_3":"<speaker=_NPC1>You want to speak with him, right?</speaker>"
+                    }
+                },
+                "Condition": "(b_school_classMet=false) AND (b_school_kathy_introduced=false)",
+                "onShow": {
+                    "5_Set":{
+                        "Type": "Set",
+                        "Values": {
+                            "b_school_kathy_introduced": true
+                        },
+                        "ValuesFromSetters": {
+                            "c_school_kathy_enslavement_start":{
+                                "Mode": "Cooldown",
+                                "Value": 604800
+                            }
+                        }
+                    }
+                }
+            },
+            "5_greeting":{
+                "Text":{
+                    "JoinWith": "\n\n",
+                    "Values":{
+                        "1_image":"<img>events/school/kathy/relaxedSoberHorizontal.jpg</img>",
+                        "5_d":"<speaker=_NPC1>Hello {_PC.nameFirst}. I think you want to speak with {NPC.school_pierre.nameFirst}?</speaker>"
+                    }
+                },
+                "Condition": "b_school_kathy_introduced=true"
+            }
+        }
+    }
+}

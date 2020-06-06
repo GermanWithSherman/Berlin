@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandsCollection : ModableDictionary<Command>, IModable
+public class CommandsCollection : ModableObjectSortedDictionary<Command>, IModable
 {
 
     public CommandsCollection() { }
@@ -60,6 +60,6 @@ public class CommandsCollection : ModableDictionary<Command>, IModable
 
     public new IModable copyDeep()
     {
-        return base.copyDeep<CommandsCollection>();
+        return copyDeep(this);
     }
 }
