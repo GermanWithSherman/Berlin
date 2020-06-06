@@ -149,9 +149,20 @@
                     "Clothes":{"Type":"ItemAdd","ItemID":"schoolUniformF1","Equip":false},
                     "Panties":{"Type":"ItemAdd","ShopID":"all_panties_f","Equip":false},
                     "Shoes":{"Type":"ItemAdd","ShopID":"all_shoes_f","Equip":false},
-                    "Outfit":{"Type":"Outfit","OutfitRequirement": {"AllowedStyles": ["School"]}}
-                }
+                    "Outfit":{
+                        "Type":"Outfit",
+                        "OutfitRequirement": {"AllowedStyles": ["School"]},
+                        "onClose": {
+                            "dialogue":{"Type": "Dialogue", "TopicID": "CONTINUE>.uniformWorn", "NPCID": ""}
+                        }
+                    }
+                },
+                "LeaveEnabled": false,
+                "TopicsVisible": false
             }
+        },
+        "uniformWorn":{
+            
         }
     }
 }

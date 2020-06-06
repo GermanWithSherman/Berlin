@@ -1,9 +1,0 @@
-{
-    "topics":{
-        "school_pierre_kathy_investigate":{
-            "IsEventExclusive": true,
-            "IsGreeting": true,
-            "NPCFilter": {"IDs": ["school_pierre"]}
-        }
-    }
-}

@@ -193,7 +193,8 @@ public class DialogueStages :  IModable
     }
 }
 
-public class DialogueTopic : IModable, IPrioritizable
+[Modable(ModableAttribute.FieldOptions.OptOut)]
+public class DialogueTopic : IModable, IPrioritizable, IModableAutofields
 {
     [JsonIgnore]
     public string ID;
@@ -239,7 +240,8 @@ public class DialogueTopic : IModable, IPrioritizable
     }
 }
 
-public class DialogueTopicsFile : IModable
+[Modable(ModableAttribute.FieldOptions.OptOut)]
+public class DialogueTopicsFile : IModable, IModableAutofields
 {
     public ModableObjectHashDictionary<DialogueTopic> topics = new ModableObjectHashDictionary<DialogueTopic>();
 

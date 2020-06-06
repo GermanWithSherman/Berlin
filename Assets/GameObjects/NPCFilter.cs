@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCFilter : IModable
+[Modable(ModableAttribute.FieldOptions.OptOut)]
+public class NPCFilter : IModable, IModableAutofields
 {
     public ModableStringList IDs = new ModableStringList();
 
