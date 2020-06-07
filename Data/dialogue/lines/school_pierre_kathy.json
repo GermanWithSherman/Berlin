@@ -9,7 +9,7 @@
                         "5_d_1":"<speaker=_NPC1>Why are you asking? Do you want to take her place?</speaker>"
                     }
                 },
-                "Condition": "PC.genderVisible=\"f\""
+                "Condition": "PC.Body.GenderVisible=\"f\""
             },
             "5_d_male":{
                 "Text":{
@@ -20,7 +20,7 @@
                         "7_d_0":"<speaker=_NPC1>I think you understand where I am going with this: if you ignore her completely we will get along fine.</speaker>"
                     }
                 },
-                "Condition": "PC.genderVisible=\"m\""
+                "Condition": "PC.Body.GenderVisible=\"m\""
             }
         }
     }

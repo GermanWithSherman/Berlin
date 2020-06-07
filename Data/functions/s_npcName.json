@@ -20,9 +20,9 @@
         "unknown":{
             "ConditionalValue":{
                 "Values":{
-                    "0": {"Condition":"_NPC.age < 18", "Value": "A kid"},
-                    "18f": {"Condition":"(_NPC.age >= 18) AND (_NPC.genderVisible = \"f\")", "Value": "A woman"},
-                    "18m": {"Condition":"(_NPC.age >= 18) AND (_NPC.genderVisible = \"m\")", "Value": "A man"}
+                    "0": {"Condition":"_NPC.Age < 18", "Value": "A kid"},
+                    "18f": {"Condition":"(_NPC.Age >= 18) AND (_NPC.Body.GenderVisible = \"f\")", "Value": "A woman"},
+                    "18m": {"Condition":"(_NPC.Age >= 18) AND (_NPC.Body.GenderVisible = \"m\")", "Value": "A man"}
                 }
             }
         }

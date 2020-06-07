@@ -5,7 +5,7 @@
             "Listen": ["shopFemale"],
             "Priority": 10,
             "Chance": 1,
-            "Condition": "PC.genderVisible = \"m\"",
+            "Condition": "PC.Body.GenderVisible = \"m\"",
             "Commands":{
                 "gte":{"Type":"Event","EventID":"shoppingFemale."}
             }

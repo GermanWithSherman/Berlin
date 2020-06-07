@@ -6,7 +6,7 @@
                 "Values":{
                     "female_1":{
                         "Value": "events/bed/female_naked_1.jpg",
-                        "Condition": "PC.genderVisible=\"f\""
+                        "Condition": "PC.Body.GenderVisible=\"f\""
                     }    
                 } 
             },

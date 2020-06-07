@@ -75,7 +75,8 @@ public class NPCsLibrary : Cache<NPC>
     protected override NPC create(string key)
     {
         NPC result = Modable.copyDeep(rawNPCsLibrary[key]); //we don't want realized NPCRaws to clutter rawNPCDict, that's what the cache is for
-        result.templateApply();
+        //result.templateApply();
+        result = NPC.templateApply(result);
 
         //Get the persistant Data from GameData
         if(GameManager.Instance.GameData.CharacterData.NPCs.TryGetValue(key, out NPC persistantNPC))
@@ -90,7 +91,16 @@ public class NPCsLibrary : Cache<NPC>
         return result;
     }
 
+    internal dynamic getNPCorField(string key)
+    {
+        string[] keyParts = key.Split(new char[] { '.' }, 2);
 
+        if (keyParts.Length == 1)
+            return this[key];
+
+        NPC npc = this[keyParts[0]];
+        return npc[keyParts[1]];
+    }
 
     public IEnumerable<NPC> npcsPresent(SubLocation subLocation, DateTime dateTime)
     {

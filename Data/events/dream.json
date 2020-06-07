@@ -24,11 +24,11 @@
                 "Values": {
                     "f":{
                         "Value": "events/dream/fly_f.jpg",
-                        "Condition": "PC.genderVisible=\"f\""
+                        "Condition": "PC.Body.GenderVisible=\"f\""
                     },
                     "m":{
                         "Value": "events/dream/fly_m.jpg",
-                        "Condition": "PC.genderVisible=\"m\""
+                        "Condition": "PC.Body.GenderVisible=\"m\""
                     }
                 }
             }

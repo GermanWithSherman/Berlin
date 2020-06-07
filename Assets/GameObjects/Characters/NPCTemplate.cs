@@ -40,27 +40,13 @@ public class NPCTemplate : IModable, IInheritable
 
     public NPC generate()
     {
-        /*NPC npc;
-
-        if (String.IsNullOrEmpty(ParentID))
-            npc = new NPC();
-        else
-            npc = GameManager.Instance.NPCTemplateCache[ParentID].generate();
-
-        npc.nameFirst = nameFirst ?? npc.nameFirst;
-        npc.nameLast  = nameLast  ?? npc.nameLast;
-
-        if(age != null)
-        {
-            npc.age = (int)age;
-        }*/
 
         NPC npc = new NPC();
 
         npc.NameFirst = NameFirst;
         npc.NameLast = NameLast;
         npc.age = ((int?)Age).GetValueOrDefault(30);
-        npc.GenderVisible = GenderVisible;
+        npc.BodyData.GenderVisible = GenderVisible;
 
 
         return npc;

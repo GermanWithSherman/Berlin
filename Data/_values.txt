@@ -41,37 +41,37 @@ NPC.nameFirst:                  string
 NPC.nameLast:                   string
 NPC.nameNick:                   declare as CText, read as string, readonly
 
-NPC.age:                        calculated age in years. if set will assign a random birthday and picks a year that matches this birthday and age
+NPC.Age:                        calculated age in years. if set will assign a random birthday and picks a year that matches this birthday and age
 NPC.birthDate:                  DateTime
-NPC.genderVisible:                   visible Gender of the PC
+NPC.Body.GenderVisible:                   visible Gender of the PC
                                         -f or m
-NPC.BMI:                        calculated float, will change the weight if set to match the new BMI
-NPC.breastSize:                 string, "None", "A", "B", "C",..., dynamically calculated from bodyBreastVolume
-NPC.breastVolume:               in cc, 0 for men and if removed
-NPC.hairColor:                  TBI: enum Haircolors
-NPC.hairLength:                 in μm
-NPC.hairStyle:                  TBI: enum HairStyles
-NPC.hairBodyColor:              TBI: enum Haircolors
-NPC.hairBodyLength:             in μm
-NPC.hairPubicColor:             TBI: enum Haircolors
-NPC.hairPubicLength:            in μm
-NPC.hairPubicStyle:             TBI: enum HairStyles
-NPC.height:                     in mm
-NPC.penisLength:                in mm, 0 for women and if removed
-NPC.weight:                     in g
+NPC.Body.BMI:                        calculated float, will change the weight if set to match the new BMI
+NPC.Body.BreastSize:                 string, "None", "A", "B", "C",..., dynamically calculated from bodyBreastVolume
+NPC.Body.BreastVolume:               in cc, 0 for men and if removed
+NPC.Body.HairColor:                  TBI: enum Haircolors
+NPC.Body.HairLength:                 in μm
+NPC.Body.HairStyle:                  TBI: enum HairStyles
+NPC.Body.HairBodyColor:              TBI: enum Haircolors
+NPC.Body.HairBodyLength:             in μm
+NPC.Body.HairPubicColor:             TBI: enum Haircolors
+NPC.Body.HairPubicLength:            in μm
+NPC.Body.HairPubicStyle:             TBI: enum HairStyles
+NPC.Body.Height:                     in mm
+NPC.Body.PenisLength:                in mm, 0 for women and if removed
+NPC.Body.Weight:                     in g
 
 
 PC values (also has all the values NPCs have)
-PC.genderDress:                     the Gender the PC is dressed as
+PC.GenderDress:                     the Gender the PC is dressed as
                                         -fm if all slots are fm
                                         -f if at least one slot is f and all other slots are either f or fm
                                         -m if at least one slot is m and all other slots are either m or fm
                                         -mix if there is at least one f and at least one m slot
-PC.genderPerceived:                 the Gender people think the PC has when looking at them
-                                        -f if genderVisible is f and genderDress is either f or fm
-                                        -f2m if genderVisible is f and genderDress is either m or mix
-                                        -m if genderVisible is m and genderDress is either m or fm
-                                        -m2f if genderVisible is m and genderDress is either f or mix
+PC.GenderPerceived:                 the Gender people think the PC has when looking at them
+                                        -f if Body.GenderVisible is f and genderDress is either f or fm
+                                        -f2m if Body.GenderVisible is f and genderDress is either m or mix
+                                        -m if Body.GenderVisible is m and genderDress is either m or fm
+                                        -m2f if Body.GenderVisible is m and genderDress is either f or mix
                                         
 
 

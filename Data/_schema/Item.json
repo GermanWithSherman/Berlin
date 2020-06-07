@@ -19,7 +19,7 @@
                 "Height":{"type":"integer","description": "in mm"}
             },
             "required": [
-                "Height"
+                "Height","Style"
             ]
         },
         {
@@ -27,6 +27,7 @@
                 "Slot": {"type": "string", "enum": ["Clothes"] }
             },
             "required": [
+                "Style"
             ]
         },
         {

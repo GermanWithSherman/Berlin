@@ -18,8 +18,8 @@
                 "5_SET":{
                     "Type": "Set",
                     "Values":{
-                        "PC.height":1910,
-                        "PC.BMI":23,
+                        "PC.Body.Height":1910,
+                        "PC.Body.BMI":23,
                         "PC.moneyCash":10000,
                         "UI.isVisibleStatusBar":false,
                         "World.DateTime":"2020-04-09T06:00:00"

@@ -103,12 +103,12 @@
                     "DialogID":"SexSelect",
                     "Settings":{
                         "Targets":{
-                            "Gender": "PC.genderVisible"
+                            "Gender": "PC.Body.GenderVisible"
                         },
                         "onComplete":{
                             "goto_appearance_female":{
                                 "Type":"Conditional",
-                                "Condition": "PC.genderVisible=\"f\"",
+                                "Condition": "PC.Body.GenderVisible=\"f\"",
                                 "Commands":{
                                     "5_call_sexSetF":{"Type":"Call","ProcedureID": "sexSetF", "Parameters": ["PC"]},
                                     "8_goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Female"}
@@ -116,7 +116,7 @@
                             },
                             "goto_appearance_male":{
                                 "Type":"Conditional",
-                                "Condition": "PC.genderVisible=\"m\"",
+                                "Condition": "PC.Body.GenderVisible=\"m\"",
                                 "Commands":{
                                     "5_call_sexSetM":{"Type":"Call","ProcedureID": "sexSetM", "Parameters": ["PC"]},
                                     "8_goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Male"}
@@ -235,7 +235,7 @@
                 
                 "5_female":{
                     "Type":"Conditional",
-                    "Condition": "PC.genderVisible=\"f\"",
+                    "Condition": "PC.Body.GenderVisible=\"f\"",
                     "Commands":{
                         "5_ItemsAdd":{"Type":"Call","ProcedureID": "itemsStartAddAndEquipF"},
                         "FirstName":{"Type":"Set","ValuesFromLists": {"PC.nameFirst": "names_first_female_90s"}}
@@ -243,7 +243,7 @@
                 },
                 "5_male":{
                     "Type":"Conditional",
-                    "Condition": "PC.genderVisible=\"m\"",
+                    "Condition": "PC.Body.GenderVisible=\"m\"",
                     "Commands":{
                         "5_ItemsAdd":{"Type":"Call","ProcedureID": "itemsStartAddAndEquipM"},
                         "FirstName":{"Type":"Set","ValuesFromLists": {"PC.nameFirst": "names_first_male_90s"}}

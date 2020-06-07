@@ -47,7 +47,7 @@ public class GameData: Data
 
     protected override dynamic get(string key)
     {
-        string[] keyParts = key.Split(new char[] { '.' });
+        string[] keyParts = key.Split(new char[] { '.' },2);
 
         if(keyParts.Length == 1)
         {
@@ -80,14 +80,14 @@ public class GameData: Data
                     return WorldData[keyParts[1]];
             }
         }
-        else if (keyParts.Length == 3)
+        /*else if (keyParts.Length == 3)
         {
             switch (keyParts[0])
             {
                 case "NPC":
                     return GameManager.Instance.NPCsLibrary[keyParts[1]][keyParts[2]];
             }
-        }
+        }*/
 
         if (_additionalData.ContainsKey(key))
         {

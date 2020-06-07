@@ -64,7 +64,7 @@
                         "TargetStage": ".experimentDecline"
                     }
                 },
-                "Condition": "PC.genderVisible=\"m\"",
+                "Condition": "PC.Body.GenderVisible=\"m\"",
                 "LeaveEnabled": false,
                 "TopicsVisible": false
             },

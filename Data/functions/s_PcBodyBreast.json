@@ -1,7 +1,12 @@
 {
     "Values":{
-        "Breast":{
-            "Value":"PC/breastB_1.jpg"
+        "5_female":{
+            "Value":"PC/breastB_1.jpg",
+            "Condition": "_PC.Body.BreastSize!=\"None\""
+        },
+        "5_male":{
+            "Value":"PC/breast_male_muscle1.jpg",
+            "Condition": "_PC.Body.BreastSize=\"None\""
         }
     }
 }
