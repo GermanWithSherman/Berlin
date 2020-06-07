@@ -68,7 +68,7 @@ public class GameData: Data
                 case "NPC":
                     //return CharacterData[keyParts[1]];
                     //We need to acquire NPC-Data from the NPCsLibrary because the Data in Savegames is incomplete (it lacks Schedules etc.)
-                    return GameManager.Instance.NPCsLibrary[keyParts[1]];
+                    return GameManager.Instance.NPCsLibrary.getNPCorField(keyParts[1]);
                 case "PC":
                     //Other than NPCs PC-Data is not split
                     return CharacterData.PC[keyParts[1]];

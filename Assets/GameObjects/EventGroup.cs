@@ -42,7 +42,7 @@ public class EventGroup : IModable, IModableAutofields
                     return result;
                 }
 
-                Debug.LogWarning($"Requested sublocation {key} is not present in location {id}");
+                Debug.LogWarning($"Requested sublocation {key} is not present in event {id}");
                 result = EventStages[Default];
                 result.StageID = Default;
                 return result;

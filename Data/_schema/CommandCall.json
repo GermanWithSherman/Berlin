@@ -3,7 +3,7 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "type": "object",
     "title": "CommandCall",
-    "description": "Procedures have access to global values through _GLOBAL (e.g. _GLOBAL.PC.nameFirst).\nParameters are called with _P-prefix and their index starting with 1 (e.g. _P.1.nameFirst)\nString-Parameters have to be escaped. PC, World and UI are valid parameters as well as numbers, bools and strings.",
+    "description": "Procedures have access to global values through _GLOBAL (e.g. _GLOBAL.PC.NameFirst).\nParameters are called with _P-prefix and their index starting with 1 (e.g. _P.1.NameFirst)\nString-Parameters have to be escaped. PC, World and UI are valid parameters as well as numbers, bools and strings.",
     "required": [
         "Type",
         "ProcedureID"

@@ -31,6 +31,7 @@ public class EventGroupCache : Cache<EventGroup>
         {
             EventGroup eventGroup = this[keyparts[0]];
             EventStage eventStage = eventGroup[keyparts[1]];
+            if (eventStage == null) throw new GameException($"Failed to load EventStage {keyparts[1]} in {keyparts[0]}");
             result = eventStage;
             result.GroupID = keyparts[0];
             result.StageID = keyparts[1];

@@ -314,7 +314,7 @@
         "3_314":{
             "Label":"Room 314",
             "Text": {
-                "Value": "Room 314 ({NPC.school_pierre.nameFirst}s room)"
+                "Value": "Room 314 ({NPC.school_pierre.NameFirst}s room)"
             },
             "TexturePath":{"Value":"locations/dahlem/school/dorm314.png"},
             "LocationConnections": {
@@ -327,7 +327,7 @@
             "Options":{
                 "5_lookForKathy":{
                     "Text": {
-                        "Value": "Look for {NPC.school_kathy.nameFirst}"
+                        "Value": "Look for {NPC.school_kathy.NameFirst}"
                     },
                     "Commands": {
                         "5_dialogue":{

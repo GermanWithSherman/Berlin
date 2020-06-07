@@ -16,7 +16,7 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "0":"<speaker=_PC>Could you tell me something about the other students here?</speaker>",
-                        "1":"<speaker=_NPC1>Well, there is {NPC.school_gabriel.nameFirst}. He is a good friend of mine and quite good at doing all the computer stuff.</speaker>"
+                        "1":"<speaker=_NPC1>Well, there is {NPC.school_gabriel.NameFirst}. He is a good friend of mine and quite good at doing all the computer stuff.</speaker>"
                     }
                 },
                 "Condition": "i_school_michel_topic_student=0",
@@ -37,7 +37,7 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "0":"<speaker=_PC>Could you tell me something about the other students here?</speaker>",
-                        "1":"<speaker=_NPC1>I have been thinking about {NPC.school_lara.nameFirst} lately. She is quite cute, isn't she? I wonder if my parents would like her.</speaker>"
+                        "1":"<speaker=_NPC1>I have been thinking about {NPC.school_lara.NameFirst} lately. She is quite cute, isn't she? I wonder if my parents would like her.</speaker>"
                     }
                 },
                 "Condition": "i_school_michel_topic_student=1",
@@ -58,7 +58,7 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "0":"<speaker=_PC>Could you tell me something about the other students here?</speaker>",
-                        "1":"<speaker=_NPC1>If I were you I would stay away from {NPC.school_christine.nameFirst}. She has crazy eyes, you know? I bet she is into some wicked stuff. Like really wicked. I wouldn't be surprised if she were a serial killer or something like this.</speaker>",
+                        "1":"<speaker=_NPC1>If I were you I would stay away from {NPC.school_christine.NameFirst}. She has crazy eyes, you know? I bet she is into some wicked stuff. Like really wicked. I wouldn't be surprised if she were a serial killer or something like this.</speaker>",
                         "2":"<speaker=_NPC1>I heard she's lurking around the dorms basement at nighttime. You better stay away from there.</speaker>"
                     }
                 },
@@ -80,7 +80,7 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "0":"<speaker=_PC>Could you tell me something about the other students here?</speaker>",
-                        "1":"<speaker=_NPC1>I think you already met {NPC.school_pierre.nameFirst}. He is the kind of guy one wouldn't want to mess with. His father is a very rich and influencial guy which make him basically immune to any kind of punishment and even legal actions.</speaker>",
+                        "1":"<speaker=_NPC1>I think you already met {NPC.school_pierre.NameFirst}. He is the kind of guy one wouldn't want to mess with. His father is a very rich and influencial guy which make him basically immune to any kind of punishment and even legal actions.</speaker>",
                         "2":"<speaker=_NPC1>But if you manage to get on his good side he might be a valuable source of... lets call them helpers. Some of these helpers can make you study harder, some others make you happy. Just make sure you always pay your bills and don't mess with him and you two should get along fine.</speaker>",
                         "3":"<speaker=_NPC1>He lives in room 314. As far as I know he doesn't mind unannounced visitors.</speaker>"
                     }

@@ -6,7 +6,7 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "image":"<img>npc/school/staff/psychologist_horizontal.jpg</img>",
-                        "0":"<speaker=_NPC1>Hello. You must be {>s_LANG(KEY:\"Miss\",NPC:_PC)} {PC.nameLast}. Welcome to the Hermann-Acedemy.</speaker>",
+                        "0":"<speaker=_NPC1>Hello. You must be {>s_LANG(KEY:\"Miss\",NPC:_PC)} {PC.NameLast}. Welcome to the Hermann-Acedemy.</speaker>",
                         "1":"She points at a chair in front of her desk. <speaker=_NPC1>Please, take a seat.</speaker>"
                     }
                 },
@@ -25,7 +25,7 @@
                 "Text": {
                     "JoinWith": "\n\n",
                     "Values":{
-                        "0":"<speaker=_NPC1>Let me introduce myself. I am {>s_LANG(KEY:\"Mrs.\",NPC:_NPC1)} {_NPC1.nameLast} and I am the school psychologist.</speaker>",
+                        "0":"<speaker=_NPC1>Let me introduce myself. I am {>s_LANG(KEY:\"Mrs.\",NPC:_NPC1)} {_NPC1.NameLast} and I am the school psychologist.</speaker>",
                         "1":"She walks over to a file cabinet and takes out a file with your name on it."
                     }
                 },
@@ -141,7 +141,7 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "0":"<speaker=_NPC1>That's fabulous.</speaker>",
-                        "1":"She opens her desk and takes out a contract and hands it over to you as well as a pen. The contract is at least 100 sites long and full of complicated scientific terms. After reading the first two pages you give up and skip to the last page. It lists your payments as described by {>s_LANG(KEY:\"Mrs.\",NPC:_NPC1)} {_NPC1.nameLast}."
+                        "1":"She opens her desk and takes out a contract and hands it over to you as well as a pen. The contract is at least 100 sites long and full of complicated scientific terms. After reading the first two pages you give up and skip to the last page. It lists your payments as described by {>s_LANG(KEY:\"Mrs.\",NPC:_NPC1)} {_NPC1.NameLast}."
                     }
                 },
                 "Options": {

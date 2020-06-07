@@ -24,7 +24,8 @@ public class CommandItemAdd : Command
         }
         else
         {
-            selectedItems = new ItemsCollection(new string[] { ItemID });
+            Item item = GameManager.Instance.ItemsLibrary[ItemID];
+            selectedItems = new ItemsCollection(new Item[] { item });
         }
 
 

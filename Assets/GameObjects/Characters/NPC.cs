@@ -162,9 +162,9 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
     public void templateApply()
     {
         throw new NotImplementedException();
-        if(!inheritanceResolved)
+        /*if(!inheritanceResolved)
             inherit(Template.generate());
-        inheritanceResolved = true;
+        inheritanceResolved = true;*/
     }
 
 

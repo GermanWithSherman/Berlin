@@ -5,7 +5,7 @@
                 "Text":{
                     "JoinWith": "\n\n",
                     "Values":{
-                        "5_d_0":"<speaker=_NPC1>{NPC.school_kathy.nameFirst}? I keep her around for fun.</speaker>",
+                        "5_d_0":"<speaker=_NPC1>{NPC.school_kathy.NameFirst}? I keep her around for fun.</speaker>",
                         "5_d_1":"<speaker=_NPC1>Why are you asking? Do you want to take her place?</speaker>"
                     }
                 },
@@ -15,7 +15,7 @@
                 "Text":{
                     "JoinWith": "\n\n",
                     "Values":{
-                        "5_d_0":"<speaker=_NPC1>{NPC.school_kathy.nameFirst}? I keep her around for fun.</speaker>",
+                        "5_d_0":"<speaker=_NPC1>{NPC.school_kathy.NameFirst}? I keep her around for fun.</speaker>",
                         "5_d_1":"<speaker=_NPC1>Did she tell you that I am her boyfriend? That's at least partly true. I will hurt you if you touch her. I will hurt you if you talk to her. I will hurt you if you look at her creepily.</speaker>",
                         "7_d_0":"<speaker=_NPC1>I think you understand where I am going with this: if you ignore her completely we will get along fine.</speaker>"
                     }

@@ -6,7 +6,7 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "image":"<img>npc/school/students/michelPortrait.png</img>",
-                        "0":"<speaker=_NPC1>Hello. You are the new student, right? I suppose I am your new roommate. My name is {_NPC1.nameFirst} {_NPC1.nameLast}.</speaker>",
+                        "0":"<speaker=_NPC1>Hello. You are the new student, right? I suppose I am your new roommate. My name is {_NPC1.NameFirst} {_NPC1.NameLast}.</speaker>",
                         "1":"He reaches out to shake your hand."
                     }
                 },
@@ -26,7 +26,7 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "0":"You take his hand and shake it.",
-                        "1":"<speaker=_PC>I am {_PC.nameFirst} {_PC.nameLast}. Nice to meet you.</speaker>",
+                        "1":"<speaker=_PC>I am {_PC.NameFirst} {_PC.NameLast}. Nice to meet you.</speaker>",
                         "2":"He smiles.",
                         "3":"<speaker=_NPC1>Feel free to make yourself at home.</speaker> He points at what appears to be his bed. <speaker=_NPC1>Just stay away from my stuff and we will get along quite well.</speaker>",
                         "4":"<speaker=_NPC1>And if you have any questions: just ask.</speaker>"

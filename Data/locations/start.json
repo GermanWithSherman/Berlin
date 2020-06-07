@@ -238,7 +238,7 @@
                     "Condition": "PC.Body.GenderVisible=\"f\"",
                     "Commands":{
                         "5_ItemsAdd":{"Type":"Call","ProcedureID": "itemsStartAddAndEquipF"},
-                        "FirstName":{"Type":"Set","ValuesFromLists": {"PC.nameFirst": "names_first_female_90s"}}
+                        "FirstName":{"Type":"Set","ValuesFromLists": {"PC.NameFirst": "names_first_female_90s"}}
                     }
                 },
                 "5_male":{
@@ -246,15 +246,15 @@
                     "Condition": "PC.Body.GenderVisible=\"m\"",
                     "Commands":{
                         "5_ItemsAdd":{"Type":"Call","ProcedureID": "itemsStartAddAndEquipM"},
-                        "FirstName":{"Type":"Set","ValuesFromLists": {"PC.nameFirst": "names_first_male_90s"}}
+                        "FirstName":{"Type":"Set","ValuesFromLists": {"PC.NameFirst": "names_first_male_90s"}}
                     }
                 },
-                "5_LastName":{"Type":"Set","ValuesFromLists": {"PC.nameLast": "names_last"}},
+                "5_LastName":{"Type":"Set","ValuesFromLists": {"PC.NameLast": "names_last"}},
                 "6_additionalNames":{
                     "Type": "Set",
                     "ValuesFromSetters": {
-                        "PC.nameFirstBorn":{"Mode":"Object","ValueObject":{"ValueType": "Reference","Key": "PC.nameFirst"}},
-                        "PC.nameLastBorn":{"Mode":"Object","ValueObject":{"ValueType": "Reference","Key": "PC.nameLast"}}
+                        "PC.NameFirstBorn":{"Mode":"Object","ValueObject":{"ValueType": "Reference","Key": "PC.NameFirst"}},
+                        "PC.NameLastBorn":{"Mode":"Object","ValueObject":{"ValueType": "Reference","Key": "PC.NameLast"}}
                     }
                 },
                 "6_backGroundSchool":{

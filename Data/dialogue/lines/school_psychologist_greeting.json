@@ -5,7 +5,7 @@
                 "Text": {
                     "JoinWith": "\n\n",
                     "Values":{
-                        "0":{"Value": "<speaker=_NPC1>Hello, {PC.nameFirst}. Are you here for another experiment?</speaker>"}
+                        "0":{"Value": "<speaker=_NPC1>Hello, {PC.NameFirst}. Are you here for another experiment?</speaker>"}
                     }
                 },
                 "Condition": "b_school_psychologist_participant=true"
@@ -14,7 +14,7 @@
                 "Text": {
                     "JoinWith": "\n\n",
                     "Values":{
-                        "0":{"Value": "<speaker=_NPC1>Hello, {PC.nameFirst}.</speaker>"}
+                        "0":{"Value": "<speaker=_NPC1>Hello, {PC.NameFirst}.</speaker>"}
                     }
                 }
             }

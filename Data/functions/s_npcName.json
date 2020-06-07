@@ -1,18 +1,18 @@
 {
     "Values":{
         "known":{
-            "Condition" :"_NPC.known = 1",
+            "Condition" :"_NPC.Known = 1",
             "ValueType": "Plain",
             "ConditionalValue":{
                 "Values":{
                     "hasNickName":{
                         "Condition" :"_NPC.nameNick != \"\"",
                         "ValueType": "Interpolate",
-                        "Key":"{_NPC.nameFirst} {_NPC.nameLast}\n<i>{_NPC.nameNick}</i>"
+                        "Key":"{_NPC.NameFirst} {_NPC.NameLast}\n<i>{_NPC.nameNick}</i>"
                     },
                     "noNick":{
                         "ValueType": "Interpolate",
-                        "Key":"{_NPC.nameFirst} {_NPC.nameLast}"
+                        "Key":"{_NPC.NameFirst} {_NPC.NameLast}"
                     }
                 }
             }

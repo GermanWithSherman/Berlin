@@ -19,6 +19,11 @@ public class ItemsLibrary : Library<Item>
     }
 
 
+    protected override Item getInvalidKeyEntry(string key)
+    {
+        throw new KeyNotFoundException($"The item with ID {key} does not exist");
+    }
+
     public IList<Item> items()
     {
         return _dict.Values.ToList();

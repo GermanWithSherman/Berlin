@@ -6,8 +6,8 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "1_image":"<img>events/school/kathy/relaxedSoberHorizontal.jpg</img>",
-                        "5_introduction_1":"<speaker=_NPC1>Hello. You are {_PC.nameFirst}, right? I am {_NPC1.nameFirst}.</speaker>",
-                        "5_introduction_2":"<speaker=_NPC1>I am the girlfriend of {NPC.school_pierre.nameFirst}.</speaker>",
+                        "5_introduction_1":"<speaker=_NPC1>Hello. You are {_PC.NameFirst}, right? I am {_NPC1.NameFirst}.</speaker>",
+                        "5_introduction_2":"<speaker=_NPC1>I am the girlfriend of {NPC.school_pierre.NameFirst}.</speaker>",
                         "5_introduction_3":"<speaker=_NPC1>You want to speak with him, right?</speaker>"
                     }
                 },
@@ -32,8 +32,8 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "1_image":"<img>events/school/kathy/relaxedSoberHorizontal.jpg</img>",
-                        "5_introduction_1":"<speaker=_NPC1>Hello. You are new at school, right? I am {_NPC1.nameFirst}</speaker>.",
-                        "5_introduction_2":"<speaker=_NPC1>I am the girlfriend of {NPC.school_pierre.nameFirst}.</speaker>",
+                        "5_introduction_1":"<speaker=_NPC1>Hello. You are new at school, right? I am {_NPC1.NameFirst}</speaker>.",
+                        "5_introduction_2":"<speaker=_NPC1>I am the girlfriend of {NPC.school_pierre.NameFirst}.</speaker>",
                         "5_introduction_3":"<speaker=_NPC1>You want to speak with him, right?</speaker>"
                     }
                 },
@@ -58,7 +58,7 @@
                     "JoinWith": "\n\n",
                     "Values":{
                         "1_image":"<img>events/school/kathy/relaxedSoberHorizontal.jpg</img>",
-                        "5_d":"<speaker=_NPC1>Hello {_PC.nameFirst}. I think you want to speak with {NPC.school_pierre.nameFirst}?</speaker>"
+                        "5_d":"<speaker=_NPC1>Hello {_PC.NameFirst}. I think you want to speak with {NPC.school_pierre.NameFirst}?</speaker>"
                     }
                 },
                 "Condition": "b_school_kathy_introduced=true"
