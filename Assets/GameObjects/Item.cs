@@ -17,7 +17,7 @@ public class Item : IModable
     public string Slot = "Clothes";
 
     //public string Style = "Casual"; //Casual, Glamour, Dance, Sports, Swimming; not enum for easy modability
-    public ModableStringList Style = new ModableStringList() { "Casual" };
+    public ModableStringList Style = new ModableStringList() { "-" };
 
     public int Height = 0;
     public int Skimpiness = 0;
@@ -32,7 +32,7 @@ public class Item : IModable
     public IModable copyDeep()
     {
         var result = new Item();
-
+        result.id = Modable.copyDeep(id);
         result.Label = Modable.copyDeep(Label);
         result.TexturePath = Modable.copyDeep(TexturePath);
         result.Price = Modable.copyDeep(Price);

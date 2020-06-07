@@ -24,6 +24,8 @@ public class FunctionsLibrary : Library<Conditional<string>>
         {
             case "npcIsPresent":
                 return GameManager.Instance.npcIsPresent(parameters["_NPCID"]);
+            case "s_OutfitStyle":
+                return GameManager.Instance.Misc.outfitStyle.get(parameters["_clothes"], parameters["_shoes"]);
         }
 
         if (!_dict.ContainsKey(id))

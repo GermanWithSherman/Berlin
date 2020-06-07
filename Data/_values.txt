@@ -70,6 +70,19 @@ PC.genderDress:                     the Gender the PC is dressed as
 PC.genderPerceived:                 the Gender people think the PC has when looking at them
                                         -f if genderVisible is f and genderDress is either f or fm
                                         -f2m if genderVisible is f and genderDress is either m or mix
-                                        -m if genderVisible is f and genderDress is either m or fm
-                                        -m2f if genderVisible is f and genderDress is either f or mix
+                                        -m if genderVisible is m and genderDress is either m or fm
+                                        -m2f if genderVisible is m and genderDress is either f or mix
                                         
+
+
+Item.Skimpiness:                    0   Not skimpy. Reserved for fm-clothes
+                                    10  Very prudish.
+                                    20  Prudish
+                                    30  Conservative
+                                    40  Default
+                                    50  Attractive
+                                    60  Sexy
+                                    70  Slutty
+                                    80  Very Slutty
+                                    90  Whorish
+                                    100 Extremely slutty (Strip club clothes)

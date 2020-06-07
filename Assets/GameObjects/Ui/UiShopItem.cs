@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UiShopItem : MonoBehaviour
 {
-    public RawImage Texture;
+    public ImageAutosize ImageAutosize;
     public TextMeshProUGUI Text;
 
     private Item _item;
@@ -33,8 +33,7 @@ public class UiShopItem : MonoBehaviour
     {
         _item = item;
         Text.text = item.Label;
-        Texture.texture = item.Texture;
-
+        ImageAutosize.texture = item.Texture;
         update();
     }
 

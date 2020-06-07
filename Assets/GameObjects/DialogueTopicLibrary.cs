@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -38,6 +39,16 @@ public class DialogueTopicLibrary : Library<DialogueTopic>
         }
         return result;
     }
+
+    /*internal DialogueStage Stage(string stageID)
+    {
+        string[] stringParts = stageID.Split(new char[] { '.' }, 2);
+        if (stringParts.Length != 2)
+            throw new Exception($"Invalid format of StageID: {stageID}");
+        DialogueTopic topic = this[stringParts[0]];
+        DialogueStage stage = GameManager.Instance.DialogueLineCache.Stage(stringParts[1], topic);
+        return stage;
+    }*/
 
     protected override void load(string path, IEnumerable<string> modPaths)
     {

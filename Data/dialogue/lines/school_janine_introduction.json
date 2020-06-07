@@ -136,7 +136,7 @@
                         "1":"Wait, what? That's not your name! Why did you say that? What is going on?",
                         "2":"<speaker=_NPC1>Nice to meet you, {PC.nameFirst}. I assume you feel a little... weird? Don't worry, I will explain it to you in time.</speaker>",
                         "3":"<speaker=_NPC1>But first you have to take a shower. That's actually very important. Here, take this.</speaker> She hands you a tube with some kind of liquid inside.",
-                        "4":"<speaker=_NPC1>Use it on all of your body and on your face. But don't put it anywhere else on your head. Just head to the end of the hallway, you will find the bathroom there. And don't worry, we are the only students at school today.</speaker>"
+                        "4":"<speaker=_NPC1>Use it on all of your body and on your face. But don't put it anywhere else on your head. Just head to the end of the hallway, you will find the bathroom there. You can open the door with your room key. And don't worry, we are the only students at school today.</speaker> She hands the key to the room over to you."
                         
                     }
                 },
@@ -146,8 +146,8 @@
                         "TargetStage": "SYS.blank_noTopic",
                         "Say":"You decide you can figure out this weirdness out later. You take the tube and head for the bathroom.",
                         "Commands": {
-                            "goto":{"Type": "GotoLocation","LocationID": "dahlem/school/dorm.2_bath_intro"},
-                            "setIntroduced":{"Type": "Set","Values": {"b_school_janine_introduced": true}}
+                            "setIntroduced":{"Type": "Set","Values": {"b_school_janine_introduced": true}},
+                            "5_event":{"Type":"Event","EventID": "school_psychologist_misc.janine_intro_shower"}
                         }
                     }
                 },

@@ -27,6 +27,8 @@ public class Condition : IModable
 
     private string conditionString = "";
 
+    public Condition():this("") { }
+
     public Condition(string condition)
     {
         conditionString = condition.Trim();

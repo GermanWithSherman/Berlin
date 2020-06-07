@@ -2,41 +2,95 @@
     "subLocations":{
         "main":{
             "Text":{
-                "Value": "Hello, and welcome to BER."
+                "JoinWith": "\n",
+                "Values":{ 
+                    "1_d":"Hello, and welcome to BAAS.",
+                    "5_d":"The game is currently under construction and not even in Alpha stage."
+                }
             },
             "TexturePath":{
-                "Value":"cityCenter/cityCenterNight0.jpg"
+                "Value":"underConstruction.jpg"
             },
             "Options":{
-                "intro":{
-                    "Text":"Test",
-                    "Commands":{
-                        "1":{
-                            "Type": "Call",
-                            "ProcedureID": "sexSetF",
-                            "Parameters": ["PC"]
-                        }
-                    }
+                "5_start":{
+                    "Text": "Start",
+                    "Commands":{"goto":{"Type":"GotoLocation","LocationID":"start.intro"}}
                 },
-                "skipIntro":{
-                    "Text":"Skip Intro",
-                    "Commands":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro"}}
-                },
-                "debug":{
-                    "Text":"Debug",
-                    "Commands":{
-                        "goto":{"Type":"GotoLocation","LocationID":"home_cheap."},
-                        "setHomeOwner":{
-                            "Type": "Set",
-                            "Values":{"b.owns_home_cheap":true}
-                        }
-                    }
+                "8_about":{
+                    "Text": "About",
+                    "Commands":{"goto":{"Type":"GotoLocation","LocationID":"start.about"}}
+                }
+            }
+        },
+        "about":{
+            "TexturePath":{
+                "Value":"gws.jpg"
+            },
+            "Text":{
+                "JoinWith": "\n",
+                "Values": {
+                    "1_GWS":"This game was created by GermanWithSherman.",
+                    "8_Feedback":"Please send feedback, suggestions and ideas to the appropriate topic at tfgames.site."
+                }
+            },
+            "Options":{
+                "5_back":{
+                    "Text": "Back",
+                    "Commands":{"goto":{"Type":"GotoLocation","LocationID":"start.main"}}
                 }
             }
         },
         "intro":{
             "Text":{
-                "Value": "Intro"
+                "JoinWith": "\n",
+                "Values": {
+                    "5_d_0":"BAAS takes place in an alternate timeline."
+                }
+            },
+            "TexturePath":{
+                "Value":"events/intro/flagPrussia.jpg"
+            },
+            "Options":{
+                "4_complete":{
+                    "Text": "Tell me everything",
+                    "State": {"Value": {"Enabled": false,"Text": "Not implemented"}}
+                },
+                "5_basics":{
+                    "Text": "Tell me only the most important aspects",
+                    "Commands":{"goto":{"Type":"GotoLocation","LocationID":"start.basicStory"}}
+                },
+                "6_skip":{
+                    "Text": "Skip",
+                    "Commands":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro"}}
+                }
+            }
+        },
+        "basicStory":{
+            "Text":{
+                "JoinWith": "\n",
+                "Values": {
+                    "5_d_0":"Friedrich III didn't die in 1888. WW1 and WW2 did not happen.",
+                    "5_d_1":"France became communist during the great recession in the 1920s.",
+                    "5_d_2":"The influence of America in Europe is unsignificant. Since the USA was not involved in major wars in the last centrury it isn't at industrialized as IRL.",
+                    "5_d_3":"Southern Germany revolted against Prussian Supremacy in 1934. They joined Austria, which damage the Prussian-Austrian relationship.",
+                    "5_d_4":"Bavaria, Baden and the Empire of Austria-Hungary call themselves the German Federation (Germany in short) today. It is currently ruled by the Austrian-Hungarian Empress.",
+                    "5_d_5":"Northern Germany calls itself the Kingdom of Prussia and is ruled by the King of Prussia.",
+                    "5_d_6":"While the citizens of Germany and Prussia view each other as brothers their respective rulers view each other as rivals.",
+                    "5_d_7":"Due to being surrounded by enemies Germany and Prussia formed an instable alliance.",
+                    "5_d_8":"During the beginning of the last centrury the European countries fought several small wars against each other, but the borders didn't change much.",
+                    "5_d_9":"With the invention of nuclear bombs in 1951 Europe entered a phase of cold war. While there are still many proxy wars around the world the continent has been in relative peace for decades.",
+                    "5_d_A":"The constant threat of war has influenced reasearch. A byproduct of reasearch in biological warfare are improvements in plastic surgery. Major changes to a patients body are no problem anymore, thanks individual tailored hormones, automated surgery and gene-editing.",
+                    "5_d_B":"Reasearch in computational science is not advanced as it is IRL though. Mobile phones are still new to the public and the internet does not exist."
+                }
+            },
+            "TexturePath":{
+                "Value":"events/intro/map.jpg"
+            },
+            "Options":{
+                "5_start":{
+                    "Text": "Start Game",
+                    "Commands":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro"}}
+                }
             }
         },
         "skipIntro":{
@@ -56,7 +110,7 @@
                                 "Type":"Conditional",
                                 "Condition": "PC.genderVisible=\"f\"",
                                 "Commands":{
-                                    "5_call_sexSetF":{"Type":"Call","ProcedureID": "sexSetF"},
+                                    "5_call_sexSetF":{"Type":"Call","ProcedureID": "sexSetF", "Parameters": ["PC"]},
                                     "8_goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Female"}
                                 }
                             },
@@ -64,7 +118,7 @@
                                 "Type":"Conditional",
                                 "Condition": "PC.genderVisible=\"m\"",
                                 "Commands":{
-                                    "5_call_sexSetM":{"Type":"Call","ProcedureID": "sexSetM"},
+                                    "5_call_sexSetM":{"Type":"Call","ProcedureID": "sexSetM", "Parameters": ["PC"]},
                                     "8_goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Male"}
                                 }
                             }
@@ -85,9 +139,9 @@
                         },
                         "Headline":"Please choose your appearance.\n<size=50%><i><color=\"red\">Choose carefully. Some of the resulting traits can be changed by performing plastic surgery, some are hard or impossible to change.</color></i></size>",
                         "Options":{
-                            "Ugly":{"Text": "<align=\"center\"><b><size=200%>Ugly</size></b></align>\n<align=\"left\">Your looks are rather unfortunate. Your skin is impure, your breasts are rather small and your figure is not very feminine.\n<color=\"red\">Most men find you less attractive</color>\n<color=\"red\">Establishing friendships will be harder with most women</color>\n<color=\"orange\">People with \"special\" interests will shun you</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>","State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":1}}}},
-                            "Average":{"Text": "<align=\"center\"><b><size=200%>Average</size></b></align>\n<align=\"left\">You look like a typical girl. You have an average height and your face is distinctively female.\n<color=\"blue\">No special modifiers</color></align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":3}}}},
-                            "Attractive":{"Text": "<align=\"center\"><b><size=200%>Attractive</size></b></align>\n<align=\"left\">You have goods looks. Your skin is soft like silk, your breasts are a little bigger than average and your figure is destinctively feminine.\n<color=\"green\">Most men find you more attractive</color>\n<color=\"green\">Establishing friendships will be easier with most women</color>\n<color=\"orange\">You will attract people with \"special\" interests</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>", "State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":5}}}}
+                            "3_Ugly":{"Text": "<align=\"center\"><b><size=200%>Ugly</size></b></align>\n<align=\"left\">Your looks are rather unfortunate. Your skin is impure, your breasts are rather small and your figure is not very feminine.\n<color=\"red\">Most men find you less attractive</color>\n<color=\"red\">Establishing friendships will be harder with most women</color>\n<color=\"orange\">People with \"special\" interests will shun you</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>","State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":1}}}},
+                            "5_Average":{"Text": "<align=\"center\"><b><size=200%>Average</size></b></align>\n<align=\"left\">You look like a typical girl. You have an average height and your face is distinctively female.\n<color=\"blue\">No special modifiers</color></align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":3}}}},
+                            "7_Attractive":{"Text": "<align=\"center\"><b><size=200%>Attractive</size></b></align>\n<align=\"left\">You have goods looks. Your skin is soft like silk, your breasts are a little bigger than average and your figure is destinctively feminine.\n<color=\"green\">Most men find you more attractive</color>\n<color=\"green\">Establishing friendships will be easier with most women</color>\n<color=\"orange\">You will attract people with \"special\" interests</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>", "State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":5}}}}
                         },
                         "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Backstory_Female"}}
                     }
@@ -106,9 +160,9 @@
                         },
                         "Headline":"Please choose your appearance.\n<size=50%><i><color=\"red\">Choose carefully. Some of the resulting traits can be changed by performing plastic surgery, some are hard or impossible to change.</color></i></size>",
                         "Options":{
-                            "Girlish":{"Text": "<align=\"center\"><b><size=200%>Girlish</size></b></align>\n<align=\"left\">You look pretty girlish for a boy. You are smaller than most boys and your facial features are softer. The pitch of your voice is also a little higher than usual.\n<color=\"red\">Most women find you less attractive</color>\n<color=\"red\">Establishing friendships will be harder with most men</color>\n<color=\"orange\">You will attract people with \"special\" interests</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>","State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":1}}}},
-                            "Average":{"Text": "<align=\"center\"><b><size=200%>Average</size></b></align>\n<align=\"left\">You look like a typical boy. You have an average height and your face is distinctively male. Your voice has a normal male pitch.\n<color=\"blue\">No special modifiers</color></align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":3}}}},
-                            "Manly":{"Text": "<align=\"center\"><b><size=200%>Manly</size></b></align>\n<align=\"left\">You are taller than most boys and you have some muscles. You face is distinctively male. Your voice is a little deeper than most boys voices.\n<color=\"green\">Most women find you more attractive</color>\n<color=\"green\">Establishing friendships will be easier with most men</color>\n<color=\"orange\">People with \"special\" interests will shun you</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>", "State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":5}}}}
+                            "3_Girlish":{"Text": "<align=\"center\"><b><size=200%>Girlish</size></b></align>\n<align=\"left\">You look pretty girlish for a boy. You are smaller than most boys and your facial features are softer. The pitch of your voice is also a little higher than usual.\n<color=\"red\">Most women find you less attractive</color>\n<color=\"red\">Establishing friendships will be harder with most men</color>\n<color=\"orange\">You will attract people with \"special\" interests</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>","State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":1}}}},
+                            "5_Average":{"Text": "<align=\"center\"><b><size=200%>Average</size></b></align>\n<align=\"left\">You look like a typical boy. You have an average height and your face is distinctively male. Your voice has a normal male pitch.\n<color=\"blue\">No special modifiers</color></align>", "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":3}}}},
+                            "7_Manly":{"Text": "<align=\"center\"><b><size=200%>Manly</size></b></align>\n<align=\"left\">You are taller than most boys and you have some muscles. You face is distinctively male. Your voice is a little deeper than most boys voices.\n<color=\"green\">Most women find you more attractive</color>\n<color=\"green\">Establishing friendships will be easier with most men</color>\n<color=\"orange\">People with \"special\" interests will shun you</color></align>\n\n<align=\"center\"><color=\"red\"><i>Currently not available</i></color></align>", "State":{"Value":{"enabled":false}}, "Commands":{"SET":{"Type":"Set","VALUES":{"RESULT":5}}}}
                         },
                         "onComplete":{"goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Backstory_Male"}}
                     }
@@ -183,10 +237,7 @@
                     "Type":"Conditional",
                     "Condition": "PC.genderVisible=\"f\"",
                     "Commands":{
-                        "Bra":{"Type":"ItemAdd","ShopID":"all_bras_f","Equip":true},
-                        "Clothes":{"Type":"ItemAdd","ShopID":"all_clothes_f","Equip":true},
-                        "Panties":{"Type":"ItemAdd","ShopID":"all_panties_f","Equip":true},
-                        "Shoes":{"Type":"ItemAdd","ShopID":"all_shoes_f","Equip":true},
+                        "5_ItemsAdd":{"Type":"Call","ProcedureID": "itemsStartAddAndEquipF"},
                         "FirstName":{"Type":"Set","ValuesFromLists": {"PC.nameFirst": "names_first_female_90s"}}
                     }
                 },
@@ -194,9 +245,7 @@
                     "Type":"Conditional",
                     "Condition": "PC.genderVisible=\"m\"",
                     "Commands":{
-                        "Clothes":{"Type":"ItemAdd","ShopID":"all_clothes_m","Equip":true},
-                        "Underwear":{"Type":"ItemAdd","ShopID":"all_panties_m","Equip":true},
-                        "Shoes":{"Type":"ItemAdd","ShopID":"all_shoes_m","Equip":true},
+                        "5_ItemsAdd":{"Type":"Call","ProcedureID": "itemsStartAddAndEquipM"},
                         "FirstName":{"Type":"Set","ValuesFromLists": {"PC.nameFirst": "names_first_male_90s"}}
                     }
                 },
@@ -212,20 +261,7 @@
                     "Type": "Conditional",
                     "Condition": "s_pc_background=\"pupil\"",
                     "Commands": {
-                        "5_goto":{"Type":"GotoLocation","LocationID":"dahlem/public."},
-                        "5_note":{
-                            "Type": "NoteAdd",
-                            "NoteID": "school_intro_gotoPsychologist",
-                            "Text": {
-                                "Value": "I am new at this school. I am told to visit the school psychologist first. I should find her in her office in the main school building."
-                            }
-                        },
-                        "5_showStatusBar":{
-                            "Type": "Set",
-                            "Values": {
-                                "UI.isVisibleStatusBar":null
-                            }
-                        }
+                        "5_event":{"Type":"Event","EventID": "intro_school."}
                     }
                 }
             }

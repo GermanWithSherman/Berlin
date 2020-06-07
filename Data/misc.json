@@ -12,5 +12,20 @@
         "10":["night","night","night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night","night","night"],
         "11":["night","night","night","night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night","night","night","night"],
         "12":["night","night","night","night","night","night","dawn1","dawn2","dawn3","day","day","day","day","day","day","day","day","dusk1","dusk2","dusk3","night","night","night","night"]
+    },
+
+    "outfitStyle":{
+        "Default":"Weird",
+        "Values":{
+            "None":     {"None":"Naked",    "Casual":"Naked",  "Sport":"Naked",    "Pumps":"Naked",    "Sandals":"Naked",  "Beach":"Naked"},
+            "Casual":   {"None":"Barefoot", "Casual":"Casual", "Sport":"Weird",    "Pumps":"Casual",   "Sandals":"Casual", "Beach":"Beach"},
+            "Dance":    {"None":"Barefoot", "Casual":"Weird",  "Sport":"Weird",    "Pumps":"Dance",    "Sandals":"Dance",  "Beach":"Weird"},
+            "Beach":    {"None":"Barefoot", "Casual":"Weird",  "Sport":"Weird",    "Pumps":"Weird",    "Sandals":"Weird",  "Beach":"Beach"},
+            "Business": {"None":"Barefoot", "Casual":"Business","Sport":"Weird",    "Pumps":"Business","Sandals":"Weird",  "Beach":"Weird"},
+            "Sport":    {"None":"Barefoot", "Casual":"Weird",  "Sport":"Sport",     "Pumps":"Weird",   "Sandals":"Weird",  "Beach":"Weird"},
+            "Stripper": {"None":"Barefoot", "Casual":"Weird",  "Sport":"Weird",     "Pumps":"Stripper", "Sandals":"Stripper","Beach":"Weird"},
+            "School":   {"None":"Barefoot", "Casual":"School", "Sport":"Weird",     "Pumps":"School",   "Sandals":"Weird",  "Beach":"Weird"}
+
+        }
     }
 }

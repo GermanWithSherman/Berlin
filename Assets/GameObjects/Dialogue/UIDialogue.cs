@@ -26,12 +26,24 @@ public class UIDialogue : MonoBehaviour
 
 
     public Data Data; //Data used to display text
-    
+
 
     public void close()
     {
         hide();
         GameManager.Instance.uiUpdate();
+    }
+
+    public void contin(string stageID){
+        show();
+
+        string[] keyparts = stageID.Split('.');
+
+        if (!String.IsNullOrWhiteSpace(keyparts[0]))
+            _currentTopic = GameManager.Instance.DialogueTopicLibrary[keyparts[0]];
+
+        DialogueStage ds = GameManager.Instance.DialogueLineCache.Stage(stageID, _currentTopic);
+        stageShow(ds);
     }
 
     public void finish()
@@ -122,15 +134,17 @@ public class UIDialogue : MonoBehaviour
         Data = new DataComposed(dict);
     }
 
-    public void show(NPC npc, DialogueTopic topic = null)
+    public void show()
     {
-        _npc = npc;
+        gameObject.SetActive(true);
+    }
 
-        setData(_npc);
+    public void show(DialogueTopic topic = null)
+    {
+        
 
         Text.Text = "";
-        //List<DialogueTopic> dialogueTopics = GameManager.Instance.DialogueTopicLibrary.getTopicsByNPC(_npc);
-        //topicListShow(dialogueTopics);
+
         topicListShow(_npc);
         optionListClear();
 
@@ -145,9 +159,19 @@ public class UIDialogue : MonoBehaviour
             topicShow(topic);
         }
 
-        gameObject.SetActive(true);
 
-        
+        show();
+
+
+    }
+
+    public void show(NPC npc, DialogueTopic topic = null)
+    {
+        _npc = npc;
+
+        setData(_npc);
+
+        show(topic);
     }
 
     public void stageShow(DialogueStage stage)

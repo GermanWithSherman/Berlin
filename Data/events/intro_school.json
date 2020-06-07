@@ -1,0 +1,94 @@
+{
+    "EventStages":{
+        "main":{
+            "TexturePath": {
+                "Value": "locations/dahlem/public/dahlem.jpg"
+            },
+            "Text": {
+                "JoinWith": "\n",
+                "Values":{
+                    "5_d_0":"Your parents have send you to a boarding school for your last year of school.",
+                    "5_d_1":"This school is in a part of Berlin that looks like a small village.",
+                    "5_d_2":"You just arrived here by train. You were told that the first thing you should do is visit the school psychologist."
+                }
+            },
+            "Commands": {
+                "5_note":{
+                    "Type": "NoteAdd",
+                    "NoteID": "school_intro_gotoPsychologist",
+                    "Text": {
+                        "Value": "I am new at this school. I am told to visit the school psychologist first. I should find her in her office in the main school building."
+                    }
+                }
+            },
+            "Options":{
+                "0":{
+                    "Text": "Go to school",
+                    "Commands": {
+                        "5_walk":{
+                            "Type": "Event",
+                            "EventID": "intro_school.school"
+                        }
+                    }
+                }
+            }
+        },
+        "school":{
+            "TexturePath": {
+                "Value": "locations/dahlem/school/schoolExterior.jpg"
+            },
+            "Text": {
+                "JoinWith": "\n",
+                "Values":{
+                    "5_d_0":"The school is only a few minutes away from the train station.",
+                    "5_d_1":"The school building looks like a big farmhouse. In the distance you see a sports field. There is also a secondary building nearby. You assume that that's the dorm.",
+                    "5_d_2":"At the moment there are no people around and there is only one car on the schools parking lot. You guess that it belongs to the psychologist."
+                }
+            },
+            "Options":{
+                "0":{
+                    "Text": "Enter School Building",
+                    "Commands": {
+                        "5_walk":{
+                            "Type": "Event",
+                            "EventID": "intro_school.enterSchool"
+                        }
+                    }
+                }
+            }
+        },
+        "enterSchool":{
+            "TexturePath": {
+                "Value": "locations/dahlem/school/schoolHallway.jpg"
+            },
+            "Text": {
+                "JoinWith": "\n",
+                "Values":{
+                    "5_d_0":"You enter the school building.",
+                    "5_d_1":"Right behind the door is an hallway with student lockers on each side.",
+                    "5_d_2":"The office of the psychologist is right next to the entrance."
+                }
+            },
+            "Options":{
+                "0":{
+                    "Text": "Enter Office",
+                    "Commands": {
+                        "3_eventEnd":{
+                            "Type": "EventEnd"
+                        },
+                        "5_enterOffice":{
+                            "Type":"GotoLocation",
+                            "LocationID": "dahlem/school/school.psychologistOffice"
+                        },
+                        "5_showStatusBar":{
+                            "Type": "Set",
+                            "Values": {
+                                "UI.isVisibleStatusBar":null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

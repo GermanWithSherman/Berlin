@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -10,6 +11,8 @@ public interface IModableDictionary<V> : IDictionary<string, V>, IModable {
 
 public class ModableValueTypeSortedDictionary<V> : SortedDictionary<string, V>, IModable, IModableDictionary<V>
 {
+    public ModableValueTypeSortedDictionary() : base(new ModableSortedDictionaryComparer()) { }
+
     public IModable copyDeep()
     {
         return copyDeep(this);
@@ -47,6 +50,7 @@ public class ModableValueTypeSortedDictionary<V> : SortedDictionary<string, V>, 
 
 public class ModableObjectSortedDictionary<V> : SortedDictionary<string, V>, IModable, IModableDictionary<V> where V : IModable
 {
+    public ModableObjectSortedDictionary():base(new ModableSortedDictionaryComparer()){}
 
     public IModable copyDeep()
     {
@@ -90,6 +94,8 @@ public class ModableObjectSortedDictionary<V> : SortedDictionary<string, V>, IMo
 
 public class ModableValueTypeHashDictionary<V> : Dictionary<string, V>, IModable, IModableDictionary<V>
 {
+    public ModableValueTypeHashDictionary() { }
+
     public IModable copyDeep()
     {
         return copyDeep(this);
@@ -127,6 +133,8 @@ public class ModableValueTypeHashDictionary<V> : Dictionary<string, V>, IModable
 public class ModableObjectHashDictionary<V> : Dictionary<string, V>, IModable, IModableDictionary<V> where V : IModable
 {
 
+    public ModableObjectHashDictionary() { }
+
     public IModable copyDeep()
     {
         return copyDeep(this);
@@ -139,6 +147,7 @@ public class ModableObjectHashDictionary<V> : Dictionary<string, V>, IModable, I
         {
             result[entry.Key] = Modable.copyDeep(entry.Value);
         }
+
         return result;
     }
 
@@ -165,137 +174,23 @@ public class ModableObjectHashDictionary<V> : Dictionary<string, V>, IModable, I
 
     }
 
-
-    /*public IModable copyDeep()
+    public override string ToString()
     {
-        return copyDeep<ModableDictionary<V>>(this);
+        return base.ToString()+"\n"+ JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
     }
-
-
-
-    public static T copyDeep<T>(T original) where T : IModableDictionary<V>, new()
-    {
-        var result = new T();
-        foreach (KeyValuePair<string, V> kv in original)
-        {
-            string key = kv.Key;
-            V value = kv.Value;
-            if (typeof(V) is IModable)
-                result[key] = (V)Modable.copyDeep((IModable)value);
-            else
-                result[key] = value;
-        }
-        return result;
-    }
-
-
-    /*public void mod(IModable modable)
-    {
-        if(modable.GetType() != GetType())
-        {
-            Debug.LogError("Type mismatch");
-            return;
-        }
-
-        ModableDictionary<V> modData = (ModableDictionary<V>)modable;
-
-        if (typeof(V) is IModable)
-        {
-            foreach (KeyValuePair<string, V> modkv in modData)
-            {
-                if (!ContainsKey(modkv.Key))
-                {
-                    this[modkv.Key] = (V)Modable.copyDeep((IModable)modkv.Value);
-                    continue;
-                }
-
-                this[modkv.Key] = (V)Modable.mod((IModable)this[modkv.Key], (IModable)modkv.Value);
-            }
-        }
-        else
-        {
-            foreach (KeyValuePair<string, V> modkv in modData)
-            {
-                this[modkv.Key] = modkv.Value;
-            }
-        }
-    }*/
-
-    /*public void mod(IModable modable)
-    {
-        if (modable.GetType() != GetType())
-        {
-            Debug.LogError("Type mismatch");
-            return;
-        }
-
-        mod<V>(this,(ModableDictionary<V>)modable);
-    }
-
-    public static void mod<T>(IModableDictionary<T> original, IModableDictionary<T> mod) where T : IModable
-    {
-        throw new System.Exception("HIT");
-    }
-
-    public static void mod<T>(IModableDictionary<T> original, IModableDictionary<T> mod)
-    {
-        throw new System.Exception("HIT2");
-    }
-
-    public static void mod(IModable original, IModable modable)
-    {
-        if (modable.GetType() != original.GetType())
-        {
-            Debug.LogError("Type mismatch");
-            return;
-        }
-
-
-        IModableDictionary<V> modData = (IModableDictionary<V>)modable;
-        IModableDictionary<V> originalData = (IModableDictionary<V>)original;
-
-
-        //if (typeof(V) is IModable)
-        if(typeof(IModable).GetTypeInfo().IsAssignableFrom(typeof(V).Ge‌​tTypeInfo()))
-        {
-            foreach (KeyValuePair<string, V> modkv in modData)
-            {
-                if (!originalData.ContainsKey(modkv.Key))
-                {
-                    originalData[modkv.Key] = (V)Modable.copyDeep((IModable)modkv.Value);
-                    continue;
-                }
-
-                originalData[modkv.Key] = (V)Modable.mod((IModable)originalData[modkv.Key], (IModable)modkv.Value);
-            }
-        }
-        else
-        {
-            foreach (KeyValuePair<string, V> modkv in modData)
-            {
-                originalData[modkv.Key] = modkv.Value;
-            }
-        }
-    }
-
 }
 
-public class ModableSortedDictionary<V> : SortedDictionary<string,V>, IModable, IModableDictionary<V>
+public class ModableSortedDictionaryComparer : Comparer<string>
 {
-    public IModable copyDeep()
+    public override int Compare(string x, string y)
     {
-        return ModableDictionary<V>.copyDeep<ModableSortedDictionary<V>>(this);
-    }
+        if (y.Length > x.Length && y.StartsWith(x) && y[x.Length] == '^')
+            return 1;
 
-    public static T copyDeep<T>(T original) where T : IModableDictionary<V>, new()
-    {
-        return ModableDictionary<V>.copyDeep<T>(original);
-    }
+        if (x.Length > y.Length && x.StartsWith(y) && x[y.Length] == '^')
+            return -1;
 
-    public void mod(IModable modable)
-    {
-        ModableDictionary<V>.mod(this, modable);
+        return Comparer<string>.Default.Compare(x,y);
+        
     }
-}
-´*/
 }

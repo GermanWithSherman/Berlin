@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public abstract class Cache<T> : MonoBehaviour where T : class,IModable
+public abstract class Cache<T> : MonoBehaviour where T : class,IModable,new()
 {
     public string Folder;
 
@@ -153,9 +154,12 @@ public abstract class Cache<T> : MonoBehaviour where T : class,IModable
         string path = Path.Combine(dataPath, Folder, key + ".json");
         T original = loadFromFile(path);
 
+
         foreach (string modPath in modsPaths) {
             path = Path.Combine(modPath, Folder, key + ".json");
-            original = Modable.mod(original, loadFromFile(path));
+            T mod = loadFromFile(path);
+            original = Modable.mod(original, mod);
+            
         }
 
         return original;
@@ -172,10 +176,10 @@ public abstract class Cache<T> : MonoBehaviour where T : class,IModable
 
             return obj;
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            //Debug.LogError(e);
-            return default;
+            Debug.LogError(e);
+            return new T();
         }
     }
 }

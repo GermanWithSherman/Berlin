@@ -1,0 +1,50 @@
+{
+    "EventStages":{
+        "janine_intro_shower":{
+            "Text":{
+                "JoinWith": "\n",
+                "Values": {
+                    "3_d_0":"You enter the bathroom.",
+                    "5_d_0":"Do you really want to use this weird cream on your body? A strong part of you tells you to not do it, but the voice that tells you to follow along is way stronger.",
+                    "5_d_1":"Before you know it you have completely undressed yourself."
+                }
+            },
+            "TexturePath": {"Value":"locations/dahlem/school/dormBath2.jpg"},
+            "Options":{
+                "5_shower":{
+                    "Text": "Shower",
+                    "Commands": {
+                        "5_shower":{
+                            "Type": "Event",
+                            "EventID": "school_psychologist_misc.janine_intro_shower_after"
+                        }
+                    }
+                }
+            }
+        },
+        "janine_intro_shower_after":{
+            "Text":{
+                "JoinWith": "\n",
+                "Values": {
+                    "5_d_0":"You use the cream as instructed. It feels very nice and warm on your skin. After a few minutes you realize that your hair is falling off. The cream seems to be a hair removal cream and you just removed all your hair except for your hair on your head."
+                }
+            },
+            "TexturePath": {"Value":"events/hairRemoval/hairRemoval.jpg"},
+            "Options":{
+                "5_shower":{
+                    "Text": "Return to your room",
+                    "Commands": {
+                        "5_eventEnd":{
+                            "Type": "EventEnd"
+                        },
+                        "7_dialogueContinue":{
+                            "Type": "Dialogue", 
+                            "TopicID": "CONTINUE>school_janine_intro_uniform.start", 
+                            "NPCID": ""
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -17,26 +17,25 @@
         "Inherit": {"type":"string"},
         "State":{
             "type":"object",
-            "required": ["Values"],
+            "anyOf": [
+                {"required": ["Values"]},
+                {"required": ["Value"]}
+            ],
             "properties": {
+                "Value":{
+                    "$ref": "./OptionState.json"
+                },
                 "Values":{
                     "type":"object",
                     "patternProperties": {
                         "^.*$": {
                             "type":"object",
-                            "required": ["Value","Condition"],
+                            "requiered": ["Value"],
                             "properties": {
-                                "Condition":{"type":"string"},
-                                "Value":{
-                                    "type":"object",
-                                    "additionalProperties": false,
-                                    "properties": {
-                                        "Enabled":{"type":"boolean"},
-                                        "Text":{"type":"string"},
-                                        "Visible":{"type":"boolean"}
-                                    }
-                                }
+                                "Value":{"$ref": "./OptionState.json"},
+                                "Condition":{"type":"string"}
                             }
+                            
                         }
                     }
                 }

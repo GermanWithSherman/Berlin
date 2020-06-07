@@ -7,6 +7,8 @@ public class WeightedStringList : WeightedList<System.String>
 {
     const char Separator = ';';
 
+    public WeightedStringList() { }
+
     public WeightedStringList(StreamReader streamReader, char separator = Separator)
     {
         loadItemsFromStream(streamReader, separator);

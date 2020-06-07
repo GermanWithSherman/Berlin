@@ -16,7 +16,8 @@ public class CurrentOutfitItem : MonoBehaviour
     public TMPro.TextMeshProUGUI LabelText;
 
     public Button Button;
-    public RawImage RawImage;
+    //public RawImage RawImage;
+    public ImageAutosize ImageAutosize;
 
     private PC currentCharacter;
 
@@ -45,6 +46,6 @@ public class CurrentOutfitItem : MonoBehaviour
             return;
         }
         RawImage.texture = item.Texture;*/
-        RawImage.texture = currentCharacter.GetClothingslotTexture(Slot);
+        ImageAutosize.texture = currentCharacter.GetClothingslotTexture(Slot);
     }
 }

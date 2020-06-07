@@ -75,7 +75,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerable<LocationConnection> CurrentReachableLocations{get => GameData.currentLocation?.LocationConnections.VisibleLocationConnections;}
+    public IEnumerable<LocationConnection> CurrentReachableLocations
+    {
+        get
+        {
+            if(GameData.CurrentEventStage == null)
+                return GameData.currentLocation?.LocationConnections.VisibleLocationConnections;
+            return new LocationConnection[0];
+        }
+    }
 
     public Template CurrentTemplate
     {
@@ -262,9 +270,10 @@ public class GameManager : MonoBehaviour
         Debug.Log(command);
     }
 
-    public void dialogueContinue(string stageID)
+    public void dialogueContinue(string topicID)
     {
-        UIDialogue.stageShow(stageID);
+
+        UIDialogue.contin(topicID);
     }
 
     public void dialogueShow(NPC npc)
@@ -299,6 +308,10 @@ public class GameManager : MonoBehaviour
     {
         GameData.CurrentEventStage = eventStage;
         eventStage?.execute();
+
+        if (GameData.CurrentEventStage != null)
+            UINPCsPresentContainer.setNPCs(new NPC[0]);
+
         uiUpdate();
     }
 
@@ -313,9 +326,20 @@ public class GameManager : MonoBehaviour
 
     public static JObject File2Data(string path)
     {
-        string jsonString = File.ReadAllText(path);
-        var data = JObject.Parse(jsonString);
-        return data;
+        if (!File.Exists(path))
+            return new JObject();
+        try
+        {
+            
+            string jsonString = File.ReadAllText(path);
+            var data = JObject.Parse(jsonString);
+            return data;
+        }
+        catch
+        {
+            return new JObject();
+        }
+        
     }
 
     public static T File2Object<T>(string path)
@@ -470,11 +494,13 @@ public class GameManager : MonoBehaviour
     private void npcsPresentUpdate()
     {
         IEnumerable<NPC> npcs = NPCsLibrary.npcsPresent(GameData.currentLocation, GameData.WorldData.DateTime);
-        /*foreach (NPC npc in npcs)
-            Debug.Log(FunctionsLibrary.npcName(npc));*/
 
         GameData.NpcsPresent = npcs;
-        UINPCsPresentContainer.setNPCs(GameData.NpcsPresent);
+
+        if (GameData.CurrentEventStage == null)
+            UINPCsPresentContainer.setNPCs(GameData.NpcsPresent);
+        else
+            UINPCsPresentContainer.setNPCs(new NPC[0]);
     }
 
     public void locationTransfer(LocationConnection locationConnection)
@@ -522,6 +548,11 @@ public class GameManager : MonoBehaviour
     public string path(string p)
     {
         return Path.Combine(DataPath,p);
+    }
+
+    public IEnumerable<string> pathsMods(string target)
+    {
+        return pathsMods(ModsServer.ActivatedModsPaths, target);
     }
 
     public IEnumerable<string> pathsMods(IEnumerable<string> modBasePaths, string target)

@@ -17,7 +17,7 @@ public class CommandItemAdd : Command
         ItemsCollection selectedItems;
         if (!String.IsNullOrEmpty(ShopID))
         {
-            GameData gameData = (GameData)data;
+            GameData gameData = GameManager.Instance.GameData;
             ItemsCollection items = gameData.ShopData[ShopID].ItemsAll;
 
             selectedItems = items.getRandomItems(Count);

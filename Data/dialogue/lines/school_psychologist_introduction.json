@@ -40,7 +40,7 @@
             }
         },
         "readFile":{
-            "offer":{
+            "3_offer":{
                 "Text": {
                     "JoinWith": "\n\n",
                     "Values":{
@@ -68,7 +68,7 @@
                 "LeaveEnabled": false,
                 "TopicsVisible": false
             },
-            "default":{
+            "5_default":{
                 "Text": {
                     "JoinWith": "\n\n",
                     "Values":{
@@ -95,7 +95,7 @@
                 "Text": {
                     "JoinWith": "\n\n",
                     "Values":{
-                        "0":"<speaker=_NPC1>I can't go into too much detail. Not knowing about the nature of the experiments is a cucial part of them. But I can assure you that they are not hurtful.</speaker>",
+                        "0":"<speaker=_NPC1>I can't go into too much detail. Not knowing about the nature of the experiments is a crucial part of them. But I can assure you that they are not hurtful.</speaker>",
                         "1":"<speaker=_NPC1>Also these experiments will affect your everyday life in a big way. But don't worry, I believe you will enjoy this.</speaker>"
                     }
                 },
@@ -229,7 +229,10 @@
                         "ValuesFromSetters": { "PC.moneyCash":{"Mode": "Inc", "Value": 50000} }
                     },
                     "setIntroduced":{"Type": "Set","Values": {"b_school_psychologist_introduced": true}},
-                    "setDormAccess":{"Type": "Set","Values": {"s_school_psychologist_intro_stage": "gotoAssistant"}},
+                    "setDormAccess":{"Type": "Set","Values": {
+                        "s_school_psychologist_intro_stage": "gotoAssistant",
+                        "i_school_dorm_room":211
+                    }},
                     "setExperiment":{"Type": "Set",
                         "Values": {
                             "b_school_psychologist_participant": true,

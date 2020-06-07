@@ -1,0 +1,13 @@
+{
+    "itemsStartAddAndEquipF":{
+        "Bra":{"Type":"ItemAdd","ShopID":"all_bras_f","Equip":true},
+        "Clothes":{"Type":"ItemAdd","ShopID":"all_clothes_f","Equip":true},
+        "Panties":{"Type":"ItemAdd","ShopID":"all_panties_f","Equip":true},
+        "Shoes":{"Type":"ItemAdd","ShopID":"all_shoes_f","Equip":true}
+    },
+    "itemsStartAddAndEquipM":{
+        "Clothes":{"Type":"ItemAdd","ShopID":"all_clothes_m","Equip":true},
+        "Underwear":{"Type":"ItemAdd","ShopID":"all_panties_m","Equip":true},
+        "Shoes":{"Type":"ItemAdd","ShopID":"all_shoes_m","Equip":true}
+    }
+}

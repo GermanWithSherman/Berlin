@@ -1,8 +1,0 @@
-{
-    "Values":{
-        "Bra":{
-            "ValueType": "Reference",
-            "Key":"_PC.currentOutfit.Clothes.TexturePath"
-        }
-    }
-}

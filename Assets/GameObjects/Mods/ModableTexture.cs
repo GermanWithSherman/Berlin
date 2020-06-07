@@ -24,9 +24,20 @@ public class ModableTexture : IModable
 
     public static implicit operator Texture2D(ModableTexture t) => t.Texture;
 
-    public ModableTexture(string path)
+    public ModableTexture(string path, bool includeMods=true)
     {
-        Path = path;
+        Path = System.IO.Path.Combine(GameManager.Instance.DataPath, path);
+
+        if (!includeMods)
+            return;
+
+        foreach(string modPath in GameManager.Instance.pathsMods(path))
+        {
+            string absouluteModPath = System.IO.Path.Combine(GameManager.Instance.DataPath, modPath);
+            if (File.Exists(absouluteModPath))
+                Path = absouluteModPath;
+        }
+
     }
 
     public ModableTexture()

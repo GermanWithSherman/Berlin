@@ -8,7 +8,7 @@
     "Schedules":{
         "dahlem/school/dorm.3_314": {
             "0": {
-                "TimeStart": 1000,
+                "TimeStart": 0,
                 "TimeEnd": 2359
             }
         }

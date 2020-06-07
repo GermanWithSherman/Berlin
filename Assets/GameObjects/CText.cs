@@ -203,4 +203,9 @@ public class CText : IModable
         result.C = Modable.copyDeep(C);
         return result;
     }
+
+    public override string ToString()
+    {
+        return Text();
+    }
 }

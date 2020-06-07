@@ -9,13 +9,17 @@ public class EventGroupCache : Cache<EventGroup>
 {
     protected override EventGroup create(string key)
     {
-        string path = Path.Combine(GameManager.Instance.DataPath, "events", key + ".json");
+        var result = base.create(key);
+        return result;
+
+        /*string path = Path.Combine(GameManager.Instance.DataPath, "events", key + ".json");
 
         JObject deserializationData = GameManager.File2Data(path);
 
         EventGroup eventGroupCache = deserializationData.ToObject<EventGroup>();
 
-        return eventGroupCache;
+        return eventGroupCache;*/
+
     }
 
     public EventStage EventStage(string key)
@@ -57,9 +61,6 @@ public class EventGroupCache : Cache<EventGroup>
 
     public EventStage EventStage(string eventGroupId, string eventStageId)
     {
-        /*EventGroup eventGroup = this[eventGroupId];
-        EventStage eventStage = eventGroup[eventStageId];*/
         return EventStage($"{eventGroupId}.{eventStageId}");
-        //return eventStage;
     }
 }
