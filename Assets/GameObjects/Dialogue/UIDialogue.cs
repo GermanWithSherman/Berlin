@@ -13,8 +13,10 @@ public class UIDialogue : MonoBehaviour
     private DialogueTopic _currentTopic;
 
     //public TextMeshProUGUI Text;
-    public TextExtended Text;
-    public ScrollRect TextScrollRect;
+    public TextExtended TextHistory;
+    public TextExtended TextCurrent;
+    public ScrollRect TextHistoryScrollRect;
+    public ScrollRect TextCurrentScrollRect;
 
     public UIDialogueOption OptionPrefab;
     public UIDialogueTopic TopicPrefab;
@@ -91,9 +93,11 @@ public class UIDialogue : MonoBehaviour
         t += "\n\n";
 
         //Text.Text += t;
-        Text.addText(t);
-        Canvas.ForceUpdateCanvases(); 
-        TextScrollRect.verticalNormalizedPosition = 0f; //do ForceUpdateCanvases first to take the new text into account
+        TextHistory.addText(t);
+        TextCurrent.Text = t;
+        Canvas.ForceUpdateCanvases();
+        TextCurrentScrollRect.verticalNormalizedPosition = 1f; //do ForceUpdateCanvases first to take the new text into account
+        TextHistoryScrollRect.verticalNormalizedPosition = 0f; //do ForceUpdateCanvases first to take the new text into account
     }
 
     public void optionExecute(DialogueOption option)
@@ -143,7 +147,8 @@ public class UIDialogue : MonoBehaviour
     {
         
 
-        Text.Text = "";
+        TextCurrent.Text = "";
+        TextHistory.Text = "";
 
         topicListShow(_npc);
         optionListClear();

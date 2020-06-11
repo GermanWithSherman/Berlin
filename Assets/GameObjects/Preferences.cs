@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 [JsonObject(MemberSerialization.OptIn)]
@@ -19,6 +20,8 @@ public class Preferences
     [JsonProperty("ActivatedModIDs")]
     private IList<string> _activatedModIDs = new List<string>();
 
+    
+
     public IList<string> ActivatedModIDs
     {
         get => _activatedModIDs;
@@ -28,5 +31,15 @@ public class Preferences
             OnUpdate();
         }
     }
-    
+
+
+    public Preferences()
+    {
+    }
+
+    public Preferences(string path)
+    {
+        DataPath = Path.Combine(path, "data");
+        SavePath = Path.Combine(path, "saves");
+    }
 }

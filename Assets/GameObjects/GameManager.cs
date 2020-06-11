@@ -171,21 +171,30 @@ public class GameManager : MonoBehaviour
 
         if (Instance == null) { Instance = this; } else { Debug.LogError("Error: multiple " + this + " in scene!"); }
 
-        _preferencesPath = Path.Combine(Application.dataPath, "preferences.json");
+       
         preferencesLoad();
     }
 
 
     private string _preferencesPath;
 
-    private void preferencesLoad() => preferencesLoad(_preferencesPath);
+    private void preferencesLoad() => preferencesLoad(Application.dataPath);
 
     private void preferencesLoad(string path)
     {
-        JObject jObject = File2Data(path);
-        Preferences = jObject.ToObject<Preferences>();
+        _preferencesPath = Path.Combine(path, "preferences.json");
+        if (!File.Exists(_preferencesPath))
+        {
+            Preferences = new Preferences(path);
+            preferencesSave(_preferencesPath);
+        }
+        else
+        {
+            JObject jObject = File2Data(_preferencesPath);
+            Preferences = jObject.ToObject<Preferences>();
+        }
 
-        Preferences.OnUpdate = delegate { preferencesSave(path);  };
+        Preferences.OnUpdate = delegate { preferencesSave(_preferencesPath);  };
     }
 
     public void preferencesSave() => preferencesSave(_preferencesPath);
@@ -197,23 +206,32 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if(Display.displays.Length > 1)
+        try
         {
-            SecondaryDisplayActive = true;
-            
+            if (Display.displays.Length > 1)
+            {
+                SecondaryDisplayActive = true;
+
+            }
+
+
+            ModsServer = new ModsServer(path("mods"), Preferences);
+
+            loadStaticData();
+
+            StartMenu.show();
+
+            LoadingScreen.SetActive(false);
+
+            UIDialogue.hide();
+            UINotes.hide();
         }
-
-
-        ModsServer = new ModsServer(path("mods"), Preferences);
-
-        loadStaticData();
-
-        StartMenu.show();
-
-        LoadingScreen.SetActive(false);
-
-        UIDialogue.hide();
-        UINotes.hide();
+        catch(Exception e)
+        {
+            LoadingScreen.SetActive(false);
+            ErrorMessage.Show(e.Message);
+            Debug.LogError(e);
+        }
     }
 
     public void loadStaticData()
@@ -570,6 +588,11 @@ public class GameManager : MonoBehaviour
     public void ProcedureExecute(string procedureID, IEnumerable<dynamic> parameters)
     {
         ProceduresLibrary.procedureExecute(procedureID,GameData,parameters);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
     public void shopShow(string shopId)
