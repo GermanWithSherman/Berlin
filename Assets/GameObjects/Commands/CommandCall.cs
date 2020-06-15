@@ -12,7 +12,7 @@ public class CommandCall : Command, IModable//, IModableAutofields
 
     public override void execute(Data data)
     {
-        GameManager.Instance.ProcedureExecute(ProcedureID,Parameters);
+        GameManager.Instance.ProcedureExecute(ProcedureID,Parameters,data);
     }
 
     public override IModable copyDeep()

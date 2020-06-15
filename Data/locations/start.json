@@ -110,7 +110,6 @@
                                 "Type":"Conditional",
                                 "Condition": "PC.Body.GenderVisible=\"f\"",
                                 "Commands":{
-                                    "5_call_sexSetF":{"Type":"Call","ProcedureID": "sexSetF", "Parameters": ["PC"]},
                                     "8_goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Female"}
                                 }
                             },
@@ -118,7 +117,6 @@
                                 "Type":"Conditional",
                                 "Condition": "PC.Body.GenderVisible=\"m\"",
                                 "Commands":{
-                                    "5_call_sexSetM":{"Type":"Call","ProcedureID": "sexSetM", "Parameters": ["PC"]},
                                     "8_goto":{"Type":"GotoLocation","LocationID":"start.skipIntro_Appearance_Male"}
                                 }
                             }
@@ -237,24 +235,14 @@
                     "Type":"Conditional",
                     "Condition": "PC.Body.GenderVisible=\"f\"",
                     "Commands":{
-                        "5_ItemsAdd":{"Type":"Call","ProcedureID": "itemsStartAddAndEquipF"},
-                        "FirstName":{"Type":"Set","ValuesFromLists": {"PC.NameFirst": "names_first_female_90s"}}
+                        "5_callStart":{"Type":"Call","ProcedureID": "startFemale","Parameters": ["PC"]}
                     }
                 },
                 "5_male":{
                     "Type":"Conditional",
                     "Condition": "PC.Body.GenderVisible=\"m\"",
                     "Commands":{
-                        "5_ItemsAdd":{"Type":"Call","ProcedureID": "itemsStartAddAndEquipM"},
-                        "FirstName":{"Type":"Set","ValuesFromLists": {"PC.NameFirst": "names_first_male_90s"}}
-                    }
-                },
-                "5_LastName":{"Type":"Set","ValuesFromLists": {"PC.NameLast": "names_last"}},
-                "6_additionalNames":{
-                    "Type": "Set",
-                    "ValuesFromSetters": {
-                        "PC.NameFirstBorn":{"Mode":"Object","ValueObject":{"ValueType": "Reference","Key": "PC.NameFirst"}},
-                        "PC.NameLastBorn":{"Mode":"Object","ValueObject":{"ValueType": "Reference","Key": "PC.NameLast"}}
+                        "5_callStart":{"Type":"Call","ProcedureID": "startMale","Parameters": ["PC"]}
                     }
                 },
                 "6_backGroundSchool":{

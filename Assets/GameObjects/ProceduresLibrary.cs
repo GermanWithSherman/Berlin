@@ -34,7 +34,7 @@ public class ProceduresLibrary : Library<CommandsCollection>
     public void procedureExecute(string id, Data data, IEnumerable<dynamic> parameters = null)
     {
         Dictionary<string, Data> paramDict = new Dictionary<string, Data>();
-        paramDict["_GLOBAL"] = data;
+        paramDict["_GLOBAL"] = GameManager.Instance.GameData;//data;
         paramDict["_P"] = new FunctionParameters(data, parameters);
 
         Data d = new DataCombined(paramDict);

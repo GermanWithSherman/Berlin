@@ -55,7 +55,7 @@ public class LocationConnection : IModable
 
     public void execute()
     {
-        if (!OutfitRequirement.isValid(GameManager.Instance.PC.currentOutfit))
+        if (!OutfitRequirement.isValid(GameManager.Instance.PC.CurrentOutfit))
         {
             ErrorMessage.Show(OutfitRequirement.Instruction);
             return;

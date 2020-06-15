@@ -101,6 +101,12 @@ public class DataCombined : Data
         {
             if (_dict.ContainsKey(keyParts[0]))
                 _dict[keyParts[0]][keyParts[1]] = value;
+            else
+                throw new System.Exception($"{keyParts[0]} does not exist in Set Key {key}");
+        }
+        else
+        {
+            throw new System.Exception($"Malformed Set Key {key}");
         }
 
     }

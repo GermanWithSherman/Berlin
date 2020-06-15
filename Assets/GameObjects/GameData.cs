@@ -42,6 +42,9 @@ public class GameData: Data
     [JsonIgnore]
     public IEnumerable<NPC> NpcsPresent = new List<NPC>();
 
+    public NPCsCollection NPCsActive = new NPCsCollection();
+
+
     [JsonExtensionData]
     private IDictionary<string, JToken> _additionalData = new Dictionary<string, JToken>();
 
@@ -69,6 +72,16 @@ public class GameData: Data
                     //return CharacterData[keyParts[1]];
                     //We need to acquire NPC-Data from the NPCsLibrary because the Data in Savegames is incomplete (it lacks Schedules etc.)
                     return GameManager.Instance.NPCsLibrary.getNPCorField(keyParts[1]);
+                case "NPCActive":
+                    string[] npcKeyParts = keyParts[1].Split(new char[] { '.' }, 2);
+                    if (NPCsActive.TryGetNPC(npcKeyParts[0], out NPC npc))
+                    {
+                        if (npcKeyParts.Length == 1)
+                            return npc;
+                        else
+                            return npc[npcKeyParts[1]];
+                    }
+                    return "";
                 case "PC":
                     //Other than NPCs PC-Data is not split
                     return CharacterData.PC[keyParts[1]];
@@ -107,6 +120,8 @@ public class GameData: Data
                         return (double)_additionalData[key];
                     case 'm':
                         return (decimal)_additionalData[key];
+                    case 'o':
+                        return _additionalData[key];
                     case 's':
                     default:
                         if (_additionalData[key] == null)
@@ -133,6 +148,8 @@ public class GameData: Data
                 return 0d;
             case 'm':
                 return 0m;
+            case 'o':
+                return null;
             case 's':
             default:
                 return "";
@@ -154,6 +171,13 @@ public class GameData: Data
                     //Persistant Data has to be written to GameData, not to libraries!
                     CharacterData[keyParts[1]] = value;
                     return;
+                case "NPCActive":
+                    string[] npcKeyParts = keyParts[1].Split(new char[] { '.' }, 2);
+                    if (NPCsActive.TryGetNPC(npcKeyParts[0], out NPC npc))
+                    {
+                        npc[npcKeyParts[1]] = value;
+                    }
+                    return;
                 case "PC":
                     CharacterData[key] = value;
                     return;
@@ -170,7 +194,7 @@ public class GameData: Data
         }
 
 
-        _additionalData[key] = value;
+        _additionalData[key] = JToken.FromObject(value);
 
 
     }

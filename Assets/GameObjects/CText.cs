@@ -154,7 +154,11 @@ public class CText : IModable
                 switch (tagType)
                 {
                     case ("speaker"):
-                        result += "<i><b>" + content + "</b></i>";
+                        NPC speaker = GameManager.Instance.GameData.NPCsActive[parameter];
+                        if(speaker == null)
+                            result += $"<i><b><color=#CCCCCC>{content}</color></b></i>";
+                        else
+                            result += $"<i><b><color={speaker.DialogueColor}><link=\"NPC:{parameter}\">{content}</link></color></b></i>";
                         break;
                     default:
                         result += $"<{tagType}>{lineParse(content)}</{tagType}>";

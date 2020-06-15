@@ -24,7 +24,8 @@
             "Business": {"None":"Barefoot", "Casual":"Business","Sport":"Weird",    "Pumps":"Business","Sandals":"Weird",  "Beach":"Weird"},
             "Sport":    {"None":"Barefoot", "Casual":"Weird",  "Sport":"Sport",     "Pumps":"Weird",   "Sandals":"Weird",  "Beach":"Weird"},
             "Stripper": {"None":"Barefoot", "Casual":"Weird",  "Sport":"Weird",     "Pumps":"Stripper", "Sandals":"Stripper","Beach":"Weird"},
-            "School":   {"None":"Barefoot", "Casual":"School", "Sport":"Weird",     "Pumps":"School",   "Sandals":"Weird",  "Beach":"Weird"}
+            "School":   {"None":"Barefoot", "Casual":"School", "Sport":"Weird",     "Pumps":"School",   "Sandals":"Weird",  "Beach":"Weird"},
+            "Maid":   {"None":"Barefoot", "Casual":"Weird", "Sport":"Weird",     "Pumps":"Maid",   "Sandals":"Maid",  "Beach":"Weird"}
 
         }
     }

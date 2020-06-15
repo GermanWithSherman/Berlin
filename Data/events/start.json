@@ -10,21 +10,10 @@
                     "Type": "GotoLocation",
                     "LocationID":"start."
                 },
-                "5_statsFill":{
+                "5_callStart":{
                     "Type":"Call",
-                    "ProcedureID": "statsFill",
+                    "ProcedureID": "startMale",
                     "Parameters": ["PC"]
-                },
-                "5_SET":{
-                    "Type": "Set",
-                    "Values":{
-                        "PC.Body.Height":1910,
-                        "PC.Body.BMI":23,
-                        "PC.moneyCash":10000,
-                        "UI.isVisibleStatusBar":false,
-                        "World.DateTime":"2020-04-09T06:00:00"
-                    }
-                    
                 }
             }
         }

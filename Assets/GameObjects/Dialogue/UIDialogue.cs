@@ -106,7 +106,21 @@ public class UIDialogue : MonoBehaviour
 
         textShow(option.Say);
 
-        stageShow(option.TargetStage);
+        if (option.TargetStage.StartsWith(">"))
+        {
+            switch (option.TargetStage.Substring(1))
+            {
+                case ("END"):
+                    hide();
+                    break;
+            }
+        }
+        else
+        {
+            stageShow(option.TargetStage);
+        }
+
+        GameManager.Instance.uiUpdate();
     }
 
     private void optionListClear()
@@ -173,6 +187,8 @@ public class UIDialogue : MonoBehaviour
     public void show(NPC npc, DialogueTopic topic = null)
     {
         _npc = npc;
+
+        GameManager.Instance.GameData.NPCsActive["_NPC1"] = npc;
 
         setData(_npc);
 

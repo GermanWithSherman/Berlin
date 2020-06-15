@@ -33,7 +33,7 @@ public class CommandItemAdd : Command
         {
             GameManager.Instance.PC.itemAdd(item);
             if (Equip)
-                GameManager.Instance.PC.currentOutfit.addItem(item);
+                GameManager.Instance.PC.CurrentOutfit.addItem(item);
         }
     }
 

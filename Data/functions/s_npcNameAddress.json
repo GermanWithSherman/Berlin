@@ -1,0 +1,23 @@
+{
+    "Mode": "Enum",
+    "Values":{
+        "mrsf":{
+            "ValueType": "Interpolate",
+            "Key":"{>s_LANG(KEY:\"Mrs.\",NPC:_NPC)} {_NPC.NameFirst}"
+        },
+        "mrsl":{
+            "ValueType": "Interpolate",
+            "Key":"{>s_LANG(KEY:\"Mrs.\",NPC:_NPC)} {_NPC.NameLast}"
+        },
+        "mrsfl":{
+            "ValueType": "Interpolate",
+            "Key":"{>s_LANG(KEY:\"Mrs.\",NPC:_NPC)} {_NPC.NameFirst} {_NPC.NameLast}"
+        },
+        "default":{
+            "ValueType": "Interpolate",
+            "Key":"{_NPC.NameFirst} {_NPC.NameLast}"
+        }
+    }
+}
+        
+    

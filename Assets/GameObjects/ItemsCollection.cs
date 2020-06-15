@@ -82,7 +82,20 @@ public class ItemsCollection : ModableValueTypeHashDictionary<string>, IModable
 
     public void removeItem(Item item)
     {
-        setItem(item.id, (Item)null);
+        //setItem(item.id, (Item)null);
+        IList<string> idsToRemove = new List<string>();
+
+        foreach (KeyValuePair<string,string> kv in this)
+        {
+            if (kv.Value == item.id)
+                idsToRemove.Add(kv.Key);
+                //setItem(kv.Key, (Item)null);
+        }
+
+        foreach (string idToRemove in idsToRemove)
+        {
+            setItem(idToRemove, (Item)null);
+        }
     }
 
     public void setItem(string key, Item item)
@@ -139,7 +152,10 @@ public class ItemsCollection : ModableValueTypeHashDictionary<string>, IModable
 
     public new IModable copyDeep()
     {
-        return copyDeep();
+        var result = ModableValueTypeHashDictionary<string>.copyDeep<ItemsCollection>(this);
+        result.cacheDirty = true;
+
+        return result;
     }
 
     [OnDeserialized]

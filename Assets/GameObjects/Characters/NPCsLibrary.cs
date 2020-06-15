@@ -12,6 +12,16 @@ using UnityEngine;
 
 public class NPCsLibrary : Cache<NPC>
 {
+    public new NPC this[string key]
+    {
+        get
+        {
+            if (key == "PC")
+                return GameManager.Instance.PC;
+            return base[key];
+        }
+    }
+
     private class NPCsRawLibrary : Library<NPC>
     {
         public List<string> Ids

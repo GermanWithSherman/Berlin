@@ -83,6 +83,9 @@ public class CommandConverter : JsonConverter
             case (Command.Type.Outfit):
                 result = new CommandOutfit();
                 break;
+            case (Command.Type.OutfitManage):
+                result = new CommandOutfitManage();
+                break;
             case (Command.Type.Pause):
                 result = new CommandPause();
                 break;

@@ -25,7 +25,9 @@ public class CommandSet : Command
 
         foreach (KeyValuePair<string, ValueSetter> kv in ValuesFromSetters)
         {
-            dynamic target = kv.Value.Target(data[kv.Key]);
+            //dynamic target = kv.Value.Target(data[kv.Key]);
+            //data[kv.Key] = target;
+            dynamic target = kv.Value.Target(kv.Key, data);
             data[kv.Key] = target;
             Debug.Log($"{kv.Key} => {target}");
         }
@@ -81,7 +83,8 @@ public class ValueSetter: IModable
 
     private dynamic modeInc(dynamic currentValue) => (int)currentValue + (int)Value;
 
-    public dynamic Target(dynamic currentValue)
+    //public dynamic Target(dynamic currentValue)
+    public dynamic Target(string key,Data data)
     {
         switch (Mode)
         {
@@ -90,11 +93,12 @@ public class ValueSetter: IModable
                 TimeSpan cooldown = new TimeSpan(0, 0, (int)Value);
                 return now + cooldown;
             case (SetMode.Inc):
+                dynamic currentValue = data[key];
                 return modeInc(currentValue);
             case (SetMode.Set):
                 return Value;
             case (SetMode.Object):
-                return ValueObject.value();
+                return ValueObject.value(data);
         }
         return null;
     }

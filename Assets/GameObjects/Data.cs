@@ -87,4 +87,29 @@ public abstract class Data
 
         return result;
     }
+
+    protected bool parseBool(dynamic original)
+    {
+        /*if (original is bool)
+            return original;
+
+        if (original is string)
+            if(Boolean.TryParse(original, out bool result))
+                return result;
+        return false;*/
+        try
+        {
+            return Convert.ToBoolean(original);
+        }
+        catch
+        {
+            return false;
+        }
+
+    }
+
+    protected string parseString(dynamic original)
+    {
+        return Convert.ToString(original);
+    }
 }

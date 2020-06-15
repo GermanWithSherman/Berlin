@@ -9,6 +9,7 @@
     "properties": {
         "$schema" :{"type":"string"},
         "TemplateID": {"type":"string" },
+        "DialogueColor": {"type":"string" },
         "GenderVisible": {"type":"string" },
         "NameNick": {"type":"string" },
         "NameFirst": {"type":"string" },

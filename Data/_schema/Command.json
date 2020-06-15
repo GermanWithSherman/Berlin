@@ -21,6 +21,7 @@
         {"$ref": "./CommandNoteRemove.json"},
         {"$ref": "./CommandItemRemove.json"},
         {"$ref": "./CommandOutfit.json"},
+        {"$ref": "./CommandOutfitManage.json"},
         {"$ref": "./CommandPause.json"},
         {"$ref": "./CommandServices.json"},
         {"$ref": "./CommandSet.json"},

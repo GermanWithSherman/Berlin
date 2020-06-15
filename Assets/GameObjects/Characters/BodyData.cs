@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,23 @@ public class BodyData : Data, IModable, IModableAutofields
 {
     public string GenderVisible;
 
+
+    [JsonProperty("BirthDate")]
+    public DateTime? _BirthDate;
+
+    [JsonIgnore]
+    public DateTime BirthDate
+    {
+        get => _BirthDate.GetValueOrDefault();
+        set => _BirthDate = value;
+    }
+
+    [JsonIgnore]
+    public int Age
+    {
+        get => GameManager.Instance.timeAgeYears(BirthDate);
+        set => _BirthDate = GameManager.Instance.timeWithAge(value);
+    }
 
 
     public int BreastVolume;
@@ -47,6 +65,8 @@ public class BodyData : Data, IModable, IModableAutofields
     {
         switch (key)
         {
+            case "Age": return Age;
+            case "BirthDate": return BirthDate;
             case "BMI": return BMI;
             case "BreastSize": return BreastSize;
             case "BreastVolume": return BreastVolume;
@@ -70,6 +90,8 @@ public class BodyData : Data, IModable, IModableAutofields
     {
         switch (key)
         {
+            case "Age": Age = (int)value; return;
+            case "BirthDate": BirthDate = value; return;
             case "BMI": BMI = (float)value; return;
             case "BreastSize": BreastSize = (string)value; return;
             case "BreastVolume": BreastVolume = (int)value; return;

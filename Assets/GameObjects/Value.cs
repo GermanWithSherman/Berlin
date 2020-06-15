@@ -21,7 +21,8 @@ public class Value<T>: Value, IModable
         Interpolate,
         Plain,
         Reference,
-        WeightedStringList
+        WeightedStringList,
+        RandomRange
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
@@ -105,6 +106,12 @@ public class Value<T>: Value, IModable
                     //return (T)(object)gameManager.WeightedStringListCache[K].value();
                     return (T)(object)GameManager.Instance.WeightedStringListCache[Key].value();
                 break;
+            case ValueTypes.RandomRange:
+                if (typeof(int) == typeof(T) || typeof(int?) == typeof(T))
+                    return (T)Convert.ChangeType(new RandomRange(Parameters).getIntNullable(), typeof(int));
+                if (typeof(float) == typeof(T) || typeof(float?) == typeof(T))
+                    return (T)Convert.ChangeType(new RandomRange(Parameters).getFloatNullable(), typeof(float));
+                throw new GameException($"RandomRange is not a valid Value Type for Value<{typeof(T)}>");
         }
         return default;
     }
@@ -158,6 +165,7 @@ public class Value<T>: Value, IModable
         result.ConditionalValue = Modable.copyDeep(ConditionalValue);
         result.Key = Modable.copyDeep(Key);
         result._priority = Modable.copyDeep(_priority);
+        result.Parameters = Modable.copyDeep(Parameters);
 
         if (_value is IModable)
         {

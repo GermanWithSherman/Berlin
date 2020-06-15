@@ -13,7 +13,7 @@ public abstract class Command : IModable
     public static bool pauseActive = false;
     public static CommandsCollection pausedCommands = new CommandsCollection();
 
-    public enum Type { None, Debug, Break, Pause, Continue, Flush, Consume, Sleep, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass, ItemAdd, ItemRemove, Conditional, Dialogue, NoteAdd, NoteRemove, Call }
+    public enum Type { None, Debug, Break, Pause, Continue, Flush, Consume, Sleep, Dialog, Event, EventEnd, GotoLocation, Interrupt, Outfit, Services, Set, Shop, TimePass, ItemAdd, ItemRemove, Conditional, Dialogue, NoteAdd, NoteRemove, Call, OutfitManage }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public Type type = Type.None;

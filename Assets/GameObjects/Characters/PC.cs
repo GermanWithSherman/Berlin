@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using UnityEngine;
 
@@ -12,8 +13,9 @@ public class PC : NPC
     public ItemsCollection items = new ItemsCollection();
 
     public Dictionary<string,Outfit> outfits = new Dictionary<string, Outfit>();
-    public string currentOutfitId="DEFAULT";
-    [JsonIgnore]
+    //public string currentOutfitId="DEFAULT";
+
+    /*[JsonIgnore]
     public Outfit currentOutfit
     {
         get
@@ -22,10 +24,42 @@ public class PC : NPC
                 outfits[currentOutfitId] = new Outfit();
             return outfits[currentOutfitId];
         }
+    }*/
+
+    public Outfit CurrentOutfit = new Outfit();
+
+    public string GenderBorn;
+
+    public string GenderDress
+    {
+        get => CurrentOutfit.Gender;
     }
 
-    public string nameFirstBorn;
-    public string nameLastBorn;
+    public string GenderPerceived
+    {
+        get
+        {
+            string visible = BodyData.GenderVisible;
+            string dress = GenderDress;
+
+            if (visible == "f")
+            {
+                if (dress == "f" || dress == "fm" || dress == "None")
+                    return "f";
+                else
+                    return "f2m";
+            }
+            else
+            {
+                if (dress == "m" || dress == "fm" || dress == "None")
+                    return "m";
+                else
+                    return "m2f";
+            }
+
+
+        }
+    }
 
 
     public Int64 moneyCash = 0;
@@ -54,16 +88,15 @@ public class PC : NPC
         {
             case "moneyCash":
                 return moneyCash;
-            case "nameFirstBorn":
-                return nameFirstBorn;
-            case "nameLastBorn":
-                return nameLastBorn;
             case "statHunger":
                 return statHunger;
             case "statHygiene":
                 return statHygiene;
             case "statSleep":
                 return statSleep;
+            case "GenderBorn": return GenderBorn;
+            case "GenderDress": return GenderDress;
+            case "GenderPerceived": return GenderPerceived;
         }
 
         string[] keyparts = key.Split(new char[] { '.' }, 2);
@@ -73,7 +106,7 @@ public class PC : NPC
             switch (keyparts[0])
             {
                 case "currentOutfit":
-                    return currentOutfit.getDynamic(keyparts[1]);
+                    return CurrentOutfit.getDynamic(keyparts[1]);
             }
         }
 
@@ -88,12 +121,6 @@ public class PC : NPC
             case "moneyCash":
                 moneyCash = value;
                 return;
-            case "nameFirstBorn":
-                nameFirstBorn = value;
-                return;
-            case "nameLastBorn":
-                nameLastBorn = value;
-                return;
             case "statHunger":
                 _statHunger = (int)value;
                 return;
@@ -103,6 +130,8 @@ public class PC : NPC
             case "statSleep":
                 _statSleep = (int)value;
                 return;
+            case "GenderBorn":
+                GenderBorn = (string)value;return;
         }
 
         setNPCData(key, value);
@@ -114,7 +143,7 @@ public class PC : NPC
         switch (slot)
         {
             case "Bra":
-                Item bra = currentOutfit["Bra"];
+                Item bra = CurrentOutfit["Bra"];
                 if (bra == null)
                 {
                     path = gameManager.FunctionsLibrary.functionExecute("s_PcBodyBreast", new FunctionParameters("_PC", this, "_slot", slot));
@@ -122,19 +151,19 @@ public class PC : NPC
                 }
                 return bra.Texture;
             case "Clothes":
-                Item clothes = currentOutfit["Clothes"];
+                Item clothes = CurrentOutfit["Clothes"];
                 if (clothes == null)
                     return GetClothingslotTexture("Bra");
                 return clothes.Texture;
             case "Panties":
-                Item panties = currentOutfit["Panties"];
+                Item panties = CurrentOutfit["Panties"];
                 if (panties == null) {
                     path = gameManager.FunctionsLibrary.functionExecute("s_PcBodyLap", new FunctionParameters("_PC", this, "_slot", slot));
                     return gameManager.TextureCache[path];
                 }
                 return panties.Texture;
             case "Shoes":
-                Item shoes = currentOutfit["Shoes"];
+                Item shoes = CurrentOutfit["Shoes"];
                 if (shoes == null)
                 {
                     path = gameManager.FunctionsLibrary.functionExecute("s_PcBodyFeet", new FunctionParameters("_PC", this, "_slot", slot));
@@ -158,7 +187,7 @@ public class PC : NPC
         items.removeItem(item);
         foreach(Outfit outfit in outfits.Values)
         {
-
+            outfit.removeItem(item);
         }
     }
 
@@ -232,5 +261,47 @@ public class PC : NPC
         _statSleep += seconds * activity.statSleep;
     }
 
+    public bool tryRemoveOutfitAndItems(string outfitId="")
+    {
+        Outfit outfit;
+
+        if (String.IsNullOrWhiteSpace( outfitId))
+            outfit = CurrentOutfit;
+        else {
+            if (!outfits.TryGetValue(outfitId, out outfit))
+                return false;
+            else
+                outfits.Remove(outfitId);
+        }
+
+        Item[] itemsToRemove =  outfit.Items.ToArray();
+        foreach (Item item in itemsToRemove)
+        {
+            itemRemove(item);
+        }
+
+        
+
+        return true;
+    }
+
+    public bool trySaveOutfit(string outfitId)
+    {
+        outfits[outfitId] = Modable.copyDeep(CurrentOutfit);
+        return true;
+    }
+
+    public bool trySetOutfit(string outfitId)
+    {
+        /*if(outfits.TryGetValue(outfitId, out Outfit outfit)){
+
+        }*/
+        if (outfits.TryGetValue(outfitId, out Outfit outfit))
+        {
+            CurrentOutfit = Modable.copyDeep(outfit);
+            return true;
+        }
+        return false;
+    }
 
 }

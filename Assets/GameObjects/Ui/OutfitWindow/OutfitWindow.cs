@@ -23,7 +23,7 @@ public class OutfitWindow : MonoBehaviour
     {
         try
         {
-            if (_outfitRequirement == null || _outfitRequirement.isValid(currentCharacter.currentOutfit))
+            if (_outfitRequirement == null || _outfitRequirement.isValid(currentCharacter.CurrentOutfit))
             {
                 hide();
                 _onClose.execute();
@@ -44,9 +44,9 @@ public class OutfitWindow : MonoBehaviour
     public void itemSelect(Item item)
     {
         if (item == null)
-            currentCharacter.currentOutfit.setItem(_itemSelectionSlot, item);
+            currentCharacter.CurrentOutfit.setItem(_itemSelectionSlot, item);
         else
-            currentCharacter.currentOutfit.addItem(item);
+            currentCharacter.CurrentOutfit.addItem(item);
         updateItems();
     }
 

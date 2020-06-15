@@ -1,23 +1,28 @@
 {
     "Values":{
-        "known":{
-            "Condition" :"_NPC.Known = 1",
+        "1_pc":{
+            "Condition" :"_NPC.ID = \"PC\"",
+            "ValueType": "Interpolate",
+            "Key":"You\n({_NPC.NameFirst} {_NPC.NameLast})"
+        },
+        "5_known":{
+            "Condition" :"_NPC.Social.KnowsName = true",
             "ValueType": "Plain",
             "ConditionalValue":{
                 "Values":{
-                    "hasNickName":{
-                        "Condition" :"_NPC.nameNick != \"\"",
+                    "5_hasNickName":{
+                        "Condition" :"_NPC.NameNick != \"\"",
                         "ValueType": "Interpolate",
                         "Key":"{_NPC.NameFirst} {_NPC.NameLast}\n<i>{_NPC.nameNick}</i>"
                     },
-                    "noNick":{
+                    "6_noNick":{
                         "ValueType": "Interpolate",
                         "Key":"{_NPC.NameFirst} {_NPC.NameLast}"
                     }
                 }
             }
         },
-        "unknown":{
+        "7_unknown":{
             "ConditionalValue":{
                 "Values":{
                     "0": {"Condition":"_NPC.Age < 18", "Value": "A kid"},

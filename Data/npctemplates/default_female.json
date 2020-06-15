@@ -1,5 +1,10 @@
 {
     "Parent":"default",
     "NameFirst":{"ValueType":"WeightedStringList","Key":"names_first_female_90s"},
-    "GenderVisible":{"ValueType":"Plain","Value":"f"}
+    "GenderVisible":{"ValueType":"Plain","Value":"f"},
+    "BreastVolume":{"ValueType":"RandomRange","Parameters":{"Min":"300","Max":"1200"}},
+    "HairLength":{"ValueType":"Plain","Value":3000000},
+    "Height":{"ValueType":"Plain","Value":1700},
+    "PenisLength":{"ValueType":"Plain","Value":0},
+    "BMI": {}
 }

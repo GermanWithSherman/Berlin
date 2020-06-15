@@ -21,13 +21,14 @@ public class GameManager : MonoBehaviour
 
     public Misc Misc;
 
-    public GameData GameData = new GameData();
+    public GameData GameData;// = new GameData();
 
     public PC PC
     {
         get => GameData.CharacterData.PC;
     }
 
+    #region Caches
     public ConditionCache ConditionCache;
     public DialogueLineCache DialogueLineCache;
     public EventGroupCache EventGroupCache;
@@ -38,7 +39,8 @@ public class GameManager : MonoBehaviour
     public ShopTypeCache ShopTypeCache;
     public TextureCache TextureCache;
     public WeightedStringListCache WeightedStringListCache;
-
+    #endregion
+    #region Libraries
     public ActivityLibrary ActivityLibrary;
     public DialogueTopicLibrary DialogueTopicLibrary;
     public FunctionsLibrary FunctionsLibrary;
@@ -47,10 +49,12 @@ public class GameManager : MonoBehaviour
     public NPCsLibrary NPCsLibrary;
     public ProceduresLibrary ProceduresLibrary;
     public TemplateLibrary TemplateLibrary;
-
+    #endregion
+    #region Servers
     public DialogServer DialogServer;
     public InterruptServer InterruptServer;
     public ModsServer ModsServer;
+    #endregion
 
     public string DataPath { get => Preferences.DataPath; }
 
@@ -141,6 +145,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public CharacterScreen CharacterScreen;
+
+    public EditWindow EditWindow;
+
     public UINPCsPresentContainer UINPCsPresentContainer;
 
     public OutfitWindow OutfitWindow;
@@ -223,6 +231,8 @@ public class GameManager : MonoBehaviour
 
             LoadingScreen.SetActive(false);
 
+            CharacterScreen.hide();
+            EditWindow.hide();
             UIDialogue.hide();
             UINotes.hide();
         }
@@ -282,6 +292,10 @@ public class GameManager : MonoBehaviour
             _uiUpdate();
     }
 
+    public void CharacterScreenShow()
+    {
+        CharacterScreen.show(PC);
+    }
 
     public void console(string command)
     {
@@ -439,13 +453,21 @@ public class GameManager : MonoBehaviour
         
 
         OutfitWindow.setCharacter(PC);
+
+        PC.id = "PC";
     }
 
     public void gameNew()
     {
-        eventExecute("start", "main");
+        GameData = new GameData();
 
-        //PC.age = 18;
+        PC pc = new PC();
+        pc.id = "PC";
+        GameData.CharacterData.PC = pc;
+
+        GameData.NPCsActive["_PC"] = pc;
+
+        eventExecute("start", "main");
 
         OutfitWindow.setCharacter(PC);
     }
@@ -585,9 +607,9 @@ public class GameManager : MonoBehaviour
         return result;
     }
 
-    public void ProcedureExecute(string procedureID, IEnumerable<dynamic> parameters)
+    public void ProcedureExecute(string procedureID, IEnumerable<dynamic> parameters,Data data)
     {
-        ProceduresLibrary.procedureExecute(procedureID,GameData,parameters);
+        ProceduresLibrary.procedureExecute(procedureID, data, parameters);
     }
 
     public void Quit()
@@ -683,6 +705,8 @@ public class GameManager : MonoBehaviour
     {
         try
         {
+            DataCache.Reset();
+
             Debug.Log($"DayNight: {Misc.dayNightState(GameData.WorldData.DateTime)}");
 
 

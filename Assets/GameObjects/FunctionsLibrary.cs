@@ -36,10 +36,14 @@ public class FunctionsLibrary : Library<Conditional<string>>
         return _dict[id].value(parameters);
     }
 
+    static int calls = 0;
+
     public string npcName(NPC npc)
     {
         //if (!stringFunctions.ContainsKey("s_npcName"))
         //    return "{npcName}";
+
+        Debug.Log($"{++calls} Calls");
 
         FunctionParameters parameters = new FunctionParameters("_NPC", npc);
 

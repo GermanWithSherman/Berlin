@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,27 +11,119 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
     [JsonIgnore]
     public string id;
 
-    public string NameFirst;
-    public string NameLast;
+    #region Names
+    [JsonProperty("NameFirst")]
+    public string _nameFirst;
+    [JsonProperty("NameLast")]
+    public string _nameLast;
 
+    [JsonIgnore]
+    public string NameFirst
+    {
+        get => _nameFirst;
+        set
+        {
+            //if (String.IsNullOrEmpty(_nameFirstBorn))
+            //    _nameFirstBorn = value;
+            _nameFirst = value;
+        }
+    }
+    [JsonIgnore]
+    public string NameLast
+    {
+        get => _nameLast;
+        set
+        {
+            //if (String.IsNullOrEmpty(_nameFirstBorn))
+            //    _nameLastBorn = value;
+            _nameLast = value;
+        }
+    }
 
     public CText NameNick;
-    public bool ShouldSerializeNameNick() => false;
+
+    [JsonProperty("NameFirstBorn")]
+    public string _nameFirstBorn;
+    [JsonProperty("NameLastBorn")]
+    public string _nameLastBorn;
+
+    [JsonIgnore]
+    public string NameFirstBorn
+    {
+        get
+        {
+            if (String.IsNullOrEmpty(_nameFirstBorn))
+                return NameFirst;
+            return _nameFirstBorn;
+        }
+        set => _nameFirstBorn = value;
+    }
+    [JsonIgnore]
+    public string NameLastBorn
+    {
+        get
+        {
+            if (String.IsNullOrEmpty(_nameLastBorn))
+                return NameLast;
+            return _nameLastBorn;
+        }
+        set => _nameLastBorn = value;
+    }
+
+    #endregion
+
+    private DataCache<NPC,string> _nameCached = new DataCache<NPC,string>(GameManager.Instance.FunctionsLibrary.npcName);
+    [JsonIgnore]
+    public string Name => _nameCached.getValue(this);
+
+    //public bool ShouldSerializeNameNick() => false;
+
+    [JsonProperty("DialogueColor")]
+    public string _dialogueColor;
+
+    [JsonIgnore]
+    public string DialogueColor
+    {
+        get
+        {
+            if (String.IsNullOrWhiteSpace(_dialogueColor))
+                return "black";
+            switch (_dialogueColor)
+            {
+                case "Female":
+                    return "#BB0000";
+                case "Male":
+                    return "#0000BB";
+            }
+            return _dialogueColor;
+        }
+        set
+        {
+            _dialogueColor = value;
+        }
+    }
+
 
     [JsonProperty("BirthDate")]
-    public DateTime? birthDate;
+    public DateTime? _BirthDate;
 
     [JsonIgnore]
     public DateTime BirthDate
     {
-        get => birthDate.GetValueOrDefault();
+        get => _BirthDate.GetValueOrDefault();
+        set
+        {
+            if (!BodyData._BirthDate.HasValue)
+                BodyData.BirthDate = value;
+            BirthDate = value;
+        }
     }
 
     [JsonIgnore]
     public int age
     {
         get => GameManager.Instance.timeAgeYears(BirthDate);
-        set => birthDate = GameManager.Instance.timeWithAge(value);
+        set => _BirthDate = GameManager.Instance.timeWithAge(value);
     }
 
     [JsonProperty("Body")]
@@ -43,6 +136,19 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
             if (_BodyData == null)
                 _BodyData = new BodyData();
             return _BodyData;
+        }
+    }
+
+    [JsonProperty("Social")]
+    public SocialData _SocialData;
+    [JsonIgnore]
+    public SocialData SocialData
+    {
+        get
+        {
+            if (_SocialData == null)
+                _SocialData = new SocialData();
+            return _SocialData;
         }
     }
 
@@ -81,18 +187,28 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
             {
                 case "Age":
                     return age;
+                case "Body":
+                    return BodyData;
                 case "NameFirst":
                     return NameFirst;
                 case "NameLast":
                     return NameLast;
                 case "NameNick":
                     return CText.Text(NameNick);
+                case "NameFirstBorn":
+                    return NameFirstBorn;
+                case "NameLastBorn":
+                    return NameLastBorn;
                 case "BirthDate":
-                    return birthDate;
+                    return BirthDate;
                 case "TexturePath":
                     return TexturePath.value();
                 case "Known":
                     return 1;
+                case "ID":
+                    return id;
+                case "Social":
+                    return SocialData;
 
             }
         }
@@ -102,6 +218,8 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
             {
                 case "Body":
                     return BodyData[keyParts[1]];
+                case "Social":
+                    return SocialData[keyParts[1]];
             }
         }
 
@@ -122,7 +240,20 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
             switch (key)
             {
                 case "Age":
-                    age = value;
+                    age = (int)value;
+                    break;
+                case "Body":
+                    JToken bodyJToken = value as JToken;
+                    if (bodyJToken == null)
+                        throw new Exception($"Body has to be set as JToken. Given: {value.GetType()}");
+                    try
+                    {
+                        _BodyData = bodyJToken.ToObject<BodyData>();
+                    }
+                    catch
+                    {
+                        throw new Exception($"Failed to cast BodyData in NPC.set.Body");
+                    }
                     break;
                 case "NameFirst":
                     NameFirst = value;
@@ -130,8 +261,17 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
                 case "NameLast":
                     NameLast = value;
                     break;
+                case "NameNick":
+                    NameNick = new CText(value);
+                    break;
+                case "NameFirstBorn":
+                    NameFirstBorn = value;
+                    break;
+                case "NameLastBorn":
+                    NameLastBorn = value;
+                    break;
                 case "BirthDate":
-                    birthDate = value;
+                    BirthDate = value;
                     break;
                 case "TexturePath":
                     TexturePath = new Conditional<string>((string)value,0,true);
@@ -144,6 +284,8 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
             {
                 case "Body":
                     BodyData[keyParts[1]] = value; return;
+                case "Social":
+                    SocialData[keyParts[1]] = value; return;
             }
         }
     }

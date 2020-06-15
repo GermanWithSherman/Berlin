@@ -20,6 +20,12 @@ public class NPCTemplate : IModable, IInheritable
 
     public Value<int?> Age;
 
+    public Value<int?> BreastVolume;
+    public Value<int?> HairLength;
+    public Value<int?> Height;
+    public Value<int?> PenisLength;
+
+
     public ModableObjectHashDictionary<TimeFilters> Schedules = new ModableObjectHashDictionary<TimeFilters>();
 
     [JsonIgnore]
@@ -32,6 +38,10 @@ public class NPCTemplate : IModable, IInheritable
         result.NameFirst = Modable.copyDeep(NameFirst);
         result.NameLast = Modable.copyDeep(NameLast);
         result.Age = Modable.copyDeep(Age);
+        result.BreastVolume = Modable.copyDeep(BreastVolume);
+        result.HairLength = Modable.copyDeep(HairLength);
+        result.Height = Modable.copyDeep(Height);
+        result.PenisLength = Modable.copyDeep(PenisLength);
         result.Schedules = Modable.copyDeep(Schedules);
         result.GenderVisible = Modable.copyDeep(GenderVisible);
 
@@ -48,6 +58,10 @@ public class NPCTemplate : IModable, IInheritable
         npc.age = ((int?)Age).GetValueOrDefault(30);
         npc.BodyData.GenderVisible = GenderVisible;
 
+        npc.BodyData.BreastVolume = ((int?)BreastVolume).GetValueOrDefault(0);
+        npc.BodyData.HairLength = ((int?)HairLength).GetValueOrDefault(0);
+        npc.BodyData.Height = ((int?)Height).GetValueOrDefault(0);
+        npc.BodyData.PenisLength = ((int?)PenisLength).GetValueOrDefault(0);
 
         return npc;
     }
@@ -89,11 +103,16 @@ public class NPCTemplate : IModable, IInheritable
         mod((NPCTemplate)modable);
     }
 
+
     private void mod(NPCTemplate original, NPCTemplate mod)
     {
         NameFirst = Modable.mod(original.NameFirst, mod.NameFirst);
         NameLast = Modable.mod(original.NameLast, mod.NameLast);
         Age = Modable.mod(original.Age, mod.Age);
+        BreastVolume = Modable.mod(original.BreastVolume, mod.BreastVolume);
+        HairLength = Modable.mod(original.HairLength, mod.HairLength);
+        Height = Modable.mod(original.Height, mod.Height);
+        PenisLength = Modable.mod(original.PenisLength, mod.PenisLength);
         Schedules = Modable.mod(original.Schedules, mod.Schedules);
         GenderVisible = Modable.mod(original.GenderVisible, mod.GenderVisible);
     }
@@ -103,4 +122,6 @@ public class NPCTemplate : IModable, IInheritable
     {
         inherit();
     }
+
+
 }

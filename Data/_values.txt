@@ -39,10 +39,21 @@ s_pc_background:                    What did the PC do before the game started?
 NPC values
 NPC.NameFirst:                  string
 NPC.NameLast:                   string
-NPC.nameNick:                   declare as CText, read as string, readonly
+NPC.NameNick:                   string
 
-NPC.Age:                        calculated age in years. if set will assign a random birthday and picks a year that matches this birthday and age
-NPC.BirthDate:                  DateTime
+NPC.NameFirstBorn:              string (if you need more use global namespace), defauts to NameFirst
+NPC.NameLastBorn:               string, defaults to NameLast
+NPC.GenderBorn
+
+NPC.Age:                        Actual age (how many years has the character lived).
+                                calculated age in years. if set will assign a random birthday and picks a year that matches this birthday and age
+NPC.BirthDate:                  DateTime. Will alos set Body.BirthDate if it isn't set already.
+NPC.Body.Age:                       The age of the body the character inhabits.
+                                    This is the legal age that determins whether the character is allowed to drive cars, consume drugs, etc.
+NPC.Body.AgeVisible:                How old does the character look? (decimal)
+NPC.Body.AgeOffset:                 Difference between Body.Age and AgeVisible (used to calculated the later) in days.
+                                    Influenced by smoking, drinking, plastic surgery, etc.
+NPC.Body.BirthDate:                 see above
 NPC.Body.GenderVisible:                   visible Gender of the PC
                                         -f or m
 NPC.Body.BMI:                        calculated float, will change the weight if set to match the new BMI
@@ -62,12 +73,12 @@ NPC.Body.Weight:                     in g
 
 
 PC values (also has all the values NPCs have)
-PC.GenderDress:                     the Gender the PC is dressed as
+PC.GenderDress:                     the Gender the PC is dressed as. Readonly
                                         -fm if all slots are fm
                                         -f if at least one slot is f and all other slots are either f or fm
                                         -m if at least one slot is m and all other slots are either m or fm
                                         -mix if there is at least one f and at least one m slot
-PC.GenderPerceived:                 the Gender people think the PC has when looking at them
+PC.GenderPerceived:                 the Gender people think the PC has when looking at them. Readonly
                                         -f if Body.GenderVisible is f and genderDress is either f or fm
                                         -f2m if Body.GenderVisible is f and genderDress is either m or mix
                                         -m if Body.GenderVisible is m and genderDress is either m or fm

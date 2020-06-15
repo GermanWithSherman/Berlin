@@ -1,0 +1,13 @@
+{
+    "setNameMale":{
+        "5_FirstName":{"Type":"Set","ValuesFromLists": {"_P.1.NameFirst": "names_first_male_90s"}},        
+        "5_LastName":{"Type":"Set","ValuesFromLists": {"_P.1.NameLast": "names_last"}},
+        "6_additionalNames":{
+            "Type": "Set",
+            "ValuesFromSetters": {
+                "_P.1.NameFirstBorn":{"Mode":"Object","ValueObject":{"ValueType": "Reference","Key": "_P.1.NameFirst"}},
+                "_P.1.NameLastBorn":{"Mode":"Object","ValueObject":{"ValueType": "Reference","Key": "_P.1.NameLast"}}
+            }
+        }
+    }
+}

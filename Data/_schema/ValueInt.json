@@ -5,17 +5,31 @@
     ],
     "title": "Value<int>",
     "description": "Value<int> schema.",
-    "default": {},
-    "examples": [
-
-    ],
-    "required": [
+    "allOf": [
+        {
+            "if":{
+                "properties": {"ValueType":{"const":"RandomRange"}}
+            },
+            "then":{
+                "properties": {
+                    "Parameters":{
+                        "properties": 
+                        {
+                            "Min":{"type":"string"},
+                            "Max":{"type":"string"}
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            }
+        }
     ],
     "additionalProperties": false,
     
     "properties": {
         "Condition":{"type":"string"},
         "Key": {"type":"string"},
+        "Parameters":{"type":"object"},
         "Value": {
             "type": "integer",
             "title": "The Value schema",

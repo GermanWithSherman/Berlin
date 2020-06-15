@@ -1,0 +1,10 @@
+{
+    "introduce":{
+        "5_setVarious":{
+            "Type": "Set",
+            "Values": {
+                "_P.2.Social.Introduced":true
+            }
+        }
+    }
+}

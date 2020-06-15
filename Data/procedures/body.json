@@ -3,11 +3,12 @@
         "5_d_0":{
             "Type":"Set",
             "Values": {
+                "_P.1.GenderBorn": "f",
                 "_P.1.Body.GenderVisible": "f",
-                "_P.1.breastVolume": 400,
-                "_P.1.hairLength": 300000,
-                "_P.1.hairBodyLength": 0,
-                "_P.1.hairPubicLength": 0,
+                "_P.1.Body.BreastVolume": 400,
+                "_P.1.Body.HairLength": 300000,
+                "_P.1.Body.HairBodyLength": 0,
+                "_P.1.Body.HairPubicLength": 0,
                 "_P.1.Body.Height": 1650,
                 "_P.1.Body.PenisLength": 0,
                 "_P.1.Body.Weight": 55000
@@ -18,11 +19,12 @@
         "5_d_0":{
             "Type":"Set",
             "Values": {
+                "_P.1.GenderBorn": "m",
                 "_P.1.Body.GenderVisible": "m",
-                "_P.1.breastVolume": 0,
-                "_P.1.hairLength": 50000,
-                "_P.1.hairBodyLength": 15000,
-                "_P.1.hairPubicLength": 15000,
+                "_P.1.Body.BreastVolume": 0,
+                "_P.1.Body.HairLength": 50000,
+                "_P.1.Body.HairBodyLength": 15000,
+                "_P.1.Body.HairPubicLength": 15000,
                 "_P.1.Body.Height": 1800,
                 "_P.1.Body.PenisLength": 1000,
                 "_P.1.Body.Weight": 75000

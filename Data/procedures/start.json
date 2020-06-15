@@ -1,0 +1,37 @@
+{
+    "start":{
+        "5_setVarious":{
+            "Type": "Set",
+            "Values": {
+                "_P.1.moneyCash":10000,
+                "_GLOBAL.World.DateTime":"2020-04-09T06:00:00"
+            }
+        },
+        "5_statsFill":{
+            "Type":"Call",
+            "ProcedureID": "statsFill",
+            "Parameters": ["_P.1"]
+        }
+    },
+    "startFemale":{
+        "1_call_start":{"Type":"Call","ProcedureID": "start", "Parameters": ["_P.1"]},
+        "3_call_sexSetM":{"Type":"Call","ProcedureID": "sexSetF", "Parameters": ["_P.1"]},
+        "3_setName":{"Type":"Call","ProcedureID": "setNameFemale", "Parameters": ["_P.1"]},
+        "5_setVarious":{"Type":"Set","Values": {
+            "_P.1.Age": 18,
+            "_P.1.GenderBorn": "f"
+        }},
+        "5_ItemsAdd":{"Type":"Call","ProcedureID": "itemsStartAddAndEquipF"}
+        
+    },
+    "startMale":{
+        "1_call_start":{"Type":"Call","ProcedureID": "start", "Parameters": ["_P.1"]},
+        "3_call_sexSetM":{"Type":"Call","ProcedureID": "sexSetM", "Parameters": ["_P.1"]},
+        "3_setName":{"Type":"Call","ProcedureID": "setNameMale", "Parameters": ["_P.1"]},
+        "5_setVarious":{"Type":"Set","Values": {
+            "_P.1.Age": 18,
+            "_P.1.GenderBorn": "m"
+        }},
+        "5_ItemsAdd":{"Type":"Call","ProcedureID": "itemsStartAddAndEquipM"}
+    }
+}
