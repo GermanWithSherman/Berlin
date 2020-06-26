@@ -12,7 +12,21 @@ public class TimeFilter : IModable, IModableAutofields
     public int TimeStart=0;
     public int TimeEnd =2359;
     public ModableStringList Days;
-    
+
+    [JsonProperty("Activity")]
+    public string _activityRaw;
+
+    [JsonIgnore]
+    public string Activity
+    {
+        get
+        {
+            if (String.IsNullOrEmpty(_activityRaw))
+                return "idle";
+            return _activityRaw;
+        }
+        set => _activityRaw = value;
+    }
 
     [JsonProperty("Condition")]
     private string _conditionString;
@@ -81,6 +95,22 @@ public class TimeFilter : IModable, IModableAutofields
 
 public class TimeFilters : ModableObjectHashDictionary<TimeFilter>, IModable
 {
+    public bool tryGetValid(DateTime dateTime, out TimeFilter timeFilter)
+    {
+        timeFilter = null;
+
+        foreach (TimeFilter filter in Values)
+        {
+            if (filter.isValid(dateTime))
+            {
+                timeFilter = filter;
+                return true;
+            }
+                
+        }
+        return false;
+    }
+
     public bool isValid(DateTime dateTime)
     {
         if (Count == 0)

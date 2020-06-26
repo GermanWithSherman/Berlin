@@ -1,0 +1,22 @@
+{
+    "items":{
+        "sandals_21":{
+            "Label":"Sandals",
+            "TexturePath":"items/shoes/f_sandals/s(21).jpg",
+            "Price": 1499,
+            "Slot": "Shoes",
+            "Gender": "f",
+            "Height": 100,
+            "Style": ["Sandals"]
+        },
+        "sandals_22":{
+            "Label":"Sandals",
+            "TexturePath":"items/shoes/f_sandals/s(22).jpg",
+            "Price": 1999,
+            "Slot": "Shoes",
+            "Gender": "f",
+            "Height": 120,
+            "Style": ["Sandals"]
+        }
+    }
+}

@@ -5,7 +5,7 @@
         "string"
     ],
     "title": "CText",
-    "description": "CText schema.",
+    "description": "Provides advanced control over text that should be displayed.",
     "default": {},
     "examples": [
         {
@@ -19,10 +19,8 @@
     "properties": {
         "JoinWith": {"type":"string"},
         "Value": {
-            "$id": "#/properties/Text/properties/Value",
             "type": "string",
-            "title": "The Value schema",
-            "description": "An explanation about the purpose of this instance.",
+            "description": "A single value of type string. Use Values instead if you need to use several values.",
             "default": "",
             "examples": [
                 "Subway Station"
@@ -34,6 +32,7 @@
                     "$ref": "./CText.json"
                 }
             }  
-        }
+        },
+        "Condition":{"$ref": "./Condition.json"}
     }
 }

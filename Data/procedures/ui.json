@@ -1,0 +1,18 @@
+{
+    "ui_statusbarHide":{
+        "5_hideUI":{
+            "Type": "Set",
+            "Values": {
+                "_GLOBAL.UI.isVisibleStatusBar":false
+            }
+        }
+    },
+    "ui_statusbarShow":{
+        "5_hideUI":{
+            "Type": "Set",
+            "Values": {
+                "_GLOBAL.UI.isVisibleStatusBar":null
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "topics":{
+        "family_sister_greeting":{
+            "NPCFilter": {"IDs": ["family_sister"]},
+            "IsGreeting": true
+        }
+    }
+}

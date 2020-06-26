@@ -30,14 +30,21 @@ public class GameData: Data
     [JsonConverter(typeof(EventStageConverter))]
     public EventStage CurrentEventStage;
 
+
+    
     [JsonIgnore]
-    public SubLocation currentLocation;
+    public SubLocation CurrentLocation
+    {
+        get => GameManager.Instance.LocationCache.SubLocation(_currentLocationId);
+        set => _currentLocationId = value.ID;
+    }
     [JsonProperty("CurrentLocationId")]
-    private string _currentLocationId
+    private string _currentLocationId;
+    /*private string _currentLocationId
     {
         get => currentLocation?.ID;
         set { currentLocation = GameManager.Instance.LocationCache.SubLocation(value); }
-    }
+    }*/
 
     [JsonIgnore]
     public IEnumerable<NPC> NpcsPresent = new List<NPC>();
@@ -56,6 +63,8 @@ public class GameData: Data
         {
             switch (key)
             {
+                case "CurrentLocationID":
+                    return _currentLocationId;
                 case "PC":
                     return CharacterData.PC;
                 case "UI":
@@ -68,6 +77,10 @@ public class GameData: Data
         {
             switch (keyParts[0])
             {
+                case "GLOBAL":
+                    if (GameManager.Instance.Misc.globals.TryGetValue(keyParts[1],out dynamic globalData))
+                        return globalData;
+                    throw new GameException($"{keyParts[1]} is not present in GLOBAL");
                 case "NPC":
                     //return CharacterData[keyParts[1]];
                     //We need to acquire NPC-Data from the NPCsLibrary because the Data in Savegames is incomplete (it lacks Schedules etc.)

@@ -17,9 +17,10 @@ public class CText : IModable
     [JsonIgnore]
     public Condition Condition
     {
-        get => GameManager.Instance.ConditionCache[C];
+        get => GameManager.Instance.ConditionCache[_condition];
     }
-    public string C = ""; //condition String
+    [JsonProperty("Condition")]
+    public string _condition = ""; //condition String
 
 
     public CText() { }
@@ -72,11 +73,10 @@ public class CText : IModable
     private static string parse(string s, Data gameData)
     {
         string result = String.Empty;
-        //string pattern = @"{([\w\.]*)(?>\|(\w+))?}";
-        string pattern = @"{(\>?[\w\.\(\),\\:,""]*)(?>\| (\w +))?}";
-        //string functionPattern = @"^>([\w]+)\(([\w\.\(\),\\""]+(?>,[\w\.\(\),\\""]+)*)\)$";
-        //string functionPattern = @"^\>(\w+)\(((?>\w+:)?(?>\\"")?\w+(?>\\"")?(?>,(?>\w+:)?(?>\\"")?\w+(?>\\"")?)*)\)$";
 
+        string pattern = @"{([^({}]+)(\([^{}]+\))?}";
+        //string pattern = @"{(\>?[\w\.\(\),\\:,""]*)(?>\| (\w +))?}";
+        
         string input = s;
 
         int pos = 0;
@@ -92,11 +92,33 @@ public class CText : IModable
 
                 dynamic d;
 
-                if (dataString[0] == '>')
+                if(match.Groups.Count == 3 && !String.IsNullOrEmpty(match.Groups[2].Value))
                 {
-                    /*Match functionMatch = Regex.Match(dataString, functionPattern, RegexOptions.IgnoreCase);
-                    string functionID = functionMatch.Groups[1].Value;
-                    string functionParametersString = functionMatch.Groups[2].Value;*/
+                    //Function
+                    string functionID = match.Groups[1].Value;
+                    string functionParametersString = match.Groups[2].Value.Substring(1, match.Groups[2].Value.Length - 2);
+
+                    FunctionParameters functionParameters = new FunctionParameters(functionParametersString);
+
+                    d = GameManager.Instance.FunctionsLibrary.FunctionExecute(functionID, functionParameters);
+                }
+                else
+                {
+                    d = gameData[match.Groups[1].Value];
+                }
+
+                //result += format(d, match.Groups[2].Value);
+
+                result += d;
+
+                /*if (match.Groups.Count > 3 && !String.IsNullOrEmpty(match.Groups[2].Value))
+                    result += format(d, match.Groups[2].Value);
+                else
+                    result += d;*/
+
+                /*if (dataString[0] == '>')
+                {
+
 
                     int indexOfOpen = dataString.IndexOf('(');
                     int indexOfClose= dataString.LastIndexOf(')');
@@ -106,24 +128,25 @@ public class CText : IModable
 
                     FunctionParameters functionParameters = new FunctionParameters(gameData, functionParametersString.Split(','));
 
-                    dataString = GameManager.Instance.FunctionsLibrary.functionExecute(functionID, functionParameters);
+                    dataString = GameManager.Instance.FunctionsLibrary.FunctionExecute(functionID, functionParameters);
 
                     d = dataString;
                 }
                 else
                 {
                     d = gameData[match.Groups[1].Value];
-                }
+                }*/
 
-                if (match.Groups.Count > 2 && !String.IsNullOrEmpty(match.Groups[2].Value))
+                /*if (match.Groups.Count > 2 && !String.IsNullOrEmpty(match.Groups[2].Value))
                     result += format(d, match.Groups[2].Value);
                 else
-                    result += d;
-                
+                    result += d;*/
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 result += "{ERROR: "+e.GetType()+" }";
+                Debug.LogError(e);
             }
             pos = match.Index + match.Length;
         }
@@ -183,7 +206,7 @@ public class CText : IModable
         JoinWith = Modable.mod(JoinWith, modable.JoinWith);
         Value = Modable.mod(Value, modable.Value);
         Values = Modable.mod(Values, modable.Values);
-        C = Modable.mod(C, modable.C);
+        _condition = Modable.mod(_condition, modable._condition);
     }
 
     public void mod(IModable modable)
@@ -204,7 +227,7 @@ public class CText : IModable
         result.JoinWith = Modable.copyDeep(JoinWith);
         result.Value = Modable.copyDeep(Value);
         result.Values = Modable.copyDeep(Values);
-        result.C = Modable.copyDeep(C);
+        result._condition = Modable.copyDeep(_condition);
         return result;
     }
 

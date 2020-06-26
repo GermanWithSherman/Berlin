@@ -1,0 +1,61 @@
+{
+    "TemplateIDs": ["default_female","family"],
+    "NameFirst": "Christine",
+    "TexturePath": {
+        "Value": "npc/family/mother/portrait.jpg"
+    },
+    "Realtionships":{
+        "PC":"Stepmother",
+        "family_brother":"Mother",
+        "family_father":"Wife",
+        "family_sister":"Mother"
+    },
+    "Schedules": {
+        "home.kitchen":{
+            "5_breakfast":{
+                "TimeStart": 616,
+                "TimeEnd": 659,
+                "Activity": "breakfast"
+            },
+            "5_cook":{
+                "TimeStart": 1800,
+                "TimeEnd": 1859,
+                "Activity": "idle"
+            },
+            "5_dinner":{
+                "TimeStart": 1900,
+                "TimeEnd": 1930,
+                "Activity": "idle"
+            }
+        },
+        "home.living":{
+            "5_16":{
+                "TimeStart": 1600,
+                "TimeEnd": 1759,
+                "Activity": "idle"
+            },
+            "5_1931":{
+                "TimeStart": 1931,
+                "TimeEnd": 2159,
+                "Activity": "idle"
+            }
+        },
+        "home.room_parents": {
+            "5_sleepEvening": {
+                "TimeStart": 2300,
+                "TimeEnd": 2359,
+                "Activity": "sleep"
+            },
+            "5_sleepMorning": {
+                "TimeStart": 0,
+                "TimeEnd": 615,
+                "Activity": "sleep"
+            },
+            "8_idle":{
+                "TimeStart": 2200,
+                "TimeEnd": 2259,
+                "Activity": "idle"
+            }
+        }
+    }
+}

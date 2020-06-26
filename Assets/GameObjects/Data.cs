@@ -13,6 +13,9 @@ public abstract class Data
 
     protected dynamic getOrSpecial(string key)
     {
+        if (String.IsNullOrEmpty(key))
+            return "";
+
         if (key[0] == '"' && key.Length >= 2)
         {
             return key.Substring(1, key.Length-2);
@@ -26,7 +29,7 @@ public abstract class Data
             string functionName = key.Substring(0,bracketOpenIndex);
             string parameters = key.Substring(bracketOpenIndex+1, bracketCloseIndex- bracketOpenIndex-1);
             FunctionParameters functionParameters = new FunctionParameters(parameters);
-            dynamic result = GameManager.Instance.FunctionsLibrary.functionExecute(functionName,functionParameters);
+            dynamic result = GameManager.Instance.FunctionsLibrary.FunctionExecute(functionName,functionParameters);
             Debug.Log($"Call function {functionName} with {parameters} => {result}");
             return result;
         }
@@ -37,6 +40,17 @@ public abstract class Data
     protected abstract dynamic get(string key);
 
     protected abstract void set(string key, dynamic value);
+
+    public virtual bool tryGetTypedValue<T>(string key, out T value)
+    {
+        value = default(T);
+        if (!tryGetValue(key, out dynamic dynResult))
+            return false;
+        if (!(dynResult is T))
+            return false;
+        value = dynResult;
+        return true;
+    }
 
     public virtual bool tryGetValue(string key, out dynamic result)
     {
@@ -106,6 +120,18 @@ public abstract class Data
             return false;
         }
 
+    }
+
+    protected int parseInt(dynamic original)
+    {
+        try
+        {
+            return Convert.ToInt32(original);
+        }
+        catch
+        {
+            return 0;
+        }
     }
 
     protected string parseString(dynamic original)

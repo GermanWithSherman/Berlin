@@ -8,7 +8,8 @@ public class UIRLocation : MonoBehaviour
     private LocationConnection locationConnection;
 
     public UnityEngine.UI.Button Button;
-    public UnityEngine.UI.RawImage RawImage;
+    //public UnityEngine.UI.RawImage RawImage;
+    public ImageAutosize Image;
     public UnityEngine.UI.Text Text;
 
     public void setRLocation(LocationConnection locationConnection)
@@ -22,7 +23,7 @@ public class UIRLocation : MonoBehaviour
         else
             Text.text = locationConnection.TargetLocation.Label.Text(gameData);
 
-        RawImage.texture = locationConnection.Texture;
+        Image.texture = locationConnection.Texture;
 
         Button.onClick.RemoveAllListeners();
 

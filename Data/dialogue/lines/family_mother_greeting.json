@@ -1,0 +1,45 @@
+{
+    "stages": {
+        "start":{
+            "3_sleeping":{
+                "Condition": "npcActivity(_NPCID:\"family_mother\")=\"sleep\"",
+                "Text": "Sleep",
+                "TopicsVisible": false
+            },
+            "3_breakfast":{
+                "Condition": "npcActivity(_NPCID:\"family_mother\")=\"breakfast\"",
+                "Text": {
+                    "JoinWith": "\n",
+                    "Values":{
+                        "4_description":"{_NPC1.NameFirst} is sitting at the table eating her breakfast.",
+                        "5_likesPC":{
+                            "Condition": "_NPC1.Social.Stance>0",
+                            "Value": "<speaker=_NPC1>Good morning, {PC.NameFirst}. Would you like some orange juice?</speaker>"
+                        },
+                        "5_neutralTowardsPC":{
+                            "Condition": "_NPC1.Social.Stance=0",
+                            "Value": "<speaker=_NPC1>Good morning, {PC.NameFirst}.</speaker>"
+                        },
+                        "5_dislikesPC":{
+                            "Condition": "_NPC1.Social.Stance<0",
+                            "Value": "She looks up as she sees you. Without a word she turn to reading her newspaper again."
+                        }
+                    }
+                }
+            },
+            "5_living_handy":{
+                "Condition": "CurrentLocationID=\"home.living\"",
+                "Text": {
+                    "JoinWith": "\n",
+                    "Value": "<img>npc/family/mother/handy.jpg</img>"
+                }
+            },
+            "8_default":{
+                "Text": {
+                    "JoinWith": "\n",
+                    "Value": "<img>npc/family/mother/portrait.jpg</img>"
+                }
+            }
+        }
+    }
+}

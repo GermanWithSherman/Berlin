@@ -139,6 +139,19 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
         }
     }
 
+    [JsonProperty("Realtionships")]
+    public RelationshipData _RelationshipData;
+    [JsonIgnore]
+    public RelationshipData RelationshipData
+    {
+        get
+        {
+            if (_RelationshipData == null)
+                _RelationshipData = new RelationshipData();
+            return _RelationshipData;
+        }
+    }
+
     [JsonProperty("Social")]
     public SocialData _SocialData;
     [JsonIgnore]
@@ -159,12 +172,34 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
     public ModableObjectHashDictionary<TimeFilters> SchedulesDict = new ModableObjectHashDictionary<TimeFilters>();
     public bool ShouldSerializeSchedulesDict() => false;
 
-    public string TemplateID;
+    /*public string TemplateID;
     [JsonIgnore]
     public NPCTemplate Template
     {
         get => GameManager.Instance.NPCTemplateCache[TemplateID];
+    }*/
+
+    public ModableStringList TemplateIDs;
+
+    [JsonIgnore]
+    public IEnumerable<NPCTemplate> Templates
+    {
+        get
+        {
+            var result = new List<NPCTemplate>();
+
+            if (TemplateIDs == null)
+                return result;
+
+            foreach (string templateID in TemplateIDs)
+            {
+                result.Add(GameManager.Instance.NPCTemplateCache[templateID]);
+            }
+
+            return result;
+        }
     }
+
 
     [JsonIgnore]
     public Texture Texture { get => GameManager.Instance.TextureCache[TexturePath]; }
@@ -218,6 +253,8 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
             {
                 case "Body":
                     return BodyData[keyParts[1]];
+                case "Relationships":
+                    return RelationshipData[keyParts[1]];
                 case "Social":
                     return SocialData[keyParts[1]];
             }
@@ -292,8 +329,26 @@ public class NPC : Data, IInheritable, IModable, IModableAutofields
 
     public static NPC templateApply(NPC original)
     {
+        /*
         NPCTemplate template = original.Template;
         NPC templateInstance = template.generate();
+
+        return Modable.mod(templateInstance, original);*/
+
+        IEnumerable<NPCTemplate> templates = original.Templates;
+
+       // NPC result = original;
+
+        NPCTemplate completeTemplate = new NPCTemplate();
+
+        foreach (NPCTemplate template in templates)
+        {
+            //NPC templateInstance = template.generate();
+            //result = Modable.mod(templateInstance, result);
+            completeTemplate = Modable.mod(completeTemplate, template);
+        }
+
+        NPC templateInstance = completeTemplate.generate();
 
         return Modable.mod(templateInstance, original);
     }

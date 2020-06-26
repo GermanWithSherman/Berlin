@@ -89,7 +89,7 @@ public class Value<T>: Value, IModable
                 {
                     p.Add(kv.Key, kv.Value.ToValue(gameData));
                 }
-                return (T)(object)GameManager.Instance.FunctionsLibrary.functionExecute(Key,p);
+                return (T)(object)GameManager.Instance.FunctionsLibrary.FunctionExecute(Key,p);
             case ValueTypes.Interpolate:
                 return (T)(object)gameData.interpolate(Key);
             case ValueTypes.None:

@@ -1,0 +1,11 @@
+{
+    "items":{
+        "underpants_1":{
+            "Label":"Blue Underpants",
+            "TexturePath":"items/underpants/1.jpg",
+            "Price": 3000,
+            "Slot": "Panties",
+            "Gender": "m"
+        }
+    }
+}

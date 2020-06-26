@@ -11,6 +11,7 @@ public class CharacterWidget : MonoBehaviour
 
     public CharacterWidgetStat HungerStat;
     public CharacterWidgetStat HygieneStat;
+    public CharacterWidgetStat SatisfactionStat;
     public CharacterWidgetStat SleepStat;
 
     public void show()
@@ -23,6 +24,7 @@ public class CharacterWidget : MonoBehaviour
 
         HygieneStat.setPercentage(pc.statHygiene);
         HungerStat.setPercentage(pc.statHunger);
+        SatisfactionStat.setPercentage(pc.StatSatisfaction);
         SleepStat.setPercentage(pc.statSleep);
 
         gameObject.SetActive(true);

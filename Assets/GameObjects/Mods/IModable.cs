@@ -292,7 +292,7 @@ public static class Modable
 
 
         if (original == null)
-            return (T)mod.copyDeep();
+            return copyDeep(mod);//(T)mod.copyDeep();
 
         T originalCopy = copyDeep(original);
 

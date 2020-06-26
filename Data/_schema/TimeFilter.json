@@ -29,6 +29,7 @@
                 "type":"string"
             }
         },
-        "Condition": {"type":"string"}
+        "Condition": {"type":"string"},
+        "Activity": {"type":"string"}
     }
 }

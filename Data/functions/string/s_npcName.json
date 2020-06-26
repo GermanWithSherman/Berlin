@@ -1,0 +1,35 @@
+{
+    "Values":{
+        "1_pc":{
+            "Condition" :"_P._NPC.ID = \"PC\"",
+            "ValueType": "Interpolate",
+            "Key":"You\n({_P._NPC.NameFirst} {_P._NPC.NameLast})"
+        },
+        "5_known":{
+            "Condition" :"_P._NPC.Social.KnowsName = true",
+            "ValueType": "Plain",
+            "ConditionalValue":{
+                "Values":{
+                    "5_hasNickName":{
+                        "Condition" :"_P._NPC.NameNick != \"\"",
+                        "ValueType": "Interpolate",
+                        "Key":"{_P._NPC.NameFirst} {_P._NPC.NameLast}\n<i>{_P._NPC.nameNick}</i>"
+                    },
+                    "6_noNick":{
+                        "ValueType": "Interpolate",
+                        "Key":"{_P._NPC.NameFirst} {_P._NPC.NameLast}"
+                    }
+                }
+            }
+        },
+        "7_unknown":{
+            "ConditionalValue":{
+                "Values":{
+                    "0": {"Condition":"_P._NPC.Age < 18", "Value": "A kid"},
+                    "18f": {"Condition":"(_P._NPC.Age >= 18) AND (_P._NPC.Body.GenderVisible = \"f\")", "Value": "A woman"},
+                    "18m": {"Condition":"(_P._NPC.Age >= 18) AND (_P._NPC.Body.GenderVisible = \"m\")", "Value": "A man"}
+                }
+            }
+        }
+    }
+}

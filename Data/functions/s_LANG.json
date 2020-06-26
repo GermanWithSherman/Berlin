@@ -1,7 +1,0 @@
-{
-    "Mode": "Enum",
-    "Values":{
-        "Miss":{"ConditionalValue": {"Values":{"0":{"Value": "Miss","Condition": "NPC.Body.GenderVisible=\"f\""},"1":{"Value": "Mr."}}}},
-        "Mrs.":{"ConditionalValue": {"Values":{"0":{"Value": "Mrs.","Condition": "NPC.Body.GenderVisible=\"f\""},"1":{"Value": "Mr."}}}}
-    }
-}

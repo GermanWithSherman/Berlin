@@ -2,11 +2,11 @@
     "Values":{
         "5_female":{
             "Value":"PC/feet_1.jpg",
-            "Condition": "_PC.Body.GenderVisible!=\"m\""
+            "Condition": "_P._PC.Body.GenderVisible!=\"m\""
         },
         "5_male":{
             "Value":"PC/feet_male.jpg",
-            "Condition": "_PC.Body.GenderVisible=\"m\""
+            "Condition": "_P._PC.Body.GenderVisible=\"m\""
         }
     }
 }

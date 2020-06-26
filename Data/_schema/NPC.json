@@ -2,18 +2,19 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "type":"object",
     "required": [
-        "TemplateID"
+        "TemplateIDs"
     ],
     "additionalProperties": false,
     
     "properties": {
         "$schema" :{"type":"string"},
-        "TemplateID": {"type":"string" },
+        "TemplateIDs": {"type":"array","items": {"type":"string"} },
         "DialogueColor": {"type":"string" },
         "GenderVisible": {"type":"string" },
         "NameNick": {"type":"string" },
         "NameFirst": {"type":"string" },
         "NameLast": {"type":"string" },
+        "Realtionships":{"type":"object","items": {"type":"string"}},
         "Schedules": {
             "patternProperties": {
                 "^.*$": {

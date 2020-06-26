@@ -20,6 +20,7 @@
     "properties": {
         "Commands": {"$ref": "./CommandsCollection.json"},
         "Condition": {"type":"string"},
+        "Else": {"$ref": "./CommandsCollection.json"},
         "Type": {"type": "string", "enum": ["Conditional"] }
     }
 }

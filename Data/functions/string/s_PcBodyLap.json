@@ -2,11 +2,11 @@
     "Values":{
         "5_female":{
             "Value":"PC/lap1.jpg",
-            "Condition": "_PC.Body.PenisLength=0"
+            "Condition": "_P._PC.Body.PenisLength=0"
         },
         "5_male":{
             "Value":"PC/lap_male.jpg",
-            "Condition": "_PC.Body.PenisLength>0"
+            "Condition": "_P._PC.Body.PenisLength>0"
         }
     }
 }

@@ -91,7 +91,8 @@ public class NPCsLibrary : Cache<NPC>
         //Get the persistant Data from GameData
         if(GameManager.Instance.GameData.CharacterData.NPCs.TryGetValue(key, out NPC persistantNPC))
         {
-            result.mod(persistantNPC); //Overwrite all Data in RawNPC with Persistant Data
+            //result.mod(persistantNPC); //Overwrite all Data in RawNPC with Persistant Data
+            result = Modable.mod(result,persistantNPC);
         }
 
         result.id = key;
@@ -112,7 +113,22 @@ public class NPCsLibrary : Cache<NPC>
         return npc[keyParts[1]];
     }
 
-    public IEnumerable<NPC> npcsPresent(SubLocation subLocation, DateTime dateTime)
+    public string npcActivity(string npcID, string locationID, DateTime dateTime)
+    {
+        NPC npcRaw = rawNPCsLibrary[npcID];
+
+        if (npcRaw.SchedulesDict.TryGetValue(locationID, out TimeFilters filters))
+        {
+            if(filters.tryGetValid(dateTime, out TimeFilter filter))
+            {
+                return filter.Activity;
+            }
+        }
+
+        return "none";
+    }
+
+    public IList<NPC> npcsPresent(SubLocation subLocation, DateTime dateTime)
     {
         string subLocationID = subLocation.ID;
         List<NPC> result = new List<NPC>();
@@ -121,16 +137,6 @@ public class NPCsLibrary : Cache<NPC>
 
         foreach (string npcId in npcIds)
         {
-            /*NPC npc;
-            IEnumerable<Schedule> schedules;
-            bool isRaw = false;
-            if (GameData.CharacterData.has(npcId))
-                npc = GameData.CharacterData[npcId];
-            else
-            {
-                npc = NPCsRawLibrary[npcId];
-                isRaw = true;
-            }*/
             NPC npcRaw = rawNPCsLibrary[npcId];
 
             if(npcRaw.SchedulesDict.TryGetValue(subLocationID, out TimeFilters filters))
@@ -138,26 +144,6 @@ public class NPCsLibrary : Cache<NPC>
                 if(filters.isValid(dateTime))
                     result.Add(this[npcId]);
             }
-
-            //IEnumerable<TimeFilters> schedules = npcRaw.Schedules;
-
-            /*int time = dateTime.Minute + dateTime.Hour * 100;
-            int day = (int)dateTime.DayOfWeek;
-
-            foreach (TimeFilters schedule in schedules)
-            {
-                if (schedule.d.Contains(day) && time >= schedule.start && time <= schedule.end)
-                {
-                    if (schedule.l == subLocation.ID)
-                    {
-                        
-                        result.Add(this[npcId]);
-                    }
-                    //else: the character is scheduled to be somewhere else
-                    break;
-
-                }
-            }*/
         }
 
         return result;

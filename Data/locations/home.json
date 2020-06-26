@@ -1,0 +1,420 @@
+{
+    "subLocations":{
+        "main":{
+            "onShow":{
+                "5_jumpOutside":{"Type":"GotoLocation","LocationID": "home.outside"}
+            }
+        },
+        "outside":{
+            "TexturePath":{
+                "Values":{
+                    "4_night":{"Value":"locations/home/outside_night.jpg", "Condition": "World.DayPhase=\"night\""},
+                    "5_day":{"Value":"locations/home/outside_day.jpg"}
+                }
+            },
+            "LocationConnections": {
+                "5_hallway": {
+                    "TargetLocationId": ".hallway",
+                    "Duration": 120,
+                    "Label": "Your Home",
+                    "TexturePath": {
+                        "Value": "locations/home/outside_day.jpg"
+                    }
+                }
+            }
+        },
+        "bathroom":{
+            "TexturePath": {
+                "Value": "locations/home/bath.jpg"
+            },
+            "Label": "Bathroom",
+            "LocationConnections": {
+                "5_leave":{
+                    "TargetLocationId": ".hallway_upstairs",
+                    "Duration": 10,
+                    "Label": "Leave"
+                }
+            },
+            "Options":{
+                "5_brushTeeth":{
+                    "Text":"Brush Teeth",
+                    "Commands": {
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "bath.brushTeeth"
+                        }
+                    }
+                },
+                "5_shower":{
+                    "Text": "Shower",
+                    "Commands": {
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "bath.shower"
+                        }
+                    }
+                }
+            }
+        },
+        "hallway":{
+            "TexturePath":{
+                "Values":{
+                    "4_night":{"Value":"locations/home/hallway_night.jpg", "Condition": "World.DayPhase=\"night\""},
+                    "5_day":{"Value":"locations/home/hallway_day.jpg"}
+                }
+            },
+            "Label": "Hallway",
+            "LocationConnections": {
+                "3_leave": {
+                    "TargetLocationId": ".outside",
+                    "Duration": 120,
+                    "Label": "Leave",
+                    "TexturePath": {
+                        "Value": "locations/home/leave.jpg"
+                    },
+                    "OutfitRequirement":{
+                        "ForbiddenStyles": ["Naked","Underwear","Barefoot"],
+                        "Instruction": "You should put on some clothes before leaving."
+                    }
+                },
+                "4_goUpstairs":{
+                    "TargetLocationId": ".hallway_upstairs",
+                    "Duration": 30,
+                    "Label": "Go Upstaris",
+                    "TexturePath": {
+                        "Values":{
+                            "4_night":{"Value":"locations/home/stairs_up_night.jpg", "Condition": "World.DayPhase=\"night\""},
+                            "5_day":{"Value":"locations/home/stairs_up_day.jpg"}
+                        }
+                    }
+                },
+                "5_kitchen":{
+                    "TargetLocationId": ".kitchen",
+                    "Duration": 10
+                },
+                "5_living":{
+                    "TargetLocationId": ".living",
+                    "Duration": 10
+                }
+            },
+            "Options":{
+                "1":{
+                    "Text":"Pass 10 Minutes",
+                    "Commands":{"timeP1800":{"Type":"TimePass","Duration":600}}
+                },
+                "2":{
+                    "Text":"Pass 120 Minutes",
+                    "Commands":{"timeP1800":{"Type":"TimePass","Duration":7200}}
+                }
+            }
+        },
+        "hallway_upstairs":{
+            "TexturePath":{
+                "Values":{
+                    "4_night":{"Value":"locations/home/hallway_upstairs_night.jpg", "Condition": "World.DayPhase=\"night\""},
+                    "5_day":{"Value":"locations/home/hallway_upstaris_day.jpg"}
+                }
+            },
+            "LocationConnections": {
+                "4_goDownstairs": {
+                    "TargetLocationId": ".hallway",
+                    "Duration": 30,
+                    "Label": "Go Downstairs",
+                    "TexturePath": {
+                        "Value": "locations/home/stairs_down.jpg"
+                    }
+                },
+                "5_room_pc":{
+                    "TargetLocationId": ".room_pc",
+                    "Duration": 10,
+                    "Label": "Your Room",
+                    "TexturePath": {
+                        "Value": "locations/home/door_brother.jpg"
+                    }
+                },
+                "6_bathroom":{
+                    "TargetLocationId": ".bathroom",
+                    "Duration": 10
+                },
+                "7_room_sister":{
+                    "TargetLocationId": ".room_sister_door",
+                    "Duration": 10,
+                    "Label": "Linas Room",
+                    "TexturePath": {
+                        "Value": "locations/home/door_sister_closed.jpg"
+                    }
+                },
+                "7_room_brother":{
+                    "TargetLocationId": ".room_brother_door",
+                    "Duration": 10,
+                    "Label": "Toms Room",
+                    "TexturePath": {
+                        "Value": "locations/home/door_brother.jpg"
+                    }
+                },
+                "7_room_parent":{
+                    "TargetLocationId": ".room_parents_door",
+                    "Duration": 10,
+                    "Label": "Parents Room",
+                    "TexturePath": {
+                        "Value": "locations/home/door_parents_closed.jpg"
+                    }
+                }
+            }
+        },
+        "kitchen":{
+            "TexturePath": {
+                "Values":{
+                    "4_night":{"Value":"locations/home/kitchen_night.jpg", "Condition": "World.DayPhase=\"night\""},
+                    "5_day":{"Value":"locations/home/kitchen.jpg"}
+                }
+            },
+            "Text": {
+                "Values":{
+                    "5_breakfast":{
+                        "Value": "It is currently breakfast time.",
+                        "Condition": "b_homeIsBreakfastTime()=true"
+                    }
+                }
+            },
+            "Label": "Kitchen",
+            "LocationConnections": {
+                "5_leave":{
+                    "TargetLocationId": ".hallway",
+                    "Duration": 10
+                },
+                "6_living":{
+                    "TargetLocationId": ".living",
+                    "Duration": 10
+                }
+            }
+        },
+        "living":{
+            "TexturePath": {
+                "Values":{
+                    "4_night":{"Value":"locations/home/living_night.jpg", "Condition": "World.DayPhase=\"night\""},
+                    "5_day":{"Value":"locations/home/living.jpg"}
+                }
+            },
+            "Label": "Living Room",
+            "LocationConnections": {
+                "5_leave":{
+                    "TargetLocationId": ".hallway",
+                    "Duration": 10
+                },
+                "6_kitchen":{
+                    "TargetLocationId": ".kitchen",
+                    "Duration": 10
+                }
+            }
+        },
+        "room_sister":{
+            "TexturePath": {
+                "Value": "locations/home/room_sister.jpg"
+            },
+            "Options":{
+                "5_rummage":{
+                    "Text": "Rummage through her stuff",
+                    "Commands": {
+                        "5_d_0":{
+                            "Type": "Event",
+                            "EventID": "home.room_sister_rummage"
+                        }
+                    },
+                    "State": {
+                        "Values": {
+                            "5_present":{
+                                "Condition": "npcIsPresent(_NPCID:\"family_sister\")=true",
+                                "Value": {
+                                    "Visible": false
+                                }
+                            }
+
+                        }
+                    }
+                }
+            },
+            "LocationConnections": {
+                "5_leave":{
+                    "TargetLocationId": ".hallway_upstairs",
+                    "Duration": 10,
+                    "Label": "Leave",
+                    "TexturePath": {
+                        "Value":"locations/home/door_sister_closed.jpg"
+                    }
+                }
+            }
+        },
+        "room_sister_door":{
+            "Text":{
+                "Values":{
+                    "5_d_0":"Linas door is closed."
+                },
+                "JoinWith": "\n"
+            },
+            "TexturePath": {
+                "Value": "locations/home/door_sister_closed.jpg"
+            },
+            "Options":{
+                "4_leave":{
+                    "Text": "Leave",
+                    "Commands": {
+                        "5_gotoLocation":{"Type": "GotoLocation","LocationID": "home.hallway_upstairs"}
+                    }
+                },
+                "5_knock":{
+                    "Text": "Knock",
+                    "Commands": {
+                        "5_event":{"Type": "Event","EventID": "home.room_sister_knock"}
+                    }
+                },
+                "6_enter":{
+                    "Text": "Enter",
+                    "Commands": {
+                        "5_gotoLocation":{"Type": "GotoLocation","LocationID": "home.room_sister"}
+                    }
+                }
+            }
+        },
+        "room_parents":{
+            "TexturePath": {
+                "Value": "locations/home/room_parents.jpg"
+            },
+            "LocationConnections": {
+                "5_leave":{
+                    "TargetLocationId": ".hallway_upstairs",
+                    "Duration": 10,
+                    "Label": "Leave",
+                    "TexturePath": {
+                        "Value":"locations/home/door_brother.jpg"
+                    }
+                }
+            }
+        },
+        "room_parents_door":{
+            "Text":{
+                "Values":{
+                    "5_d_0":"The door to your parents bedroom is closed."
+                },
+                "JoinWith": "\n"
+            },
+            "TexturePath": {
+                "Value": "locations/home/door_parents_closed.jpg"
+            },
+            "Options":{
+                "4_leave":{
+                    "Text": "Leave",
+                    "Commands": {
+                        "5_gotoLocation":{"Type": "GotoLocation","LocationID": "home.hallway_upstairs"}
+                    }
+                },
+                "5_knock":{
+                    "Text": "Knock",
+                    "Commands": {
+                        "5_gotoLocation":{"Type": "GotoLocation","LocationID": "home.room_parents"}
+                    }
+                },
+                "6_enter":{
+                    "Text": "Enter",
+                    "Commands": {
+                        "5_gotoLocation":{"Type": "GotoLocation","LocationID": "home.room_parents"}
+                    }
+                }
+            }
+        },
+        "room_pc":{
+            "TexturePath": {
+                "Value": "locations/home/room_pc.jpg"
+            },
+            "LocationConnections": {
+                "5_leave":{
+                    "TargetLocationId": ".hallway_upstairs",
+                    "Duration": 10,
+                    "Label": "Leave",
+                    "TexturePath": {
+                        "Value":"locations/home/door_brother.jpg"
+                    },
+                    "OutfitRequirement":{
+                        "ForbiddenStyles": ["Naked"],
+                        "Instruction": "You should at least wear underwear."
+                    }
+                }
+            },
+            
+            "Options":{
+                "3_bed":{
+                    "Text": "Lay down in bed",
+                    "Commands": {
+                        "0":{
+                            "Type": "Event",
+                            "EventID": "bed."
+                        }
+                    }
+                },
+                "5_outfit":{
+                    "Text":"Change Outfit",
+                    "Commands":{
+                        "outfit":{
+                            "Type":"Outfit"
+                        }
+                    }
+                },
+                "6_pc":{
+                    "Text": "Use Computer",
+                    "Commands": {
+                        "0":{
+                            "Type": "Event",
+                            "EventID": "computer."
+                        }
+                    }
+                }
+            }
+        },
+        "room_brother":{
+            "TexturePath": {
+                "Value": "locations/home/room_brother.jpg"
+            },
+            "LocationConnections": {
+                "5_leave":{
+                    "TargetLocationId": ".hallway_upstairs",
+                    "Duration": 10,
+                    "Label": "Leave",
+                    "TexturePath": {
+                        "Value":"locations/home/door_brother.jpg"
+                    }
+                }
+            }
+        },
+        "room_brother_door":{
+            "Text":{
+                "Values":{
+                    "5_d_0":"Toms door is closed."
+                },
+                "JoinWith": "\n"
+            },
+            "TexturePath": {
+                "Value": "locations/home/door_brother.jpg"
+            },
+            "Options":{
+                "4_leave":{
+                    "Text": "Leave",
+                    "Commands": {
+                        "5_gotoLocation":{"Type": "GotoLocation","LocationID": "home.hallway_upstairs"}
+                    }
+                },
+                "5_knock":{
+                    "Text": "Knock",
+                    "Commands": {
+                        "5_gotoLocation":{"Type": "GotoLocation","LocationID": "home.room_brother"}
+                    }
+                },
+                "6_enter":{
+                    "Text": "Enter",
+                    "Commands": {
+                        "5_gotoLocation":{"Type": "GotoLocation","LocationID": "home.room_brother"}
+                    }
+                }
+            }
+        }
+    }
+}

@@ -15,7 +15,18 @@ public class UINPCPresent : MonoBehaviour
 
     public void onClick()
     {
-        GameManager.Instance.dialogueShow(_npc);
+        try
+        {
+            GameManager.Instance.dialogueShow(_npc);
+        }
+        catch(GameException ge)
+        {
+            ErrorMessage.Show(ge.Message);
+        }
+        catch(System.Exception e)
+        {
+            ErrorMessage.Show(e.Message);
+        }
     }
 
     public void setNPC(NPC npc)
@@ -31,6 +42,6 @@ public class UINPCPresent : MonoBehaviour
 
     public void updateTooltipText()
     {
-        TooltipProvider.Text = GameManager.Instance.FunctionsLibrary.npcName(_npc);
+        TooltipProvider.Text = GameManager.Instance.FunctionsLibrary.npcName(_npc) + "\nYour " + _npc.RelationshipData.GetRelationshipTo(GameManager.Instance.PC);
     }
 }

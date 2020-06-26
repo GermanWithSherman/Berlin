@@ -1,0 +1,40 @@
+{
+    "items":{
+        "dress_0":{
+            "Label":"Dress 0",
+            "TexturePath":"items/clothes/f_dress/dressA(0).jpg",
+            "Price": 3000,
+            "Slot": "Clothes",
+            "Gender": "f",
+            "Skimpiness": 70,
+            "Style": ["Dress","Dance"]
+        },
+        "dress_1":{
+            "Label":"Dress 1",
+            "TexturePath":"items/clothes/f_dress/dressA(1).jpg",
+            "Price": 5000,
+            "Slot": "Clothes",
+            "Gender": "f",
+            "Skimpiness": 40,
+            "Style": ["Dress","Casual"]
+        },
+        "dress_2":{
+            "Label":"Dress 2",
+            "TexturePath":"items/clothes/f_dress/dressA(2).jpg",
+            "Price": 4444,
+            "Slot": "Clothes",
+            "Gender": "f",
+            "Skimpiness": 50,
+            "Style": ["Dress","Casual"]
+        },
+        "dress_3":{
+            "Label":"Dress 3",
+            "TexturePath":"items/clothes/f_dress/dressA(3).jpg",
+            "Price": 1111,
+            "Slot": "Clothes",
+            "Gender": "f",
+            "Skimpiness": 60,
+            "Style": ["Dress","Casual"]
+        }
+    }
+}

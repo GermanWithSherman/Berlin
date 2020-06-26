@@ -14,42 +14,11 @@ public class LocationCache : Cache<Location>
         var result = base.create(key);
 
         result?.linkIds(key);
-        /*List<string> locationPaths = new List<string>() { GameManager.Instance.DataPath };
-        locationPaths.AddRange(GameManager.Instance.ModsServer.ActivatedModsPaths);
 
-        Location result = null;
-
-        foreach (string rawpath in locationPaths)
-        {
-            string path = Path.Combine(rawpath, "locations", key + ".json");
-            Location location = loadLocation(path);
-            if (location == null)
-                continue;
-            if (result == null)
-            {
-                result = location;
-                continue;
-            }
-            result.mod(location);
-        }
-
-        result?.linkIds(key);
-        */
         return result;
 
     }
 
-    /*private Location loadLocation(string path)
-    {
-        if (!File.Exists(path))
-            return null;
-
-        JObject deserializationData = GameManager.File2Data(path);
-
-        Location location = deserializationData.ToObject<Location>();
-
-        return location;
-    }*/
 
     public SubLocation SubLocation(string key)
     {

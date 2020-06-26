@@ -1,0 +1,11 @@
+{
+    "items":{
+        "bra1":{
+            "Label":"Bra 1",
+            "TexturePath":"items/bras/bra1.jpg",
+            "Price": 1000,
+            "Slot": "Bra",
+            "Gender": "f"
+        }
+    }
+}

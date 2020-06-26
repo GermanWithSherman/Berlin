@@ -1,0 +1,8 @@
+{
+    "Mode": "Enum",
+    "Values":{
+        "her/him":{"ConditionalValue": {"Values":{"0":{"Value": "her","Condition": "_P.NPC.Body.GenderVisible=\"f\""},"1":{"Value": "him"}}}},
+        "Miss":{"ConditionalValue": {"Values":{"0":{"Value": "Miss","Condition": "_P.NPC.Body.GenderVisible=\"f\""},"1":{"Value": "Mr."}}}},
+        "Mrs.":{"ConditionalValue": {"Values":{"0":{"Value": "Mrs.","Condition": "_P.NPC.Body.GenderVisible=\"f\""},"1":{"Value": "Mr."}}}}
+    }
+}

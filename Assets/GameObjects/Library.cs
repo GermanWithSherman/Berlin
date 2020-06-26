@@ -5,7 +5,14 @@ using System.IO;
 using System.Threading;
 using UnityEngine;
 
-public abstract class Library<T> where T : IModable
+public interface ILibrary
+{
+    Thread loadThreaded();
+    void load();
+
+}
+
+public abstract class Library<T>: ILibrary where T : IModable
 {
     protected Dictionary<string, T> _dict = new Dictionary<string, T>();
 

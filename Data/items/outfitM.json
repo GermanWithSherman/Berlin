@@ -1,0 +1,12 @@
+{
+    "items":{
+        "clothes_m_casual_1":{
+            "Label":"Crew-neck Sweater and Brown Pants",
+            "TexturePath":"items/clothes/m_casual/1.jpg",
+            "Price": 6000,
+            "Slot": "Clothes",
+            "Gender": "m",
+            "Style": ["Casual"]
+        }
+    }
+}
