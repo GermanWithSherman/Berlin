@@ -1,0 +1,11 @@
+{
+    "Values": {
+        "5_isBreakfastTime":{
+            "Condition": "_GLOBAL.World.DateTime⊆{\"TimeStart\":616,\"TimeEnd\":659}",
+            "Value": true
+        },
+        "8_default":{
+            "Value": false
+        }
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "stages": {
+        "start":{
+            "5_default":{
+                "Text":{
+                    "JoinWith": "\n",
+                    "Values":{
+                        "5_d_0":"{_NPC1.NameFirst} musters you as you ask her for some allowance.",
+                        "5_d_1":"<speaker=_NPC1>Sorry {PC.NameFirst}, but I can't give you any money.</speaker>"
+                    }
+                }
+            }
+        }
+    }
+}

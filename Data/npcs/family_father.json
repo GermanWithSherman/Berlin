@@ -1,0 +1,57 @@
+{
+    "TemplateIDs": ["default_male","family"],
+    "NameFirst": "Jonas",
+    "TexturePath": {
+        "Value": "npc/family/father/portrait.jpg"
+    },
+    "Realtionships":{
+        "PC":"Father",
+        "family_brother":"Stepfather",
+        "family_mother":"Husband",
+        "family_sister":"Stepfather"
+    },
+    "Schedules": {
+        "home.kitchen":{
+            "5_breakfast":{
+                "TimeStart": 616,
+                "TimeEnd": 659,
+                "Activity": "breakfast",
+                "Days": ["Th","Sa","Su"]
+            },
+            "5_dinner":{
+                "TimeStart": 1900,
+                "TimeEnd": 1930,
+                "Activity": "idle",
+                "Days": ["Sa","Su"]
+            }
+        },
+        "home.living":{
+            "5_16":{
+                "TimeStart": 1600,
+                "TimeEnd": 1759,
+                "Activity": "idle",
+                "Days": ["Sa","Su"]
+            },
+            "5_1931":{
+                "TimeStart": 1931,
+                "TimeEnd": 2159,
+                "Activity": "idle",
+                "Days": ["Sa","Su"]
+            }
+        },
+        "home.room_parents": {
+            "5_sleepEvening": {
+                "TimeStart": 2300,
+                "TimeEnd": 2359,
+                "Activity": "sleep",
+                "Days": ["Fr","Sa"]
+            },
+            "5_sleepMorning": {
+                "TimeStart": 0,
+                "TimeEnd": 615,
+                "Activity": "sleep",
+                "Days": ["Sa","Su"]
+            }
+        }
+    }
+}

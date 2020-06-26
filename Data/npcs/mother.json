@@ -1,8 +1,0 @@
-{
-    "TemplateID": "default_female",
-    "NameNick": "Mum",
-    "Schedules":{
-        "home_parents.kitchen":{"0":{"TimeStart":0,"TimeEnd":2359}}
-    },
-    "TexturePath":{"Value": "npc/mother/portrait.jpg"}
-}

@@ -8,6 +8,8 @@ public class Misc
     public LookupTable outfitStyle = new LookupTable("Weird");
     public ModableValueTypeHashDictionary<string[]> dayNightCycle;
 
+    public ModableValueTypeHashDictionary<dynamic> globals;
+
     public string dayNightState(DateTime dateTime)
     {
         string month = dateTime.Month.ToString();

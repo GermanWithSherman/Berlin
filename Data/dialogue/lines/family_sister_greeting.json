@@ -1,0 +1,17 @@
+{
+    "stages": {
+        "start":{
+            "3_sleeping":{
+                "Condition": "npcActivity(_NPCID:\"family_sister\")=\"sleep\"",
+                "Text": "Sleep",
+                "TopicsVisible": false
+            },
+            "8_default":{
+                "Text": {
+                    "JoinWith": "\n",
+                    "Value": "<img>npc/family/sister/portrait.jpg</img>"
+                }
+            }
+        }
+    }
+}

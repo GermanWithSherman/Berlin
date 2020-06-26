@@ -6,6 +6,8 @@ using UnityEngine;
 public class CommandConditional : Command
 {
     public CommandsCollection Commands;
+    public CommandsCollection Else;
+
 
     [JsonProperty("Condition")]
     public string ConditionString = "";
@@ -20,6 +22,8 @@ public class CommandConditional : Command
     {
         if (Condition.evaluate(data))
             Commands.execute(data);
+        else if (Else != null)
+            Else.execute(data);
     }
 
     public override IModable copyDeep()
@@ -28,6 +32,7 @@ public class CommandConditional : Command
 
         result.Commands = Modable.copyDeep(Commands);
         result.ConditionString = Modable.copyDeep(ConditionString);
+        result.Else = Modable.copyDeep(Else);
 
         return result;
     }
@@ -36,7 +41,7 @@ public class CommandConditional : Command
     {
         Commands = Modable.mod(original.Commands, mod.Commands);
         ConditionString = Modable.mod(original.ConditionString, mod.ConditionString);
-
+        Else = Modable.mod(original.Else, mod.Else);
 
     }
 

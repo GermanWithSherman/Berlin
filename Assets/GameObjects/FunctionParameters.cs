@@ -74,7 +74,21 @@ public class FunctionParameters : Data
                 return data[key];
             return GameManager.Instance.GameData[key];
         }
-        return data[keyParts[0]][keyParts[1]];
+
+        if (data.TryGetValue(keyParts[0], out dynamic dataPartOuter))
+        {
+            return data[keyParts[0]][keyParts[1]];
+        }
+        else
+        {
+            if (data.TryGetValue("_GLOBAL", out dynamic globalData))
+            {
+                Debug.LogWarning($"{keyParts[0]} is not present in FunctionParameters. Did you forget a _GLOBAL-prefix?");
+                return globalData[key];
+            }
+        }
+
+        throw new GameException($"The key {key} is not present in FunctionParameter");
 
 
     }

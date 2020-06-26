@@ -1,0 +1,44 @@
+{
+    "TemplateIDs": ["default_female","family"],
+    "NameFirst": "Lina",
+    "TexturePath": {
+        "Value": "npc/family/sister/portrait.jpg"
+    },
+    "Realtionships":{
+        "PC":"Stepsister",
+        "family_brother":"Sister",
+        "family_father":"Stepdaughter",
+        "family_mother":"Daughter"
+    },
+    "Schedules": {
+        "home.kitchen":{
+            "5_breakfast":{
+                "TimeStart": 616,
+                "TimeEnd": 659,
+                "Activity": "breakfast"
+            },
+            "5_dinner":{
+                "TimeStart": 1900,
+                "TimeEnd": 1930,
+                "Activity": "idle"
+            }
+        },
+        "home.room_sister": {
+            "5_sleepEvening": {
+                "TimeStart": 2300,
+                "TimeEnd": 2359,
+                "Activity": "sleep"
+            },
+            "5_sleepMorning": {
+                "TimeStart": 0,
+                "TimeEnd": 615,
+                "Activity": "sleep"
+            },
+            "8_idle":{
+                "TimeStart": 700,
+                "TimeEnd": 2259,
+                "Activity": "idle"
+            }
+        }
+    }
+}

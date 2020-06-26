@@ -1,0 +1,9 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type":"string",
+    "description": "A condition that gets evaluated during runtime.\nPlain strings are interpreted as references (e.g. 'PC.NameFirst'). Strings need to be written such as \\\"String\\\".",
+    "examples": [
+        "PC.GenderVisible=\"f\"",
+        "World.DateTime⊆{\"TimeStart\":616,\"TimeEnd\":659}"
+    ]
+}

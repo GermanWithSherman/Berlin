@@ -1,0 +1,133 @@
+{
+    "EventStages":{
+        "main":{
+            "Text": "You sit down at your desk and boot up your computer.",
+            "Commands": {
+                "5_timePass":{
+                    "Type": "TimePass",
+                    "Duration": 180
+                }
+            },
+            "Options":{
+                "5_game":{
+                    "Text": "Play Games",
+                    "Commands": {
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "computer.game"
+                        }
+                    }
+                },
+                "6_porn":{
+                    "Text": "Watch Porn",
+                    "Commands": {
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "computer.porn"
+                        }
+                    },
+                    "State": {
+                        "Values": {
+                            "5_satisfied":{
+                                "Condition": "PC.StatSatisfaction>GLOBAL.i_StatSatisfactionMax4Porn",
+                                "Value": {
+                                    "Enabled": false,
+                                    "Text": "You don't feel like doing this now. You are not horny enough."
+                                }   
+                            }
+                        }
+                    }
+                },
+                "8_off":{
+                    "Text": "Shut off",
+                    "Commands": {
+                        "5_eventEnd":{
+                            "Type": "EventEnd"
+                        }
+                    }
+                }
+            }
+        },
+        "game":{
+            "Options":{
+                "5_game_0":{
+                    "Text": "Play for 10 minutes",
+                    "Commands": {
+                        "3 _timePass":{
+                            "Type": "TimePass",
+                            "Duration": 600
+                        },
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "computer.game"
+                        }
+                    }
+                },
+                "5_game_1":{
+                    "Text": "Play for 60 minutes",
+                    "Commands": {
+                        "3 _timePass":{
+                            "Type": "TimePass",
+                            "Duration": 3600
+                        },
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "computer.game"
+                        }
+                    }
+                },
+                "7_back":{
+                    "Text": "Close Game",
+                    "Commands": {
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "computer.main"
+                        }
+                    }
+                },
+                "8_off":{
+                    "Text": "Shut off",
+                    "Commands": {
+                        "5_eventEnd":{
+                            "Type": "EventEnd"
+                        }
+                    }
+                }
+            }
+        },
+        "porn":{
+            "Text":"",
+            "Commands": {
+                "3 _timePass":{
+                    "Type": "TimePass",
+                    "Duration": 600
+                },
+                "5_satisfaction":{
+                    "Type": "Set",
+                    "Values": {
+                        "PC.StatSatisfaction": 1000000
+                    }
+                }
+            },
+            "Options":{
+                "7_back":{
+                    "Text": "Back",
+                    "Commands": {
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "computer.main"
+                        }
+                    }
+                },
+                "8_off":{
+                    "Text": "Shut off",
+                    "Commands": {
+                        "5_eventEnd":{
+                            "Type": "EventEnd"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -3,17 +3,90 @@
     "EventStages":{
         "main":{
             "Text":{
-                "Value": "Hallo mein Lieber!"
+                "JoinWith": "\n",
+                "Values":{ 
+                    "1_d":"Hello, and welcome to BAAS.",
+                    "5_d":"The game is currently under construction and not even in Alpha stage."
+                }
             },
-            "Commands":{
-                "8_gtl":{
-                    "Type": "GotoLocation",
-                    "LocationID":"start."
+            "TexturePath":{
+                "Value":"underConstruction.jpg"
+            },
+            "Options":{
+                "5_start":{
+                    "Text": "Start",
+                    "Commands":{"goto":{"Type":"Event","EventID":"start.start"}}
                 },
-                "5_callStart":{
-                    "Type":"Call",
+                "8_about":{
+                    "Text": "About",
+                    "Commands":{"goto":{"Type":"Event","EventID":"start.about"}}
+                }
+            },
+            "Commands": {
+                "5_hideUI":{
+                    "Type": "Call",
+                    "ProcedureID": "ui_statusbarHide"
+                }
+            }
+        },
+        "about":{
+            "TexturePath":{
+                "Value":"gws.jpg"
+            },
+            "Text":{
+                "JoinWith": "\n",
+                "Values": {
+                    "1_GWS":"This game was created by GermanWithSherman.",
+                    "8_Feedback":"Please send feedback, suggestions and ideas to the appropriate topic at tfgames.site."
+                }
+            },
+            "Options":{
+                "5_back":{
+                    "Text": "Back",
+                    "Commands":{"goto":{"Type":"Event","EventID":"start.main"}}
+                }
+            }
+        },
+        "start":{
+            "Text": {
+                "JoinWith": "\n",
+                "Values":{
+                    "5_d_0":"You are a 18 years old boy."
+                }
+            },
+            "Options":{
+                "5_back":{
+                    "Text": "Confirm",
+                    "Commands":{"goto":{"Type":"Event","EventID":"start.finalize"}}
+                }
+            }
+        },
+        "finalize":{
+            "Commands": {
+                "2_startMale":{
+                    "Type": "Call",
                     "ProcedureID": "startMale",
                     "Parameters": ["PC"]
+                },
+                "5_hideUI":{
+                    "Type": "Call",
+                    "ProcedureID": "ui_statusbarShow"
+                },
+                "5_introduceBrother":{"Type": "Call","ProcedureID": "introduce",
+                    "Parameters": ["PC","NPC.family_brother"]
+                },
+                "5_introduceFather":{"Type": "Call","ProcedureID": "introduce",
+                    "Parameters": ["PC","NPC.family_father"]
+                },
+                "5_introduceMother":{"Type": "Call","ProcedureID": "introduce",
+                    "Parameters": ["PC","NPC.family_mother"]
+                },
+                "5_introduceSister":{"Type": "Call","ProcedureID": "introduce",
+                    "Parameters": ["PC","NPC.family_sister"]
+                },
+                "8_gotoHome":{
+                    "Type": "GotoLocation",
+                    "LocationID": "home."
                 }
             }
         }

@@ -1,0 +1,214 @@
+{
+    "EventStages":{
+        "room_sister_knock":{
+            "Commands": {
+                "2_isPresent":{
+                    "Type": "Conditional",
+                    "Condition": "npcIsPresent(_NPCID:\"family_sister\";_LOCATIONID:\"home.room_sister\")=true",
+                    "Commands": {
+                        "2_isPresent":{
+                            "Type": "Conditional",
+                            "Condition": "npcActivity(_NPCID:\"family_sister\";_LOCATIONID:\"home.room_sister\")=\"sleep\"",
+                            "Commands":{
+                                "5_event":{
+                                    "Type": "Event",
+                                    "EventID": "home.room_sister_knock_sleep"
+                                }
+                            },
+                            "Else": {
+                                "5_event":{
+                                    "Type": "Event",
+                                    "EventID": "home.room_sister_knock_present"
+                                }
+                            }
+                        }
+                    },
+                    "Else":{
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "home.room_sister_knock_absent"
+                        }
+                    }
+                }
+            }
+        },
+        "room_sister_knock_absent":{
+            "Text": {
+                "Value": "Your sister doesn't seem to be in her room."
+            },
+            "Options":{
+                "5_enter":{
+                    "Text": "Leave",
+                    "Commands": {
+                        "5_gotoLocation":{
+                            "Type": "GotoLocation",
+                            "LocationID": "home.hallway_upstairs"
+                        },
+                        "5_eventEnd":{
+                            "Type": "EventEnd"
+                        }
+                    }
+                }
+            }
+        },
+        "room_sister_knock_present":{
+            "Text": {
+                "Value": "You her the voice of your sister telling you to come in."
+            },
+            "Options":{
+                "5_enter":{
+                    "Text": "Enter",
+                    "Commands": {
+                        "5_gotoLocation":{
+                            "Type": "GotoLocation",
+                            "LocationID": "home.room_sister"
+                        },
+                        "5_eventEnd":{
+                            "Type": "EventEnd"
+                        }
+                    }
+                }
+            }
+        },
+        "room_sister_knock_sleep":{
+            "Text": {
+                "Value": "Your sister is probably asleep at this time."
+            },
+            "Options":{
+                "5_enter":{
+                    "Text": "Leave",
+                    "Commands": {
+                        "5_gotoLocation":{
+                            "Type": "GotoLocation",
+                            "LocationID": "home.hallway_upstairs"
+                        },
+                        "5_eventEnd":{
+                            "Type": "EventEnd"
+                        }
+                    }
+                }
+            }
+        },
+        "room_sister_rummage":{
+            "TexturePath": {
+                "Value": "locations/home/room_sister.jpg"
+            },
+            "Text":"Where would you like to rummage?",
+            "Options":{
+                "5_wardrobe":{
+                    "Text": "Wardrobe",
+                    "Commands": {
+                        "5_timePass":{"Type": "TimePass","Duration": 60},
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "home.room_sister_rummage_wardrobe"
+                        }
+                    }
+                },
+                "5_dresser":{
+                    "Text": "Dresser",
+                    "Commands": {
+                        "5_timePass":{"Type": "TimePass","Duration": 60},
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "home.room_sister_rummage_dresser"
+                        }
+                    }
+                },
+                "5_nightstand":{
+                    "Text": "Nightstand",
+                    "Commands": {
+                        "5_timePass":{"Type": "TimePass","Duration": 60},
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "home.room_sister_rummage_nightstand"
+                        }
+                    }
+                },
+                "8_leave":{
+                    "Text": "Nevermind",
+                    "Commands": {
+                        "5_eventEnd":{
+                            "Type":"EventEnd"
+                        }
+                    }
+                }
+            }
+        },
+        "room_sister_rummage_dresser":{
+            "TexturePath": {
+                "Value": "events/home/sister/pantiesDrawer.jpg"
+            },
+            "Text":"You open your sisters dresser. She has stored her undies in here.\n She might notice something going missing.",
+            "Options":{
+                "5_wardrobe":{
+                    "Text": "Take Panties",
+                    "Commands": {
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "home.room_sister_rummage_dresser"
+                        }
+                    }
+                },
+                "8_leave":{
+                    "Text": "Nevermind",
+                    "Commands": {
+                        "5_eventEnd":{
+                            "Type":"EventEnd"
+                        }
+                    }
+                }
+            }
+        },
+        "room_sister_rummage_nightstand":{
+            "TexturePath": {
+                "Value": "events/home/sister/toys.jpg"
+            },
+            "Text":"You open your sisters nightstand. You found a collection of her sex toys.\n Maybe she wouldn't notice a condom being missing, but there is no way she wouldn't mention one of her toys being gone.",
+            "Options":{
+                "5_wardrobe":{
+                    "Text": "Take Vibrator",
+                    "Commands": {
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "home.room_sister_rummage_nightstand"
+                        }
+                    }
+                },
+                "8_leave":{
+                    "Text": "Nevermind",
+                    "Commands": {
+                        "5_eventEnd":{
+                            "Type":"EventEnd"
+                        }
+                    }
+                }
+            }
+        },
+        "room_sister_rummage_wardrobe":{
+            "TexturePath": {
+                "Value": "events/home/sister/wardrobe.jpg"
+            },
+            "Text":"You open your sisters wardrobe. She has stored her shoes and dresses here.\nIt could take some time for her to notice that some of it were gone.",
+            "Options":{
+                "5_wardrobe":{
+                    "Text": "Take Dress",
+                    "Commands": {
+                        "5_event":{
+                            "Type": "Event",
+                            "EventID": "home.room_sister_rummage_wardrobe"
+                        }
+                    }
+                },
+                "8_leave":{
+                    "Text": "Nevermind",
+                    "Commands": {
+                        "5_eventEnd":{
+                            "Type":"EventEnd"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

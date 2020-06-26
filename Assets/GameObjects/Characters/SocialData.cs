@@ -19,6 +19,8 @@ public class SocialData : Data, IModable, IModableAutofields
     }
 
 
+    public int Stance;
+
 
 
 
@@ -28,7 +30,7 @@ public class SocialData : Data, IModable, IModableAutofields
         {
             case "Introduced": return Introduced;
             case "KnowsName": return KnowsName;
-            
+            case "Stance": return Stance;
 
         }
         return null;
@@ -40,7 +42,7 @@ public class SocialData : Data, IModable, IModableAutofields
         {
             case "Introduced": Introduced = parseBool(value); return;
             case "KnowsName": KnowsName = parseBool(value); return;
-
+            case "Stance": Stance = parseInt(value); return;
         }
     }
 

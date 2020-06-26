@@ -39,6 +39,25 @@ public class GameManager : MonoBehaviour
     public ShopTypeCache ShopTypeCache;
     public TextureCache TextureCache;
     public WeightedStringListCache WeightedStringListCache;
+
+    public void CacheLocationsReset()
+    {
+        LocationCache.Reset();
+    }
+
+    public void CachesReset()
+    {
+        CacheLocationsReset();
+        DialogueLineCache.Reset();
+        EventGroupCache.Reset();
+        NPCTemplateCache.Reset();
+        ServicesCache.Reset();
+        ServicepointCache.Reset();
+        ShopTypeCache.Reset();
+        TextureCache.Reset();
+        WeightedStringListCache.Reset();
+    }
+
     #endregion
     #region Libraries
     public ActivityLibrary ActivityLibrary;
@@ -73,7 +92,7 @@ public class GameManager : MonoBehaviour
         {
 
             if (GameData.CurrentEventStage == null)
-                return GameData.currentLocation.Options.Values;
+                return GameData.CurrentLocation.Options.Values;
             else
                 return GameData.CurrentEventStage.Options.Values;
         }
@@ -84,7 +103,7 @@ public class GameManager : MonoBehaviour
         get
         {
             if(GameData.CurrentEventStage == null)
-                return GameData.currentLocation?.LocationConnections.VisibleLocationConnections;
+                return GameData.CurrentLocation?.LocationConnections.VisibleLocationConnections;
             return new LocationConnection[0];
         }
     }
@@ -93,8 +112,8 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if (GameData.currentLocation != null)
-                return GameData.currentLocation.LocationType.Template;
+            if (GameData.CurrentLocation != null)
+                return GameData.CurrentLocation.LocationType.Template;
             return TemplateLibrary[""];
         }
     }
@@ -104,7 +123,7 @@ public class GameManager : MonoBehaviour
         get
         {
             if (GameData.CurrentEventStage == null)
-                return GameData.currentLocation.Text.Text(GameData);
+                return GameData.CurrentLocation.Text.Text(GameData);
             else
                 return GameData.CurrentEventStage.Text.Text(GameData);
         }
@@ -114,7 +133,7 @@ public class GameManager : MonoBehaviour
         get
         {
             if (GameData.CurrentEventStage == null || GameData.CurrentEventStage.Texture == null)
-                return GameData.currentLocation?.Texture;
+                return GameData.CurrentLocation?.Texture;
             else
                 return GameData.CurrentEventStage.Texture;
 
@@ -506,7 +525,7 @@ public class GameManager : MonoBehaviour
         
 
         GameData.CurrentEventStage = null;
-        GameData.currentLocation = subLocation;
+        GameData.CurrentLocation = subLocation;
 
         npcsPresentUpdate();
 
@@ -515,6 +534,18 @@ public class GameManager : MonoBehaviour
 
         uiUpdate();
     }
+
+    public string npcActivity(string npcID)
+    {
+        return npcActivity(npcID,GameData.CurrentLocation.ID);
+    }
+
+    public string npcActivity(string npcID, string locationID)
+    {
+        return NPCsLibrary.npcActivity(npcID, locationID, GameData.WorldData.DateTime);
+    }
+
+
 
     public bool npcIsPresent(string npcID)
     {
@@ -531,9 +562,27 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+
+
+    public bool npcIsPresent(string npcID, string locationID)
+    {
+        NPC npc = NPCsLibrary[npcID];
+        SubLocation subLocation = LocationCache.SubLocation(locationID);
+        return npcIsPresent(npc,subLocation);
+    }
+
+    public bool npcIsPresent(NPC npc, SubLocation subLocation)
+    {
+        IList<NPC> npcsPresent = NPCsLibrary.npcsPresent(subLocation, GameData.WorldData.DateTime);
+
+        if (npcsPresent.Contains(npc))
+            return true;
+        return false;
+    }
+
     private void npcsPresentUpdate()
     {
-        IEnumerable<NPC> npcs = NPCsLibrary.npcsPresent(GameData.currentLocation, GameData.WorldData.DateTime);
+        IEnumerable<NPC> npcs = NPCsLibrary.npcsPresent(GameData.CurrentLocation, GameData.WorldData.DateTime);
 
         GameData.NpcsPresent = npcs;
 
@@ -615,6 +664,15 @@ public class GameManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void Refresh()
+    {
+        CachesReset();
+        loadStaticData();
+
+        npcsPresentUpdate();
+        uiUpdate();
     }
 
     public void shopShow(string shopId)

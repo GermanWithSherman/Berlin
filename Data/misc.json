@@ -18,6 +18,7 @@
         "Default":"Weird",
         "Values":{
             "None":     {"None":"Naked",    "Casual":"Naked",  "Sport":"Naked",    "Pumps":"Naked",    "Sandals":"Naked",  "Beach":"Naked"},
+            "Underwear":{"None":"Underwear",    "Casual":"Underwear",  "Sport":"Underwear",    "Pumps":"Underwear",    "Sandals":"Underwear",  "Beach":"Underwear"},
             "Casual":   {"None":"Barefoot", "Casual":"Casual", "Sport":"Weird",    "Pumps":"Casual",   "Sandals":"Casual", "Beach":"Beach"},
             "Dance":    {"None":"Barefoot", "Casual":"Weird",  "Sport":"Weird",    "Pumps":"Dance",    "Sandals":"Dance",  "Beach":"Weird"},
             "Beach":    {"None":"Barefoot", "Casual":"Weird",  "Sport":"Weird",    "Pumps":"Weird",    "Sandals":"Weird",  "Beach":"Beach"},
@@ -28,5 +29,8 @@
             "Maid":   {"None":"Barefoot", "Casual":"Weird", "Sport":"Weird",     "Pumps":"Maid",   "Sandals":"Maid",  "Beach":"Weird"}
 
         }
+    },
+    "globals":{
+        "i_StatSatisfactionMax4Porn": 800000
     }
 }

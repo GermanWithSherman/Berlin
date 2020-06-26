@@ -76,6 +76,9 @@ public class PC : NPC
     public int statSleep;
     private int _statSleep { get => statSleep; set => statSleep = Mathf.Clamp(value, 0, 1000000); }
 
+    public int StatSatisfaction;
+    private int _statSatisfaction { get => StatSatisfaction; set => StatSatisfaction = Mathf.Clamp(value, 0, 1000000); }
+
     public override bool ShouldSerializeTexturePath() => true;
 
     private static GameManager gameManager { get => GameManager.Instance; }
@@ -89,9 +92,11 @@ public class PC : NPC
             case "moneyCash":
                 return moneyCash;
             case "statHunger":
-                return statHunger;
+                return _statHunger;
             case "statHygiene":
-                return statHygiene;
+                return _statHygiene;
+            case "StatSatisfaction":
+                return _statSatisfaction;
             case "statSleep":
                 return statSleep;
             case "GenderBorn": return GenderBorn;
@@ -127,6 +132,9 @@ public class PC : NPC
             case "statHygiene":
                 _statHygiene = (int)value;
                 return;
+            case "StatSatisfaction":
+                _statSatisfaction = (int)value;
+                return;
             case "statSleep":
                 _statSleep = (int)value;
                 return;
@@ -146,7 +154,7 @@ public class PC : NPC
                 Item bra = CurrentOutfit["Bra"];
                 if (bra == null)
                 {
-                    path = gameManager.FunctionsLibrary.functionExecute("s_PcBodyBreast", new FunctionParameters("_PC", this, "_slot", slot));
+                    path = gameManager.FunctionsLibrary.FunctionExecute("s_PcBodyBreast", new FunctionParameters("_PC", this, "_slot", slot));
                     return gameManager.TextureCache[path];
                 }
                 return bra.Texture;
@@ -158,7 +166,7 @@ public class PC : NPC
             case "Panties":
                 Item panties = CurrentOutfit["Panties"];
                 if (panties == null) {
-                    path = gameManager.FunctionsLibrary.functionExecute("s_PcBodyLap", new FunctionParameters("_PC", this, "_slot", slot));
+                    path = gameManager.FunctionsLibrary.FunctionExecute("s_PcBodyLap", new FunctionParameters("_PC", this, "_slot", slot));
                     return gameManager.TextureCache[path];
                 }
                 return panties.Texture;
@@ -166,7 +174,7 @@ public class PC : NPC
                 Item shoes = CurrentOutfit["Shoes"];
                 if (shoes == null)
                 {
-                    path = gameManager.FunctionsLibrary.functionExecute("s_PcBodyFeet", new FunctionParameters("_PC", this, "_slot", slot));
+                    path = gameManager.FunctionsLibrary.FunctionExecute("s_PcBodyFeet", new FunctionParameters("_PC", this, "_slot", slot));
                     return gameManager.TextureCache[path];
                 }
                 return shoes.Texture;

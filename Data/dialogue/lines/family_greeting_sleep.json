@@ -1,0 +1,10 @@
+{
+    "stages": {
+        "start":{
+            "3_sleeping":{
+                "Text": "{_NPC1.NameFirst} is asleep. You should not wake {s_LANG(KEY:\"her/him\";NPC:NPCActive._NPC1)} up.",
+                "TopicsVisible": false
+            }
+        }
+    }
+}

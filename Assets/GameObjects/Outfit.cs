@@ -149,12 +149,15 @@ public class Outfit : IModable
 
         if (bra != null)
             braStyle = bra.Style.ToArray();
-        if (clothes != null)
-            clothesStyle = clothes.Style.ToArray();
         if (panties != null)
             pantiesStyle = panties.Style.ToArray();
         if (shoes != null)
             shoesStyle = shoes.Style.ToArray();
+
+        if (clothes != null)
+            clothesStyle = clothes.Style.ToArray();
+        else if (panties != null)
+            clothesStyle = new string[] { "Underwear" };
 
         FunctionParameters parameters = new FunctionParameters();
         parameters.Add("_bra", braStyle);
@@ -162,7 +165,7 @@ public class Outfit : IModable
         parameters.Add("_panties", pantiesStyle);
         parameters.Add("_shoes", shoesStyle);
 
-        string style = GameManager.Instance.FunctionsLibrary.functionExecute("s_OutfitStyle", parameters);
+        string style = GameManager.Instance.FunctionsLibrary.FunctionExecute("s_OutfitStyle",GameManager.Instance.GameData, parameters);
 
         Style = style;
         Debug.Log($"New style: {style}");

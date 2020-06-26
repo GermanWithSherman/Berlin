@@ -1,0 +1,13 @@
+{
+    "items":{
+        "jeans_2":{
+            "Label":"Jeans 2",
+            "TexturePath":"items/clothes/f_jeans/jeans(2).JPG",
+            "Price": 3000,
+            "Slot": "Clothes",
+            "Gender": "f",
+            "Skimpiness": 60,
+            "Style": ["Jeans","Casual"]
+        }
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "items":{
+        "shoes_business_1":{
+            "Label":"Black Businessshoes",
+            "TexturePath":"items/shoes/m_business/1.jpg",
+            "Price": 2500,
+            "Slot": "Shoes",
+            "Gender": "m",
+            "Height": 0,
+            "Style": ["Casual","Business"]
+        }
+    }
+}

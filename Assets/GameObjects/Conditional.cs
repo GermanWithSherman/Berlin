@@ -92,7 +92,7 @@ public class Conditional<T> : Conditional, IModable
 
                 return default;
             case (ConditionalMode.Enum):
-                string index = (string)data["KEY"];
+                string index = (string)data["_P.KEY"];
                 return Values[index].value(data);
             case (ConditionalMode.Random):
                 List<Value<T>> possibleValues = Values.Values.ToList();

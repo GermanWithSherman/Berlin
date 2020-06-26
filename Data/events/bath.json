@@ -1,0 +1,30 @@
+{
+    "EventStages":{
+        "main":{
+
+        },
+        "shower":{
+            "Commands":{
+                "5_HygieneReset":{
+                    "Type": "Set",
+                    "Values":{"PC.statHygiene":1000000}
+                },
+                "5_timePass":{
+                    "Type": "TimePass",
+                    "Duration": 300
+                }
+            },
+            "Text":{
+                "Value": "Shower Shower"
+            },
+            "Options":{
+                "leave":{
+                    "text":"Leave",
+                    "Commands":{
+                        "EventEnd":{"Type":"EventEnd"}
+                    }
+                }
+            }
+        }
+    }
+}

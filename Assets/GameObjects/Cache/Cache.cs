@@ -22,31 +22,25 @@ public abstract class Cache<T> : MonoBehaviour where T : class,IModable,new()
     private Dictionary<string,T> _strongReferences = new Dictionary<string,T>();
     private Dictionary<string, WeakReference<T>> _weakReferences = new Dictionary<string, WeakReference<T>>();
 
+    private Dictionary<string, T> _editData = new Dictionary<string, T>();
+
+    public void SetEditData(string key, T data)
+    {
+        _editData[key] = data;
+    }
+
+    public void Reset()
+    {
+        _strongReferences.Clear();
+        _weakReferences.Clear();
+        keys.Clear();
+    }
+
     protected virtual T create(string key)
     {
         return loadFromFileWithMods(key);
     }
 
-    /*protected void add(string key)
-    {
-        string data = key;
-
-        if (hashKey)
-            key = System.Convert.ToString(key.GetHashCode());
-
-        if (keys.Count >= size)
-        {
-            string keyToRemove = keys[0];
-            _strongReferences.Remove(keyToRemove);
-            keys.RemoveAt(0);
-        }
-
-        if (_strongReferences.ContainsKey(key))
-            throw new ArgumentException($"Trying to add already existing key {key} in {GetType()}");
-
-        _strongReferences.Add(key, create(data));
-        keys.Add(key);
-    }*/
 
     private void strongReferencesCrop()
     {
@@ -161,6 +155,9 @@ public abstract class Cache<T> : MonoBehaviour where T : class,IModable,new()
             original = Modable.mod(original, mod);
             
         }
+
+        if (_editData.TryGetValue(key, out T editData))
+            original = Modable.mod(original, editData);
 
         return original;
     }

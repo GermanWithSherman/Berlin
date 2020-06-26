@@ -1,0 +1,12 @@
+{
+    "topics":{
+        "family_mother_greeting":{
+            "NPCFilter": {"IDs": ["family_mother"]},
+            "IsGreeting": true
+        },
+        "family_mother_ask4money":{
+            "NPCFilter": {"IDs": ["family_mother"]},
+            "Title": "Ask for money"
+        }
+    }
+}

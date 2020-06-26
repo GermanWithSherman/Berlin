@@ -85,6 +85,7 @@ PC.GenderPerceived:                 the Gender people think the PC has when look
                                         -m2f if Body.GenderVisible is m and genderDress is either f or mix
                                         
 
+PC.StatSatisfaction:                1000000 = 100%
 
 Item.Skimpiness:                    0   Not skimpy. Reserved for fm-clothes
                                     10  Very prudish.

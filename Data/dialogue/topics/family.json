@@ -1,0 +1,11 @@
+{
+    "topics":{
+        "family_greeting_sleep":{
+            "NPCFilter": {"IDs": ["family_mother","family_sister","family_brother"]},
+            "IsGreeting": true,
+            "Priority": 10000,
+            "Condition": "npcActivity(_NPCID:NPCActive._NPC1.ID)=\"sleep\""
+        }
+    }
+
+}
